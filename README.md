@@ -19,3 +19,5 @@
 - Hotkey active toggle
 - System startup and tray options
 - App cannot click on itself!
+
+[<img alt="Get from Microsoft store" width="200px" src="https://getbadgecdn.azureedge.net/images/English_L.png" border-radius="101px"/>](https://www.microsoft.com/store/productId/9PG9MT5ZZZQ7)
