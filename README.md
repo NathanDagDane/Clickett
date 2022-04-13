@@ -20,4 +20,4 @@
 - System startup and tray options
 - App cannot click on itself!
 
- [<img alt="Get from Microsoft store" width="200px" src="https://www.sharp-sbs.com/portals/0/assets/images/microsoft-badge.png" border-radius="101px"/>](https://www.microsoft.com/store/productId/9PG9MT5ZZZQ7)
+ [<img alt="Get from Microsoft store" width="200px" src="https://www.sharp-sbs.com/portals/0/assets/images/microsoft-badge.png" border-radius="101px"/>](https://www.microsoft.com/store/productId/9NW55MH6VMHG)
