@@ -12,6 +12,7 @@
     - Burst *(Clicks a specified number of times each time the hotkey is pressed)*
 - *(Actually)* Modern UI *(If I do say so myself)*
 - UI scaling and animations
+- Theme switching!
 - Choose screen location
 - Choose left, middle or right clicks
 - Always on top option
