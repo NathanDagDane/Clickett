@@ -51,6 +51,21 @@
             </Setter>
         </Style>
 
+        <!--Colour Button Style-->
+        <Style x:Key="ColourButton" TargetType="Button">
+            <Setter Property="OverridesDefaultStyle" Value="True" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border BorderThickness="0" Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
         <!--ComboBox Style-->
         <Style x:Key="ComboboxButtonStyle1" TargetType="{x:Type ToggleButton}">
             <Setter Property="Template">
@@ -69,7 +84,6 @@
                 </Setter.Value>
             </Setter>
         </Style>
-
         <Style x:Key="ComboboxTextBoxStyle1" TargetType="{x:Type TextBox}">
             <Setter Property="Template">
                 <Setter.Value>
@@ -86,7 +100,6 @@
                 </Setter.Value>
             </Setter>
         </Style>
-
         <Style x:Key="ComboboxStyle1" TargetType="{x:Type ComboBox}">
             <Setter Property="HorizontalContentAlignment" Value="Center"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
@@ -105,7 +118,7 @@
                             IsReadOnly="True"
                             Cursor="Arrow"
                             Padding="5,0,0,0"  
-                            Height="{TemplateBinding Height}" FontFamily="LEMON MILK Pro FTR"/>
+                            Height="{TemplateBinding Height}" FontFamily="./#LEMON MILK Pro FTR Regular"/>
                             <ToggleButton Grid.Column="1" Margin="0"  
                 Height="{TemplateBinding Height}"  
                 Style="{StaticResource ComboboxButtonStyle1}"  
@@ -118,7 +131,7 @@
                   HorizontalAlignment="Center"  
                   VerticalAlignment="Center"  
                   Data="M 0 0 L 4 4 L 8 0 Z"  
-                  Fill="#FF45B4B4" />
+                  Fill="{DynamicResource AcCol1}" />
                             </ToggleButton>
                             <ContentPresenter Name="ContentSite"  
                Content="{TemplateBinding SelectionBoxItem}"  
@@ -140,12 +153,13 @@
                                     <Border   
                    x:Name="DropDownBorder"  
                    BorderThickness="0"
-                   Background="{Binding Source={StaticResource BoxBackCol}}"
+                   Background="{DynamicResource BoxBack}"
                                         Opacity="1"
                    CornerRadius="5"  
                    BorderBrush="{TemplateBinding BorderBrush}" Margin="4,6,4,6"/>
                                     <ScrollViewer Margin="4,6,4,6" SnapsToDevicePixels="True">
-                                        <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Contained" />
+                                        <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Contained" >
+                                        </StackPanel>
                                     </ScrollViewer>
                                 </Grid>
                             </Popup>
@@ -164,56 +178,38 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="RepeatButton">
-                        <Border  BorderThickness="0" Background="#99C9DED9" Height="4" CornerRadius="0,2,2,0"/>
+                        <Border  BorderThickness="0" Background="{DynamicResource FgCol2}" Height="4" CornerRadius="0,2,2,0"/>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
-
         <Style x:Key="SliderRepeatButton1" TargetType="RepeatButton">
             <Setter Property="SnapsToDevicePixels" Value="true" />
             <Setter Property="OverridesDefaultStyle" Value="true" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="RepeatButton">
-                        <Border SnapsToDevicePixels="True"  BorderThickness="0" Height="4" CornerRadius="2,0,0,2">
-                            <Border.Background>
-                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                    <LinearGradientBrush.RelativeTransform>
-                                        <TransformGroup>
-                                            <ScaleTransform CenterY="0.5" CenterX="0.5"/>
-                                            <SkewTransform CenterX="0.5" CenterY="0.5"/>
-                                            <RotateTransform Angle="-90" CenterX="0.5" CenterY="0.5"/>
-                                            <TranslateTransform/>
-                                        </TransformGroup>
-                                    </LinearGradientBrush.RelativeTransform>
-                                    <GradientStop Color="#FF45B4B4"/>
-                                    <GradientStop Color="#FF45AA96" Offset="1"/>
-                                </LinearGradientBrush>
-                            </Border.Background>
-                        </Border>
+                        <Border SnapsToDevicePixels="True"  BorderThickness="0" Height="4" CornerRadius="2,0,0,2" Background="{DynamicResource AcGrad}"/>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
-
         <Style x:Key="SliderThumb" TargetType="Thumb">
             <Setter Property="SnapsToDevicePixels" Value="true" />
             <Setter Property="OverridesDefaultStyle" Value="true" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Thumb">
-                        <Ellipse x:Name="Ellipse" Height="15" Width="15" Fill="#FFDDE4E2"></Ellipse>
+                        <Ellipse x:Name="Ellipse" Height="15" Width="15" Fill="{DynamicResource FgCol3}"></Ellipse>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="true">
-                                <Setter TargetName="Ellipse" Property="Fill" Value="#FFB8C1BE"></Setter>
+                                <Setter TargetName="Ellipse" Property="Fill" Value="{DynamicResource FgCol1}"></Setter>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
-
         <ControlTemplate x:Key="Slider"  TargetType="Slider">
             <Grid>
                 <Grid.RowDefinitions>
@@ -264,8 +260,8 @@
                         <Rectangle Width="6" RadiusX="3" RadiusY="3">
                             <Rectangle.Fill>
                                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                    <GradientStop Color="#FF45B4B4"/>
-                                    <GradientStop Color="#FF45AA96" Offset="1"/>
+                                    <GradientStop Color="{DynamicResource AcCol1c}"/>
+                                    <GradientStop Color="{DynamicResource AcCol2c}" Offset="1"/>
                                 </LinearGradientBrush>
                             </Rectangle.Fill>
                         </Rectangle>
@@ -342,192 +338,194 @@
 
     </Window.Resources>
 
-    <!--Tray Icon-->
-
     <!--Structure-->
-    <Viewbox>
-        <Canvas Name="fullCanvas" Width="500" Height="233.197616946127">
-            <Grid Width="500" Name="fullGrid" Focusable="True" MouseDown="fullGridFocus">
-                <!--tb:TaskbarIcon IconSource="iconround.ico" ToolTipText="hello world" /-->
-                <Border CornerRadius="{Binding Source={StaticResource MajRad}}" BorderThickness="0" Padding="0,0,0,5">
-                    <Border.Background>
-                        <LinearGradientBrush>
-                            <LinearGradientBrush.RelativeTransform>
-                                <TransformGroup>
-                                    <ScaleTransform CenterY="0.5" CenterX="0.5"/>
-                                    <SkewTransform CenterX="0.5" CenterY="0.5"/>
-                                    <RotateTransform Angle="0" CenterX="0.5" CenterY="0.5"/>
-                                    <TranslateTransform/>
-                                </TransformGroup>
-                            </LinearGradientBrush.RelativeTransform>
-                            <GradientStop Color="#F2061010" Offset="1"/>
-                            <GradientStop Color="#F2091212" Offset="0"/>
-                        </LinearGradientBrush>
-                    </Border.Background>
+    <Viewbox FocusVisualStyle="{x:Null}">
+        <Canvas FocusVisualStyle="{x:Null}" Name="fullCanvas" Width="500" Height="233.197616946127" Opacity="1">
+            <Grid FocusVisualStyle="{x:Null}" Width="500" Name="fullGrid" Focusable="True" MouseDown="fullGridFocus">
+                <Border FocusVisualStyle="{x:Null}" CornerRadius="{Binding Source={StaticResource MajRad}}" BorderThickness="0" Padding="0,0,0,5" Background="{DynamicResource Back}">
                     <StackPanel>
-                        <Image Source="/res/Title.png" Width="220" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="8,8,0,0" RenderOptions.BitmapScalingMode="HighQuality"/>
+                        <Grid>
+                            <Border Width="220" Background="{DynamicResource AcGrad}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="8,8,0,0" Height="48.8109502794603">
+                                <Border.OpacityMask>
+                                    <ImageBrush ImageSource="{DynamicResource TitleDrawingImage}" Stretch="Uniform">
+                                        <ImageBrush.RelativeTransform>
+                                            <TransformGroup>
+                                                <ScaleTransform CenterY="0" CenterX="0"/>
+                                                <TranslateTransform X="0" Y="0"/>
+                                            </TransformGroup>
+                                        </ImageBrush.RelativeTransform>
+                                    </ImageBrush>
+                                </Border.OpacityMask>
+                            </Border>
+                            <Border Width="50" Height="50" CornerRadius="25" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="7,0,0,0" MouseEnter="LogoMouseEnter"  MouseLeave="LogoMouseLeave" Background="#00000000"/>
+                            <TextBlock Name="hudText" Foreground="{DynamicResource FgCol2}" Margin="240,20,20,0" Text="" FontFamily="./#LEMON MILK Pro FTR Regular" FontSize="13" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="WrapWithOverflow" TextTrimming="CharacterEllipsis" MaxHeight="37" TextAlignment="Center" Opacity="0.69"/>
+                        </Grid>
                         <Grid>
                             <!--Config View-->
-                            <StackPanel Name="confStack" Visibility="Hidden">
-                                <TextBlock Name="interText" Foreground="{Binding Source={StaticResource FGCol2}}" Margin="20,5,20,0" Text="Clicks Per Second" FontFamily="LEMON MILK Pro FTR" FontSize="13"/>
+                            <StackPanel x:Name="confStack" Visibility="Visible">
+                                <TextBlock x:Name="interText" Foreground="{DynamicResource FgCol2}" Margin="20,5,20,0" Text="Clicks Per Second" FontFamily="./#LEMON MILK Pro FTR Regular" FontSize="13"/>
                                 <Grid Margin="0,1,0,0">
-                                    <Border CornerRadius="{Binding Source={StaticResource MinRad}}" Margin="5,0,35,0" Height="{Binding Source={StaticResource MinBoxHeight}}" Background="{Binding Source={StaticResource BoxBackCol}}">
+                                    <Border CornerRadius="{Binding Source={StaticResource MinRad}}" Margin="5,0,35,0" Height="{Binding Source={StaticResource MinBoxHeight}}" Background="{DynamicResource BoxBack}">
                                         <Grid>
-                                            <Grid Name="cpsGrid" Visibility="Hidden">
-                                                <TextBlock Foreground="{Binding Source={StaticResource FGCol1}}" Text="1" FontFamily="LEMON MILK Pro FTR" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="13,0,0,0"/>
-                                                <Slider Name="cpsSlid" ValueChanged="cpsChange" VerticalAlignment="Center" Margin="30,0,30,0" BorderThickness="0" Style="{StaticResource Horizontal_Slider}" Minimum="1" Maximum="69" Value="4" TickFrequency="1" IsSnapToTickEnabled="True" IsTabStop="False"/>
-                                                <TextBlock Foreground="{Binding Source={StaticResource FGCol1}}" Text="69" FontFamily="LEMON MILK Pro FTR" FontSize="14" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,6,0"/>
+                                            <Grid x:Name="cpsGrid" Visibility="Hidden">
+                                                <TextBlock Foreground="{DynamicResource FgCol1}" Text="1" FontFamily="./#LEMON MILK Pro FTR Regular" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="13,0,0,0"/>
+                                                <Slider x:Name="cpsSlid" ValueChanged="cpsChange" VerticalAlignment="Center" Margin="30,0,30,0" BorderThickness="0" Style="{StaticResource Horizontal_Slider}" Minimum="1" Maximum="69" Value="4" TickFrequency="1" IsSnapToTickEnabled="True" IsTabStop="False"/>
+                                                <TextBlock Foreground="{DynamicResource FgCol1}" Text="69" FontFamily="./#LEMON MILK Pro FTR Regular" FontSize="14" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,6,0"/>
                                             </Grid>
-                                            <Grid Name="interGrid">
+                                            <Grid x:Name="interGrid">
                                                 <!--Minutes Input-->
-                                                <TextBox Name="minutesInput" LostFocus="HandleTextChange" TextChanged="HandleInterTextChange" HorizontalAlignment="Left" BorderThickness="2" Margin="65,3,0,3" Width="75" Background="{Binding Source={StaticResource InBacCol}}" BorderBrush="{Binding Source={StaticResource InBorCol}}" FontFamily="LEMON MILK Pro FTR" Foreground="{Binding Source={StaticResource FGCol3}}" Padding="2,0,0,0" PreviewTextInput="NumberValidationTextBox" IsTabStop="False">
+                                                <TextBox x:Name="minutesInput" Background="{DynamicResource InBac}" BorderBrush="{DynamicResource InBor}" Foreground="{DynamicResource FgCol3}" LostFocus="HandleTextChange" TextChanged="HandleInterTextChange" HorizontalAlignment="Left" BorderThickness="2" Margin="65,3,0,3" Width="75" FontFamily="./#LEMON MILK Pro FTR Regular" Padding="2,0,0,0" PreviewTextInput="NumberValidationTextBox" IsTabStop="False">
                                                     <TextBox.Resources>
-                                                        <Style TargetType="Border">
+                                                        <Style TargetType="{x:Type Border}">
                                                             <Setter Property="CornerRadius" Value="5"/>
                                                         </Style>
                                                     </TextBox.Resources>
                                                 </TextBox>
-                                                <TextBlock LostFocus="HandleTextChange" Foreground="{Binding Source={StaticResource FGCol1}}" Text="Minutes" FontFamily="LEMON MILK Pro FTR" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                                                <TextBlock LostFocus="HandleTextChange" Foreground="{DynamicResource FgCol1}" Text="Minutes" FontFamily="./#LEMON MILK Pro FTR Regular" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0,0,0"/>
                                                 <!--Seconds Input-->
-                                                <TextBox Name="secondsInput" LostFocus="HandleTextChange" TextChanged="HandleInterTextChange" HorizontalAlignment="Center" BorderThickness="2" Margin="75,3,0,3" Width="75" Background="{Binding Source={StaticResource InBacCol}}" BorderBrush="{Binding Source={StaticResource InBorCol}}" FontFamily="LEMON MILK Pro FTR" Foreground="{Binding Source={StaticResource FGCol3}}" Padding="2,0,0,0" PreviewTextInput="NumberValidationTextBox" IsTabStop="False">
+                                                <TextBox x:Name="secondsInput" Background="{DynamicResource InBac}" BorderBrush="{DynamicResource InBor}" Foreground="{DynamicResource FgCol3}" LostFocus="HandleTextChange" TextChanged="HandleInterTextChange" HorizontalAlignment="Center" BorderThickness="2" Margin="75,3,0,3" Width="75" FontFamily="./#LEMON MILK Pro FTR Regular" Padding="2,0,0,0" PreviewTextInput="NumberValidationTextBox" IsTabStop="False">
                                                     <TextBox.Resources>
-                                                        <Style TargetType="Border">
+                                                        <Style TargetType="{x:Type Border}">
                                                             <Setter Property="CornerRadius" Value="5"/>
                                                         </Style>
                                                     </TextBox.Resources>
                                                 </TextBox>
-                                                <TextBlock Foreground="{Binding Source={StaticResource FGCol1}}" Text="Seconds" FontFamily="LEMON MILK Pro FTR" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,70,0"/>
+                                                <TextBlock Foreground="{DynamicResource FgCol1}" Text="Seconds" FontFamily="./#LEMON MILK Pro FTR Regular" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,70,0"/>
                                                 <!--Milliseconds Input-->
-                                                <TextBox Name="millisInput" LostFocus="HandleTextChange" TextChanged="HandleInterTextChange" HorizontalAlignment="Right" BorderThickness="2" Margin="0,3,3,3" Width="75" Background="{Binding Source={StaticResource InBacCol}}" BorderBrush="{Binding Source={StaticResource InBorCol}}" FontFamily="LEMON MILK Pro FTR" Foreground="{Binding Source={StaticResource FGCol3}}" Padding="2,0,0,0" PreviewTextInput="NumberValidationTextBox" IsTabStop="False" >
+                                                <TextBox x:Name="millisInput" Background="{DynamicResource InBac}" BorderBrush="{DynamicResource InBor}" Foreground="{DynamicResource FgCol3}" LostFocus="HandleTextChange" TextChanged="HandleInterTextChange" HorizontalAlignment="Right" BorderThickness="2" Margin="0,3,3,3" Width="75" FontFamily="./#LEMON MILK Pro FTR Regular" Padding="2,0,0,0" PreviewTextInput="NumberValidationTextBox" IsTabStop="False" >
                                                     <TextBox.Resources>
-                                                        <Style TargetType="Border">
+                                                        <Style TargetType="{x:Type Border}">
                                                             <Setter Property="CornerRadius" Value="5"/>
                                                         </Style>
                                                     </TextBox.Resources>
                                                 </TextBox>
-                                                <TextBlock Foreground="{Binding Source={StaticResource FGCol1}}" Text="Millis" FontFamily="LEMON MILK Pro FTR" FontSize="14" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,83,0"/>
+                                                <TextBlock Foreground="{DynamicResource FgCol1}" Text="Millis" FontFamily="./#LEMON MILK Pro FTR Regular" FontSize="14" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,83,0"/>
                                             </Grid>
                                         </Grid>
                                     </Border>
-                                    <Button Click="InterTypeSwap" Style="{StaticResource MyButton}" Height="{Binding Source={StaticResource MinBoxHeight}}" Width="{Binding Source={StaticResource MinBoxHeight}}" HorizontalAlignment="Right" Background="{Binding Source={StaticResource BoxBackCol}}" BorderThickness="0" Margin="0,0,5,0" IsTabStop="False" Focusable="False">
+                                    <Button Click="InterTypeSwap" Background="{DynamicResource BoxBack}" HorizontalAlignment="Right" BorderThickness="0" Margin="0,0,5,0" IsTabStop="False" Focusable="False">
                                         <Button.Resources>
-                                            <Style TargetType="Border">
+                                            <Style TargetType="{x:Type Border}">
                                                 <Setter Property="CornerRadius" Value="{Binding Source={StaticResource MinRad}}"/>
                                             </Style>
                                         </Button.Resources>
-                                        <Image Source="/res/Swap.png" Margin="3,0,3,0" RenderOptions.BitmapScalingMode="HighQuality" VerticalAlignment="Center"/>
+                                        <Button.Style>
+                                            <StaticResource ResourceKey="MyButton"/>
+                                        </Button.Style>
+                                        <Button.Height>
+                                            <Binding Source="{StaticResource MinBoxHeight}"/>
+                                        </Button.Height>
+                                        <Button.Width>
+                                            <Binding Source="{StaticResource MinBoxHeight}"/>
+                                        </Button.Width>
+                                        <Border Background="{DynamicResource AcCol2}" RenderOptions.BitmapScalingMode="HighQuality" VerticalAlignment="Center" Width="18" Height="18" CornerRadius="0,0,0,0">
+                                            <Border.OpacityMask>
+                                                <ImageBrush ImageSource="{DynamicResource SwapDrawingImage}" Stretch="Uniform">
+                                                    <ImageBrush.RelativeTransform>
+                                                        <TransformGroup>
+                                                            <ScaleTransform CenterY="0" CenterX="0"/>
+                                                            <TranslateTransform X="0" Y="0"/>
+                                                        </TransformGroup>
+                                                    </ImageBrush.RelativeTransform>
+                                                </ImageBrush>
+                                            </Border.OpacityMask>
+                                        </Border>
                                     </Button>
                                 </Grid>
-                                <TextBlock Foreground="{Binding Source={StaticResource FGCol2}}" Margin="20,3,20,0" Text="Options" FontFamily="LEMON MILK Pro FTR" FontSize="13"/>
+                                <TextBlock Foreground="{DynamicResource FgCol2}" Margin="20,3,20,0" Text="Options" FontFamily="./#LEMON MILK Pro FTR Regular" FontSize="13"/>
                                 <Grid Margin="0,1,0,0">
-                                    <Border Name="locBorder" CornerRadius="{Binding Source={StaticResource MinRad}}" Margin="5,0,210,0" Height="{Binding Source={StaticResource MinBoxHeight}}" Background="{Binding Source={StaticResource BoxBackCol}}" HorizontalAlignment="Stretch">
+                                    <Border x:Name="locBorder" CornerRadius="{Binding Source={StaticResource MinRad}}" Margin="5,0,210,0" Height="{Binding Source={StaticResource MinBoxHeight}}" Background="{DynamicResource BoxBack}" HorizontalAlignment="Stretch">
                                         <Grid>
-                                            <TextBlock Name="locText" Foreground="{Binding Source={StaticResource FGCol1}}" Text="Location" FontFamily="LEMON MILK Pro FTR" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="8,0,8,0"/>
-                                            <Grid Name="locGrid">
-                                                <TextBlock Foreground="{Binding Source={StaticResource FGCol2}}" Text="x" FontFamily="LEMON MILK Pro FTR" FontSize="14" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,129,2"/>
-                                                <TextBox Name="xPosInput" LostFocus="HandleLocTextChange" TextChanged="HandleInterTextChange" HorizontalAlignment="Right" BorderThickness="2" Margin="0,3,85,3" Width="40" Background="{Binding Source={StaticResource InBacCol}}" BorderBrush="{Binding Source={StaticResource InBorCol}}" FontFamily="LEMON MILK Pro FTR" Foreground="{Binding Source={StaticResource FGCol3}}" Padding="2,0,0,0" PreviewTextInput="NumberValidationTextBox" IsTabStop="False" >
+                                            <TextBlock x:Name="locText" Foreground="{DynamicResource FgCol1}" Text="Location" FontFamily="./#LEMON MILK Pro FTR Regular" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="8,0,8,0"/>
+                                            <Grid x:Name="locGrid">
+                                                <TextBlock Foreground="{DynamicResource FgCol2}" Text="x" FontFamily="./#LEMON MILK Pro FTR Regular" FontSize="14" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,137,2"/>
+                                                <TextBox x:Name="xPosInput" Background="{DynamicResource InBac}" BorderBrush="{DynamicResource InBor}" Foreground="{DynamicResource FgCol3}" LostFocus="HandleLocTextChange" TextChanged="HandleInterTextChange" HorizontalAlignment="Right" BorderThickness="2" Margin="0,3,89,3" Width="44" FontFamily="./#LEMON MILK Pro FTR Regular" Padding="2,0,0,0" PreviewTextInput="NumberValidationTextBox" IsTabStop="False" >
                                                     <TextBox.Resources>
-                                                        <Style TargetType="Border">
+                                                        <Style TargetType="{x:Type Border}">
                                                             <Setter Property="CornerRadius" Value="5"/>
                                                         </Style>
                                                     </TextBox.Resources>
                                                 </TextBox>
-                                                <TextBlock Foreground="{Binding Source={StaticResource FGCol2}}" Text="y" FontFamily="LEMON MILK Pro FTR" FontSize="14" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,69,2"/>
-                                                <TextBox Name="yPosInput" LostFocus="HandleLocTextChange" TextChanged="HandleInterTextChange" HorizontalAlignment="Right" BorderThickness="2" Margin="0,3,25,3" Width="40" Background="{Binding Source={StaticResource InBacCol}}" BorderBrush="{Binding Source={StaticResource InBorCol}}" FontFamily="LEMON MILK Pro FTR" Foreground="{Binding Source={StaticResource FGCol3}}" Padding="2,0,0,0" PreviewTextInput="NumberValidationTextBox" IsTabStop="False" >
+                                                <TextBlock Foreground="{DynamicResource FgCol2}" Text="y" FontFamily="./#LEMON MILK Pro FTR Regular" FontSize="14" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,73,2"/>
+                                                <TextBox x:Name="yPosInput" Background="{DynamicResource InBac}" BorderBrush="{DynamicResource InBor}" Foreground="{DynamicResource FgCol3}" LostFocus="HandleLocTextChange" TextChanged="HandleInterTextChange" HorizontalAlignment="Right" BorderThickness="2" Margin="0,3,25,3" Width="44" FontFamily="./#LEMON MILK Pro FTR Regular" Padding="2,0,0,0" PreviewTextInput="NumberValidationTextBox" IsTabStop="False" >
                                                     <TextBox.Resources>
-                                                        <Style TargetType="Border">
+                                                        <Style TargetType="{x:Type Border}">
                                                             <Setter Property="CornerRadius" Value="5"/>
                                                         </Style>
                                                     </TextBox.Resources>
                                                 </TextBox>
-                                                <Button Name="locSetButt" Style="{StaticResource MyButton}" Click="SetLoc" HorizontalAlignment="Right" BorderThickness="0" Margin="0,3,145,3" Width="40" FontSize="8" IsTabStop="False" Focusable="False">
+                                                <Button x:Name="locSetButt" Click="SetLoc" Background="{DynamicResource AcGrad}" HorizontalAlignment="Right" BorderThickness="0" Margin="0,3,153,3" Width="40" FontSize="8" IsTabStop="False" Focusable="False">
                                                     <Button.Resources>
-                                                        <Style TargetType="Border">
+                                                        <Style TargetType="{x:Type Border}">
                                                             <Setter Property="CornerRadius" Value="5"/>
                                                         </Style>
                                                     </Button.Resources>
-                                                    <Button.Background>
-                                                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                                            <LinearGradientBrush.RelativeTransform>
-                                                                <TransformGroup>
-                                                                    <RotateTransform Angle="-90"/>
-                                                                    <TranslateTransform/>
-                                                                </TransformGroup>
-                                                            </LinearGradientBrush.RelativeTransform>
-                                                            <GradientStop Color="#FF45B4B4"/>
-                                                            <GradientStop Color="#FF45AA96" Offset="1"/>
-                                                        </LinearGradientBrush>
-                                                    </Button.Background>
-                                                    <TextBlock Text="Set" FontFamily="LEMON MILK Pro FTR" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="#CCFFFFFF" FontSize="14"/>
+                                                    <Button.Style>
+                                                        <StaticResource ResourceKey="MyButton"/>
+                                                    </Button.Style>
+                                                    <TextBlock Text="Set" FontFamily="./#LEMON MILK Pro FTR Regular" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="#CCFFFFFF" FontSize="14"/>
                                                 </Button>
-                                                <Button Style="{StaticResource MyButton}" Background="AntiqueWhite" Name="LocBut" HorizontalAlignment="Right" Width="15" Height="15" VerticalAlignment="Center" Margin="0,0,5,0" Click="ToggleLoc" IsTabStop="False">
+                                                <Button Background="AntiqueWhite" x:Name="LocBut" HorizontalAlignment="Right" Width="15" Height="15" VerticalAlignment="Center" Margin="0,0,5,0" Click="ToggleLoc" IsTabStop="False">
                                                     <Button.Resources>
-                                                        <Style TargetType="Border">
+                                                        <Style TargetType="{x:Type Border}">
                                                             <Setter Property="CornerRadius" Value="20"/>
                                                         </Style>
                                                     </Button.Resources>
+                                                    <Button.Style>
+                                                        <StaticResource ResourceKey="MyButton"/>
+                                                    </Button.Style>
                                                 </Button>
                                             </Grid>
                                         </Grid>
                                     </Border>
-                                    <Border CornerRadius="{Binding Source={StaticResource MinRad}}" Margin="5,0,5,0" Height="{Binding Source={StaticResource MinBoxHeight}}" Background="{Binding Source={StaticResource BoxBackCol}}" HorizontalAlignment="Right" Width="200">
+                                    <Border CornerRadius="{Binding Source={StaticResource MinRad}}" Margin="5,0,5,0" Height="{Binding Source={StaticResource MinBoxHeight}}" Background="{DynamicResource BoxBack}" HorizontalAlignment="Right" Width="200">
                                         <Grid>
-                                            <TextBlock Name="trigText" Foreground="{Binding Source={StaticResource FGCol1}}" Text="Trigger" FontFamily="LEMON MILK Pro FTR" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="8,0,8,0"/>
-                                            <Border Name="trigBorder" HorizontalAlignment="Right" BorderThickness="0" Margin="0,3,46,3" Width="76" CornerRadius="5" Background="{Binding Source={StaticResource InBacCol}}" BorderBrush="{Binding Source={StaticResource InBorCol}}">
-                                                <TextBlock Name="triggerDis" Text="F" FontFamily="LEMON MILK Pro FTR" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{Binding Source={StaticResource FGCol1}}" FontSize="14" Opacity="0.8"/>
-                                            </Border>
-                                            <Button Name="trigSet" Style="{StaticResource MyButton}" Click="NewTrigger" HorizontalAlignment="Right" BorderThickness="0" Margin="0,3,3,3" Width="40" FontSize="8" IsTabStop="False" Focusable="False">
-                                                <Button.Resources>
-                                                    <Style TargetType="Border">
-                                                        <Setter Property="CornerRadius" Value="5"/>
-                                                    </Style>
-                                                </Button.Resources>
-                                                <Button.Background>
-                                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                                        <LinearGradientBrush.RelativeTransform>
-                                                            <TransformGroup>
-                                                                <RotateTransform Angle="-90"/>
-                                                                <TranslateTransform/>
-                                                            </TransformGroup>
-                                                        </LinearGradientBrush.RelativeTransform>
-                                                        <GradientStop Color="#FF45B4B4"/>
-                                                        <GradientStop Color="#FF45AA96" Offset="1"/>
-                                                    </LinearGradientBrush>
-                                                </Button.Background>
-                                                <TextBlock Text="Set" FontFamily="LEMON MILK Pro FTR" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="#CCFFFFFF" FontSize="14"/>
-                                            </Button>
+                                            <Grid x:Name="burstGrid">
+                                                <TextBox x:Name="burstCountInput" Background="{DynamicResource InBac}" BorderBrush="{DynamicResource InBor}" Foreground="{DynamicResource FgCol3}" LostFocus="ChangeBurstCount" TextChanged="HandleInterTextChange" HorizontalAlignment="Right" BorderThickness="2" Margin="0,3,85,3" Width="40" FontFamily="./#LEMON MILK Pro FTR Regular" Padding="2,0,0,0" PreviewTextInput="NumberValidationTextBox" IsTabStop="False" >
+                                                    <TextBox.Resources>
+                                                        <Style TargetType="{x:Type Border}">
+                                                            <Setter Property="CornerRadius" Value="5"/>
+                                                        </Style>
+                                                    </TextBox.Resources>
+                                                </TextBox>
+                                            </Grid>
+                                            <TextBlock Foreground="{DynamicResource FgCol1}" Text="Mode" FontFamily="./#LEMON MILK Pro FTR Regular" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="8,0,0,0"/>
+                                            <ComboBox x:Name="modeSel" SelectionChanged="ModeChange" Height="19" HorizontalAlignment="Right" SelectedIndex="2"  Margin="0,0,3,0" Style="{StaticResource ComboboxStyle1}" Width="79" Background="{DynamicResource InBac}" BorderBrush="{DynamicResource InBor}" FontFamily="./#LEMON MILK Pro FTR Regular" Foreground="{DynamicResource FgCol3}" >
+                                                <ComboBoxItem Content="Burst"/>
+                                                <ComboBoxItem Content="Toggle"/>
+                                                <ComboBoxItem Content="Hold"/>
+                                            </ComboBox>
                                         </Grid>
                                     </Border>
                                 </Grid>
                                 <Grid Margin="0,5,0,0">
-                                    <Border CornerRadius="{Binding Source={StaticResource MinRad}}" Margin="5,0,210,0" Height="{Binding Source={StaticResource MinBoxHeight}}" Background="{Binding Source={StaticResource BoxBackCol}}" HorizontalAlignment="Stretch">
+                                    <Border CornerRadius="{Binding Source={StaticResource MinRad}}" Margin="5,0,210,0" Height="{Binding Source={StaticResource MinBoxHeight}}" Background="{DynamicResource BoxBack}" HorizontalAlignment="Stretch">
                                         <Grid>
-                                            <Grid Name="burstGrid">
-                                                <TextBlock Foreground="{Binding Source={StaticResource FGCol2}}" Text="Count" FontFamily="LEMON MILK Pro FTR" FontSize="14" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,130,0"/>
-                                                <TextBox Name="burstCountInput" LostFocus="ChangeBurstCount" TextChanged="HandleInterTextChange" HorizontalAlignment="Right" BorderThickness="2" Margin="0,3,85,3" Width="40" Background="{Binding Source={StaticResource InBacCol}}" BorderBrush="{Binding Source={StaticResource InBorCol}}" FontFamily="LEMON MILK Pro FTR" Foreground="{Binding Source={StaticResource FGCol3}}" Padding="2,0,0,0" PreviewTextInput="NumberValidationTextBox" IsTabStop="False" >
-                                                    <TextBox.Resources>
-                                                        <Style TargetType="Border">
-                                                            <Setter Property="CornerRadius" Value="5"/>
-                                                        </Style>
-                                                    </TextBox.Resources>
-                                                </TextBox>
-                                            </Grid>
-                                            <TextBlock Foreground="{Binding Source={StaticResource FGCol1}}" Text="Mode" FontFamily="LEMON MILK Pro FTR" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="8,0,0,0"/>
-                                            <ComboBox Name="modeSel" SelectionChanged="ModeChange" Height="19" HorizontalAlignment="Right" SelectedIndex="2"  Margin="0,0,3,0" Style="{StaticResource ComboboxStyle1}" Width="79" Background="{Binding Source={StaticResource InBacCol}}" BorderBrush="{Binding Source={StaticResource InBorCol}}" FontFamily="LEMON MILK Pro FTR" Foreground="{Binding Source={StaticResource FGCol3}}" >
-                                                <ComboBoxItem>Burst</ComboBoxItem>
-                                                <ComboBoxItem>Toggle</ComboBoxItem>
-                                                <ComboBoxItem>Hold</ComboBoxItem>
-                                            </ComboBox>
+                                            <TextBlock x:Name="trigText" Foreground="{DynamicResource FgCol1}" Text="Trigger" FontFamily="./#LEMON MILK Pro FTR Regular" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="8,0,8,0"/>
+                                            <Border x:Name="trigBorder" HorizontalAlignment="Left" BorderThickness="0" Margin="92,3,0,3" Width="147" CornerRadius="5" Background="{DynamicResource InBac}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" MouseEnter="HotMouseEnter" MouseLeave="HotMouseLeave">
+                                                <TextBlock x:Name="triggerDis" Text="F" FontFamily="./#LEMON MILK Pro FTR Regular" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{DynamicResource FgCol1}" FontSize="14" Opacity="0.8" MaxWidth="143" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis"/>
+                                            </Border>
+                                            <Button x:Name="trigSet" Click="NewTrigger" Background="{DynamicResource AcGrad}" HorizontalAlignment="Right" BorderThickness="0" Margin="0,3,3,3" Width="40" FontSize="8" IsTabStop="False" Focusable="False">
+                                                <Button.Resources>
+                                                    <Style TargetType="{x:Type Border}">
+                                                        <Setter Property="CornerRadius" Value="5"/>
+                                                    </Style>
+                                                </Button.Resources>
+                                                <Button.Style>
+                                                    <StaticResource ResourceKey="MyButton"/>
+                                                </Button.Style>
+                                                <TextBlock Text="Set" FontFamily="./#LEMON MILK Pro FTR Regular" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="#CCFFFFFF" FontSize="14"/>
+                                            </Button>
                                         </Grid>
                                     </Border>
-                                    <Border CornerRadius="{Binding Source={StaticResource MinRad}}" Margin="5,0,5,0" Height="{Binding Source={StaticResource MinBoxHeight}}" Background="{Binding Source={StaticResource BoxBackCol}}" HorizontalAlignment="Right" Width="200">
+                                    <Border CornerRadius="{Binding Source={StaticResource MinRad}}" Margin="5,0,5,0" Height="{Binding Source={StaticResource MinBoxHeight}}" Background="{DynamicResource BoxBack}" HorizontalAlignment="Right" Width="200">
                                         <Grid>
-                                            <TextBlock Foreground="{Binding Source={StaticResource FGCol1}}" Text="Click" FontFamily="LEMON MILK Pro FTR" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="8,0,0,0"/>
+                                            <TextBlock Foreground="{DynamicResource FgCol1}" Text="Click" FontFamily="./#LEMON MILK Pro FTR Regular" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="8,0,0,0"/>
                                             <Border>
-                                                <ComboBox Name="clickSel" Height="19" HorizontalAlignment="Right" SelectedIndex="0"  Margin="0,2,2,2" Style="{StaticResource ComboboxStyle1}" Width="120" Background="{Binding Source={StaticResource InBacCol}}" BorderBrush="{Binding Source={StaticResource InBorCol}}" FontFamily="LEMON MILK Pro FTR" Foreground="{Binding Source={StaticResource FGCol3}}" IsTabStop="False" >
-                                                    <ComboBoxItem>Left Click</ComboBoxItem>
-                                                    <ComboBoxItem>Middle Click</ComboBoxItem>
-                                                    <ComboBoxItem>Right Click</ComboBoxItem>
+                                                <ComboBox x:Name="clickSel" SelectionChanged="CliclChange" Height="19" HorizontalAlignment="Right" SelectedIndex="0"  Margin="0,2,2,2" Style="{StaticResource ComboboxStyle1}" Width="123" Background="{DynamicResource InBac}" BorderBrush="{DynamicResource InBor}" FontFamily="./#LEMON MILK Pro FTR Regular" Foreground="{DynamicResource FgCol3}" IsTabStop="False" >
+                                                    <ComboBoxItem Content="Left Click"/>
+                                                    <ComboBoxItem Content="Middle Click"/>
+                                                    <ComboBoxItem Content="Right Click"/>
                                                 </ComboBox>
                                             </Border>
                                         </Grid>
@@ -535,76 +533,322 @@
                                 </Grid>
                             </StackPanel>
                             <!--Settings View-->
-                            <ScrollViewer Visibility="Visible" Height="121.386666666667" Name="SettView" Margin="5,5,0,0" Style="{Binding Source = {StaticResource ScrollViewerStyle}}">
+                            <ScrollViewer Visibility="Hidden" Height="121.386666666667" x:Name="SettView" Margin="5,5,0,0" Style="{Binding Source={StaticResource ScrollViewerStyle}}">
                                 <!--Height="121.386666666667"-->
                                 <StackPanel>
-                                    <TextBlock Name="uiScaleText" Foreground="{Binding Source={StaticResource FGCol2}}" Margin="15,0,20,0" Text="UI Scale - 100%" FontFamily="LEMON MILK Pro FTR" FontSize="13"/>
-                                    <Border CornerRadius="{Binding Source={StaticResource MinRad}}" Margin="0,1,0,0" Height="{Binding Source={StaticResource MinBoxHeight}}" Background="{Binding Source={StaticResource BoxBackCol}}">
+                                    <Grid>
+                                        <TextBlock x:Name="uiScaleText" Foreground="{DynamicResource FgCol2}" Margin="15,0,20,0" Text="UI Scale - 100%" FontFamily="./#LEMON MILK Pro FTR Regular" FontSize="13"/>
+                                        <TextBlock Foreground="{DynamicResource AcCol2}" Margin="15,0,10,0" Text="{Binding AssemblyVersion}" FontFamily="./#LEMON MILK Pro FTR Regular" FontSize="13" HorizontalAlignment="Right" Opacity="0.6"/>
+                                    </Grid>
+                                    <Border CornerRadius="{Binding Source={StaticResource MinRad}}" Margin="0,1,0,0" Height="{Binding Source={StaticResource MinBoxHeight}}" Background="{DynamicResource BoxBack}">
                                         <Grid>
-                                            <TextBlock Foreground="{Binding Source={StaticResource FGCol1}}" Text="50" FontFamily="LEMON MILK Pro FTR" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0"/>
-                                            <Slider Name="uiScaleSlid" ValueChanged="ScaleSliderChange" Thumb.DragCompleted="ScaleChange" VerticalAlignment="Center" Margin="35,0,40,0" BorderThickness="0" Style="{StaticResource Horizontal_Slider}" Minimum="50" Maximum="200" Value="4" TickFrequency="1" IsSnapToTickEnabled="True" IsTabStop="False"/>
-                                            <TextBlock Foreground="{Binding Source={StaticResource FGCol1}}" Text="200" FontFamily="LEMON MILK Pro FTR" FontSize="14" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,6,0"/>
+                                            <TextBlock Foreground="{DynamicResource FgCol1}" Text="50" FontFamily="./#LEMON MILK Pro FTR Regular" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                                            <Slider x:Name="uiScaleSlid" ValueChanged="ScaleSliderChange" Thumb.DragCompleted="ScaleChange" VerticalAlignment="Center" Margin="35,0,40,0" BorderThickness="0" Style="{StaticResource Horizontal_Slider}" Minimum="50" Maximum="200" Value="4" TickFrequency="1" IsSnapToTickEnabled="True" IsTabStop="False"/>
+                                            <TextBlock Foreground="{DynamicResource FgCol1}" Text="200" FontFamily="./#LEMON MILK Pro FTR Regular" FontSize="14" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,6,0"/>
                                         </Grid>
                                     </Border>
-                                    <Border Name="animBorder" CornerRadius="{Binding Source={StaticResource MinRad}}" Margin="0,5,0,0" Height="{Binding Source={StaticResource MinBoxHeight}}" Background="{Binding Source={StaticResource BoxBackCol}}">
+                                    <Border CornerRadius="{Binding Source={StaticResource MinRad}}" Margin="0,5,0,0" Height="42" Background="{DynamicResource BoxBack}">
                                         <Grid>
-                                            <TextBlock Foreground="{Binding Source={StaticResource FGCol1}}" Text="Animations" FontFamily="LEMON MILK Pro FTR" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0"/>
-                                            <Button Style="{StaticResource MyButton}" Background="AntiqueWhite" Name="animButt" HorizontalAlignment="Right" Width="15" Height="15" VerticalAlignment="Center" Margin="0,0,5,0" Click="ToggleAnim" IsTabStop="False">
+                                            <TextBlock Foreground="{DynamicResource FgCol1}" Text="Theme" FontFamily="./#LEMON MILK Pro FTR Regular" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                                            <StackPanel Orientation="Horizontal" Margin="5,0,5,0" HorizontalAlignment="Right">
+                                                <Button Name="DefaultThemeBut" Background="#061010" Style="{StaticResource ColourButton}" Click="SetTheme" Width="32" Height="32" VerticalAlignment="Center" BorderThickness="0" RenderTransformOrigin="0.5,0.5">
+                                                    <Button.Resources>
+                                                        <Style TargetType="{x:Type Border}">
+                                                            <Setter Property="CornerRadius" Value="16"/>
+                                                        </Style>
+                                                    </Button.Resources>
+                                                    <Button.RenderTransform>
+                                                        <ScaleTransform x:Name="TB1ST" ScaleX="1" ScaleY="1"/>
+                                                    </Button.RenderTransform>
+                                                    <Button.Triggers>
+                                                        <EventTrigger RoutedEvent="Button.MouseEnter">
+                                                            <BeginStoryboard>
+                                                                <Storyboard>
+                                                                    <DoubleAnimation Storyboard.TargetName="TB1ST"
+                                         Storyboard.TargetProperty="ScaleX" To="1.1" Duration="0:0:0.1" AccelerationRatio="0.1" DecelerationRatio="0.9"/>
+                                                                    <DoubleAnimation Storyboard.TargetName="TB1ST"
+                                         Storyboard.TargetProperty="ScaleY" To="1.1" Duration="0:0:0.1" AccelerationRatio="0.1" DecelerationRatio="0.9"/>
+                                                                </Storyboard>
+                                                            </BeginStoryboard>
+                                                        </EventTrigger>
+                                                        <EventTrigger RoutedEvent="Button.MouseLeave">
+                                                            <BeginStoryboard>
+                                                                <Storyboard>
+                                                                    <DoubleAnimation Storyboard.TargetName="TB1ST"
+                                         Storyboard.TargetProperty="ScaleX" To="1" Duration="0:0:0.2" AccelerationRatio="0.3" DecelerationRatio="0.7"/>
+                                                                    <DoubleAnimation Storyboard.TargetName="TB1ST"
+                                         Storyboard.TargetProperty="ScaleY" To="1" Duration="0:0:0.2" AccelerationRatio="0.3" DecelerationRatio="0.7" />
+                                                                </Storyboard>
+                                                            </BeginStoryboard>
+                                                        </EventTrigger>
+                                                    </Button.Triggers>
+                                                    <Border Background="#FF45B4B4" Width="16" Height="16" VerticalAlignment="Center" CornerRadius="17" HorizontalAlignment="Center"/>
+                                                </Button>
+                                                <Button Name="DefaultLightThemeBut" Background="#F8FFFF" Style="{StaticResource ColourButton}" Click="SetTheme" Width="32" Height="32" VerticalAlignment="Center" BorderThickness="0" RenderTransformOrigin="0.5,0.5" Margin="5,0,0,0">
+                                                    <Button.Resources>
+                                                        <Style TargetType="{x:Type Border}">
+                                                            <Setter Property="CornerRadius" Value="16"/>
+                                                        </Style>
+                                                    </Button.Resources>
+                                                    <Button.RenderTransform>
+                                                        <ScaleTransform x:Name="TB2ST" ScaleX="1" ScaleY="1"/>
+                                                    </Button.RenderTransform>
+                                                    <Button.Triggers>
+                                                        <EventTrigger RoutedEvent="Button.MouseEnter">
+                                                            <BeginStoryboard>
+                                                                <Storyboard>
+                                                                    <DoubleAnimation Storyboard.TargetName="TB2ST"
+                                         Storyboard.TargetProperty="ScaleX" To="1.1" Duration="0:0:0.1" AccelerationRatio="0.1" DecelerationRatio="0.9"/>
+                                                                    <DoubleAnimation Storyboard.TargetName="TB2ST"
+                                         Storyboard.TargetProperty="ScaleY" To="1.1" Duration="0:0:0.1" AccelerationRatio="0.1" DecelerationRatio="0.9"/>
+                                                                </Storyboard>
+                                                            </BeginStoryboard>
+                                                        </EventTrigger>
+                                                        <EventTrigger RoutedEvent="Button.MouseLeave">
+                                                            <BeginStoryboard>
+                                                                <Storyboard>
+                                                                    <DoubleAnimation Storyboard.TargetName="TB2ST"
+                                         Storyboard.TargetProperty="ScaleX" To="1" Duration="0:0:0.2" AccelerationRatio="0.3" DecelerationRatio="0.7"/>
+                                                                    <DoubleAnimation Storyboard.TargetName="TB2ST"
+                                         Storyboard.TargetProperty="ScaleY" To="1" Duration="0:0:0.2" AccelerationRatio="0.3" DecelerationRatio="0.7" />
+                                                                </Storyboard>
+                                                            </BeginStoryboard>
+                                                        </EventTrigger>
+                                                    </Button.Triggers>
+                                                    <Border Background="#FF45B4B4" Width="16" Height="16" VerticalAlignment="Center" CornerRadius="17" HorizontalAlignment="Center"/>
+                                                </Button>
+                                                <Button Name="GreenThemeBut" Background="#030303" Style="{StaticResource ColourButton}" Click="SetTheme" Width="32" Height="32" VerticalAlignment="Center" BorderThickness="0" RenderTransformOrigin="0.5,0.5" Margin="5,0,0,0">
+                                                    <Button.Resources>
+                                                        <Style TargetType="{x:Type Border}">
+                                                            <Setter Property="CornerRadius" Value="16"/>
+                                                        </Style>
+                                                    </Button.Resources>
+                                                    <Button.RenderTransform>
+                                                        <ScaleTransform x:Name="TB3ST" ScaleX="1" ScaleY="1"/>
+                                                    </Button.RenderTransform>
+                                                    <Button.Triggers>
+                                                        <EventTrigger RoutedEvent="Button.MouseEnter">
+                                                            <BeginStoryboard>
+                                                                <Storyboard>
+                                                                    <DoubleAnimation Storyboard.TargetName="TB3ST"
+                                         Storyboard.TargetProperty="ScaleX" To="1.1" Duration="0:0:0.1" AccelerationRatio="0.1" DecelerationRatio="0.9"/>
+                                                                    <DoubleAnimation Storyboard.TargetName="TB3ST"
+                                         Storyboard.TargetProperty="ScaleY" To="1.1" Duration="0:0:0.1" AccelerationRatio="0.1" DecelerationRatio="0.9"/>
+                                                                </Storyboard>
+                                                            </BeginStoryboard>
+                                                        </EventTrigger>
+                                                        <EventTrigger RoutedEvent="Button.MouseLeave">
+                                                            <BeginStoryboard>
+                                                                <Storyboard>
+                                                                    <DoubleAnimation Storyboard.TargetName="TB3ST"
+                                         Storyboard.TargetProperty="ScaleX" To="1" Duration="0:0:0.2" AccelerationRatio="0.3" DecelerationRatio="0.7"/>
+                                                                    <DoubleAnimation Storyboard.TargetName="TB3ST"
+                                         Storyboard.TargetProperty="ScaleY" To="1" Duration="0:0:0.2" AccelerationRatio="0.3" DecelerationRatio="0.7" />
+                                                                </Storyboard>
+                                                            </BeginStoryboard>
+                                                        </EventTrigger>
+                                                    </Button.Triggers>
+                                                    <Border Background="#FF16D419" Width="16" Height="16" VerticalAlignment="Center" CornerRadius="17" HorizontalAlignment="Center"/>
+                                                </Button>
+                                                <Button Name="DiscordThemeBut" Background="#2f3136" Style="{StaticResource ColourButton}" Click="SetTheme" Width="32" Height="32" VerticalAlignment="Center" BorderThickness="0" RenderTransformOrigin="0.5,0.5" Margin="5,0,0,0">
+                                                    <Button.Resources>
+                                                        <Style TargetType="{x:Type Border}">
+                                                            <Setter Property="CornerRadius" Value="16"/>
+                                                        </Style>
+                                                    </Button.Resources>
+                                                    <Button.RenderTransform>
+                                                        <ScaleTransform x:Name="TB4ST" ScaleX="1" ScaleY="1"/>
+                                                    </Button.RenderTransform>
+                                                    <Button.Triggers>
+                                                        <EventTrigger RoutedEvent="Button.MouseEnter">
+                                                            <BeginStoryboard>
+                                                                <Storyboard>
+                                                                    <DoubleAnimation Storyboard.TargetName="TB4ST"
+                                         Storyboard.TargetProperty="ScaleX" To="1.1" Duration="0:0:0.1" AccelerationRatio="0.1" DecelerationRatio="0.9"/>
+                                                                    <DoubleAnimation Storyboard.TargetName="TB4ST"
+                                         Storyboard.TargetProperty="ScaleY" To="1.1" Duration="0:0:0.1" AccelerationRatio="0.1" DecelerationRatio="0.9"/>
+                                                                </Storyboard>
+                                                            </BeginStoryboard>
+                                                        </EventTrigger>
+                                                        <EventTrigger RoutedEvent="Button.MouseLeave">
+                                                            <BeginStoryboard>
+                                                                <Storyboard>
+                                                                    <DoubleAnimation Storyboard.TargetName="TB4ST"
+                                         Storyboard.TargetProperty="ScaleX" To="1" Duration="0:0:0.2" AccelerationRatio="0.3" DecelerationRatio="0.7"/>
+                                                                    <DoubleAnimation Storyboard.TargetName="TB4ST"
+                                         Storyboard.TargetProperty="ScaleY" To="1" Duration="0:0:0.2" AccelerationRatio="0.3" DecelerationRatio="0.7" />
+                                                                </Storyboard>
+                                                            </BeginStoryboard>
+                                                        </EventTrigger>
+                                                    </Button.Triggers>
+                                                    <Image Source="res/Discord.png" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center" RenderOptions.BitmapScalingMode="HighQuality"/>
+                                                </Button>
+                                                <Button Background="{DynamicResource Back}" Style="{StaticResource ColourButton}" Cursor="Arrow" Width="32" Height="32" VerticalAlignment="Center" BorderThickness="0" RenderTransformOrigin="0.5,0.5" Margin="5,0,0,0" Opacity="0.3">
+                                                    <Button.Resources>
+                                                        <Style TargetType="{x:Type Border}">
+                                                            <Setter Property="CornerRadius" Value="16"/>
+                                                        </Style>
+                                                    </Button.Resources>
+                                                    <Border Background="{DynamicResource BoxBack}" Width="16" Height="16" VerticalAlignment="Center" CornerRadius="17" HorizontalAlignment="Center"/>
+                                                </Button>
+                                                <Button Background="{DynamicResource Back}" Style="{StaticResource ColourButton}" Cursor="Arrow" Width="32" Height="32" VerticalAlignment="Center" BorderThickness="0" RenderTransformOrigin="0.5,0.5" Margin="5,0,0,0" Opacity="0.3">
+                                                    <Button.Resources>
+                                                        <Style TargetType="{x:Type Border}">
+                                                            <Setter Property="CornerRadius" Value="16"/>
+                                                        </Style>
+                                                    </Button.Resources>
+                                                    <Border Background="{DynamicResource BoxBack}" Width="16" Height="16" VerticalAlignment="Center" CornerRadius="17" HorizontalAlignment="Center"/>
+                                                </Button>
+                                                <Button Background="{DynamicResource Back}" Style="{StaticResource ColourButton}" Cursor="Arrow" Width="32" Height="32" VerticalAlignment="Center" BorderThickness="0" RenderTransformOrigin="0.5,0.5" Margin="5,0,0,0" Opacity="0.25">
+                                                    <Button.Resources>
+                                                        <Style TargetType="{x:Type Border}">
+                                                            <Setter Property="CornerRadius" Value="16"/>
+                                                        </Style>
+                                                    </Button.Resources>
+                                                    <Border Background="{DynamicResource BoxBack}" Width="16" Height="16" VerticalAlignment="Center" CornerRadius="17" HorizontalAlignment="Center"/>
+                                                </Button>
+                                                <Button Background="{DynamicResource Back}" Style="{StaticResource ColourButton}" Cursor="Arrow" Width="32" Height="32" VerticalAlignment="Center" BorderThickness="0" RenderTransformOrigin="0.5,0.5" Margin="5,0,0,0" Opacity="0.2">
+                                                    <Button.Resources>
+                                                        <Style TargetType="{x:Type Border}">
+                                                            <Setter Property="CornerRadius" Value="16"/>
+                                                        </Style>
+                                                    </Button.Resources>
+                                                    <Border Background="{DynamicResource BoxBack}" Width="16" Height="16" VerticalAlignment="Center" CornerRadius="17" HorizontalAlignment="Center"/>
+                                                </Button>
+                                                <Button Background="{DynamicResource Back}" Style="{StaticResource ColourButton}" Cursor="Arrow" Width="32" Height="32" VerticalAlignment="Center" BorderThickness="0" RenderTransformOrigin="0.5,0.5" Margin="5,0,0,0" Opacity="0.15">
+                                                    <Button.Resources>
+                                                        <Style TargetType="{x:Type Border}">
+                                                            <Setter Property="CornerRadius" Value="16"/>
+                                                        </Style>
+                                                    </Button.Resources>
+                                                    <Border Background="{DynamicResource BoxBack}" Width="16" Height="16" VerticalAlignment="Center" CornerRadius="17" HorizontalAlignment="Center"/>
+                                                </Button>
+                                                <Button Background="{DynamicResource Back}" Style="{StaticResource ColourButton}" Cursor="Arrow" Width="32" Height="32" VerticalAlignment="Center" BorderThickness="0" RenderTransformOrigin="0.5,0.5" Margin="5,0,0,0" Opacity="0.1">
+                                                    <Button.Resources>
+                                                        <Style TargetType="{x:Type Border}">
+                                                            <Setter Property="CornerRadius" Value="16"/>
+                                                        </Style>
+                                                    </Button.Resources>
+                                                    <Border Background="{DynamicResource BoxBack}" Width="16" Height="16" VerticalAlignment="Center" CornerRadius="17" HorizontalAlignment="Center"/>
+                                                </Button>
+                                            </StackPanel>
+                                            <TextBlock Foreground="{DynamicResource FgCol1}" Text="More coming soon!" FontFamily="./#LEMON MILK Pro FTR Regular" FontSize="14" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,43,0" Opacity="0.5"/>
+
+                                        </Grid>
+                                    </Border>
+                                    <Border x:Name="animBorder" CornerRadius="{Binding Source={StaticResource MinRad}}" Margin="0,5,0,0" Height="{Binding Source={StaticResource MinBoxHeight}}" Background="{DynamicResource BoxBack}">
+                                        <Grid>
+                                            <TextBlock Foreground="{DynamicResource FgCol1}" Text="Animations" FontFamily="./#LEMON MILK Pro FTR Regular" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                                            <Button Background="AntiqueWhite" x:Name="animButt" HorizontalAlignment="Right" Width="15" Height="15" VerticalAlignment="Center" Margin="0,0,5,0" Click="ToggleAnim" IsTabStop="False">
                                                 <Button.Resources>
-                                                    <Style TargetType="Border">
+                                                    <Style TargetType="{x:Type Border}">
                                                         <Setter Property="CornerRadius" Value="20"/>
                                                     </Style>
                                                 </Button.Resources>
+                                                <Button.Style>
+                                                    <StaticResource ResourceKey="MyButton"/>
+                                                </Button.Style>
                                             </Button>
                                         </Grid>
                                     </Border>
-                                    <TextBlock Foreground="{Binding Source={StaticResource FGCol2}}" Margin="15,3,20,0" Text="Panel" FontFamily="LEMON MILK Pro FTR" FontSize="13"/>
-                                    <Border Name="aotBorder" CornerRadius="{Binding Source={StaticResource MinRad}}" Margin="0,1,0,0" Height="{Binding Source={StaticResource MinBoxHeight}}" Background="{Binding Source={StaticResource BoxBackCol}}">
+                                    <TextBlock Foreground="{DynamicResource FgCol2}" Margin="15,3,20,0" Text="Clicking" FontFamily="./#LEMON MILK Pro FTR Regular" FontSize="13"/>
+                                    <Border x:Name="ctBorder" CornerRadius="{Binding Source={StaticResource MinRad}}" Margin="0,1,0,0" Height="{Binding Source={StaticResource MinBoxHeight}}" Background="{DynamicResource BoxBack}">
                                         <Grid>
-                                            <TextBlock Foreground="{Binding Source={StaticResource FGCol1}}" Text="Always on top" FontFamily="LEMON MILK Pro FTR" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0"/>
-                                            <Button Style="{StaticResource MyButton}" Background="AntiqueWhite" Name="aotButt" HorizontalAlignment="Right" Width="15" Height="15" VerticalAlignment="Center" Margin="0,0,5,0" Click="ToggleAot" IsTabStop="False">
+                                            <TextBlock Foreground="{DynamicResource FgCol1}" Text="Count total clicks" FontFamily="./#LEMON MILK Pro FTR Regular" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                                            <Button x:Name="tcResetButt" Click="TcReset" Background="{DynamicResource AcGrad}" Style="{StaticResource MyButton}" HorizontalAlignment="Left" BorderThickness="0" Margin="150,3,0,3" Width="60" FontSize="8" IsTabStop="False" Focusable="False">
                                                 <Button.Resources>
-                                                    <Style TargetType="Border">
+                                                    <Style TargetType="{x:Type Border}">
+                                                        <Setter Property="CornerRadius" Value="5"/>
+                                                    </Style>
+                                                </Button.Resources>
+                                                <TextBlock Text="Reset" FontFamily="./#LEMON MILK Pro FTR Regular" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="#CCFFFFFF" FontSize="14"/>
+                                            </Button>
+                                            <TextBlock x:Name="totalText" Foreground="{DynamicResource FgCol1}" Text="69420" FontFamily="./#LEMON MILK Pro FTR Regular" FontSize="14" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,50,0" Opacity="0.69"/>
+                                            <Button Background="AntiqueWhite" x:Name="ctButt" HorizontalAlignment="Right" Width="15" Height="15" VerticalAlignment="Center" Margin="0,0,5,0" Click="ToggleCt" IsTabStop="False">
+                                                <Button.Resources>
+                                                    <Style TargetType="{x:Type Border}">
                                                         <Setter Property="CornerRadius" Value="20"/>
                                                     </Style>
                                                 </Button.Resources>
+                                                <Button.Style>
+                                                    <StaticResource ResourceKey="MyButton"/>
+                                                </Button.Style>
                                             </Button>
                                         </Grid>
                                     </Border>
-                                    <TextBlock Foreground="{Binding Source={StaticResource FGCol2}}" Margin="15,3,20,0" Text="Windows" FontFamily="LEMON MILK Pro FTR" FontSize="13"/>
-                                    <Border Name="startupBorder" CornerRadius="{Binding Source={StaticResource MinRad}}" Margin="0,1,0,0" Height="{Binding Source={StaticResource MinBoxHeight}}" Background="{Binding Source={StaticResource BoxBackCol}}">
+                                    <TextBlock Foreground="{DynamicResource FgCol2}" Margin="15,3,20,0" Text="Panel" FontFamily="./#LEMON MILK Pro FTR Regular" FontSize="13"/>
+                                    <Border x:Name="aotBorder" CornerRadius="{Binding Source={StaticResource MinRad}}" Margin="0,1,0,0" Height="{Binding Source={StaticResource MinBoxHeight}}" Background="{DynamicResource BoxBack}">
                                         <Grid>
-                                            <TextBlock Foreground="{Binding Source={StaticResource FGCol1}}" Text="Open on Startup" FontFamily="LEMON MILK Pro FTR" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0"/>
-                                            <Button Style="{StaticResource MyButton}" Background="AntiqueWhite" Name="startupButt" HorizontalAlignment="Right" Width="15" Height="15" VerticalAlignment="Center" Margin="0,0,5,0" Click="ToggleStartup" IsTabStop="False">
+                                            <TextBlock Foreground="{DynamicResource FgCol1}" Text="Always on top" FontFamily="./#LEMON MILK Pro FTR Regular" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                                            <Button Background="AntiqueWhite" x:Name="aotButt" HorizontalAlignment="Right" Width="15" Height="15" VerticalAlignment="Center" Margin="0,0,5,0" Click="ToggleAot" IsTabStop="False">
                                                 <Button.Resources>
-                                                    <Style TargetType="Border">
+                                                    <Style TargetType="{x:Type Border}">
                                                         <Setter Property="CornerRadius" Value="20"/>
                                                     </Style>
                                                 </Button.Resources>
+                                                <Button.Style>
+                                                    <StaticResource ResourceKey="MyButton"/>
+                                                </Button.Style>
                                             </Button>
                                         </Grid>
                                     </Border>
-                                    <Border Name="trayBorder" CornerRadius="{Binding Source={StaticResource MinRad}}" Margin="0,5,0,0" Height="{Binding Source={StaticResource MinBoxHeight}}" Background="{Binding Source={StaticResource BoxBackCol}}">
+                                    <Border CornerRadius="{Binding Source={StaticResource MinRad}}" Margin="0,5,0,0" Height="{Binding Source={StaticResource MinBoxHeight}}" Background="{DynamicResource BoxBack}">
                                         <Grid>
-                                            <TextBlock Foreground="{Binding Source={StaticResource FGCol1}}" Text="System Tray Icon" FontFamily="LEMON MILK Pro FTR" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0"/>
-                                            <Button Style="{StaticResource MyButton}" Background="AntiqueWhite" Name="trayButt" HorizontalAlignment="Right" Width="15" Height="15" VerticalAlignment="Center" Margin="0,0,5,0" Click="ToggleTray" IsTabStop="False">
+                                            <TextBlock Foreground="{DynamicResource FgCol1}" Text="Normal Opacity" FontFamily="./#LEMON MILK Pro FTR Regular" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                                            <TextBlock Foreground="{DynamicResource FgCol1}" x:Name="nOpText" Text="100%" FontFamily="./#LEMON MILK Pro FTR Regular" FontSize="14" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,6,0"/>
+                                            <Slider x:Name="nOpSlid" ValueChanged="NOpSliderChange" Thumb.DragCompleted="NOpChange" VerticalAlignment="Center" Margin="150,0,50,0" BorderThickness="0" Style="{StaticResource Horizontal_Slider}" Minimum="40" Maximum="100" Value="4" TickFrequency="1" IsSnapToTickEnabled="True" IsTabStop="False"/>
+                                        </Grid>
+                                    </Border>
+                                    <Border CornerRadius="{Binding Source={StaticResource MinRad}}" Margin="0,5,0,0" Height="{Binding Source={StaticResource MinBoxHeight}}" Background="{DynamicResource BoxBack}">
+                                        <Grid>
+                                            <TextBlock Foreground="{DynamicResource FgCol1}" Text="Clicking Opacity" FontFamily="./#LEMON MILK Pro FTR Regular" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                                            <TextBlock Foreground="{DynamicResource FgCol1}" x:Name="cOpText" Text="100%" FontFamily="./#LEMON MILK Pro FTR Regular" FontSize="14" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,6,0"/>
+                                            <Slider x:Name="cOpSlid" ValueChanged="COpSliderChange" Thumb.DragCompleted="COpChange" VerticalAlignment="Center" Margin="150,0,50,0" BorderThickness="0" Style="{StaticResource Horizontal_Slider}" Minimum="0" Maximum="100" Value="4" TickFrequency="1" IsSnapToTickEnabled="True" IsTabStop="False"/>
+                                        </Grid>
+                                    </Border>
+                                    <TextBlock Foreground="{DynamicResource FgCol2}" Margin="15,3,20,0" Text="Windows" FontFamily="./#LEMON MILK Pro FTR Regular" FontSize="13"/>
+                                    <Border x:Name="startupBorder" CornerRadius="{Binding Source={StaticResource MinRad}}" Margin="0,1,0,0" Height="{Binding Source={StaticResource MinBoxHeight}}" Background="{DynamicResource BoxBack}">
+                                        <Grid>
+                                            <TextBlock Foreground="{DynamicResource FgCol1}" Text="Open on Startup" FontFamily="./#LEMON MILK Pro FTR Regular" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                                            <Button Background="AntiqueWhite" x:Name="startupButt" HorizontalAlignment="Right" Width="15" Height="15" VerticalAlignment="Center" Margin="0,0,5,0" Click="ToggleStartup" IsTabStop="False">
                                                 <Button.Resources>
-                                                    <Style TargetType="Border">
+                                                    <Style TargetType="{x:Type Border}">
                                                         <Setter Property="CornerRadius" Value="20"/>
                                                     </Style>
                                                 </Button.Resources>
+                                                <Button.Style>
+                                                    <StaticResource ResourceKey="MyButton"/>
+                                                </Button.Style>
                                             </Button>
                                         </Grid>
                                     </Border>
-                                    <Border Name="minTrayBorder" CornerRadius="{Binding Source={StaticResource MinRad}}" Margin="0,5,0,0" Height="{Binding Source={StaticResource MinBoxHeight}}" Background="{Binding Source={StaticResource BoxBackCol}}">
+                                    <Border x:Name="trayBorder" CornerRadius="{Binding Source={StaticResource MinRad}}" Margin="0,5,0,0" Height="{Binding Source={StaticResource MinBoxHeight}}" Background="{DynamicResource BoxBack}">
                                         <Grid>
-                                            <TextBlock Foreground="{Binding Source={StaticResource FGCol1}}" Text="Minimise to System Tray" FontFamily="LEMON MILK Pro FTR" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0"/>
-                                            <Button Style="{StaticResource MyButton}" Background="AntiqueWhite" Name="minTrayButt" HorizontalAlignment="Right" Width="15" Height="15" VerticalAlignment="Center" Margin="0,0,5,0" Click="ToggleMinTray" IsTabStop="False">
+                                            <TextBlock Foreground="{DynamicResource FgCol1}" Text="System Tray Icon" FontFamily="./#LEMON MILK Pro FTR Regular" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                                            <Button Background="AntiqueWhite" x:Name="trayButt" HorizontalAlignment="Right" Width="15" Height="15" VerticalAlignment="Center" Margin="0,0,5,0" Click="ToggleTray" IsTabStop="False">
                                                 <Button.Resources>
-                                                    <Style TargetType="Border">
+                                                    <Style TargetType="{x:Type Border}">
                                                         <Setter Property="CornerRadius" Value="20"/>
                                                     </Style>
                                                 </Button.Resources>
+                                                <Button.Style>
+                                                    <StaticResource ResourceKey="MyButton"/>
+                                                </Button.Style>
+                                            </Button>
+                                        </Grid>
+                                    </Border>
+                                    <Border x:Name="minTrayBorder" CornerRadius="{Binding Source={StaticResource MinRad}}" Margin="0,5,0,0" Height="{Binding Source={StaticResource MinBoxHeight}}" Background="{DynamicResource BoxBack}">
+                                        <Grid>
+                                            <TextBlock Foreground="{DynamicResource FgCol1}" Text="Minimise to System Tray" FontFamily="./#LEMON MILK Pro FTR Regular" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                                            <Button Background="AntiqueWhite" x:Name="minTrayButt" HorizontalAlignment="Right" Width="15" Height="15" VerticalAlignment="Center" Margin="0,0,5,0" Click="ToggleMinTray" IsTabStop="False">
+                                                <Button.Resources>
+                                                    <Style TargetType="{x:Type Border}">
+                                                        <Setter Property="CornerRadius" Value="20"/>
+                                                    </Style>
+                                                </Button.Resources>
+                                                <Button.Style>
+                                                    <StaticResource ResourceKey="MyButton"/>
+                                                </Button.Style>
                                             </Button>
                                         </Grid>
                                     </Border>
@@ -612,60 +856,69 @@
                             </ScrollViewer>
                         </Grid>
                         <Grid Margin="0,5,0,0">
-                            <Button Click="SettingsToggle" Style="{StaticResource MyButton}" Height="{Binding Source={StaticResource MajBoxHeight}}" Width="{Binding Source={StaticResource MajBoxHeight}}" HorizontalAlignment="Left" Background="{Binding Source={StaticResource BoxBackCol}}" BorderThickness="0" Margin="5,0,0,0" IsTabStop="False" Focusable="False">
+                            <Button x:Name="settButt" Click="SettingsToggle" Style="{StaticResource MyButton}" Height="{Binding Source={StaticResource MajBoxHeight}}" Width="{Binding Source={StaticResource MajBoxHeight}}" HorizontalAlignment="Left" Background="{DynamicResource BoxBack}" BorderThickness="0" Margin="5,0,0,0" IsTabStop="False" Focusable="False">
                                 <Button.Resources>
                                     <Style TargetType="Border">
                                         <Setter Property="CornerRadius" Value="{Binding Source={StaticResource MinRad}}"/>
                                     </Style>
                                 </Button.Resources>
-                                <Image Source="/res/Settings.png" Margin="4,4,4,4" OpacityMask="#B2000000" RenderOptions.BitmapScalingMode="HighQuality"/>
-                            </Button>
-                            <Button Name="activateButt" Click="Activate" Style="{StaticResource MyButton}" Height="{Binding Source={StaticResource MajBoxHeight}}" HorizontalAlignment="Stretch" BorderThickness="0" Margin="50,0,5,0" IsTabStop="False" Focusable="False">
-                                <Button.Resources>
-                                    <Style TargetType="Border">
-                                        <Setter Property="CornerRadius" Value="{Binding Source={StaticResource MinRad}}"/>
-                                    </Style>
-                                </Button.Resources>
-                                <Button.Background>
-                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                        <LinearGradientBrush.RelativeTransform>
-                                            <TransformGroup>
-                                                <ScaleTransform CenterY="0.5" CenterX="0.5"/>
-                                                <SkewTransform CenterX="0.5" CenterY="0.5"/>
-                                                <RotateTransform Angle="-89" CenterX="0.5" CenterY="0.5"/>
-                                                <TranslateTransform/>
-                                            </TransformGroup>
-                                        </LinearGradientBrush.RelativeTransform>
-                                        <GradientStop Color="#FF45B4B4"/>
-                                        <GradientStop Color="#FF45AA96" Offset="1"/>
-                                    </LinearGradientBrush>
-                                </Button.Background>
-                                <TextBlock Name="activateButtText" Text="Activate" FontFamily="LEMON MILK Pro FTR Medium" FontSize="35" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0,0,0">
-                                    <TextBlock.Foreground>
-                                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                            <LinearGradientBrush.RelativeTransform>
+                                <Border Name="settIcon" Background="{DynamicResource FgCol1}" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28">
+                                    <Border.RenderTransform>
+                                        <RotateTransform Angle="0" />
+                                    </Border.RenderTransform>
+                                    <Border.OpacityMask>
+                                        <ImageBrush ImageSource="{DynamicResource SettingsDrawingImage}" Stretch="Uniform">
+                                            <ImageBrush.RelativeTransform>
                                                 <TransformGroup>
-                                                    <ScaleTransform CenterY="0.5" CenterX="0.5"/>
-                                                    <SkewTransform CenterX="0.5" CenterY="0.5"/>
-                                                    <RotateTransform Angle="180" CenterX="0.5" CenterY="0.5"/>
-                                                    <TranslateTransform/>
+                                                    <ScaleTransform CenterY="0" CenterX="0"/>
+                                                    <TranslateTransform X="0" Y="0"/>
                                                 </TransformGroup>
-                                            </LinearGradientBrush.RelativeTransform>
-                                            <GradientStop Color="#FFD1DBDC"/>
-                                            <GradientStop Color="#FFF1F3F3" Offset="1"/>
-                                            <GradientStop Color="#FFE4EBEC" Offset="0.458"/>
-                                        </LinearGradientBrush>
-                                    </TextBlock.Foreground>
-                                </TextBlock>
+                                            </ImageBrush.RelativeTransform>
+                                        </ImageBrush>
+                                    </Border.OpacityMask>
+                                </Border>
+                            </Button>
+                            <Button Name="activateButt" Click="Activate" Background="{DynamicResource AcGrad}" Style="{StaticResource MyButton}" Height="{Binding Source={StaticResource MajBoxHeight}}" HorizontalAlignment="Stretch" BorderThickness="0" Margin="50,0,5,0" IsTabStop="False" Focusable="False">
+                                <Button.Resources>
+                                    <Style TargetType="Border">
+                                        <Setter Property="CornerRadius" Value="{Binding Source={StaticResource MinRad}}"/>
+                                    </Style>
+                                </Button.Resources>
+                                <TextBlock Name="activateButtText" Text="Activate" FontFamily="./#LEMON MILK Pro FTR Medium" FontSize="35" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0,0,0" Foreground="{DynamicResource ActivateText}"/>
                             </Button>
                         </Grid>
                     </StackPanel>
                 </Border>
                 <Button Style="{StaticResource MyButton}" Click="AppClose" HorizontalAlignment="Right" VerticalAlignment="Top" Width="25" Height="25" Margin="0,3,3,0" BorderThickness="0" Background="#00DDDDDD" IsTabStop="False">
-                    <Image Source="/res/Max.png" HorizontalAlignment="Center" VerticalAlignment="Center" Width="13" Height="13" Opacity="0.69" RenderOptions.BitmapScalingMode="HighQuality"/>
+                    <Border Background="{DynamicResource FgCol1}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="13" Height="13" Opacity="0.69">
+                        <Border.OpacityMask>
+                            <ImageBrush ImageSource="{DynamicResource CloseDrawingImage}" Stretch="Uniform">
+                                <ImageBrush.RelativeTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform CenterY="0" CenterX="0"/>
+                                        <TranslateTransform X="0" Y="0"/>
+                                    </TransformGroup>
+                                </ImageBrush.RelativeTransform>
+                            </ImageBrush>
+                        </Border.OpacityMask>
+                    </Border>
                 </Button>
                 <Button Style="{StaticResource MyButton}" Click="AppMin" HorizontalAlignment="Right" VerticalAlignment="Top" Width="25" Height="25" Margin="0,3,32,0" BorderThickness="0" Background="#00DDDDDD" IsTabStop="False">
-                    <Image Source="/res/Min.png" HorizontalAlignment="Center" VerticalAlignment="Center" Width="13" Height="13" Opacity="0.69" RenderOptions.BitmapScalingMode="HighQuality"/>
+                    <Border Background="{DynamicResource FgCol1}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="13" Height="13" Opacity="0.69" RenderOptions.BitmapScalingMode="HighQuality">
+                        <Border.OpacityMask>
+                            <ImageBrush ImageSource="{DynamicResource MinDrawingImage}" Stretch="Uniform">
+                                <ImageBrush.RelativeTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform CenterY="0" CenterX="0"/>
+                                        <TranslateTransform X="0" Y="0"/>
+                                    </TransformGroup>
+                                </ImageBrush.RelativeTransform>
+                            </ImageBrush>
+                        </Border.OpacityMask>
+                    </Border>
+                </Button>
+                <Button Style="{StaticResource MyButton}" Click="HelpLink" HorizontalAlignment="Right" VerticalAlignment="Top" Width="25" Height="25" Margin="0,3,61,0" BorderThickness="0" Background="#00DDDDDD" IsTabStop="False">
+                    <TextBlock Foreground="{DynamicResource FgCol1}" Text="?" FontFamily="./#LEMON MILK Pro FTR Regular" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center" Opacity="0.3" Margin="0,0,0,2"/>
                 </Button>
             </Grid>
         </Canvas>

@@ -4,6 +4,11 @@
              xmlns:local="clr-namespace:Clickett"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="res/dic/Themes/BaseTheme.xaml"/>
+                <ResourceDictionary Source="res/dic/Vectors.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>
