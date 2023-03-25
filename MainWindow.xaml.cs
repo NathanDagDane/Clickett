@@ -27,7 +27,7 @@ namespace Clickett
         private long totalClickCounter;
         private uint clickDo, clickUp, xPos, yPos;
         private int clickInterval, uiScale, hudCurrentPriority;
-        private string hudCurrentToken, versionNum = "0.6.1", curTheme;
+        private string hudCurrentToken, versionNum = "0.6.2", curTheme;
         private float nOpacity, cOpacity;
         private Key hotkey;
         private System.Drawing.Icon icon, iconbw;
@@ -126,7 +126,6 @@ namespace Clickett
             _mainWindowHandle = new WindowInteropHelper(this).Handle;
             _source = HwndSource.FromHwnd(_mainWindowHandle);
             _source.AddHook(Hooks);
-
         }
 
         private void Activate(object sender, RoutedEventArgs e)
@@ -135,7 +134,7 @@ namespace Clickett
             {
                 UnregisterHotkey();
                 activateButtText.Text = "Activate";
-                activateButt.Background = (LinearGradientBrush)Application.Current.Resources["AcGrad"];
+                activateButt.SetResourceReference(BackgroundProperty, "AcGrad"); //This makes my balls go YES
                 active = false;
                 trigSet.IsEnabled = locSetButt.IsEnabled = true;
                 trigSet.Opacity = locSetButt.Opacity = 1;
@@ -161,7 +160,7 @@ namespace Clickett
                     return;
                 }
                 activateButtText.Text = "Stop";
-                activateButt.Background = (SolidColorBrush)Application.Current.Resources["InacBut"];
+                activateButt.SetResourceReference(BackgroundProperty, "InacBut");
                 active = true;
                 clicking = false;
                 trigSet.IsEnabled = locSetButt.IsEnabled = false;
@@ -491,6 +490,11 @@ namespace Clickett
             Process.Start(new ProcessStartInfo("https://github.com/NathanDagDane/Clickett/wiki/Getting-Started,-Help-and-FAQ") { UseShellExecute = true });
         }
 
+        private void WarnLink(object sender, RoutedEventArgs? e)
+        {
+            Process.Start(new ProcessStartInfo("https://github.com/NathanDagDane/Clickett/wiki/Getting-Started,-Help-and-FAQ#only-69-clicks-per-second") { UseShellExecute = true });
+        }
+
         private void AppMin(object sender, RoutedEventArgs? e)
         {
             ShowInTaskbar = true;
@@ -551,6 +555,19 @@ namespace Clickett
             var cps = cpsSlid.Value;
             clickInterval = (int)Math.Round(1000 / cps);
             interText.Text = "Clicks Per Second - " + cps;
+            if (cps > 55)
+            {
+                cpsWarn.Visibility = Visibility.Visible;
+                var mar = cpsWarn.Margin;
+                mar.Left = 30+(385*((cps-1)/68));
+                cpsWarn.Margin = mar;
+                cpsWarnBack.Opacity = 0.2 + (0.6 * ((cps - 55) / 14));
+            }
+            else
+            {
+                cpsWarn.Visibility = Visibility.Hidden;
+            }
+            
         }
 
         private void InterTypeSwap(object sender, RoutedEventArgs? e)
@@ -602,6 +619,15 @@ namespace Clickett
         private void HotMouseLeave(object sender, MouseEventArgs? e)
         {
             CHT(5, "ShowHotkey", "");
+        }
+        private void WarnMouseEnter(object sender, MouseEventArgs? e)
+        {
+            CHT(2, "ShowWarning", "Some games may struggle to process this many clicks!");
+        }
+
+        private void WarnMouseLeave(object sender, MouseEventArgs? e)
+        {
+            CHT(5, "ShowWarning", "");
         }
 
         private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)

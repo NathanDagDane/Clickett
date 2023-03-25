@@ -367,12 +367,26 @@
                                 <Grid Margin="0,1,0,0">
                                     <Border CornerRadius="{Binding Source={StaticResource MinRad}}" Margin="5,0,35,0" Height="{Binding Source={StaticResource MinBoxHeight}}" Background="{DynamicResource BoxBack}">
                                         <Grid>
-                                            <Grid x:Name="cpsGrid" Visibility="Hidden">
+                                            <Grid x:Name="cpsGrid" Visibility="Visible">
                                                 <TextBlock Foreground="{DynamicResource FgCol1}" Text="1" FontFamily="./#LEMON MILK Pro FTR Regular" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="13,0,0,0"/>
+                                                <Button x:Name="cpsWarn" Style="{StaticResource MyButton}" MouseEnter="WarnMouseEnter" MouseLeave="WarnMouseLeave" Click="WarnLink"  Height="15" Width="15" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="300,-19,0,0">
+                                                    <Border x:Name="cpsWarnBack" Background="{DynamicResource FgCol1}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="15" Height="15" Opacity="0.69" RenderOptions.BitmapScalingMode="HighQuality">
+                                                        <Border.OpacityMask>
+                                                            <ImageBrush ImageSource="{DynamicResource Warning1DrawingImage}" Stretch="Uniform">
+                                                                <ImageBrush.RelativeTransform>
+                                                                    <TransformGroup>
+                                                                        <ScaleTransform CenterY="0" CenterX="0"/>
+                                                                        <TranslateTransform X="0" Y="0"/>
+                                                                    </TransformGroup>
+                                                                </ImageBrush.RelativeTransform>
+                                                            </ImageBrush>
+                                                        </Border.OpacityMask>
+                                                    </Border>
+                                                </Button>
                                                 <Slider x:Name="cpsSlid" ValueChanged="cpsChange" VerticalAlignment="Center" Margin="30,0,30,0" BorderThickness="0" Style="{StaticResource Horizontal_Slider}" Minimum="1" Maximum="69" Value="4" TickFrequency="1" IsSnapToTickEnabled="True" IsTabStop="False"/>
                                                 <TextBlock Foreground="{DynamicResource FgCol1}" Text="69" FontFamily="./#LEMON MILK Pro FTR Regular" FontSize="14" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,6,0"/>
                                             </Grid>
-                                            <Grid x:Name="interGrid">
+                                            <Grid x:Name="interGrid" Visibility="Hidden">
                                                 <!--Minutes Input-->
                                                 <TextBox x:Name="minutesInput" Background="{DynamicResource InBac}" BorderBrush="{DynamicResource InBor}" Foreground="{DynamicResource FgCol3}" LostFocus="HandleTextChange" TextChanged="HandleInterTextChange" HorizontalAlignment="Left" BorderThickness="2" Margin="65,3,0,3" Width="75" FontFamily="./#LEMON MILK Pro FTR Regular" Padding="2,0,0,0" PreviewTextInput="NumberValidationTextBox" IsTabStop="False">
                                                     <TextBox.Resources>
