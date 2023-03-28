@@ -3,6 +3,11 @@
     --accent: rgba(0, 235, 197, 1);
 }
 
+@font-face {
+font-family: "Outfit";
+src: url("fonts/Outfit.ttf");
+}
+
 body {
     background: rgb(0,233,233);
     background: -moz-linear-gradient(180deg, var(--main_colour) 0%, var(--accent) 100%);
@@ -19,7 +24,7 @@ body {
     min-width: 180px;
     min-height: 50px;
     font-family: Outfit, serif;
-    font-size: max((calc(min(2.5vw, 30px) + 4px)), 22px);
+    font-size: max((calc(min(2.5vw, 35px) + 4px)), 22px);
     justify-content: center;
     letter-spacing: 1px;
     font-weight: 350;
@@ -30,7 +35,7 @@ body {
     cursor: pointer;
     outline: none;
     color: rgb(0,150,150);
-    margin: 8vh auto auto auto;
+    margin: 9vh auto auto auto;
     display: flex;
     align-items: center;
 }
