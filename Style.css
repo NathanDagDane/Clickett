@@ -8,7 +8,7 @@
 }
 
 .DownloadBut {
-  width: 220px;
+  width: 230px;
   height: 60px;
   font-family: Outfit;
   font-size: 25px;
@@ -66,7 +66,7 @@ body,
 }
 
 #topText {
-    margin-top: 3vh;
+    margin-top: 1vh;
     font-size: max(min(2.6vw,36px),22px);
     max-width: 1000px;
     margin-left: auto;
