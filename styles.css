@@ -3,11 +3,6 @@
     --accent: rgba(0, 235, 197, 1);
 }
 
-@font-face {
-font-family: "Outfit";
-src: url("fonts/Outfit.ttf");
-}
-
 body {
     background: rgb(0,233,233);
     background: -moz-linear-gradient(180deg, var(--main_colour) 0%, var(--accent) 100%);
@@ -27,7 +22,6 @@ body {
     font-size: max((calc(min(2.5vw, 35px) + 4px)), 22px);
     justify-content: center;
     letter-spacing: 1px;
-    font-weight: 350;
     border: none;
     border-radius: 90px;
     box-shadow: 0 0 30px rgba(0, 0, 0, 0.15);
