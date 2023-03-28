@@ -1,0 +1,86 @@
+.TopGradient
+{
+    background: rgb(0,233,233);
+    background: -moz-linear-gradient(180deg, rgba(0,233,233,1) 0%, rgba(0,235,197,1) 100%);
+    background: -webkit-linear-gradient(180deg, rgba(0,233,233,1) 0%, rgba(0,235,197,1) 100%);
+    background: linear-gradient(180deg, rgba(0,233,233,1) 0%, rgba(0,235,197,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#00e9e9",endColorstr="#00ebc5",GradientType=1);
+}
+
+.DownloadBut {
+  width: 220px;
+  height: 60px;
+  font-family: Outfit;
+  font-size: 25px;
+  justify-content: center;
+  letter-spacing: 1px;
+  font-weight: 350;
+  border: none;
+  border-radius: 45px;
+  box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+    color: rgb(0,150,150);
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    align-items: center;
+  }
+
+.DownloadBut:hover {
+  //background-color: #2EE59D;
+  box-shadow: 0px 3px 25px rgba(0,0,0, 0.15);
+  //color: #fff;
+  transform: translateY(-5px);
+}
+body,
+div {
+  margin: 0;
+  border: 0 none;
+  padding: 0;
+}
+
+html,
+body,
+#topBack {
+  height: 100%;
+  min-height: 100%;
+}
+
+#topBack {
+  margin: auto;
+  overflow: hidden;
+  justify-content: center;
+}
+
+#topLogo {
+    min-width: 500px;
+    max-height: 175px;
+    width: 55%;
+    margin-top: 15vh;
+    margin-left: auto;
+    margin-right: auto;
+    object-fit: contain;
+    display: flex;
+}
+
+#topText {
+    margin-top: 3vh;
+    font-size: max(min(2.6vw,36px),22px);
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+#sc1 {
+    min-width: 500px;
+    width: 75vw;
+    margin-top: 12vh;
+    margin-left: auto;
+    margin-right: auto;
+    object-fit: contain;
+    display: flex;
+    align-items: center;
+}
