@@ -1,5 +1,8 @@
 .MyGradientClass
 {
     background: rgb(0,233,233);
+    background: -moz-linear-gradient(180deg, rgba(0,233,233,1) 0%, rgba(0,235,197,1) 100%);
+    background: -webkit-linear-gradient(180deg, rgba(0,233,233,1) 0%, rgba(0,235,197,1) 100%);
     background: linear-gradient(180deg, rgba(0,233,233,1) 0%, rgba(0,235,197,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#00e9e9",endColorstr="#00ebc5",GradientType=1);
 }​
