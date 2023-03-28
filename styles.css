@@ -32,6 +32,7 @@ body {
     margin: 9vh auto auto auto;
     display: flex;
     align-items: center;
+    animation: enterSizeAnim 1.5s;
 }
 
 .DownloadBut:hover {
@@ -41,9 +42,19 @@ body {
     transform: translateY(-5px);
 }
 
-@keyframes enterAnim{
+@keyframes enterUpAnim{
     0%{ opacity: 0; transform : translateY(6vh) }
     100%{ opacity: 1; transform : translateY(0em)}
+}
+
+@keyframes enterSizeAnim{
+    0%{ opacity: 0; transform : scale(1.1) }
+    100%{ opacity: 1; transform : translateY(1)}
+}
+
+@keyframes enterFadeAnim{
+    0%{ opacity: 0; }
+    100%{ opacity: 1; }
 }
 
 body,
@@ -77,6 +88,7 @@ body {
     margin: 8vw auto 0 auto;
     object-fit: contain;
     display: flex;
+    animation: enterFadeAnim 0.3s;
 }
 
 #topText {
@@ -88,6 +100,7 @@ body {
     padding: 0 5vw 0 5vw;
     text-align: center;
     text-wrap: normal;
+    animation: enterFadeAnim 0.6s;
 }
 
 #sc1 {
@@ -97,7 +110,7 @@ body {
     margin: 12vh auto auto;
     object-fit: contain;
     display: flex;
-    animation: enterAnim 1s;
+    animation: enterUpAnim 2.5s;
 }
 
 @media (max-width: 700px){
