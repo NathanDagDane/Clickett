@@ -4,11 +4,7 @@
 }
 
 body {
-    background: rgb(0,233,233);
-    background: -moz-linear-gradient(180deg, var(--main_colour) 0%, var(--accent) 100%);
-    background: -webkit-linear-gradient(180deg, var(--main_colour) 0%, var(--accent) 100%);
-    background: linear-gradient(180deg, var(--main_colour) 0%, var(--accent) 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#00e9e9",endColorstr="#00ebc5",GradientType=1);
+    background-color: var(--main_colour);
 }
 
 .DownloadBut {
@@ -72,24 +68,28 @@ html,
 body,
 #topBack {
     height: 100%;
-    min-height: 100%;
-}
-
-body {
-    background-color: var(--main_colour);
+    //min-height: 100%;
 }
 
 #topBack {
+    background: rgb(0,233,233);
+    background: -moz-linear-gradient(180deg, var(--main_colour) 0%, var(--accent) 100%);
+    background: -webkit-linear-gradient(180deg, var(--main_colour) 0%, var(--accent) 100%);
+    background: linear-gradient(180deg, var(--main_colour) 0%, var(--accent) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#00e9e9",endColorstr="#00ebc5",GradientType=1);
+    
     margin: auto;
+    max-height: 80vw;
     overflow: hidden;
     justify-content: center;
+    transition: all 0.5s ease 0s;
 }
 
 #topLogo {
     min-width: 70vw;
     max-height: 175px;
     width: 55%;
-    margin: 10vw auto 0 auto;
+    margin: min(10vw,22vh) auto 0 auto;
     object-fit: contain;
     display: flex;
     animation: enterFadeAnim 0.3s;
@@ -108,16 +108,36 @@ body {
 }
 
 #sc1 {
+    position:absolute;
     width: min(90vw, min(75vw, 120vh));
-    margin: 12vh auto auto;
+    margin: min(calc(26vw + 33vh), 83vh) calc(calc(100% - min(90vw, min(75vw, 120vh)))/2) auto;
     object-fit: contain;
     display: flex;
     animation: enterUpAnim 2.5s;
     filter: drop-shadow(0px 0px 40px rgba(0,0,0,0.3));
+    transition: all 0.1s ease 0s;
 }
 
-@media (max-width: 700px){
-    body {
-        background-color: red;
+#secBack{
+    height: 80vh;
+    background-color: white;
+}
+
+#topBound{
+    height: 10vh
+}
+
+@media only screen and (orientation: portrait){
+    .DownloadBut {
+        margin: 3vh auto auto auto;
+    }
+    .DownloadBut:hover {
+        font-size: max((calc(min(2vw, 30px) + 4px)), 22px);
+    }
+    #sc1{
+        margin: calc(5vh + 42vw) calc(calc(100% - min(90vw, min(75vw, 120vh)))/2) auto;
+    }
+    #topBack {
+        height: 66vw;
     }
 }

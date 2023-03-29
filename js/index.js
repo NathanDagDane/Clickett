@@ -15,8 +15,8 @@ window.addEventListener("load", function() {
 
 function parallax(event) {
   this.querySelectorAll("#sc1").forEach((shift) => {
-    const x = (window.innerWidth - event.pageX) / 90;
-    const y = (window.innerHeight - event.pageY) / 90;
+    const x = ((window.innerWidth/2) - event.pageX) / 90;
+    const y = ((window.innerHeight/2) - event.pageY) / 90;
 
     shift.style.transform = `translateX(${x}px) translateY(${y}px)`;
   });
