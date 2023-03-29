@@ -17,6 +17,7 @@ window.addEventListener("load", function() {
     
     if (windows){
         //Do Windows stuff
+        document.getElementById("topText").innerHTML = "test";
     }else{
         $("#bodyTop").load("downloadInvalid.html");
     }
