@@ -16,7 +16,7 @@ window.addEventListener("load", function() {
     }*/
     
     if (windows){
-        document.getElementById('topText').innerHTML = "You're on windows";
+        //Do Windows stuff
     }else{
         $("#bodyTop").load("downloadInvalid.html");
     }
