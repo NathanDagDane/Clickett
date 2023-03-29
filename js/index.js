@@ -7,6 +7,17 @@ window.addEventListener("load", function() {
     if (check === true)
     {
         //document.querySelector("link").href = "mobileStyles.css";
+    } else{
+        document.addEventListener("mousemove", parallax);
     }
 
 })
+
+function parallax(event) {
+  this.querySelectorAll("#sc1").forEach((shift) => {
+    const x = (window.innerWidth - event.pageX) / 90;
+    const y = (window.innerHeight - event.pageY) / 90;
+
+    shift.style.transform = `translateX(${x}px) translateY(${y}px)`;
+  });
+}

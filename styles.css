@@ -19,7 +19,8 @@ body {
     min-width: 180px;
     min-height: 50px;
     font-family: Outfit, serif;
-    font-size: max((calc(min(2.5vw, 35px) + 4px)), 22px);
+    font-size: max((calc(min(2.2vw, 29px) + 4px)), 18px);
+    font-weight: 500;
     justify-content: center;
     letter-spacing: 1px;
     border: none;
@@ -28,18 +29,21 @@ body {
     transition: all 0.3s ease 0s;
     cursor: pointer;
     outline: none;
-    color: rgb(0,150,150);
-    margin: 9vh auto auto auto;
+    background-color: rgba(255,255,255,0.98);
+    color: rgba(0,200,200);
+    margin: 9.8vh auto auto auto;
     display: flex;
     align-items: center;
     animation: enterSizeAnim 1.5s;
 }
 
 .DownloadBut:hover {
-    color: rgb(0,100,100);
+    color: rgb(0,170,170);
     box-shadow: 0 3px 40px rgba(0,0,0, 0.2);
+    background-color: rgba(255,255,255,1);
 //color: #fff;
-    transform: translateY(-5px);
+    transform: translateY(-7px) scale(1.02);
+    font-size: max((calc(min(2.3vw, 30px) + 4px)), 29px);
 }
 
 @keyframes enterUpAnim{
@@ -85,7 +89,7 @@ body {
     min-width: 70vw;
     max-height: 175px;
     width: 55%;
-    margin: 8vw auto 0 auto;
+    margin: 10vw auto 0 auto;
     object-fit: contain;
     display: flex;
     animation: enterFadeAnim 0.3s;
@@ -94,9 +98,9 @@ body {
 #topText {
     font-family: Outfit, serif;
     color:rgba(255,255,255,0.8);
-    font-size: max(min(2.9vw,36px),22px);
+    font-size: max(min(2.4vw,28px),16px);
     width: fit-content;
-    margin: 3vh auto 0 auto;
+    margin: 0 auto 0 auto;
     padding: 0 5vw 0 5vw;
     text-align: center;
     text-wrap: normal;
@@ -104,13 +108,12 @@ body {
 }
 
 #sc1 {
-    min-width: 500px;
-    max-width: 120vh;
-    width: 75vw;
+    width: min(90vw, min(75vw, 120vh));
     margin: 12vh auto auto;
     object-fit: contain;
     display: flex;
     animation: enterUpAnim 2.5s;
+    filter: drop-shadow(0px 0px 40px rgba(0,0,0,0.3));
 }
 
 @media (max-width: 700px){
