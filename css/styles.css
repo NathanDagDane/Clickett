@@ -1,0 +1,14 @@
+:root {
+    --main_colour: rgba(0, 233, 233, 1);
+    --accent: rgba(0, 235, 197, 1);
+    --initScale: 1;
+}
+
+.unselectable {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
