@@ -1,4 +1,5 @@
 var scone;
+var mx, my;
 
 window.addEventListener("load", function() {
 
@@ -12,26 +13,29 @@ window.addEventListener("load", function() {
     } else{
         document.addEventListener("mousemove", parallax);
         
-        window.addEventListener( "scroll", (event) => {scrolly("")}, false);
+        window.addEventListener( "scroll", (event) => {scrolly()}, false);
     }
 
 })
 
 function parallax(event) {
-    var x = ((window.innerWidth/2) - event.pageX) / 90;
-    var y = ((window.innerHeight/2) - event.pageY) / 90;
-
-    var transformValue = `translateX(${x}px) translateY(${y}px) `;
-    scrolly(transformValue);
+    
+    mx = event.pageX;
+    my = event.pageY;
+    
+    scrolly();
 }
 
-function scrolly(transformValue){
+function scrolly(){
+    var x = ((window.innerWidth/2) - mx) / 90;
+    var y = ((window.innerHeight/2) - my) / 90;
+
     var docHeight = document.documentElement.offsetHeight;
     var scrolled = (window.scrollY / ( 700 ))+0.8;
     if(scrolled < 0.95) scrolled = 0.95;
     if(scrolled > 1.1) scrolled = 1.1;
     
-    transformValue+='scale('+scrolled+')';
+    var transformValue = `translateX(${x}px) translateY(${y}px) scale(${scrolled})`;
     
     scone.style.WebkitTransform = transformValue;
     scone.style.MozTransform = transformValue;
