@@ -5,6 +5,7 @@
 
 body {
     background-color: var(--main_colour);
+    max-width: 100vw;
 }
 
 .DownloadBut {
@@ -121,6 +122,8 @@ body,
 #secBack{
     height: 80vh;
     background-color: white;
+    max-width: 100vw;
+    overflow: hidden;
 }
 
 #topBound{

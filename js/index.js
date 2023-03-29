@@ -21,3 +21,21 @@ function parallax(event) {
     shift.style.transform = `translateX(${x}px) translateY(${y}px)`;
   });
 }
+
+$(document).ready(function() {
+  $(window).scroll(function() {
+      var scroll = $(window).scrollTop();
+      $('#sc1').css({
+          let scroll = $(window).scrollTop() / 1;
+          button.css("transform", "scale("+ scroll +", "+ scroll +")");
+      })
+  });
+});
+
+function scroll(event){
+    
+    $('#sc1').css({
+          let scroll = $(window).scrollTop() / 1;
+          button.css("transform", "scale("+ scroll +", "+ scroll +")");
+  });
+}
