@@ -1,4 +1,4 @@
-<img src="https://user-images.githubusercontent.com/93830135/151047902-40103e8a-5044-47bb-9ee2-92df1e33fac3.png" alt="Clickett" width="300">
+ [<img src="https://user-images.githubusercontent.com/93830135/151047902-40103e8a-5044-47bb-9ee2-92df1e33fac3.png" alt="Clickett" width="300"/>](https://nathandagdane.github.io/Clickett/)
 
 ## A lightweight yet feature-packed auto clicker
 
@@ -22,3 +22,5 @@
 - App cannot click on itself!
 
  [<img alt="Get from Microsoft store" width="200px" src="https://www.sharp-sbs.com/portals/0/assets/images/microsoft-badge.png" border-radius="101px"/>](https://www.microsoft.com/store/productId/9NW55MH6VMHG)
+ 
+ [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/L4L0K0358)
