@@ -105,7 +105,6 @@ body {
     
     margin: 0;
     max-height: 72vw;
-    //height: min(100vh);
     justify-content: center;
     transition: all 0.5s ease 0s, max-width 0s;
 }
@@ -114,6 +113,7 @@ body {
     width: 100%;
     height: 100%;
     z-index: 5;
+    position:fixed;
 }
 
 #topLogo {
@@ -321,7 +321,7 @@ body {
         height: 85vw;
     }
     #getStartedBack {
-    margin: 24vw 0px 0px 0px;
+    margin: 34vw 0px 0px 0px;
     }
     #gitButt, #gitLogo, #helpButt{
         min-width: 0;
