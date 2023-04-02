@@ -72,11 +72,11 @@ div {
 html,
 body,
 #topBack {
-    height: 100%;
+    height: 100vh;
 }
 
 html {
-  overflow-x: hidden;
+  //overflow-x: hidden;
 }
 
 body {
@@ -103,8 +103,9 @@ body {
     background: linear-gradient(180deg, var(--main_colour) 0%, var(--accent) 100%);
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#00e9e9",endColorstr="#00ebc5",GradientType=1);
     
-    margin: auto;
+    margin: 0;
     max-height: 72vw;
+    //height: min(100vh);
     justify-content: center;
     transition: all 0.5s ease 0s, max-width 0s;
 }
