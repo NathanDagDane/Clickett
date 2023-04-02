@@ -75,6 +75,12 @@ body,
     height: 100%;
 }
 
+#scDiv{
+    margin: 0 auto;
+    overflow: visible;
+    animation: enterSizeAnim 0.01s;
+}
+
 #topBack {
     background: rgb(0,233,233);
     background: -moz-linear-gradient(180deg, var(--main_colour) 0%, var(--accent) 100%);
