@@ -14,25 +14,28 @@ using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
+using System.Threading;
 using Forms = System.Windows.Forms;
 using s = Clickett.Properties.Settings;
+using System.Threading.Tasks;
 
 namespace Clickett
 {
     public partial class MainWindow : Window
     {
-        public bool doLocation, active, clicking, awaitReset;
+        public bool doLocation, active, clicking, awaitReset, rocket;
         private bool newTrigListen, newLocListen, interType, settOpen, doAnimations, aot, startup, trayIcon, minToTray, hkShift, hkCtrl, hkAlt, countTotal;
-        private int modeInt, clickCounter, burstCount;
+        private int modeInt, clickCounter, burstCount, threads;
         private long totalClickCounter;
         private uint clickDo, clickUp, xPos, yPos;
         private int clickInterval, uiScale, hudCurrentPriority;
-        private string hudCurrentToken, versionNum = "0.6.2", curTheme;
+        private string hudCurrentToken, versionNum = "0.7.0", curTheme;
         private float nOpacity, cOpacity;
         private Key hotkey;
         private System.Drawing.Icon icon, iconbw;
         private Storyboard settStoryboard;
         DispatcherTimer dispatcherTimer = new DispatcherTimer(DispatcherPriority.Send), tcResetTimer;
+        PeriodicTimer pTimer = new PeriodicTimer(TimeSpan.FromMilliseconds(1));
         IntPtr hwnd;
         private Forms.NotifyIcon _tbi;
 
@@ -89,6 +92,8 @@ namespace Clickett
             minutesInput.Text = "0";
             clickInterval = s.Default.clickInterval;
             InterTypeSwap(this, null);
+            rocket = true;
+            RocketSwap(this, null);
             burstCount = s.Default.burstCount;
             ModeChange(this, null);
             settOpen = true;
@@ -357,10 +362,7 @@ namespace Clickett
                 {
                     return;
                 }
-                clicking = true;
-                dispatcherTimer.Tick += new EventHandler(Click);
                 dispatcherTimer.Tick += new EventHandler(HoldCheck);
-                if (countTotal) dispatcherTimer.Tick += new EventHandler(CountTotal);
                 EnterClickState();
             }
             else if (modeInt == 1)      //Toggle
@@ -371,8 +373,6 @@ namespace Clickett
                 }
                 else
                 {
-                    dispatcherTimer.Tick += new EventHandler(Click);
-                    if (countTotal) dispatcherTimer.Tick += new EventHandler(CountTotal);
                     EnterClickState();
                 }
             }
@@ -381,22 +381,14 @@ namespace Clickett
                 if (clicking)
                 {
                     ExitClickState();
-                    dispatcherTimer.Tick -= IterateClick;
                     clickCounter = 0;
                 }
                 else
                 {
-                    clickCounter = 0;
-                    dispatcherTimer.Tick += new EventHandler(IterateClick);
-                    if (countTotal) dispatcherTimer.Tick += new EventHandler(CountTotal);
+                    clickCounter = 1;
                     EnterClickState();
                 }
             }
-        }
-
-        private void Click(object sender, EventArgs? e)
-        {
-            mouse_event(clickDo | clickUp, xPos, yPos, 0, 0);
         }
 
         private void SetCurLoc(object sender, EventArgs? e)
@@ -413,17 +405,15 @@ namespace Clickett
             }
         }
 
-        private void IterateClick(object sender, EventArgs? e)
+        private void IterateClick()
         {
             if (clickCounter >= burstCount)
             {
                 ExitClickState();
-                dispatcherTimer.Tick -= IterateClick;
                 clickCounter = 0;
                 return;
             }
             clickCounter++;
-            Click(sender, e);
         }
 
         private void CountTotal(object sender, EventArgs? e)
@@ -443,17 +433,97 @@ namespace Clickett
             blur.Radius = 5;
             fullGrid.Effect = blur;
             dispatcherTimer.Start();
+            if (!rocket)
+            {
+                _ = Clicking(clickInterval);
+            }
+            else
+            {
+                for (int i = 0; i < threads; i++)
+                {
+                    Thread clickHandler = new Thread(Clicker);
+                    clickHandler.Start();
+                }
+            }
+        }
+
+        private async Task Clicking(int clickInterval)
+        {
+            var cap = (modeInt == 0);
+            pTimer = new(TimeSpan.FromMilliseconds(clickInterval));
+            while (await pTimer.WaitForNextTickAsync())
+            {
+                if (cap) IterateClick();
+                mouse_event(clickDo | clickUp, xPos, yPos, 0, 0);
+                totalClickCounter++;
+            }
+        }
+
+        void Clicker()
+        {
+            var count = 0;
+            uint CclickDo = 0;
+            uint CclickUp = 0;
+            var CdoLoc = false;
+            var CdoCount = false;
+            uint CxPos = 0;
+            uint CyPos = 0;
+            var CburstCount = 0;
+
+            Dispatcher.Invoke((Action)(() =>
+            {
+                CclickDo = clickDo;
+                CclickUp = clickUp;
+                CdoLoc = doLocation;
+                CdoCount = modeInt == 0;
+                CxPos = xPos;
+                CyPos = yPos;
+                CburstCount = (int)Math.Ceiling((float)burstCount/(float)threads);
+            }));
+
+            while (true)
+            {
+                bool doClick = true;
+                Dispatcher.Invoke((Action)(() =>
+                {
+                    doClick = clicking;
+                }));
+
+                if (doClick)
+                {
+                    if (CdoCount)
+                    {
+                        if (count >= CburstCount)
+                        {
+                            Dispatcher.Invoke((Action)(() =>
+                            {
+                                ExitClickState();
+                            }));
+                            break;
+                        }
+                        count += 1;
+                    }
+
+                    mouse_event(CclickDo | CclickUp, CxPos, CyPos, 0, 0);
+
+                    Thread.Sleep(1);
+                }
+                else
+                {
+                    break;
+                }
+            }
         }
 
         private void ExitClickState()
         {
             dispatcherTimer.Stop();
+            clicking = false;
+            pTimer.Dispose();
             Focusable = true;
             SetWindowExDefault(hwnd);
             fullCanvas.Opacity = nOpacity;
             fullGrid.Effect = null;
-            dispatcherTimer.Tick -= Click;
-            dispatcherTimer.Tick -= CountTotal;
             if (countTotal)
             {
                 s.Default.totalClicks += totalClickCounter - 1;
@@ -461,7 +531,6 @@ namespace Clickett
                 s.Default.Save();
                 totalText.Text = s.Default.totalClicks.ToString();
             }
-            clicking = false;
         }
 
         private void CHT(int priority, string token, string text) // Change Hud Text
@@ -559,7 +628,7 @@ namespace Clickett
             {
                 cpsWarn.Visibility = Visibility.Visible;
                 var mar = cpsWarn.Margin;
-                mar.Left = 30+(385*((cps-1)/68));
+                mar.Left = 30 + (355 * ((cps - 1) / 68));
                 cpsWarn.Margin = mar;
                 cpsWarnBack.Opacity = 0.2 + (0.6 * ((cps - 55) / 14));
             }
@@ -567,7 +636,68 @@ namespace Clickett
             {
                 cpsWarn.Visibility = Visibility.Hidden;
             }
+
+        }
+
+        private void ThreadsChange(object sender, RoutedPropertyChangedEventArgs<double>? e)
+        {
+            threads = (int)threadsSlid.Value;
+            var speed = "";
+            if (threads < 5) speed = "Fast";
+            else if (threads < 10) speed = "Very fast";
+            else if (threads < 15) speed = "Stupidly fast";
+            else if (threads < 20) speed = "Insanely fast";
+            else speed = "Broken";
+            interText.Text = "Threads - " + threads + "  " + speed;
+            if (threads > 9)
+            {
+                threadsWarn.Visibility = Visibility.Visible;
+                var mar = threadsWarn.Margin;
+                mar.Left = 30 + (355 * (((float)threads - 1) / 19));
+                threadsWarn.Margin = mar;
+                threadsWarnBack.Opacity = 0.2 + (0.6 * (((float)threads - 10) / 10));
+                if(threads > 14){
+                    threadsWarnBack.SetResourceReference(BackgroundProperty, "AcCol2");
+                }
+                else
+                {
+
+                    threadsWarnBack.SetResourceReference(BackgroundProperty, "FgCol1");
+                }
+            }
+            else
+            {
+                threadsWarn.Visibility = Visibility.Hidden;
+            }
+
+        }
+
+        private void RocketSwap(object sender, RoutedEventArgs? e)
+        {
+            rocket = !rocket;
             
+            if (rocket)
+            {
+                rocketIconDis.ImageSource = (ImageSource)FindResource("rocket2DrawingImage");
+                rocketBorder.SetResourceReference(BackgroundProperty, "AcCol2");
+                swapBorder.SetResourceReference(BackgroundProperty, "FgCol2");
+                swapButt.IsEnabled = false;
+                threadsGrid.Visibility = Visibility.Visible;
+                cpsGrid.Visibility = Visibility.Hidden;
+                interGrid.Visibility = Visibility.Hidden;
+                ThreadsChange(this, null);
+            }
+            else
+            {
+                rocketIconDis.ImageSource = (ImageSource)FindResource("rocket1DrawingImage");
+                rocketBorder.SetResourceReference(BackgroundProperty, "FgCol2");
+                swapBorder.SetResourceReference(BackgroundProperty, "AcCol2");
+                swapButt.IsEnabled = true;
+                threadsGrid.Visibility = Visibility.Hidden;
+                interType = !interType;
+                InterTypeSwap(this, null);
+
+            }
         }
 
         private void InterTypeSwap(object sender, RoutedEventArgs? e)
@@ -629,6 +759,24 @@ namespace Clickett
         {
             CHT(5, "ShowWarning", "");
         }
+        private void RWarnMouseEnter(object sender, MouseEventArgs? e)
+        {
+            CHT(2, "ShowRWarning", (threads>14)? "Clicks may slow down as applications get overloaded!" : "Some games may struggle to process this many clicks!");
+        }
+
+        private void RWarnMouseLeave(object sender, MouseEventArgs? e)
+        {
+            CHT(5, "ShowRWarning", "");
+        }
+        private void RocketMouseEnter(object sender, MouseEventArgs? e)
+        {
+            CHT(2, "RocketSwitch", "Rocket Mode");
+        }
+
+        private void RocketMouseLeave(object sender, MouseEventArgs? e)
+        {
+            CHT(5, "RocketSwitch", "");
+        }
 
         private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
         {
@@ -651,7 +799,7 @@ namespace Clickett
             int millis = 0;
             int seconds = 0;
             int minutes = 0;
-            try { millis = int.Parse(millisInput.Text); } catch { millisInput.Text = "0"; millis = 0; }
+            try { var mils = int.Parse(millisInput.Text); millis = (mils == 0)? 1 : mils; } catch { millisInput.Text = "1"; millis = 1; }
             try { seconds = int.Parse(secondsInput.Text); } catch { secondsInput.Text = "0"; seconds = 0; }
             try { minutes = int.Parse(minutesInput.Text); } catch { minutesInput.Text = "0"; minutes = 0; }
             InterTextSet(millis, seconds, minutes);
@@ -820,6 +968,11 @@ namespace Clickett
             }
         }
 
+        private void SupportLink(object sender, RoutedEventArgs? e)
+        {
+            Process.Start(new ProcessStartInfo("https://nathandagdane.github.io/Clickett/Donate/") { UseShellExecute = true });
+        }
+
         private void MakeNotification(string title, string meat)
         {
             ToastNotificationManagerCompat.History.Clear();
@@ -918,6 +1071,7 @@ namespace Clickett
 
         private void OnExit(object sender, EventArgs e)
         {
+            clicking = false;
             _source.RemoveHook(Hooks);
             UnregisterHotkey();
 

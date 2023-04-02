@@ -45,6 +45,9 @@
                             <Trigger Property="IsMouseOver" Value="True">
                                 <Setter Property="Opacity" Value="0.69" />
                             </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Opacity" Value="0.4"/>
+                            </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
@@ -362,12 +365,12 @@
                         </Grid>
                         <Grid>
                             <!--Config View-->
-                            <StackPanel x:Name="confStack" Visibility="Visible">
+                            <StackPanel x:Name="confStack" Visibility="hidden">
                                 <TextBlock x:Name="interText" Foreground="{DynamicResource FgCol2}" Margin="20,5,20,0" Text="Clicks Per Second" FontFamily="./#LEMON MILK Pro FTR Regular" FontSize="13"/>
                                 <Grid Margin="0,1,0,0">
-                                    <Border CornerRadius="{Binding Source={StaticResource MinRad}}" Margin="5,0,35,0" Height="{Binding Source={StaticResource MinBoxHeight}}" Background="{DynamicResource BoxBack}">
+                                    <Border CornerRadius="{Binding Source={StaticResource MinRad}}" Margin="5,0,65,0" Height="{Binding Source={StaticResource MinBoxHeight}}" Background="{DynamicResource BoxBack}">
                                         <Grid>
-                                            <Grid x:Name="cpsGrid" Visibility="Visible">
+                                            <Grid x:Name="cpsGrid" Visibility="Hidden">
                                                 <TextBlock Foreground="{DynamicResource FgCol1}" Text="1" FontFamily="./#LEMON MILK Pro FTR Regular" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="13,0,0,0"/>
                                                 <Button x:Name="cpsWarn" Style="{StaticResource MyButton}" MouseEnter="WarnMouseEnter" MouseLeave="WarnMouseLeave" Click="WarnLink"  Height="15" Width="15" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="300,-19,0,0">
                                                     <Border x:Name="cpsWarnBack" Background="{DynamicResource FgCol1}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="15" Height="15" Opacity="0.69" RenderOptions.BitmapScalingMode="HighQuality">
@@ -385,6 +388,25 @@
                                                 </Button>
                                                 <Slider x:Name="cpsSlid" ValueChanged="cpsChange" VerticalAlignment="Center" Margin="30,0,30,0" BorderThickness="0" Style="{StaticResource Horizontal_Slider}" Minimum="1" Maximum="69" Value="4" TickFrequency="1" IsSnapToTickEnabled="True" IsTabStop="False"/>
                                                 <TextBlock Foreground="{DynamicResource FgCol1}" Text="69" FontFamily="./#LEMON MILK Pro FTR Regular" FontSize="14" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,6,0"/>
+                                            </Grid>
+                                            <Grid x:Name="threadsGrid" Visibility="Visible">
+                                                <TextBlock Foreground="{DynamicResource FgCol1}" Text="1" FontFamily="./#LEMON MILK Pro FTR Regular" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="13,0,0,0"/>
+                                                <Button x:Name="threadsWarn" Style="{StaticResource MyButton}" MouseEnter="RWarnMouseEnter" MouseLeave="RWarnMouseLeave" Click="WarnLink"  Height="15" Width="15" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="300,-19,0,0">
+                                                    <Border x:Name="threadsWarnBack" Background="{DynamicResource FgCol1}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="15" Height="15" Opacity="0.69" RenderOptions.BitmapScalingMode="HighQuality">
+                                                        <Border.OpacityMask>
+                                                            <ImageBrush ImageSource="{DynamicResource Warning2DrawingImage}" Stretch="Uniform">
+                                                                <ImageBrush.RelativeTransform>
+                                                                    <TransformGroup>
+                                                                        <ScaleTransform CenterY="0" CenterX="0"/>
+                                                                        <TranslateTransform X="0" Y="0"/>
+                                                                    </TransformGroup>
+                                                                </ImageBrush.RelativeTransform>
+                                                            </ImageBrush>
+                                                        </Border.OpacityMask>
+                                                    </Border>
+                                                </Button>
+                                                <Slider x:Name="threadsSlid" ValueChanged="ThreadsChange" VerticalAlignment="Center" Margin="30,0,30,0" BorderThickness="0" Style="{StaticResource Horizontal_Slider}" Minimum="1" Maximum="20" Value="5" TickFrequency="1" IsSnapToTickEnabled="True" IsTabStop="False"/>
+                                                <TextBlock Foreground="{DynamicResource FgCol1}" Text="20" FontFamily="./#LEMON MILK Pro FTR Regular" FontSize="14" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,6,0"/>
                                             </Grid>
                                             <Grid x:Name="interGrid" Visibility="Hidden">
                                                 <!--Minutes Input-->
@@ -417,7 +439,7 @@
                                             </Grid>
                                         </Grid>
                                     </Border>
-                                    <Button Click="InterTypeSwap" Background="{DynamicResource BoxBack}" HorizontalAlignment="Right" BorderThickness="0" Margin="0,0,5,0" IsTabStop="False" Focusable="False">
+                                    <Button Click="RocketSwap" MouseEnter="RocketMouseEnter" MouseLeave="RocketMouseLeave" Background="{DynamicResource BoxBack}" HorizontalAlignment="Right" BorderThickness="0" Margin="0,0,35,0" IsTabStop="False" Focusable="False">
                                         <Button.Resources>
                                             <Style TargetType="{x:Type Border}">
                                                 <Setter Property="CornerRadius" Value="{Binding Source={StaticResource MinRad}}"/>
@@ -432,13 +454,41 @@
                                         <Button.Width>
                                             <Binding Source="{StaticResource MinBoxHeight}"/>
                                         </Button.Width>
-                                        <Border Background="{DynamicResource AcCol2}" RenderOptions.BitmapScalingMode="HighQuality" VerticalAlignment="Center" Width="18" Height="18" CornerRadius="0,0,0,0">
+                                        <Border x:Name="rocketBorder" Background="{DynamicResource FgCol2}" RenderOptions.BitmapScalingMode="HighQuality" VerticalAlignment="Center" Width="20" Height="20" CornerRadius="0,0,0,0">
                                             <Border.OpacityMask>
-                                                <ImageBrush ImageSource="{DynamicResource SwapDrawingImage}" Stretch="Uniform">
+                                                <ImageBrush x:Name="rocketIconDis" ImageSource="{DynamicResource rocket1DrawingImage}" Stretch="Uniform">
                                                     <ImageBrush.RelativeTransform>
                                                         <TransformGroup>
                                                             <ScaleTransform CenterY="0" CenterX="0"/>
-                                                            <TranslateTransform X="0" Y="0"/>
+                                                            <TranslateTransform X="0" Y="-0.09"/>
+                                                        </TransformGroup>
+                                                    </ImageBrush.RelativeTransform>
+                                                </ImageBrush>
+                                            </Border.OpacityMask>
+                                        </Border>
+                                    </Button>
+                                    <Button x:Name="swapButt"  Click="InterTypeSwap" Background="{DynamicResource BoxBack}" HorizontalAlignment="Right" BorderThickness="0" Margin="0,0,5,0" IsTabStop="False" Focusable="False">
+                                        <Button.Resources>
+                                            <Style TargetType="{x:Type Border}">
+                                                <Setter Property="CornerRadius" Value="{Binding Source={StaticResource MinRad}}"/>
+                                            </Style>
+                                        </Button.Resources>
+                                        <Button.Style>
+                                            <StaticResource ResourceKey="MyButton"/>
+                                        </Button.Style>
+                                        <Button.Height>
+                                            <Binding Source="{StaticResource MinBoxHeight}"/>
+                                        </Button.Height>
+                                        <Button.Width>
+                                            <Binding Source="{StaticResource MinBoxHeight}"/>
+                                        </Button.Width>
+                                        <Border x:Name="swapBorder" Background="{DynamicResource AcCol2}" RenderOptions.BitmapScalingMode="HighQuality" VerticalAlignment="Center" Width="20" Height="20" CornerRadius="0,0,0,0">
+                                            <Border.OpacityMask>
+                                                <ImageBrush ImageSource="{DynamicResource swapDrawingImage}" Stretch="Uniform">
+                                                    <ImageBrush.RelativeTransform>
+                                                        <TransformGroup>
+                                                            <ScaleTransform CenterY="0" CenterX="0"/>
+                                                            <TranslateTransform X="0" Y="-0.1"/>
                                                         </TransformGroup>
                                                     </ImageBrush.RelativeTransform>
                                                 </ImageBrush>
@@ -547,9 +597,9 @@
                                 </Grid>
                             </StackPanel>
                             <!--Settings View-->
-                            <ScrollViewer Visibility="Hidden" Height="121.386666666667" x:Name="SettView" Margin="5,5,0,0" Style="{Binding Source={StaticResource ScrollViewerStyle}}">
+                            <ScrollViewer Visibility="visible" Height="121.386666666667" x:Name="SettView" Margin="5,5,0,0" Style="{Binding Source={StaticResource ScrollViewerStyle}}" >
                                 <!--Height="121.386666666667"-->
-                                <StackPanel>
+                                <StackPanel Margin="0,-0,0,0">
                                     <Grid>
                                         <TextBlock x:Name="uiScaleText" Foreground="{DynamicResource FgCol2}" Margin="15,0,20,0" Text="UI Scale - 100%" FontFamily="./#LEMON MILK Pro FTR Regular" FontSize="13"/>
                                         <TextBlock Foreground="{DynamicResource AcCol2}" Margin="15,0,10,0" Text="{Binding AssemblyVersion}" FontFamily="./#LEMON MILK Pro FTR Regular" FontSize="13" HorizontalAlignment="Right" Opacity="0.6"/>
@@ -866,6 +916,20 @@
                                             </Button>
                                         </Grid>
                                     </Border>
+                                    <TextBlock Foreground="{DynamicResource FgCol2}" Margin="15,3,20,0" Text="Other" FontFamily="./#LEMON MILK Pro FTR Regular" FontSize="13"/>
+                                    <Border x:Name="OtherBorder" CornerRadius="{Binding Source={StaticResource MinRad}}" Margin="0,1,0,0" Height="{Binding Source={StaticResource MinBoxHeight}}" Background="{DynamicResource BoxBack}">
+                                        <Grid>
+                                            <TextBlock Foreground="{DynamicResource FgCol1}" Text="Support the Developer" FontFamily="./#LEMON MILK Pro FTR Regular" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                                            <Button x:Name="supportButt" Click="SupportLink" Background="{DynamicResource AcGrad}" Style="{StaticResource MyButton}" HorizontalAlignment="Right" BorderThickness="0" Margin="0,3,3,3" Width="100" FontSize="8" IsTabStop="False" Focusable="False">
+                                                <Button.Resources>
+                                                    <Style TargetType="{x:Type Border}">
+                                                        <Setter Property="CornerRadius" Value="5"/>
+                                                    </Style>
+                                                </Button.Resources>
+                                                <TextBlock Text="Donate" FontFamily="./#LEMON MILK Pro FTR Regular" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="#CCFFFFFF" FontSize="14"/>
+                                            </Button>
+                                        </Grid>
+                                    </Border>
                                 </StackPanel>
                             </ScrollViewer>
                         </Grid>
@@ -932,7 +996,18 @@
                     </Border>
                 </Button>
                 <Button Style="{StaticResource MyButton}" Click="HelpLink" HorizontalAlignment="Right" VerticalAlignment="Top" Width="25" Height="25" Margin="0,3,61,0" BorderThickness="0" Background="#00DDDDDD" IsTabStop="False">
-                    <TextBlock Foreground="{DynamicResource FgCol1}" Text="?" FontFamily="./#LEMON MILK Pro FTR Regular" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center" Opacity="0.3" Margin="0,0,0,2"/>
+                    <Border Background="{DynamicResource FgCol1}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="18" Height="18" Opacity="0.3" RenderOptions.BitmapScalingMode="HighQuality">
+                        <Border.OpacityMask>
+                            <ImageBrush ImageSource="{DynamicResource helpDrawingImage}" Stretch="Uniform">
+                                <ImageBrush.RelativeTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform CenterY="0" CenterX="0"/>
+                                        <TranslateTransform X="0" Y="-0.1"/>
+                                    </TransformGroup>
+                                </ImageBrush.RelativeTransform>
+                            </ImageBrush>
+                        </Border.OpacityMask>
+                    </Border>
                 </Button>
             </Grid>
         </Canvas>
