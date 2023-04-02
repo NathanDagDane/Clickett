@@ -17,7 +17,7 @@ body {
     min-width: 180px;
     min-height: 50px;
     font-family: Outfit, serif;
-    font-size: max((calc(min(2.2vw, 29px) + 4px)), 18px);
+    font-size: min(2.9vw, 3.8vh);
     font-weight: 500;
     justify-content: center;
     letter-spacing: 1px;
@@ -29,7 +29,7 @@ body {
     outline: none;
     background-color: rgba(255,255,255,0.98);
     color: rgba(0,200,200);
-    margin: 14vh auto auto auto;
+    margin: 8vh auto auto auto;
     display: flex;
     align-items: center;
     animation: enterSizeAnim 1.5s;
@@ -40,7 +40,7 @@ body {
     box-shadow: 0 3px 40px rgba(0,0,0, 0.2);
     background-color: rgba(255,255,255,1);
     transform: translateY(-7px) scale(1.02);
-    font-size: max((calc(min(2.3vw, 30px) + 4px)), 29px);
+    font-size: min(3.2vw, 4vh);
 }
 
 @keyframes enterUpAnim{
@@ -68,8 +68,8 @@ div {
 html,
 body,
 #topBack {
-    height: 100%;
-    //min-height: 100%;
+    //height: 100%;
+    min-height: 100%;
 }
 
 #topBack {
@@ -80,6 +80,7 @@ body,
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#00e9e9",endColorstr="#00ebc5",GradientType=1);
     
     margin: auto;
+    min-height: 100vh;
     overflow: hidden;
     justify-content: center;
     transition: all 0.5s ease 0s;
@@ -87,9 +88,9 @@ body,
 
 #topLogo {
     min-width: 70vw;
-    max-height: 175px;
+    max-height: 20vh;
     width: 55%;
-    margin: min(10vw,22vh) auto 0 auto;
+    margin: min(9vw,20vh) auto 0 auto;
     object-fit: contain;
     display: flex;
     animation: enterFadeAnim 0.3s;
@@ -98,7 +99,7 @@ body,
 #topText {
     font-family: Outfit, serif;
     color:rgba(255,255,255,0.8);
-    font-size: max(min(2.4vw,28px),16px);
+    font-size: max(min(2.4vw,2.9vh),1vh);
     width: fit-content;
     margin: 0 auto 0 auto;
     padding: 0 5vw 0 5vw;
@@ -124,6 +125,16 @@ body,
     text-align: center;
     text-wrap: normal;
     animation: enterUpAnim 3s;
+}
+
+#kofiframe{
+    border: none;
+    width: 400px;
+    height: 489px;
+    border-radius: 20px;
+    display: flex;
+    margin: 10vh auto 10vh auto;
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.15);
 }
 
 /*@media only screen and (orientation: portrait){
