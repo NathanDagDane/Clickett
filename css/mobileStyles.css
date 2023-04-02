@@ -1,8 +1,3 @@
-:root {
-    --main_colour: rgba(0, 233, 233, 1);
-    --accent: rgba(0, 235, 197, 1);
-}
-
 body {
     background: rgb(0,233,233);
     background: -moz-linear-gradient(180deg, var(--main_colour) 0%, var(--accent) 100%);
@@ -35,9 +30,7 @@ body {
 }
 
 .DownloadBut:hover {
-//background-color: #2EE59D;
     box-shadow: 0 3px 25px rgba(0,0,0, 0.15);
-//color: #fff;
     transform: translateY(-5px);
 }
 

@@ -4,6 +4,21 @@
     --initScale: 1;
 }
 
+@keyframes enterUpAnim{
+    0%{ opacity: 0; transform : translateY(6vh) }
+    100%{ opacity: 1; transform : translateY(0em) scale(--initScale) }
+}
+
+@keyframes enterSizeAnim{
+    0%{ opacity: 0; transform : scale(1.1) }
+    100%{ opacity: 1; transform : scale(--initScale) }
+}
+
+@keyframes enterFadeAnim{
+    0%{ opacity: 0; }
+    100%{ opacity: 1; transform : scale(--initScale) }
+}
+
 .unselectable {
     -webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -11,4 +26,35 @@
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+}
+
+.Heading{
+    font-family: Outfit, serif;
+    color:rgba(0,0,0,0.8);
+    font-size: min(4vw,8.5vh);
+    font-weight: 700;
+    width: fit-content;
+    
+    text-align: center;
+    text-wrap: normal;
+    animation: enterFadeAnim 0.6s;
+}
+
+.HLeft{
+    margin-left: min(5vh, 10vw);
+}
+
+.HRight{
+    margin-right: min(5vh, 10vw);
+    margin-left: auto;
+}
+
+.ColContainer{
+    height: fit-content;
+    margin-top: min(5vh, 6vw);
+}
+.Column{
+    height: min(15vh, 15vw);
+    width: 50%;
+    float: left;
 }

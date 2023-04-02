@@ -1,9 +1,3 @@
-:root {
-    --main_colour: rgba(0, 233, 233, 1);
-    --accent: rgba(0, 235, 197, 1);
-    --initScale: 1;
-}
-
 body {
     background-color: var(--main_colour);
     max-width: 100vw;
@@ -41,21 +35,6 @@ body {
     background-color: rgba(255,255,255,1);
     transform: translateY(-7px) scale(1.02);
     font-size: min(3.2vw, 4vh);
-}
-
-@keyframes enterUpAnim{
-    0%{ opacity: 0; transform : translateY(6vh) }
-    100%{ opacity: 1; transform : translateY(0em) scale(--initScale) }
-}
-
-@keyframes enterSizeAnim{
-    0%{ opacity: 0; transform : scale(1.1) }
-    100%{ opacity: 1; transform : scale(--initScale) }
-}
-
-@keyframes enterFadeAnim{
-    0%{ opacity: 0; }
-    100%{ opacity: 1; transform : scale(--initScale) }
 }
 
 body,

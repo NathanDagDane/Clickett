@@ -11,7 +11,7 @@ window.addEventListener("load", function() {
     window.addEventListener( "scroll", (event) => {scrolly()}, false);
     
     new ScrollWithMe(document.querySelector(`#topIdleBack`), {
-            startAt: 0,
+            startAt: 0.01,
             endAt: window.innerHeight,
             setTop: 0,
             });
