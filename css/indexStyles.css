@@ -75,6 +75,15 @@ body,
     height: 100%;
 }
 
+html {
+  overflow-x: hidden;
+}
+
+body {
+  position: relative;
+  overflow-x: hidden;
+}
+
 #scDiv{
     width: 100%;
     margin: 0px auto auto 0px;
