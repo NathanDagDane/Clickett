@@ -76,8 +76,8 @@ body,
 }
 
 #scDiv{
-    //width: fit-content;
-    margin: 0 auto;
+    width: 100%;
+    margin: 0px auto auto 0px;
     //overflow: visible;
     animation: enterSizeAnim 0.1s;
 }
