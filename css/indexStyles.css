@@ -76,9 +76,10 @@ body,
 }
 
 #scDiv{
+    //width: fit-content;
     margin: 0 auto;
-    overflow: visible;
-    animation: enterSizeAnim 0.01s;
+    //overflow: visible;
+    animation: enterSizeAnim 0.1s;
 }
 
 #topBack {
