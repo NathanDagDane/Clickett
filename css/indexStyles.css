@@ -20,12 +20,8 @@ body {
 }
 
 .DownloadBut {
-    width: 25vw;
-    height: 7vw;
-    max-width: 36vh;
-    max-height: 10vh;
-    min-width: 180px;
-    min-height: 50px;
+    width: 100%;
+    height: 100%;
     font-family: Outfit, serif;
     font-size: min(2.9vw, 3.8vh);
     font-weight: 500;
@@ -39,9 +35,7 @@ body {
     outline: none;
     background-color: rgba(255,255,255,0.98);
     color: rgba(0,200,200);
-    margin: 9.8vh auto auto auto;
-    display: flex;
-    align-items: center;
+    margin: 0;
     animation: enterSizeAnim 1.5s;
 }
 
@@ -51,6 +45,34 @@ body {
     background-color: rgba(255,255,255,1);
     transform: translateY(-7px) scale(1.02);
     font-size: min(3.2vw, 4vh);
+}
+
+.TopOBut {
+    width: 100%;
+    height: 100%;
+    font-family: Outfit, serif;
+    font-size: max(min(2.2vw, 3.2vh),16px);
+    font-weight: 500;
+    white-space: nowrap;
+    letter-spacing: 1px;
+    border-color: rgba(255,255,255,0.7);
+    border-style:solid;
+    border-width: min(0.6vw, 0.6vh);
+    border-radius: 90px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0);
+    transition: all 0.3s ease 0s, visibility 0s;
+    cursor: pointer;
+    outline: none;
+    background-color: rgba(255,255,255,0);
+    color: rgba(255,255,255,0.8);
+    margin: 0;
+}
+
+.TopOBut:hover {
+    color: rgb(0,170,170);
+    box-shadow: 0 3px 40px rgba(0,0,0, 0.2);
+    background-color: rgba(255,255,255,1);
+    transform: translateY(-7px) scale(1.02);
 }
 
 .Heading{
@@ -85,6 +107,8 @@ div {
     margin: 0;
     border: 0 none;
     padding: 0;
+    max-width: 100vw;
+    overflow-x: hidden;
 }
 
 html,
@@ -102,9 +126,8 @@ body,
     
     margin: auto;
     max-height: 72vw;
-    overflow:hidden;
     justify-content: center;
-    transition: all 0.5s ease 0s;
+    transition: all 0.5s ease 0s, max-width 0s;
 }
 
 #topIdleBack{
@@ -133,6 +156,102 @@ body,
     text-align: center;
     text-wrap: normal;
     animation: enterFadeAnim 0.6s;
+}
+
+#topButtons{
+    width: fit-content;
+    margin: 9.8vh auto;
+    overflow: visible;
+    animation: enterSizeAnim 1.5s;
+}
+
+#gitButt{
+    width: 5vw;
+    height: 5vw;
+    max-width: 8vh;
+    max-height: 8vh;
+    min-width: 45px;
+    min-height: 45px;
+    
+    margin-right: min(2vw, 3vh);
+    vertical-align: middle;
+    
+    display: inline-block;
+    position:relative;
+    
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0);
+}
+#gitLogo{
+    width: 100%;
+    opacity: 0.8;
+    position:absolute;
+    margin:auto;
+    top:0vh;right:0;bottom:0;left:0;
+    transition: all 0.3s ease 0s, visibility 0s;
+}
+#gitLogo:hover{
+    opacity: 1;
+    transform: translateY(-7px) scale(1.02);
+    filter: drop-shadow(0px 3px 40px rgba(0,0,0,0.2));
+}
+
+#donButt{
+    width: 16vw;
+    height: 5vw;
+    max-width: 24vh;
+    max-height: 8vh;
+    min-width: 120px;
+    min-height: 45px;
+    
+    margin-right: min(2vw, 3vh);
+    vertical-align: middle;
+    
+    display: inline-block;
+}
+
+#downButt{
+    width: 25vw;
+    height: 7vw;
+    max-width: 36vh;
+    max-height: 10vh;
+    min-width: 180px;
+    min-height: 50px;
+    
+    margin-right: min(2vw, 3vh);
+    vertical-align: middle;
+    
+    display: inline-block;
+}
+
+#startButt{
+    width: 16vw;
+    height: 5vw;
+    max-width: 24vh;
+    max-height: 8vh;
+    min-width: 120px;
+    min-height: 45px;
+    
+    margin-right: min(2vw, 3vh);
+    vertical-align: middle;
+    
+    display: inline-block;
+}
+
+#helpButt{
+    width: 5vw;
+    height: 5vw;
+    max-width: 8vh;
+    max-height: 8vh;
+    min-width: 45px;
+    min-height: 45px;
+    
+    vertical-align: middle;
+    transition: all 0.3s ease 0s, visibility 0s;
+    
+    display: inline-block;
+}
+#helpButt:hover{
+    transform: rotateZ(7deg);
 }
 
 #sc1 {
@@ -170,7 +289,7 @@ body,
 }
 
 @media (width < 100vh){
-    .DownloadBut {
+    #topButtons {
         margin: 3vh auto auto auto;
     }
     #sc1{
@@ -183,13 +302,17 @@ body,
 
 @media (width < 65vh){
     .DownloadBut{
-        width: 36vw;
-        height: 11vw;
         font-size: 3.9vw;
-        margin: 4vh auto auto auto;
     }
     .DownloadBut:hover{
         font-size: 4.3vw;
+    }
+    #topButtons{
+        margin: 4vh auto auto auto;
+    }
+    #downButt{
+        width: 36vw;
+        height: 11vw;
     }
     #sc1{
         margin: calc(7vh + 40vw) calc(calc(100% - min(90vw, min(75vw, 120vh)))/2) auto;
@@ -197,9 +320,15 @@ body,
     }
     #topBack {
         height: 85vw;
-        max-height: none;
     }
     #getStartedBack {
-    margin: 24vw auto 0 auto;
-}
+    margin: 24vw 0px 0px 0px;
+    }
+    #gitButt, #gitLogo, #helpButt{
+        min-width: 0;
+        min-height: 0;
+        width: 0;
+        height: 0;
+        visibility:collapse;
+    }
 }
