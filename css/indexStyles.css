@@ -1,7 +1,7 @@
 body {
     background-color: var(--main_colour);
     max-width: 100vw;
-    overflow-x: hidden
+    //overflow-x: hidden
 }
 
 .DownloadBut {
@@ -66,7 +66,7 @@ div {
     border: 0 none;
     padding: 0;
     max-width: 100vw;
-    overflow-x: hidden;
+    //overflow-x: hidden;
 }
 
 html,
@@ -78,7 +78,7 @@ body,
 #scDiv{
     width: 100%;
     margin: 0px auto auto 0px;
-    //overflow: visible;
+    //overflow:hidden;
     animation: enterSizeAnim 0.1s;
 }
 
@@ -239,7 +239,7 @@ body,
     height: 300vh;
     background-color: white;
     max-width: 100vw;
-    overflow: hidden;
+    //overflow: hidden;
 }
 
 #topBound{
