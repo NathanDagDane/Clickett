@@ -141,4 +141,14 @@
         <GeometryDrawing Brush="#FF000000" Geometry="{StaticResource rocket1Geometry}" />
     </DrawingGroup>
     <DrawingImage x:Key="rocket1DrawingImage" Drawing="{StaticResource rocket1DrawingGroup}" />
+    <DrawingImage x:Key="DnArrDrawingImage">
+        <DrawingImage.Drawing>
+            <DrawingGroup ClipGeometry="M0,96 V1056 H960 V0 H96 Z">
+                <DrawingGroup.Transform>
+                    <TranslateTransform X="0" Y="-96" />
+                </DrawingGroup.Transform>
+                <GeometryDrawing Brush="#FF000000" Geometry="F1 M960,960z M0,0z M452.782,681.783L325.782,554.783Q306.695,535.696 317.021,511.543 327.348,487.391 353.565,487.391L607.565,487.391Q633.783,487.391 644.109,511.543 654.435,535.696 635.348,554.783L508.348,681.783Q502.218,687.913 495.239,690.479 488.261,693.044 480.565,693.044 472.304,693.044 465.609,690.479 458.913,687.913 452.782,681.783z" />
+            </DrawingGroup>
+        </DrawingImage.Drawing>
+    </DrawingImage>
 </ResourceDictionary>

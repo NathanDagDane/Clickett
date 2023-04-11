@@ -23,13 +23,13 @@ namespace Clickett
 {
     public partial class MainWindow : Window
     {
-        public bool doLocation, active, clicking, awaitReset, rocket;
+        public bool doLocation, active, clicking, awaitReset, rocket, exOp;
         private bool newTrigListen, newLocListen, interType, settOpen, doAnimations, aot, startup, trayIcon, minToTray, hkShift, hkCtrl, hkAlt, countTotal;
         private int modeInt, clickCounter, burstCount, threads;
         private long totalClickCounter;
         private uint clickDo, clickUp, xPos, yPos;
         private int clickInterval, uiScale, hudCurrentPriority;
-        private string hudCurrentToken, versionNum = "0.7.0", curTheme;
+        private string hudCurrentToken, versionNum = "0.7.1", curTheme;
         private float nOpacity, cOpacity;
         private Key hotkey;
         private System.Drawing.Icon icon, iconbw;
@@ -178,6 +178,40 @@ namespace Clickett
             }
         }
 
+        private void ToggleExOp(object sender, RoutedEventArgs? e)
+        {
+            exOp = !exOp;
+
+            if (doAnimations)
+            {
+                DoubleAnimation sizeAnimation = new DoubleAnimation(exOp ? 0.0 : 30.0, exOp ? 30.0 : 0.0, TimeSpan.FromMilliseconds(150), FillBehavior.Stop);
+                sizeAnimation.DecelerationRatio = 1;
+                if (!exOp) { sizeAnimation.Completed += CollapseExOp; }
+                else { CollapseExOp(this, null); }
+                exOptions.BeginAnimation(HeightProperty, sizeAnimation);
+            }
+            else { exOptions.Height = 30.0; CollapseExOp(this, null); }
+
+            if (doAnimations)
+            {
+                var exAnim = new DoubleAnimation((exOp ? 0 : 180), (exOp ? 180 : 0), TimeSpan.FromMilliseconds(200), FillBehavior.HoldEnd);
+                exAnim.DecelerationRatio = 1;
+                settStoryboard = new Storyboard();
+                settStoryboard.Children.Add(exAnim);
+                Storyboard.SetTarget(exAnim, OptionsArrow);
+                Storyboard.SetTargetProperty(exAnim, new PropertyPath("(UIElement.RenderTransform).(RotateTransform.Angle)"));
+                settStoryboard.Begin(this);
+            }
+            else OptionsArrow.RenderTransform = new RotateTransform(exOp?180.0:0.0,0.5,0.5);
+        }
+
+        private void CollapseExOp(object? sender, EventArgs? e)
+        {
+            exOptions.Visibility = exOp ? Visibility.Visible : Visibility.Collapsed;
+            SettView.Height = exOp ? 151.387 : 121.387;
+            fullCanvas.Height = exOp ? 263.198 : 233.198;
+        }
+
         private void ToggleLoc(object sender, RoutedEventArgs? e)
         {
             doLocation = !doLocation;
@@ -279,8 +313,7 @@ namespace Clickett
 
         private void ColourToggle(Button b, bool colour)
         {
-            var thingy = (LinearGradientBrush)Application.Current.Resources["AcGrad"];
-            b.Background = colour ? thingy : new SolidColorBrush(Color.FromArgb(90, 178, 187, 175));
+            b.SetResourceReference(BackgroundProperty, colour ? "AcGrad" : "InacBut");
         }
 
         private void SetTheme(object sender, RoutedEventArgs? e)
@@ -290,16 +323,6 @@ namespace Clickett
             ResourceDictionary newRes = Application.Current.Resources.MergedDictionaries[1];
             newRes.MergedDictionaries.Clear();
             newRes.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("res/dic/Themes/" + themeName + ".xaml", UriKind.Relative) });
-
-            var thingy = (LinearGradientBrush)Application.Current.Resources["AcGrad"];
-            if (doLocation) LocBut.Background = thingy;
-            if (doAnimations) animButt.Background = thingy;
-            if (countTotal) ctButt.Background = thingy;
-            if (aot) aotButt.Background = thingy;
-            if (startup) startupButt.Background = thingy;
-            if (trayIcon) trayButt.Background = thingy;
-            if (minToTray) minTrayButt.Background = thingy;
-
         }
 
         private IntPtr Hooks(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
@@ -331,6 +354,11 @@ namespace Clickett
                     locText.Text = "Location";
                     locText.HorizontalAlignment = HorizontalAlignment.Left;
                     locText.Opacity = 1;
+                    trigSet.IsEnabled = true;
+                    locText.Margin = new Thickness(8, 0, 0, 0);
+                    locSetButt.Margin = new Thickness(0, 3, 153, 3);
+                    locSetButt.Width = 40;
+                    locSetButtText.Text = "Set";
 
                     handled = true;
                 }
@@ -578,12 +606,32 @@ namespace Clickett
 
         private void NewTrigger(object sender, RoutedEventArgs? e)
         {
-            newTrigListen = true;
-            trigText.Text = "Press a key combo";
-            trigText.HorizontalAlignment = HorizontalAlignment.Center;
-            trigText.Opacity = 0.6;
-            trigBorder.Visibility = trigSet.Visibility = Visibility.Hidden;
-            activateButt.IsEnabled = false;
+            if (newTrigListen)
+            {
+                newTrigListen = false;
+                trigBorder.Visibility = Visibility.Visible;
+                trigText.Text = "Trigger";
+                trigText.HorizontalAlignment = HorizontalAlignment.Left;
+                trigText.Margin = new Thickness(8, 0, 0, 0);
+                trigText.Opacity = 1;
+                locSetButt.IsEnabled = true;
+                trigSet.Width = 40;
+                trigSetText.Text = "Set";
+                activateButt.IsEnabled = true;
+            }
+            else
+            {
+                newTrigListen = true;
+                trigBorder.Visibility = Visibility.Hidden;
+                trigText.Text = "Press a key combo";
+                trigText.HorizontalAlignment = HorizontalAlignment.Center;
+                trigText.Opacity = 0.7;
+                trigText.Margin = new Thickness(8, 0, 78, 0);
+                locSetButt.IsEnabled = false;
+                trigSet.Width = 69;
+                trigSetText.Text = "Cancel";
+                activateButt.IsEnabled = false;
+            }
         }
 
         private void ModeChange(object sender, SelectionChangedEventArgs? e)
@@ -799,9 +847,18 @@ namespace Clickett
             int millis = 0;
             int seconds = 0;
             int minutes = 0;
-            try { var mils = int.Parse(millisInput.Text); millis = (mils == 0)? 1 : mils; } catch { millisInput.Text = "1"; millis = 1; }
+            try { millis = int.Parse(millisInput.Text); } catch { millisInput.Text = "0"; millis = 0; }
             try { seconds = int.Parse(secondsInput.Text); } catch { secondsInput.Text = "0"; seconds = 0; }
             try { minutes = int.Parse(minutesInput.Text); } catch { minutesInput.Text = "0"; minutes = 0; }
+            if(millis==0 && seconds==0 && minutes == 0)
+            {
+                millis = 1;
+                millisInput.Text = "1";
+                seconds = 0;
+                secondsInput.Text = "0";
+                minutes = 0;
+                minutesInput.Text = "0";
+            }
             InterTextSet(millis, seconds, minutes);
         }
 
@@ -911,7 +968,7 @@ namespace Clickett
                 if (settOpen) SettView.BeginAnimation(OpacityProperty, fadeInAnimation);
                 else confStack.BeginAnimation(OpacityProperty, fadeInAnimation);
             }
-            SettView.Visibility = settOpen ? Visibility.Visible : Visibility.Hidden;
+            SettView.Visibility = settOpen ? Visibility.Visible : Visibility.Collapsed;
             confStack.Visibility = settOpen ? Visibility.Hidden : Visibility.Visible;
 
             if (doAnimations)
@@ -933,12 +990,35 @@ namespace Clickett
 
         private void SetLoc(object sender, RoutedEventArgs? e)
         {
-            newLocListen = true;
-            locGrid.Visibility = Visibility.Hidden;
-            locText.Text = "Press Trigger Key";
-            locText.HorizontalAlignment = HorizontalAlignment.Center;
-            locText.Opacity = 0.7;
-            RegisterHotkey();
+            if (newLocListen)
+            {
+                UnregisterHotkey();
+                newLocListen = false;
+                locGrid.Visibility = Visibility.Visible;
+                locText.Text = "Location";
+                locText.HorizontalAlignment = HorizontalAlignment.Left;
+                locText.Margin = new Thickness(8, 0, 0, 0);
+                locText.Opacity = 1;
+                trigSet.IsEnabled = true;
+                locSetButt.Margin = new Thickness(0, 3, 153, 3);
+                locSetButt.Width = 40;
+                locSetButtText.Text = "Set";
+            }
+            else
+            {
+                newLocListen = true;
+                locGrid.Visibility = Visibility.Hidden;
+                locText.Text = "Press Trigger Key";
+                locText.HorizontalAlignment = HorizontalAlignment.Center;
+                locText.Opacity = 0.7;
+                locText.Margin = new Thickness(8,0,78,0);
+                trigSet.IsEnabled = false;
+                RegisterHotkey();
+                locSetButt.Margin = new Thickness(0, 3, 3, 3);
+                locSetButt.Width = 69;
+                locSetButtText.Text = "Cancel";
+            }
+            
         }
 
         private void TcReset(object sender, RoutedEventArgs? e)
@@ -1006,15 +1086,17 @@ namespace Clickett
                     hotkey = Key.None;
                 }
 
-                trigText.Text = "Trigger";
-                trigText.HorizontalAlignment = HorizontalAlignment.Left;
-                trigBorder.Visibility = trigSet.Visibility = Visibility.Hidden;
-                trigText.Opacity = 1;
-                trigBorder.Visibility = trigSet.Visibility = Visibility.Visible;
-
                 activateButt.IsEnabled = true;
 
                 newTrigListen = false;
+                trigBorder.Visibility = Visibility.Visible;
+                trigText.Text = "Trigger";
+                trigText.HorizontalAlignment = HorizontalAlignment.Left;
+                trigText.Margin = new Thickness(8, 0, 0, 0);
+                trigText.Opacity = 1;
+                locSetButt.IsEnabled = true;
+                trigSet.Width = 40;
+                trigSetText.Text = "Set";
 
                 s.Default.hkAction = hotkey;
                 s.Default.hkAlt = hkAlt;
@@ -1023,7 +1105,6 @@ namespace Clickett
                 s.Default.Save();
             }
             if (Keyboard.IsKeyDown(Key.LeftAlt) || Keyboard.IsKeyDown(Key.RightAlt) || e.Key == Key.Tab) e.Handled = true;
-
         }
 
         static string KeyChar(Key key)

@@ -1,18 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <LinearGradientBrush x:Key="Back">
-        <LinearGradientBrush.RelativeTransform>
-            <TransformGroup>
-                <ScaleTransform CenterY="0.5" CenterX="0.5"/>
-                <SkewTransform CenterX="0.5" CenterY="0.5"/>
-                <RotateTransform Angle="-89" CenterX="0.5" CenterY="0.5"/>
-                <TranslateTransform/>
-            </TransformGroup>
-        </LinearGradientBrush.RelativeTransform>
-        <GradientStop Color="#2f3136" Offset="1"/>
-        <GradientStop Color="#2f3136" Offset="0"/>
-    </LinearGradientBrush>
+    <SolidColorBrush x:Key="Back">#313338</SolidColorBrush>
 
     <LinearGradientBrush x:Key="AcGrad">
         <LinearGradientBrush.RelativeTransform>
@@ -27,19 +16,7 @@
         <GradientStop Color="#5865F2" Offset="1"/>
     </LinearGradientBrush>
 
-    <LinearGradientBrush x:Key="ActivateText">
-        <LinearGradientBrush.RelativeTransform>
-            <TransformGroup>
-                <ScaleTransform CenterY="0.5" CenterX="0.5"/>
-                <SkewTransform CenterX="0.5" CenterY="0.5"/>
-                <RotateTransform Angle="180" CenterX="0.5" CenterY="0.5"/>
-                <TranslateTransform/>
-            </TransformGroup>
-        </LinearGradientBrush.RelativeTransform>
-        <GradientStop Color="#FFD1DBDC"/>
-        <GradientStop Color="#FFF1F3F3" Offset="1"/>
-        <GradientStop Color="#FFE4EBEC" Offset="0.458"/>
-    </LinearGradientBrush>
+    <SolidColorBrush x:Key="ActivateText">#dbdee1</SolidColorBrush>
 
     <SolidColorBrush x:Key="AcCol1">#5865F2</SolidColorBrush>
     <SolidColorBrush x:Key="AcCol2">#5865F2</SolidColorBrush>
@@ -47,15 +24,15 @@
     <Color x:Key="AcCol1c">#5865F2</Color>
     <Color x:Key="AcCol2c">#5865F2</Color>
 
-    <SolidColorBrush x:Key="FgCol1">#FEfefefe</SolidColorBrush>
+    <SolidColorBrush x:Key="FgCol1">#dbdee1</SolidColorBrush>
     <SolidColorBrush x:Key="FgCol2">#FFb5b8bb</SolidColorBrush>
     <SolidColorBrush x:Key="FgCol3">#FFd7d8de</SolidColorBrush>
 
-    <SolidColorBrush x:Key="BoxBack">#36393f</SolidColorBrush>
+    <SolidColorBrush x:Key="BoxBack">#404249</SolidColorBrush>
 
-    <SolidColorBrush x:Key="InBac">#40444b</SolidColorBrush>
-    <SolidColorBrush x:Key="InBor">#AA4f545c</SolidColorBrush>
+    <SolidColorBrush x:Key="InBac">#51535A</SolidColorBrush>
+    <SolidColorBrush x:Key="InBor">#616369</SolidColorBrush>
 
-    <SolidColorBrush x:Key="InacBut">#202225</SolidColorBrush>
+    <SolidColorBrush x:Key="InacBut">#51535A</SolidColorBrush>
 
 </ResourceDictionary>

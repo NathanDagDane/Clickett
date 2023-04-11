@@ -10,8 +10,8 @@
                 <TranslateTransform/>
             </TransformGroup>
         </LinearGradientBrush.RelativeTransform>
-        <GradientStop Color="#F2061010" Offset="1"/>
-        <GradientStop Color="#F2091212" Offset="0"/>
+        <GradientStop Color="#F6061616" Offset="1"/>
+        <GradientStop Color="#F6081815" Offset="0"/>
     </LinearGradientBrush>
 
     <LinearGradientBrush x:Key="AcGrad">
@@ -23,8 +23,8 @@
                 <TranslateTransform/>
             </TransformGroup>
         </LinearGradientBrush.RelativeTransform>
-        <GradientStop Color="#FF45B4B4"/>
-        <GradientStop Color="#FF45AA96" Offset="1"/>
+        <GradientStop Color="#FF21C2C2"/>
+        <GradientStop Color="#FF13c2a5" Offset="1"/>
     </LinearGradientBrush>
 
     <LinearGradientBrush x:Key="ActivateText">
@@ -36,25 +36,26 @@
                 <TranslateTransform/>
             </TransformGroup>
         </LinearGradientBrush.RelativeTransform>
-        <GradientStop Color="#FFD1DBDC"/>
+        <GradientStop Color="#FFDADDDF"/>
         <GradientStop Color="#FFF1F3F3" Offset="1"/>
         <GradientStop Color="#FFE4EBEC" Offset="0.458"/>
     </LinearGradientBrush>
 
-    <SolidColorBrush x:Key="AcCol1">#FF45B4B4</SolidColorBrush>
-    <SolidColorBrush x:Key="AcCol2">#FF45AA96</SolidColorBrush>
-    
-    <Color x:Key="AcCol1c">#FF45B4B4</Color>
-    <Color x:Key="AcCol2c">#FF45AA96</Color>
+    <SolidColorBrush x:Key="AcCol1">#FF21C2C2</SolidColorBrush>
+    <SolidColorBrush x:Key="AcCol2">#FF13c2a5</SolidColorBrush>
+
+    <Color x:Key="AcCol1c">#FF21C2C2</Color>
+    <Color x:Key="AcCol2c">#FF13c2a5</Color>
 
     <SolidColorBrush x:Key="FgCol1">#EED7DBDB</SolidColorBrush>
     <SolidColorBrush x:Key="FgCol2">#D5BBBBBB</SolidColorBrush>
     <SolidColorBrush x:Key="FgCol3">#FFEEF5F5</SolidColorBrush>
+    <SolidColorBrush x:Key="GradFG">#FFEEF5F5</SolidColorBrush>
 
-    <SolidColorBrush x:Key="BoxBack">#CC5A5E5F</SolidColorBrush>
+    <SolidColorBrush x:Key="BoxBack">#CC353838</SolidColorBrush>
 
-    <SolidColorBrush x:Key="InBac">#D1757575</SolidColorBrush>
-    <SolidColorBrush x:Key="InBor">#F17F7F7F</SolidColorBrush>
+    <SolidColorBrush x:Key="InBac">#D1575858</SolidColorBrush>
+    <SolidColorBrush x:Key="InBor">#F15D5F5F</SolidColorBrush>
 
     <SolidColorBrush x:Key="InacBut">#CC5A5A5A</SolidColorBrush>
 

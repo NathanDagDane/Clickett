@@ -11,7 +11,7 @@
             </TransformGroup>
         </LinearGradientBrush.RelativeTransform>
         <GradientStop Color="#F0030303" Offset="1"/>
-        <GradientStop Color="#F0050303" Offset="0"/>
+        <GradientStop Color="#F0030503" Offset="0"/>
     </LinearGradientBrush>
 
     <LinearGradientBrush x:Key="AcGrad">
@@ -24,7 +24,7 @@
             </TransformGroup>
         </LinearGradientBrush.RelativeTransform>
         <GradientStop Color="#FF16D419"/>
-        <GradientStop Color="#FF11C535" Offset="1"/>
+        <GradientStop Color="#FF12D138" Offset="1"/>
     </LinearGradientBrush>
 
     <LinearGradientBrush x:Key="ActivateText">
@@ -42,19 +42,20 @@
     </LinearGradientBrush>
 
     <SolidColorBrush x:Key="AcCol1">#FF16D419</SolidColorBrush>
-    <SolidColorBrush x:Key="AcCol2">#FF11C535</SolidColorBrush>
+    <SolidColorBrush x:Key="AcCol2">#FF12D138</SolidColorBrush>
 
     <Color x:Key="AcCol1c">#FF16D419</Color>
-    <Color x:Key="AcCol2c">#FF11C535</Color>
+    <Color x:Key="AcCol2c">#FF12D138</Color>
 
     <SolidColorBrush x:Key="FgCol1">#EED7DBDB</SolidColorBrush>
     <SolidColorBrush x:Key="FgCol2">#D5BBBBBB</SolidColorBrush>
     <SolidColorBrush x:Key="FgCol3">#FFEEF5F5</SolidColorBrush>
+    <SolidColorBrush x:Key="GradFG">#E9030303</SolidColorBrush>
 
-    <SolidColorBrush x:Key="BoxBack">#aC2A2A2A</SolidColorBrush>
+    <SolidColorBrush x:Key="BoxBack">#aC1D1E1D</SolidColorBrush>
 
-    <SolidColorBrush x:Key="InBac">#D1757575</SolidColorBrush>
-    <SolidColorBrush x:Key="InBor">#F17F7F7F</SolidColorBrush>
+    <SolidColorBrush x:Key="InBac">#D1323232</SolidColorBrush>
+    <SolidColorBrush x:Key="InBor">#F13B3B3B</SolidColorBrush>
 
     <SolidColorBrush x:Key="InacBut">#CC5A5A5A</SolidColorBrush>
 
