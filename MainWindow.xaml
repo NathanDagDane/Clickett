@@ -1,4 +1,4 @@
-﻿<Window x:Class="Clickett.MainWindow"
+﻿<Window x:Class="Clickett.MainWindow" Name="window"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -7,17 +7,31 @@
         mc:Ignorable="d"
         MouseLeftButtonDown="WindowDrag" PreviewKeyDown="KeyDown" Closed="OnExit" Topmost="true"
         Background="Transparent" AllowsTransparency="true" WindowStyle="None" ResizeMode="NoResize"
-        Title="Clickett" SizeToContent="Height" HorizontalAlignment="Stretch" Width="600" Icon="/res/iconround.png">
+        Title="Clickett" SizeToContent="Height" HorizontalAlignment="Stretch" Width="600" Icon="/res/iconround.png" RenderTransformOrigin="0.5,0.5">
 
     <Window.Triggers>
         <EventTrigger RoutedEvent="Window.Loaded">
             <BeginStoryboard>
                 <Storyboard>
-                    <DoubleAnimation Duration="00:00:00.2" Storyboard.TargetProperty="Opacity" From="0" To="1"/>
+                    <DoubleAnimation Duration="00:00:00.6" Storyboard.TargetProperty="Opacity" From="0" To="1"/>
+                    <DoubleAnimation Duration="00:00:01.4" Storyboard.TargetName="WindowScale" Storyboard.TargetProperty="(ScaleTransform.ScaleX)" From="0.96" To="1">
+                        <DoubleAnimation.EasingFunction>
+                            <QuarticEase EasingMode="EaseOut"/>
+                        </DoubleAnimation.EasingFunction>
+                    </DoubleAnimation>
+                    <DoubleAnimation Duration="00:00:01.4" Storyboard.TargetName="WindowScale" Storyboard.TargetProperty="(ScaleTransform.ScaleY)" From="0.96" To="1">
+                        <DoubleAnimation.EasingFunction>
+                            <QuarticEase EasingMode="EaseOut"/>
+                        </DoubleAnimation.EasingFunction>
+                    </DoubleAnimation>
                 </Storyboard>
             </BeginStoryboard>
         </EventTrigger>
     </Window.Triggers>
+    <Window.RenderTransform>
+        <ScaleTransform x:Name="WindowScale" 
+          ScaleX="1" ScaleY="1"  />
+    </Window.RenderTransform>
     <Window.Resources>
         <Sys:String x:Key="BoxBackCol">#CC5A5E5F</Sys:String>
         <Sys:String x:Key="FGCol1">#EED7DBDB</Sys:String>
@@ -54,6 +68,27 @@
             </Setter>
         </Style>
 
+        <!--Switch Button Style-->
+        <Style x:Key="CustBut" TargetType="Button">
+            <Setter Property="OverridesDefaultStyle" Value="True" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border BorderThickness="0" Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
         <!--Toggle Button Style-->
         <Style x:Key="TogBut" TargetType="Button">
             <Setter Property="OverridesDefaultStyle" Value="True" />
@@ -677,9 +712,34 @@
                                             <TextBlock x:Name="FrofText" Foreground="{DynamicResource FgCol2}" Text="Coming Soon" FontFamily="./#LEMON MILK Pro FTR Regular" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="8,0,8,0"/>
                                         </Grid>
                                     </Border>
-                                    <Border CornerRadius="{Binding Source={StaticResource MinRad}}" Margin="5,5,5,0" Height="{Binding Source={StaticResource MinBoxHeight}}" Background="{DynamicResource BoxBack}" HorizontalAlignment="Right" Width="200">
+                                    <Border x:Name="jitBorder" MouseEnter="JitterMouseEnter" MouseLeave="JitterMouseLeave" CornerRadius="{Binding Source={StaticResource MinRad}}" Margin="5,5,132.5,0" Height="{Binding Source={StaticResource MinBoxHeight}}" Background="{DynamicResource BoxBack}" HorizontalAlignment="Right" Width="72.5">
                                         <Grid>
-                                            <TextBlock Foreground="{DynamicResource FgCol2}" Text="Also Coming Soon" FontFamily="./#LEMON MILK Pro FTR Regular" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="8,0,0,0"/>
+                                            <TextBlock Foreground="{DynamicResource FgCol1}" Text="Jitter" FontFamily="./#LEMON MILK Pro FTR Regular" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="8,0,8,0"/>
+                                            <Button Background="AntiqueWhite" x:Name="jitBut" HorizontalAlignment="Right" Width="15" Height="15" VerticalAlignment="Center" Margin="0,0,5,0" Click="ToggleJit" IsTabStop="False">
+                                                <Button.Resources>
+                                                    <Style TargetType="{x:Type Border}">
+                                                        <Setter Property="CornerRadius" Value="20"/>
+                                                    </Style>
+                                                </Button.Resources>
+                                                <Button.Style>
+                                                    <StaticResource ResourceKey="TogBut"/>
+                                                </Button.Style>
+                                            </Button>
+                                        </Grid>
+                                    </Border>
+                                    <Border x:Name="douBorder" CornerRadius="{Binding Source={StaticResource MinRad}}" Margin="5,5,5,0" Height="{Binding Source={StaticResource MinBoxHeight}}" Background="{DynamicResource BoxBack}" HorizontalAlignment="Right" Width="122.5">
+                                        <Grid>
+                                            <TextBlock Foreground="{DynamicResource FgCol1}" Text="Double Click" FontFamily="./#LEMON MILK Pro FTR Regular" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="8,0,8,0"/>
+                                            <Button Background="AntiqueWhite" x:Name="douBut" HorizontalAlignment="Right" Width="15" Height="15" VerticalAlignment="Center" Margin="0,0,5,0" Click="ToggleDou" IsTabStop="False">
+                                                <Button.Resources>
+                                                    <Style TargetType="{x:Type Border}">
+                                                        <Setter Property="CornerRadius" Value="20"/>
+                                                    </Style>
+                                                </Button.Resources>
+                                                <Button.Style>
+                                                    <StaticResource ResourceKey="TogBut"/>
+                                                </Button.Style>
+                                            </Button>
                                         </Grid>
                                     </Border>
                                 </Grid>
@@ -942,13 +1002,13 @@
                                     <Border x:Name="OtherBorder" CornerRadius="{Binding Source={StaticResource MinRad}}" Margin="0,1,0,0" Height="{Binding Source={StaticResource MinBoxHeight}}" Background="{DynamicResource BoxBack}">
                                         <Grid>
                                             <TextBlock Foreground="{DynamicResource FgCol1}" Text="Support the Developer" FontFamily="./#LEMON MILK Pro FTR Regular" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0"/>
-                                            <Button x:Name="supportButt" Click="SupportLink" Background="{DynamicResource AcGrad}" Style="{StaticResource MyButton}" HorizontalAlignment="Right" BorderThickness="0" Margin="0,3,3,3" Width="100" FontSize="8" IsTabStop="False" Focusable="False">
+                                            <Button x:Name="supportButt" Click="SupportLink" Background="{DynamicResource AcGrad}" Style="{StaticResource MyButton}" HorizontalAlignment="Right" BorderThickness="0" Margin="0,3,3,3" Width="130" FontSize="8" IsTabStop="False" Focusable="False">
                                                 <Button.Resources>
                                                     <Style TargetType="{x:Type Border}">
                                                         <Setter Property="CornerRadius" Value="5"/>
                                                     </Style>
                                                 </Button.Resources>
-                                                <TextBlock Text="Donate" FontFamily="./#LEMON MILK Pro FTR Regular" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="{DynamicResource GradFG}" FontSize="14"/>
+                                                <TextBlock Text="Leave a Tip" FontFamily="./#LEMON MILK Pro FTR Regular" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="{DynamicResource GradFG}" FontSize="14"/>
                                             </Button>
                                         </Grid>
                                     </Border>
@@ -956,21 +1016,47 @@
                             </ScrollViewer>
                         </Grid>
                         <Grid Margin="0,5,0,0">
-                            <Button x:Name="settButt" Click="SettingsToggle" Style="{StaticResource MyButton}" Height="{Binding Source={StaticResource MajBoxHeight}}" Width="{Binding Source={StaticResource MajBoxHeight}}" HorizontalAlignment="Left" Background="{DynamicResource BoxBack}" BorderThickness="0" Margin="5,0,0,0" IsTabStop="False" Focusable="False">
+                            <Button x:Name="settButt" Style="{StaticResource CustBut}" Click="SettingsToggle" Height="{Binding Source={StaticResource MajBoxHeight}}" Width="{Binding Source={StaticResource MajBoxHeight}}" HorizontalAlignment="Left" Background="{DynamicResource BoxBack}" BorderThickness="0" Margin="5,0,0,0" IsTabStop="False" Focusable="False">
+
                                 <Button.Resources>
                                     <Style TargetType="Border">
                                         <Setter Property="CornerRadius" Value="{Binding Source={StaticResource MinRad}}"/>
                                     </Style>
                                 </Button.Resources>
+                                <Button.Triggers>
+                                    <EventTrigger RoutedEvent="Button.MouseEnter">
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation Storyboard.TargetName="settScale"
+                                         Storyboard.TargetProperty="ScaleX" To="1.06" Duration="0:0:0.05" AccelerationRatio="0.1" DecelerationRatio="0.9"/>
+                                                <DoubleAnimation Storyboard.TargetName="settScale"
+                                         Storyboard.TargetProperty="ScaleY" To="1.06" Duration="0:0:0.05" AccelerationRatio="0.1" DecelerationRatio="0.9"/>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </EventTrigger>
+                                    <EventTrigger RoutedEvent="Button.MouseLeave">
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation Storyboard.TargetName="settScale"
+                                         Storyboard.TargetProperty="ScaleX" To="1" Duration="0:0:0.2" AccelerationRatio="0.3" DecelerationRatio="0.7"/>
+                                                <DoubleAnimation Storyboard.TargetName="settScale"
+                                         Storyboard.TargetProperty="ScaleY" To="1" Duration="0:0:0.2" AccelerationRatio="0.3" DecelerationRatio="0.7" />
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </EventTrigger>
+                                </Button.Triggers>
+
                                 <Border Name="settIcon" Background="{DynamicResource FgCol1}" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28">
                                     <Border.RenderTransform>
-                                        <RotateTransform Angle="0" />
+                                        <TransformGroup>
+                                            <RotateTransform Angle="0" />
+                                            <ScaleTransform x:Name="settScale" CenterY="0.5" CenterX="0.5"/>
+                                        </TransformGroup>
                                     </Border.RenderTransform>
                                     <Border.OpacityMask>
                                         <ImageBrush ImageSource="{DynamicResource SettingsDrawingImage}" Stretch="Uniform">
                                             <ImageBrush.RelativeTransform>
                                                 <TransformGroup>
-                                                    <ScaleTransform CenterY="0" CenterX="0"/>
                                                     <TranslateTransform X="0" Y="0"/>
                                                 </TransformGroup>
                                             </ImageBrush.RelativeTransform>

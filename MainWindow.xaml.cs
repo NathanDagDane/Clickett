@@ -23,13 +23,15 @@ namespace Clickett
 {
     public partial class MainWindow : Window
     {
-        public bool doLocation, active, clicking, awaitReset, rocket, exOp;
+        public bool doLocation, active, clicking, awaitReset, rocket, exOp, jitter, doubleClick;
         private bool newTrigListen, newLocListen, interType, settOpen, doAnimations, aot, startup, trayIcon, minToTray, hkShift, hkCtrl, hkAlt, countTotal;
         private int modeInt, clickCounter, burstCount, threads;
         private long totalClickCounter;
         private uint clickDo, clickUp, xPos, yPos;
         private int clickInterval, uiScale, hudCurrentPriority;
-        private string hudCurrentToken, versionNum = "0.7.1", curTheme;
+        private string hudCurrentToken;
+        private readonly string versionNum = "0.7.2";
+        private string curTheme;
         private float nOpacity, cOpacity;
         private Key hotkey;
         private System.Drawing.Icon icon, iconbw;
@@ -41,7 +43,7 @@ namespace Clickett
 
         private IntPtr _mainWindowHandle;
         private HwndSource _source;
-        private readonly int _hotkeyID = 696914248;
+        private readonly int _hotkeyID = 696938548;
 
         [DllImport("user32.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.StdCall)]
         public static extern void mouse_event(uint dwFlags, uint dx, uint dy, uint cButtons, uint dwExtraInfo);
@@ -56,11 +58,9 @@ namespace Clickett
         internal static extern bool UnregisterHotKey(IntPtr hWnd, int id);
 
         [DllImport("user32.dll")]
-        public static extern int ToUnicode(uint virtualKeyCode, uint scanCode,
-    byte[] keyboardState,
-    [Out, MarshalAs(UnmanagedType.LPWStr, SizeConst = 64)]
-    StringBuilder receivingBuffer,
-    int bufferSize, uint flags);
+        public static extern int ToUnicode(uint virtualKeyCode, uint scanCode, byte[] keyboardState,
+            [Out, MarshalAs(UnmanagedType.LPWStr, SizeConst = 64)]
+            StringBuilder receivingBuffer, int bufferSize, uint flags);
 
         public MainWindow()
         {
@@ -86,6 +86,10 @@ namespace Clickett
             newRes.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("res/dic/Themes/" + s.Default.Theme + ".xaml", UriKind.Relative) });
             doLocation = true;
             ToggleLoc(this, null);
+            jitter = !s.Default.jitter;
+            ToggleJit(this, null);
+            doubleClick = false;
+            ToggleDou(this, null);
             interType = true;
             millisInput.Text = "0";
             secondsInput.Text = "0";
@@ -108,7 +112,7 @@ namespace Clickett
             ToggleStartup(this, null);
             trayIcon = !s.Default.trayIcon;
             ToggleTray(this, null);
-            minToTray = !s.Default.trayIcon;
+            minToTray = !s.Default.minToTray;
             ToggleMinTray(this, null);
             ToolTipService.SetInitialShowDelay(trigBorder, 69);
 
@@ -124,25 +128,27 @@ namespace Clickett
             hudCurrentPriority = 5;
             clickDo = 0x02; //LMB = 0x02  MMB = 0x20  RMB = 0x08
             clickUp = 0x04; //LMB = 0x04  MMB = 0x40  RMB = 0x10
+            
         }
 
         protected override void OnSourceInitialized(EventArgs e)
         {
+            WindowStartupLocation = WindowStartupLocation.CenterScreen;
             _mainWindowHandle = new WindowInteropHelper(this).Handle;
             _source = HwndSource.FromHwnd(_mainWindowHandle);
             _source.AddHook(Hooks);
         }
 
-        private void Activate(object sender, RoutedEventArgs e)
+        private void Activate(object sender, RoutedEventArgs? e)
         {
             if (active)
             {
                 UnregisterHotkey();
                 activateButtText.Text = "Activate";
-                activateButt.SetResourceReference(BackgroundProperty, "AcGrad"); //This makes my balls go YES
+                activateButt.SetResourceReference(BackgroundProperty, "AcGrad");
                 active = false;
-                trigSet.IsEnabled = locSetButt.IsEnabled = true;
-                trigSet.Opacity = locSetButt.Opacity = 1;
+                trigSet.IsEnabled = true;
+                locSetButt.IsEnabled = doLocation;
                 if (trayIcon)
                 {
                     _tbi.Icon = iconbw;
@@ -169,7 +175,6 @@ namespace Clickett
                 active = true;
                 clicking = false;
                 trigSet.IsEnabled = locSetButt.IsEnabled = false;
-                trigSet.Opacity = locSetButt.Opacity = 0.5;
                 if (trayIcon)
                 {
                     _tbi.Icon = icon;
@@ -221,6 +226,22 @@ namespace Clickett
             if (active) locSetButt.IsEnabled = false;
             if (doLocation) dispatcherTimer.Tick += new EventHandler(SetCurLoc);
             else dispatcherTimer.Tick -= new EventHandler(SetCurLoc);
+        }
+
+        private void ToggleJit(object sender, RoutedEventArgs? e)
+        {
+            jitter = s.Default.jitter = !jitter;
+            ColourToggle(jitBut, jitter);
+            jitBorder.Opacity = jitter ? 1 : 0.4;
+            s.Default.Save();
+        }
+
+        private void ToggleDou(object sender, RoutedEventArgs? e)
+        {
+            doubleClick = !doubleClick;
+            ColourToggle(douBut, doubleClick);
+            douBorder.Opacity = doubleClick ? 1 : 0.4;
+            s.Default.Save();
         }
 
         private void ToggleAnim(object sender, RoutedEventArgs? e)
@@ -290,14 +311,18 @@ namespace Clickett
                 }
                 catch
                 {
-                    MakeNotification("Tray icon died", "There was a problem setting up the tray icon. The tray icon option had been disabled. (Sorry)");
+                    MakeNotification("Tray icon died", "There was a problem setting up the tray icon. The tray icon option has been disabled. (Sorry)");
                     ToggleTray(this, null);
                 }
             }
             else
             {
-                if (minToTray) ToggleMinTray(this, null);
+                try
+                {
                 _tbi.Dispose();
+                if (minToTray) ToggleMinTray(this, null);
+                }
+                catch { }
             }
             s.Default.Save();
         }
@@ -460,6 +485,12 @@ namespace Clickett
             var blur = new System.Windows.Media.Effects.BlurEffect();
             blur.Radius = 5;
             fullGrid.Effect = blur;
+
+            mouse_event(clickDo | clickUp, xPos, yPos, 0, 0);
+            totalClickCounter++;
+
+            Thread.Sleep(1);
+
             dispatcherTimer.Start();
             if (!rocket)
             {
@@ -471,6 +502,7 @@ namespace Clickett
                 {
                     Thread clickHandler = new Thread(Clicker);
                     clickHandler.Start();
+                    Thread.Sleep(1);
                 }
             }
         }
@@ -479,11 +511,28 @@ namespace Clickett
         {
             var cap = (modeInt == 0);
             pTimer = new(TimeSpan.FromMilliseconds(clickInterval));
+
+            if (cap) IterateClick();
+            if (doubleClick)
+            {
+                mouse_event(clickDo | clickUp, xPos, yPos, 0, 0);
+                totalClickCounter++;
+            }
+
             while (await pTimer.WaitForNextTickAsync())
             {
+                if (jitter)
+                {
+                    Thread.Sleep((int)Math.Floor((float)clickInterval * (float)(new Random().Next(0, 6)) / 10f));
+                }
                 if (cap) IterateClick();
                 mouse_event(clickDo | clickUp, xPos, yPos, 0, 0);
                 totalClickCounter++;
+                if (doubleClick)
+                {
+                    mouse_event(clickDo | clickUp, xPos, yPos, 0, 0);
+                    totalClickCounter++;
+                }
             }
         }
 
@@ -497,6 +546,7 @@ namespace Clickett
             uint CxPos = 0;
             uint CyPos = 0;
             var CburstCount = 0;
+            var doub = false;
 
             Dispatcher.Invoke((Action)(() =>
             {
@@ -507,6 +557,7 @@ namespace Clickett
                 CxPos = xPos;
                 CyPos = yPos;
                 CburstCount = (int)Math.Ceiling((float)burstCount/(float)threads);
+                doub = doubleClick;
             }));
 
             while (true)
@@ -533,6 +584,7 @@ namespace Clickett
                     }
 
                     mouse_event(CclickDo | CclickUp, CxPos, CyPos, 0, 0);
+                    if (doub) mouse_event(CclickDo | CclickUp, CxPos, CyPos, 0, 0);
 
                     Thread.Sleep(1);
                 }
@@ -782,9 +834,7 @@ namespace Clickett
         private void LogoMouseEnter(object sender, MouseEventArgs? e)
         {
             if (countTotal) CHT(2, "ShowScore", "Total Clicks\n" + s.Default.totalClicks.ToString());
-        }
-
-        private void LogoMouseLeave(object sender, MouseEventArgs? e)
+        }private void LogoMouseLeave(object sender, MouseEventArgs? e)
         {
             CHT(5, "ShowScore", "");
         }
@@ -792,38 +842,41 @@ namespace Clickett
         private void HotMouseEnter(object sender, MouseEventArgs? e)
         {
             CHT(2, "ShowHotkey", triggerDis.Text);
-        }
-
-        private void HotMouseLeave(object sender, MouseEventArgs? e)
+        }private void HotMouseLeave(object sender, MouseEventArgs? e)
         {
             CHT(5, "ShowHotkey", "");
         }
+
         private void WarnMouseEnter(object sender, MouseEventArgs? e)
         {
             CHT(2, "ShowWarning", "Some games may struggle to process this many clicks!");
-        }
-
-        private void WarnMouseLeave(object sender, MouseEventArgs? e)
+        }private void WarnMouseLeave(object sender, MouseEventArgs? e)
         {
             CHT(5, "ShowWarning", "");
         }
+
         private void RWarnMouseEnter(object sender, MouseEventArgs? e)
         {
             CHT(2, "ShowRWarning", (threads>14)? "Clicks may slow down as applications get overloaded!" : "Some games may struggle to process this many clicks!");
-        }
-
-        private void RWarnMouseLeave(object sender, MouseEventArgs? e)
+        }private void RWarnMouseLeave(object sender, MouseEventArgs? e)
         {
             CHT(5, "ShowRWarning", "");
         }
+
         private void RocketMouseEnter(object sender, MouseEventArgs? e)
         {
             CHT(2, "RocketSwitch", "Rocket Mode");
-        }
-
-        private void RocketMouseLeave(object sender, MouseEventArgs? e)
+        }private void RocketMouseLeave(object sender, MouseEventArgs? e)
         {
             CHT(5, "RocketSwitch", "");
+        }
+
+        private void JitterMouseEnter(object sender, MouseEventArgs? e)
+        {
+            CHT(2, "JitterInfo", "Adds random timing between clicks so it's harder to detect");
+        }private void JitterMouseLeave(object sender, MouseEventArgs? e)
+        {
+            CHT(5, "JitterInfo", "");
         }
 
         private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
@@ -978,7 +1031,7 @@ namespace Clickett
                 settStoryboard = new Storyboard();
                 settStoryboard.Children.Add(settAnim);
                 Storyboard.SetTarget(settAnim, settIcon);
-                Storyboard.SetTargetProperty(settAnim, new PropertyPath("(UIElement.RenderTransform).(RotateTransform.Angle)"));
+                Storyboard.SetTargetProperty(settAnim, new PropertyPath("RenderTransform.Children[0].Angle"));
                 settStoryboard.Begin(this);
             }
         }
@@ -1160,6 +1213,7 @@ namespace Clickett
             s.Default.hkAlt = hkAlt;
             s.Default.hkCtrl = hkCtrl;
             s.Default.hkShift = hkShift;
+            s.Default.jitter = jitter;
             s.Default.doAnimations = doAnimations;
             s.Default.countTotal = countTotal;
             s.Default.aot = aot;
