@@ -18,19 +18,20 @@ using System.Threading;
 using Forms = System.Windows.Forms;
 using s = Clickett.Properties.Settings;
 using System.Threading.Tasks;
+using System.Windows.Media.Effects;
 
 namespace Clickett
 {
     public partial class MainWindow : Window
     {
-        public bool doLocation, active, clicking, awaitReset, rocket, exOp, jitter, doubleClick;
+        public bool doLocation, active, clicking, awaitReset, rocket, exOp, jitter, doubleClick, inTuto;
         private bool newTrigListen, newLocListen, interType, settOpen, doAnimations, aot, startup, trayIcon, minToTray, hkShift, hkCtrl, hkAlt, countTotal;
-        private int modeInt, clickCounter, burstCount, threads;
+        private int modeInt, clickCounter, burstCount, threads, tutStep;
         private long totalClickCounter;
         private uint clickDo, clickUp, xPos, yPos;
         private int clickInterval, uiScale, hudCurrentPriority;
         private string hudCurrentToken;
-        private readonly string versionNum = "0.7.2";
+        private readonly string versionNum = "0.7.3";
         private string curTheme;
         private float nOpacity, cOpacity;
         private Key hotkey;
@@ -83,7 +84,15 @@ namespace Clickett
             curTheme = s.Default.Theme;
             ResourceDictionary newRes = Application.Current.Resources.MergedDictionaries[1];
             newRes.MergedDictionaries.Clear();
-            newRes.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("res/dic/Themes/" + s.Default.Theme + ".xaml", UriKind.Relative) });
+            try
+            {
+                newRes.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("res/dic/Themes/" + s.Default.Theme + ".xaml", UriKind.Relative) });
+            }
+            catch
+            {
+                newRes.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("res/dic/Themes/Default.xaml", UriKind.Relative) });
+                s.Default.Theme = curTheme = "Default";
+            }
             doLocation = true;
             ToggleLoc(this, null);
             jitter = !s.Default.jitter;
@@ -128,7 +137,17 @@ namespace Clickett
             hudCurrentPriority = 5;
             clickDo = 0x02; //LMB = 0x02  MMB = 0x20  RMB = 0x08
             clickUp = 0x04; //LMB = 0x04  MMB = 0x40  RMB = 0x10
-            
+            if (s.Default.welcomed)
+            {
+                fullGrid.Children.Remove(welcomeGrid);
+            }
+            else
+            {
+                inTuto = true;
+                helpBut.Visibility = Visibility.Collapsed;
+                FocusItem(0);
+                welcomeGrid.Visibility = Visibility.Visible;
+            }
         }
 
         protected override void OnSourceInitialized(EventArgs e)
@@ -208,6 +227,11 @@ namespace Clickett
                 settStoryboard.Begin(this);
             }
             else OptionsArrow.RenderTransform = new RotateTransform(exOp?180.0:0.0,0.5,0.5);
+
+            if (inTuto && tutStep==9)
+            {
+                TutoNext(this, null);
+            }
         }
 
         private void CollapseExOp(object? sender, EventArgs? e)
@@ -249,6 +273,31 @@ namespace Clickett
             doAnimations = s.Default.doAnimations = !doAnimations;
             ColourToggle(animButt, doAnimations);
             animBorder.Opacity = doAnimations ? 1 : 0.4;
+
+            var style = doAnimations ? "TogBut" : "MyButton";
+            cpsWarn.SetResourceReference(StyleProperty, style);
+            threadsWarn.SetResourceReference(StyleProperty, style);
+            rocketSwap.SetResourceReference(StyleProperty, style);
+            swapButt.SetResourceReference(StyleProperty, style);
+            LocBut.SetResourceReference(StyleProperty, style);
+            jitBut.SetResourceReference(StyleProperty, style);
+            douBut.SetResourceReference(StyleProperty, style);
+            DefaultThemeBut.SetResourceReference(StyleProperty, style);
+            DefaultLightThemeBut.SetResourceReference(StyleProperty, style);
+            ColdThemeBut.SetResourceReference(StyleProperty, style);
+            GreenThemeBut.SetResourceReference(StyleProperty, style);
+            DiscordThemeBut.SetResourceReference(StyleProperty, style);
+            animButt.SetResourceReference(StyleProperty, style);
+            ctButt.SetResourceReference(StyleProperty, style);
+            aotButt.SetResourceReference(StyleProperty, style);
+            startupButt.SetResourceReference(StyleProperty, style);
+            trayButt.SetResourceReference(StyleProperty, style);
+            minTrayButt.SetResourceReference(StyleProperty, style);
+            tutNextBut.SetResourceReference(StyleProperty, style);
+            begTutButt.SetResourceReference(StyleProperty, style);
+            helpBut.SetResourceReference(StyleProperty, style);
+
+
             s.Default.Save();
         }
 
@@ -343,11 +392,28 @@ namespace Clickett
 
         private void SetTheme(object sender, RoutedEventArgs? e)
         {
-            var themeName = curTheme = s.Default.Theme = ((Button)sender).Name.Substring(0, ((Button)sender).Name.Length - 8);
-            s.Default.Save();
+            var themeName = curTheme = ((Button)sender).Name.Substring(0, ((Button)sender).Name.Length - 8);
             ResourceDictionary newRes = Application.Current.Resources.MergedDictionaries[1];
             newRes.MergedDictionaries.Clear();
-            newRes.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("res/dic/Themes/" + themeName + ".xaml", UriKind.Relative) });
+            try
+            {
+                newRes.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("res/dic/Themes/" + themeName + ".xaml", UriKind.Relative) });
+            }
+            catch
+            {
+                try
+                {
+                    themeName = s.Default.Theme;
+                    newRes.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("res/dic/Themes/" + themeName + ".xaml", UriKind.Relative) });
+                }
+                catch
+                {
+                    s.Default.Theme = themeName = "Default";
+                    newRes.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("res/dic/Themes/" + themeName + ".xaml", UriKind.Relative) });
+                }
+            }
+            s.Default.Theme = themeName;
+            s.Default.Save();
         }
 
         private IntPtr Hooks(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
@@ -623,6 +689,7 @@ namespace Clickett
             }
             else if (priority <= hudCurrentPriority)      // Compare priorities: 5:Cleanup    4:Barely matters    3:Should see    2:Current situe    1:Important    0:Do not override
             {
+                if (inTuto && priority >= 2) return;
                 hudText.Text = text;
                 hudCurrentPriority = priority;
                 hudCurrentToken = token;
@@ -634,9 +701,44 @@ namespace Clickett
             DragMove();
         }
 
+        private void Help(object sender, RoutedEventArgs? e)
+        {
+            FocusItem(0);
+            helpMenu.Visibility = Visibility.Visible;
+        }
+        private void StartTuto(object sender, RoutedEventArgs? e)
+        {
+
+            helpMenu.Visibility = Visibility.Collapsed;
+            Tutorial();
+        }
+        private void AcceptTuto(object sender, RoutedEventArgs? e)
+        {
+            s.Default.welcomed = true;
+            helpBut.Visibility = Visibility.Visible;
+            fullGrid.Children.Remove(welcomeGrid);
+            StartTuto(this, null);
+        }
+        private void DenyTuto(object sender, RoutedEventArgs? e)
+        {
+            s.Default.welcomed = true;
+            helpMenu.Visibility = Visibility.Collapsed;
+            fullGrid.Children.Remove(welcomeGrid);
+            tutOverlay.Visibility = Visibility.Visible;
+            TutoExit(this, null);
+        }
         private void HelpLink(object sender, RoutedEventArgs? e)
         {
             Process.Start(new ProcessStartInfo("https://github.com/NathanDagDane/Clickett/wiki/Getting-Started,-Help-and-FAQ") { UseShellExecute = true });
+        }
+        private void HelpContact(object sender, RoutedEventArgs? e)
+        {
+            Process.Start(new ProcessStartInfo("mailto:nathandane.dev@gmail.com?subject=Clickett%20Support") { UseShellExecute = true });
+        }
+        private void HelpExit(object sender, RoutedEventArgs? e)
+        {
+            FocusItem(69);
+            helpMenu.Visibility = Visibility.Collapsed;
         }
 
         private void WarnLink(object sender, RoutedEventArgs? e)
@@ -1013,7 +1115,6 @@ namespace Clickett
 
         private void SettingsToggle(object sender, RoutedEventArgs? e)
         {
-
             settOpen = !settOpen;
             if (doAnimations)
             {
@@ -1172,6 +1273,370 @@ namespace Clickett
             charStr = charStr[0].ToString().ToUpper() + charStr.Substring(1).ToLower();
 
             return charStr;
+        }
+
+        private void Tutorial()
+        {
+            if (active) Activate(this, null);
+            if (settOpen) SettingsToggle(this, null);
+            if (exOp) ToggleExOp(this, null);
+            if (rocket) RocketSwap(this, null);
+            helpBut.IsEnabled = false;
+            if (newLocListen)
+            {
+                UnregisterHotkey();
+                newLocListen = false;
+                locGrid.Visibility = Visibility.Visible;
+                locText.Text = "Location";
+                locText.HorizontalAlignment = HorizontalAlignment.Left;
+                locText.Margin = new Thickness(8, 0, 0, 0);
+                locText.Opacity = 1;
+                trigSet.IsEnabled = true;
+                locSetButt.Margin = new Thickness(0, 3, 153, 3);
+                locSetButt.Width = 40;
+                locSetButtText.Text = "Set";
+            }
+            if (newTrigListen)
+            {
+                newTrigListen = false;
+                trigBorder.Visibility = Visibility.Visible;
+                trigText.Text = "Trigger";
+                trigText.HorizontalAlignment = HorizontalAlignment.Left;
+                trigText.Margin = new Thickness(8, 0, 0, 0);
+                trigText.Opacity = 1;
+                locSetButt.IsEnabled = true;
+                trigSet.Width = 40;
+                trigSetText.Text = "Set";
+                activateButt.IsEnabled = true;
+            }
+            tutNextBut.Visibility = Visibility.Visible;
+            tutExitBut.Visibility = Visibility.Visible;
+            tutArrow.Visibility = Visibility.Visible;
+            tutTextOther.Visibility = Visibility.Collapsed;
+            helpBut.Visibility = Visibility.Collapsed;
+            tutHelpPage.Visibility = Visibility.Collapsed;
+            tutContact.Visibility = Visibility.Collapsed;
+            FocusItem(1); 
+            TutoArrange(340, 125, 100, 64, 300, false, -98, 44, 48, "You can use this part to choose how fast you want to click");
+            tutNextButText.Text = "Next";
+            tutOverlay.Visibility = Visibility.Visible;
+            tutStep = 0;
+            inTuto = true;
+        }
+
+        private void TutoExit(object sender, RoutedEventArgs? e)
+        {
+            if (!inTuto || tutStep == 17)
+            {
+                tutStep = 0;
+                FocusItem(69);
+                tutExitBut.Visibility = Visibility.Collapsed;
+                helpBut.Visibility = Visibility.Visible;
+                helpBut.IsEnabled = true;
+                tutOverlay.Visibility = Visibility.Collapsed;
+                tutHelpPage.Visibility = Visibility.Collapsed;
+                tutContact.Visibility = Visibility.Collapsed;
+                tutArrow.Visibility = Visibility.Collapsed;
+                tutTextOther.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                tutStep = 16;
+                TutoNext(this, null);
+            }
+            inTuto = false;
+        }
+
+        private void TutoNext(object sender, RoutedEventArgs? e)
+        {
+            switch (tutStep)
+            {
+                case 0:
+                    FocusItem(3);
+                    TutoArrange(340, 125, 30, 64, 400, true, 98, 430, 48, "Click this to choose between the clicks per second slider and typing the time between clicks");
+                    break;
+                case 1:
+                    FocusItem(2);
+                    TutoArrange(340, 125, 20, 72, 460, true, 98, 400, 48, "Click this for Rocket mode!\nThis lets you choose how many CPU threads are clicking");
+                    break;
+                case 2:
+                    TutoArrange(340, 125, 10, 72, 400, true, 98, 400, 48, "This can click up to 20,000 times per second!\nBe careful!");
+                    break;
+                case 3:
+                    FocusItem(6);
+                    TutoArrange(361, 113, 25, 20, 250, false, 67, 274, 0, "Choose between the 3 different clicking modes with this\n\nBurst - Click a set amount of times every time you press the trigger");
+                    break;
+                case 4:
+                    TutoArrange(361, 113, 25, 20, 250, false, 67, 274, 0, "Choose between the 3 different clicking modes with this\n\nToggle - Switch between clicking and not clicking when you press the trigger");
+                    break;
+                case 5:
+                    TutoArrange(361, 113, 25, 20, 250, false, 67, 274, 0, "Choose between the 3 different clicking modes with this\n\nHold - Start clicking when you push the trigger down and stops when you let go");
+                    break;
+                case 6:
+                    FocusItem(11);
+                    TutoArrange(361, 40, 36, 44, 300, true, 180, 220, 64, "Choose what type of click will happen");
+                    break;
+                case 7:
+                    FocusItem(5);
+                    TutoArrange(361, 68, 50, 10, 400, true, 100, 222, 95, "Lock the cursor to a specific place on the screen\nClick 'Set' to choose where");
+                    tutTextOther.Visibility = Visibility.Visible;
+                    break;
+                case 8:
+                    FocusItem(4);
+                    TutoArrange(361, 82, 80, 106, 280, false, -84, 22, 72, "See extra options by clicking here");
+                    tutNextBut.Visibility = Visibility.Collapsed;
+                    tutTextOther.Visibility = Visibility.Collapsed;
+                    break;
+                case 9:
+                    FocusItem(8);
+                    TutoArrange(108, 149, 16, 24, 260, false, 85, 278, 24, "Add a random wait between each click\n\nThis makes it harder for games to detect the autockicler");
+                    tutNextBut.Visibility = Visibility.Visible;
+                    break;
+                case 10:
+                    FocusItem(9);
+                    TutoArrange(150, 125, 27, 60, 320, true, 165, 295, 74, "This makes each click a double click\nDouble the speed!");
+                    break;
+                case 11:
+                    //FocusItem(7);
+                    tutStep++;
+                    TutoNext(this, null);
+                    return;
+                case 12:
+                    FocusItem(13);
+                    TutoArrange(375, 69, 27, 30, 320, false, 100, 250, 82, "When you click this it activates Clickett\n\nAfter that you can press the trigger to start clicking!");
+                    break;
+                case 13:
+                    TutoArrange(375, 69, 27, 60, 320, false, 100, 250, 82, "Clickett cannot click when it isn't activated");
+                    break;
+                case 14:
+                    FocusItem(10);
+                    TutoArrange(361, 90, 35, 20, 360, true, -90, 55, 55, "This shows you the trigger you need to press to start clicking\n\nClick 'Set' to change it");
+                    break;
+                case 15:
+                    FocusItem(12);
+                    TutoArrange(213, 145, 50, 28, 400, false, -180, 56, 120, "See settings by clicking here\n\nHere you can choose a theme and customise the experience!");
+                    break;
+                case 16:
+                    FocusItem(0);
+                    tutExitBut.Visibility = Visibility.Collapsed;
+                    tutTextOther.Visibility = Visibility.Collapsed;
+                    tutHelpPage.Visibility = Visibility.Collapsed;
+                    tutContact.Visibility = Visibility.Collapsed;
+                    helpBut.Visibility = Visibility.Visible;
+                    helpBut.IsEnabled = false;
+                    tutNextButText.Text = "Okay!";
+                    TutoArrange(213, 84, 100, 28, 300, true, 70, 390, -28, "You can always see the tutorial or get other help by clicking here!");
+                    break;
+                case 17:
+                    if (!inTuto)
+                    {
+                        TutoExit(this, null);
+                        return;
+                    }
+                    FocusItem(0);
+                    TutoArrange(213, 145, 50, 28, 400, false, 0, 0, 0, "Thanks for taking the tour!\n\nIf you still need help:");
+                    tutArrow.Visibility = Visibility.Collapsed;
+                    tutHelpPage.Visibility = Visibility.Visible;
+                    tutContact.Visibility = Visibility.Visible;
+                    tutNextButText.Text = "Finish";
+                    break;
+                case 18:
+                    inTuto = false;
+                    TutoExit(this, null);
+                    break;
+            }
+            tutStep++;
+        }
+
+        private void TutoArrange(float nextX, float nextY, float textX, float textY, float textWidth, bool arrowFlip, float arrowRot, float arrowX, float arrowY, string text)
+        {
+            tutNextBut.Margin = new Thickness(nextX, nextY, 0, 0);
+            tutText.Margin = new Thickness(textX, textY, 0, 0);
+            tutText.Width = textWidth;
+            tutText.Text = text;
+            TransformGroup bruh = new TransformGroup();
+            bruh.Children.Add(new ScaleTransform((arrowFlip? -1 : 1), 1));
+            bruh.Children.Add(new RotateTransform(arrowRot));
+            tutArrow.RenderTransform = bruh;
+            tutArrow.Margin = new Thickness(arrowX, arrowY, 0, 0);
+        }
+
+        private void FocusItem(int i)
+        {
+            var blur = new BlurEffect();
+            blur.Radius = 10;
+            interBor.Effect = blur;
+
+            interText.SetResourceReference(OpacityProperty, "OverlayOpacity");
+            interText.Effect = blur;
+            interBor.SetResourceReference(OpacityProperty, "OverlayOpacity");
+            interBor.Effect = blur;
+            rocketSwapGrid.SetResourceReference(OpacityProperty, "OverlayOpacity");
+            rocketSwap.Effect = blur;
+            rocketSwap.IsEnabled = false;
+            swapButtGrid.SetResourceReference(OpacityProperty, "OverlayOpacity");
+            swapButt.Effect = blur;
+            swapButt.IsEnabled = false;
+            optionsTitGrid.SetResourceReference(OpacityProperty, "OverlayOpacity");
+            optionsTitGrid.Effect = blur;
+            optionsTit.IsEnabled = false;
+            locBorder.SetResourceReference(OpacityProperty, "OverlayOpacity");
+            locBorder.Effect = blur;
+            LocBut.IsEnabled = false;
+            locSetButt.IsEnabled = false;
+            modeBor.SetResourceReference(OpacityProperty, "OverlayOpacity");
+            modeBor.Effect = blur;
+            modeSel.IsEnabled = false;
+            ProfBorder.SetResourceReference(OpacityProperty, "OverlayOpacity");
+            ProfBorder.Effect = blur;
+            jitBorder.SetResourceReference(OpacityProperty, "OverlayOpacity");
+            jitBorder.Effect = blur;
+            jitBut.IsEnabled = false;
+            douBorder.SetResourceReference(OpacityProperty, "OverlayOpacity");
+            douBorder.Effect = blur;
+            douBut.IsEnabled = false;
+            trigBor.SetResourceReference(OpacityProperty, "OverlayOpacity");
+            trigBor.Effect = blur;
+            trigSet.IsEnabled = false;
+            clickBor.SetResourceReference(OpacityProperty, "OverlayOpacity");
+            clickBor.Effect = blur;
+            clickSel.IsEnabled = false;
+            settButt.SetResourceReference(OpacityProperty, "OverlayOpacity");
+            settButt.Effect = blur;
+            settButt.IsEnabled = false;
+            activateButtGrid.SetResourceReference(OpacityProperty, "OverlayOpacity");
+            activateButtGrid.Effect = blur;
+            activateButt.IsEnabled= false;
+            settGrid.SetResourceReference(OpacityProperty, "OverlayOpacity");
+            settGrid.Effect = blur;
+
+            switch (i){
+                case 0:
+                    break;
+                case 1:
+                    interText.Opacity = 1;
+                    interText.Effect = null;
+                    interBor.Opacity = 1;
+                    interBor.Effect = null;
+                    break;
+                case 2:
+                    rocketSwapGrid.Opacity = 1;
+                    rocketSwap.Effect = null;
+                    rocketSwap.IsEnabled = true;
+                    interText.Opacity = 1;
+                    interText.Effect = null;
+                    interBor.Opacity = 1;
+                    interBor.Effect = null;
+                    break;
+                case 3:
+                    swapButtGrid.Opacity = 1;
+                    swapButt.Effect = null;
+                    swapButt.IsEnabled = true;
+                    interText.Opacity = 1;
+                    interText.Effect = null;
+                    interBor.Opacity = 1;
+                    interBor.Effect = null;
+                    break;
+                case 4:
+                    optionsTitGrid.Opacity = 1;
+                    optionsTitGrid.Effect = null;
+                    optionsTit.IsEnabled = true;
+                    break;
+                case 5:
+                    LocBut.IsEnabled = true;
+                    locBorder.Effect = null;
+                    locSetButt.IsEnabled = true;
+                    ToggleLoc(this, null);
+                    ToggleLoc(this, null);
+                    break;
+                case 6:
+                    modeBor.Opacity = 1;
+                    modeBor.Effect = null;
+                    modeSel.IsEnabled = true;
+                    break;
+                case 7:
+                    ProfBorder.Opacity = 1;
+                    ProfBorder.Effect = null;
+                    break;
+                case 8:
+                    jitBut.IsEnabled = true;
+                    jitBorder.Effect = null;
+                    ToggleJit(this, null);
+                    ToggleJit(this, null);
+                    break;
+                case 9:
+                    douBut.IsEnabled = true;
+                    douBorder.Effect = null;
+                    ToggleDou(this, null);
+                    ToggleDou(this, null);
+                    break;
+                case 10:
+                    trigBor.Opacity = 1;
+                    trigBor.Effect = null;
+                    trigSet.IsEnabled = true;
+                    break;
+                case 11:
+                    clickBor.Opacity = 1;
+                    clickBor.Effect = null;
+                    clickSel.IsEnabled = true;
+                    break;
+                case 12:
+                    settButt.Opacity = 1;
+                    settButt.Effect = null;
+                    settButt.IsEnabled = true;
+                    break;
+                case 13:
+                    activateButtGrid.Opacity = 1;
+                    activateButtGrid.Effect = null;
+                    activateButt.IsEnabled = true;
+                    break;
+                default:
+                    interText.Opacity = 1;
+                    interText.Effect = null;
+                    interBor.Opacity = 1;
+                    interBor.Effect = null;
+                    rocketSwapGrid.Opacity = 1;
+                    rocketSwap.Effect = null;
+                    rocketSwap.IsEnabled = true;
+                    swapButtGrid.Opacity = 1;
+                    swapButt.Effect = null;
+                    swapButt.IsEnabled = true;
+                    optionsTitGrid.Opacity = 1;
+                    optionsTitGrid.Effect = null;
+                    optionsTit.IsEnabled = true;
+                    ToggleLoc(this, null);
+                    ToggleLoc(this, null);
+                    locBorder.Effect = null;
+                    LocBut.IsEnabled = true;
+                    modeBor.Opacity = 1;
+                    modeBor.Effect = null;
+                    modeSel.IsEnabled = true;
+                    ProfBorder.Opacity = 1;
+                    ProfBorder.Effect = null;
+                    jitBorder.Effect = null;
+                    ToggleJit(this, null);
+                    ToggleJit(this, null);
+                    jitBut.IsEnabled = true;
+                    douBorder.Effect = null;
+                    ToggleDou(this, null);
+                    ToggleDou(this, null);
+                    douBut.IsEnabled = true;
+                    trigBor.Opacity = 1;
+                    trigBor.Effect = null;
+                    trigSet.IsEnabled = true;
+                    clickBor.Opacity = 1;
+                    clickBor.Effect = null;
+                    clickSel.IsEnabled = true;
+                    settButt.Opacity = 1;
+                    settButt.Effect = null;
+                    settButt.IsEnabled = true;
+                    activateButtGrid.Opacity = 1;
+                    activateButtGrid.Effect = null;
+                    activateButt.IsEnabled = true;
+                    settGrid.Opacity = 1;
+                    settGrid.Effect = null;
+                    break;
+            }
         }
 
         const int WS_EX_TRANSPARENT = 0x00000020;

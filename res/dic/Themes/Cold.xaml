@@ -1,5 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:Sys="clr-namespace:System;assembly=mscorlib">
 
     <!-- https://coolors.co/fcfbf8-a3aaae-22272c-2e343b-3b4149-484d56-595d65 -->
 
@@ -38,5 +39,9 @@
     <SolidColorBrush x:Key="InBor">#484D56</SolidColorBrush>
 
     <SolidColorBrush x:Key="InacBut">#595D65</SolidColorBrush>
+
+    <Sys:Double x:Key="OverlayOpacity">0.13</Sys:Double>
+    
+    
 
 </ResourceDictionary>

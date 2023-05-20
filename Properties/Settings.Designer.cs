@@ -249,5 +249,17 @@ namespace Clickett.Properties {
                 this["jitter"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool welcomed {
+            get {
+                return ((bool)(this["welcomed"]));
+            }
+            set {
+                this["welcomed"] = value;
+            }
+        }
     }
 }

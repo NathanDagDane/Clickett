@@ -1,5 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:Sys="clr-namespace:System;assembly=mscorlib">
 
     <LinearGradientBrush x:Key="Back">
         <LinearGradientBrush.RelativeTransform>
@@ -57,5 +58,7 @@
     <SolidColorBrush x:Key="InBor">#F9EAF2F3</SolidColorBrush>
 
     <SolidColorBrush x:Key="InacBut">#CCB5B5B5</SolidColorBrush>
+
+    <Sys:Double x:Key="OverlayOpacity">0.25</Sys:Double>
 
 </ResourceDictionary>
