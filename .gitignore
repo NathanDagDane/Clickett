@@ -3,7 +3,7 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
-App.xaml.cs
+/App.xaml.cs
 
 # User-specific files
 *.rsuser
