@@ -1311,7 +1311,7 @@
                     </Button.Style>
                     <TextBlock Text="Exit Tutorial" FontFamily="./#LEMON MILK Pro FTR Regular" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="{DynamicResource FgCol1}" FontSize="10"/>
                 </Button>
-                <Button x:Name="UpdateBut" Style="{StaticResource TogBut}" Click="InstallUpdateButton_Click" HorizontalAlignment="Right" VerticalAlignment="Top" Width="25" Height="25" Margin="0,3,90,0" BorderThickness="0" Background="#00DDDDDD" IsTabStop="False">
+                <Button x:Name="UpdateBut" Style="{StaticResource TogBut}" HorizontalAlignment="Right" VerticalAlignment="Top" Width="25" Height="25" Margin="0,3,90,0" BorderThickness="0" Background="#00DDDDDD" IsTabStop="False">
                     <Border Background="{DynamicResource FgCol1}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="18" Height="18" Opacity="0.69" RenderOptions.BitmapScalingMode="HighQuality">
                         <Border.OpacityMask>
                             <ImageBrush ImageSource="{DynamicResource swapDrawingImage}" Stretch="Uniform">

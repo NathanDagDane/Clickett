@@ -19,14 +19,6 @@ using Forms = System.Windows.Forms;
 using s = Clickett.Properties.Settings;
 using System.Threading.Tasks;
 using System.Windows.Media.Effects;
-using Microsoft.AppCenter.Analytics;
-using Microsoft.AppCenter.Crashes;
-using System.Collections.Generic;
-using NetSparkleUpdater.SignatureVerifiers;
-using NetSparkleUpdater;
-using NetSparkleUpdater.Enums;
-using NetSparkleUpdater.Events;
-using System.IO;
 
 namespace Clickett
 {
@@ -54,11 +46,6 @@ namespace Clickett
         private HwndSource _source;
         private readonly int _hotkeyID = 696938548;
 
-        private SparkleUpdater _sparkle;
-        private UpdateInfo _updateInfo;
-        private string _downloadPath = null;
-        private bool _hasDownloadFinished = false;
-
         [DllImport("user32.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.StdCall)]
         public static extern void mouse_event(uint dwFlags, uint dx, uint dy, uint cButtons, uint dwExtraInfo);
 
@@ -82,13 +69,6 @@ namespace Clickett
             InitializeThingies();
             TextOptions.SetTextRenderingMode(this, TextRenderingMode.Auto);
             this.DataContext = this;
-
-            _sparkle = new SparkleUpdater("https://github.com/NathanDagDane/Clickett/releases/latest/download/appcastx32.xml", new DSAChecker(SecurityMode.Unsafe))
-            {
-                UIFactory = null// required on Avalonia, preferred on WPF/WinForms
-            };
-            _sparkle.SecurityProtocolType = System.Net.SecurityProtocolType.Tls12;
-            CheckUpdates();
         }
 
         private void InitializeThingies()
@@ -180,8 +160,6 @@ namespace Clickett
 
         private void Activate(object sender, RoutedEventArgs? e)
         {
-            CheckUpdates();
-            Crashes.GenerateTestCrash();
             if (active)
             {
                 UnregisterHotkey();
@@ -697,7 +675,6 @@ namespace Clickett
                 s.Default.totalClicks += totalClickCounter - 1;
                 s.Default.Save();
                 totalText.Text = s.Default.totalClicks.ToString();
-                Analytics.TrackEvent("Click session", new Dictionary<string, string> {{ "Clicks", totalClickCounter.ToString() }});
                 totalClickCounter = 0;
             }
         }
@@ -737,8 +714,6 @@ namespace Clickett
         }
         private void AcceptTuto(object sender, RoutedEventArgs? e)
         {
-            Analytics.TrackEvent("New user");
-            Analytics.TrackEvent("Actually did the tutorial");
             s.Default.welcomed = true;
             helpBut.Visibility = Visibility.Visible;
             fullGrid.Children.Remove(welcomeGrid);
@@ -746,8 +721,6 @@ namespace Clickett
         }
         private void DenyTuto(object sender, RoutedEventArgs? e)
         {
-            Analytics.TrackEvent("New user");
-            Analytics.TrackEvent("Skipped the tutorial");
             s.Default.welcomed = true;
             helpMenu.Visibility = Visibility.Collapsed;
             fullGrid.Children.Remove(welcomeGrid);
@@ -1693,69 +1666,6 @@ namespace Clickett
             {
                 return "v" + versionNum + " - Beta";
             }
-        }
-
-        private async void CheckUpdates()
-        {
-            UpdateBut.Visibility = Visibility.Collapsed;
-
-            _updateInfo = await _sparkle.CheckForUpdatesQuietly();
-            if (_updateInfo != null)
-            {
-                if (_updateInfo.Status == NetSparkleUpdater.Enums.UpdateStatus.UpdateAvailable)
-                {
-                    _sparkle.DownloadFinished -= _sparkle_FinishedDownloading;
-                    _sparkle.DownloadFinished += _sparkle_FinishedDownloading;
-
-                    _sparkle.DownloadMadeProgress += _sparkle_DownloadMadeProgress;
-
-                    _sparkle.CheckServerFileName = true;
-                    _hasDownloadFinished = false;
-                    //_sparkle.ClearOldInstallers();
-                    await _sparkle.InitAndBeginDownload(_updateInfo.Updates.First());
-                }
-            }
-        }
-
-        private void _sparkle_DownloadMadeProgress(object sender, AppCastItem item, ItemDownloadProgressEventArgs e)
-        {
-            if (!_hasDownloadFinished)
-            {
-                CHT(2, "ajhsdg", e.ProgressPercentage.ToString());
-            }
-        }
-
-        private void _sparkle_FinishedDownloading(AppCastItem item, string path)
-        {
-            MakeNotification("Here it is:", path);
-            
-            _hasDownloadFinished = true;
-            //DownloadInfo.Text = "Done downloading!";
-            UpdateBut.Visibility = Visibility.Visible;
-            _downloadPath = path;
-        }
-        private void InstallUpdateButton_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                if (File.Exists(_downloadPath + ".msi"))
-                {
-                    File.Delete(_downloadPath + ".msi");
-                }
-                File.Move(_downloadPath, _downloadPath + ".msi");
-                _sparkle.CloseApplication += _sparkle_CloseApplication;
-                _sparkle.InstallUpdate(_updateInfo.Updates.First(), _downloadPath + ".msi");
-            }
-            catch
-            {
-
-            }
-        }
-
-        private void _sparkle_CloseApplication()
-        {
-            AppClose(this, null);
-            System.Windows.Application.Current.Shutdown();
         }
 
         private void OnExit(object sender, EventArgs e)
