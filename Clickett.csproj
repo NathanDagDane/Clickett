@@ -6,9 +6,9 @@
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
     <SupportedOSPlatformVersion>10.0.19041.0</SupportedOSPlatformVersion>
-    <ApplicationIcon>iconround.ico</ApplicationIcon>
+    <ApplicationIcon>res\iconround.ico</ApplicationIcon>
     <UseWindowsForms>True</UseWindowsForms>
-    <AssemblyVersion>0.7.2</AssemblyVersion>
+    <AssemblyVersion>0.7.3</AssemblyVersion>
     <FileVersion>$(AssemblyVersion)</FileVersion>
 	<Version>$(AssemblyVersion)</Version>
 	<VersionPrefix>$(AssemblyVersion)</VersionPrefix>
@@ -16,9 +16,13 @@
     <DebugType>embedded</DebugType>
     <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
-	<PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
-  <DebugType>Full</DebugType>
-</PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugType>Full</DebugType>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <StartupObject>Clickett.Program</StartupObject>
+  </PropertyGroup>
 	
 	    
 
@@ -33,7 +37,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="iconround.ico">
+    <Content Include="res\iconround.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="res\iconcirc.ico">
@@ -47,14 +51,15 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.Toolkit.Uwp.Notifications" Version="7.1.3" />
     <PackageReference Include="System.Runtime" Version="4.3.1" />
+    <PackageReference Include="Velopack" Version="0.0.556" />
   </ItemGroup>
 
   <ItemGroup>
     <Resource Include="res\Discord.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Lemon Milk Pro Medium.ttf" />
-    <Resource Include="Lemon Milk Pro Regular.ttf" />
+    <Resource Include="res\Lemon Milk Pro Medium.ttf" />
+    <Resource Include="res\Lemon Milk Pro Regular.ttf" />
     <Resource Include="res\iconround.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>

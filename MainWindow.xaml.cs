@@ -19,6 +19,8 @@ using Forms = System.Windows.Forms;
 using s = Clickett.Properties.Settings;
 using System.Threading.Tasks;
 using System.Windows.Media.Effects;
+using Velopack;
+using Velopack.Sources;
 
 namespace Clickett
 {
@@ -46,6 +48,9 @@ namespace Clickett
         private HwndSource _source;
         private readonly int _hotkeyID = 696938548;
 
+        private UpdateManager _um;
+        private UpdateInfo _update;
+
         [DllImport("user32.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.StdCall)]
         public static extern void mouse_event(uint dwFlags, uint dx, uint dy, uint cButtons, uint dwExtraInfo);
 
@@ -69,6 +74,11 @@ namespace Clickett
             InitializeThingies();
             TextOptions.SetTextRenderingMode(this, TextRenderingMode.Auto);
             this.DataContext = this;
+
+            _um = new UpdateManager(new GithubSource("https://github.com/NathanDagDane/Clickett", null, false));
+
+            UpdateBut.Visibility = Visibility.Hidden;
+            CheckUpdate(false);
         }
 
         private void InitializeThingies()
@@ -1659,6 +1669,68 @@ namespace Clickett
             SetWindowLong(hwnd, GWL_EXSTYLE, 0x00000000);
         }
 
+        // UPDATING LOGIC
+        private async void CheckUpdate(bool manual)
+        {
+            try
+            {
+                // ConfigureAwait(true) so that UpdateStatus() is called on the UI thread
+                _update = await _um.CheckForUpdatesAsync().ConfigureAwait(false);
+            }
+            catch (Exception ex)
+            {
+                if(manual) MakeNotification("Update Error", "Failed to check for updates");
+                return;
+            }
+
+            if (_update == null)
+            {
+                if(manual) MakeNotification("Up to Date!", "You're on the latest version!");
+                return;
+            }
+
+            MakeNotification("Update Available", null);
+
+            try
+            {
+                await _um.DownloadUpdatesAsync(_update, Progress).ConfigureAwait(false);
+            }
+            catch (Exception ex)
+            {
+                try
+                {
+                    await _um.DownloadUpdatesAsync(_update, Progress, ignoreDeltas: true).ConfigureAwait(false);
+                }
+                catch (Exception exc)
+                {
+                    if(manual) MakeNotification("Download Error", "Failed to download update");
+                }
+            }
+        }
+
+        private void Progress(int percent)
+        {
+            // progress can be sent from other threads
+            this.Dispatcher.InvokeAsync(() => {
+
+                //CHT(2, "UpdatePercentage", percent.ToString());
+                if (percent == 100)
+                {
+                    UpdateBut.Visibility = Visibility.Visible;
+                    //CHT(2, "UpdatePercentage", "");
+                }
+            });
+            
+        }
+
+        private void InstallUpdateButton_Click(object sender, RoutedEventArgs e)
+        {
+            clicking = false;
+            _source.RemoveHook(Hooks);
+            UnregisterHotkey();
+
+            _um.ApplyUpdatesAndRestart(_update);
+        }
 
         public string AssemblyVersion
         {
