@@ -11,8 +11,8 @@
                 <TranslateTransform/>
             </TransformGroup>
         </LinearGradientBrush.RelativeTransform>
-        <GradientStop Color="#F5F8FFFF" Offset="1"/>
-        <GradientStop Color="#F5EAF7F7" Offset="0"/>
+        <GradientStop Color="#FFF" Offset="1"/>
+        <GradientStop Color="#FFF" Offset="0"/>
     </LinearGradientBrush>
 
     <LinearGradientBrush x:Key="AcGrad">
@@ -24,8 +24,21 @@
                 <TranslateTransform/>
             </TransformGroup>
         </LinearGradientBrush.RelativeTransform>
-        <GradientStop Color="#FF24c7c7"/>
-        <GradientStop Color="#FF13c2a5" Offset="1"/>
+        <GradientStop Color="#FF00BABA"/>
+        <GradientStop Color="#FF00C4BA" Offset="1"/>
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="AcGradAlt">
+        <LinearGradientBrush.RelativeTransform>
+            <TransformGroup>
+                <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                <SkewTransform CenterX="0.5" CenterY="0.5"/>
+                <RotateTransform Angle="0" CenterX="0.5" CenterY="0.5"/>
+                <TranslateTransform/>
+            </TransformGroup>
+        </LinearGradientBrush.RelativeTransform>
+        <GradientStop Color="#FFC8E8E8"/>
+        <GradientStop Color="#FFCFEFEE" Offset="1.5"/>
     </LinearGradientBrush>
 
     <LinearGradientBrush x:Key="ActivateText">
@@ -37,27 +50,26 @@
                 <TranslateTransform/>
             </TransformGroup>
         </LinearGradientBrush.RelativeTransform>
-        <GradientStop Color="#FFD1DBDC"/>
-        <GradientStop Color="#FFF1F3F3" Offset="1"/>
-        <GradientStop Color="#FFE4EBEC" Offset="0.458"/>
+        <GradientStop Color="#FFF"/>
     </LinearGradientBrush>
 
-    <SolidColorBrush x:Key="AcCol1">#FF24c7c7</SolidColorBrush>
-    <SolidColorBrush x:Key="AcCol2">#FF13c2a5</SolidColorBrush>
+    <SolidColorBrush x:Key="AcCol1">#FF00BABA</SolidColorBrush>
+    <SolidColorBrush x:Key="AcCol2">#FF00C4BA</SolidColorBrush>
 
-    <Color x:Key="AcCol1c">#FF24c7c7</Color>
-    <Color x:Key="AcCol2c">#FF13c2a5</Color>
+    <Color x:Key="AcCol1c">#FF00BABA</Color>
+    <Color x:Key="AcCol2c">#FF00C4BA</Color>
 
-    <SolidColorBrush x:Key="FgCol1">#EE383d3d</SolidColorBrush>
-    <SolidColorBrush x:Key="FgCol2">#D5697777</SolidColorBrush>
-    <SolidColorBrush x:Key="FgCol3">#FF7d8585</SolidColorBrush>
+    <SolidColorBrush x:Key="FgCol1">#CC000000</SolidColorBrush>
+    <SolidColorBrush x:Key="FgCol2">#C2444444</SolidColorBrush>
+    <SolidColorBrush x:Key="FgCol3">#FF666666</SolidColorBrush>
+    <SolidColorBrush x:Key="GradFG">#FF00BABA</SolidColorBrush>
 
-    <SolidColorBrush x:Key="BoxBack">#CCDAE4E6</SolidColorBrush>
+    <SolidColorBrush x:Key="BoxBack">#EEE</SolidColorBrush>
 
-    <SolidColorBrush x:Key="InBac">#D1F3FAFC</SolidColorBrush>
-    <SolidColorBrush x:Key="InBor">#F9EAF2F3</SolidColorBrush>
+    <SolidColorBrush x:Key="InBac">#E0e0e0</SolidColorBrush>
+    <SolidColorBrush x:Key="InBor">#F9F9F9</SolidColorBrush>
 
-    <SolidColorBrush x:Key="InacBut">#CCB5B5B5</SolidColorBrush>
+    <SolidColorBrush x:Key="InacBut">#CCDDDDDD</SolidColorBrush>
 
     <Sys:Double x:Key="OverlayOpacity">0.25</Sys:Double>
 

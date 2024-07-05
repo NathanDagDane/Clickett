@@ -7,20 +7,20 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
-using System.Windows.Threading;
-using System.Threading;
-using Forms = System.Windows.Forms;
-using s = Clickett.Properties.Settings;
-using System.Threading.Tasks;
 using System.Windows.Media.Effects;
+using System.Windows.Threading;
 using Velopack;
 using Velopack.Sources;
+using Forms = System.Windows.Forms;
+using s = Clickett.Properties.Settings;
 
 namespace Clickett
 {
@@ -170,6 +170,11 @@ namespace Clickett
 
         private void Activate(object sender, RoutedEventArgs? e)
         {
+            if (inTuto && tutStep == 14)
+            {
+                TutoNext(this, null);
+            }
+
             if (active)
             {
                 UnregisterHotkey();
@@ -236,9 +241,9 @@ namespace Clickett
                 Storyboard.SetTargetProperty(exAnim, new PropertyPath("(UIElement.RenderTransform).(RotateTransform.Angle)"));
                 settStoryboard.Begin(this);
             }
-            else OptionsArrow.RenderTransform = new RotateTransform(exOp?180.0:0.0,0.5,0.5);
+            else OptionsArrow.RenderTransform = new RotateTransform(exOp ? 180.0 : 0.0, 0.5, 0.5);
 
-            if (inTuto && tutStep==9)
+            if (inTuto && tutStep == 9)
             {
                 TutoNext(this, null);
             }
@@ -247,8 +252,8 @@ namespace Clickett
         private void CollapseExOp(object? sender, EventArgs? e)
         {
             exOptions.Visibility = exOp ? Visibility.Visible : Visibility.Collapsed;
-            SettView.Height = exOp ? 151.387 : 121.387;
-            fullCanvas.Height = exOp ? 263.198 : 233.198;
+            SettView.Height = exOp ? 183 : 153;
+            fullCanvas.Height = exOp ? 262.1 : 232.1;
         }
 
         private void ToggleLoc(object sender, RoutedEventArgs? e)
@@ -378,8 +383,8 @@ namespace Clickett
             {
                 try
                 {
-                _tbi.Dispose();
-                if (minToTray) ToggleMinTray(this, null);
+                    _tbi.Dispose();
+                    if (minToTray) ToggleMinTray(this, null);
                 }
                 catch { }
             }
@@ -632,7 +637,7 @@ namespace Clickett
                 CdoCount = modeInt == 0;
                 CxPos = xPos;
                 CyPos = yPos;
-                CburstCount = (int)Math.Ceiling((float)burstCount/(float)threads);
+                CburstCount = (int)Math.Ceiling((float)burstCount / (float)threads);
                 doub = doubleClick;
             }));
 
@@ -868,7 +873,8 @@ namespace Clickett
                 mar.Left = 30 + (355 * (((float)threads - 1) / 19));
                 threadsWarn.Margin = mar;
                 threadsWarnBack.Opacity = 0.2 + (0.6 * (((float)threads - 10) / 10));
-                if(threads > 14){
+                if (threads > 14)
+                {
                     threadsWarnBack.SetResourceReference(BackgroundProperty, "AcCol2");
                 }
                 else
@@ -887,7 +893,7 @@ namespace Clickett
         private void RocketSwap(object sender, RoutedEventArgs? e)
         {
             rocket = !rocket;
-            
+
             if (rocket)
             {
                 rocketIconDis.ImageSource = (ImageSource)FindResource("rocket2DrawingImage");
@@ -946,7 +952,8 @@ namespace Clickett
         private void LogoMouseEnter(object sender, MouseEventArgs? e)
         {
             if (countTotal) CHT(2, "ShowScore", "Total Clicks\n" + s.Default.totalClicks.ToString());
-        }private void LogoMouseLeave(object sender, MouseEventArgs? e)
+        }
+        private void LogoMouseLeave(object sender, MouseEventArgs? e)
         {
             CHT(5, "ShowScore", "");
         }
@@ -954,7 +961,8 @@ namespace Clickett
         private void HotMouseEnter(object sender, MouseEventArgs? e)
         {
             CHT(2, "ShowHotkey", triggerDis.Text);
-        }private void HotMouseLeave(object sender, MouseEventArgs? e)
+        }
+        private void HotMouseLeave(object sender, MouseEventArgs? e)
         {
             CHT(5, "ShowHotkey", "");
         }
@@ -962,15 +970,17 @@ namespace Clickett
         private void WarnMouseEnter(object sender, MouseEventArgs? e)
         {
             CHT(2, "ShowWarning", "Some games may struggle to process this many clicks!");
-        }private void WarnMouseLeave(object sender, MouseEventArgs? e)
+        }
+        private void WarnMouseLeave(object sender, MouseEventArgs? e)
         {
             CHT(5, "ShowWarning", "");
         }
 
         private void RWarnMouseEnter(object sender, MouseEventArgs? e)
         {
-            CHT(2, "ShowRWarning", (threads>14)? "Clicks may slow down as applications get overloaded!" : "Some games may struggle to process this many clicks!");
-        }private void RWarnMouseLeave(object sender, MouseEventArgs? e)
+            CHT(2, "ShowRWarning", (threads > 14) ? "Clicks may slow down as applications get overloaded!" : "Some games may struggle to process this many clicks!");
+        }
+        private void RWarnMouseLeave(object sender, MouseEventArgs? e)
         {
             CHT(5, "ShowRWarning", "");
         }
@@ -978,7 +988,8 @@ namespace Clickett
         private void RocketMouseEnter(object sender, MouseEventArgs? e)
         {
             CHT(2, "RocketSwitch", "Rocket Mode");
-        }private void RocketMouseLeave(object sender, MouseEventArgs? e)
+        }
+        private void RocketMouseLeave(object sender, MouseEventArgs? e)
         {
             CHT(5, "RocketSwitch", "");
         }
@@ -986,7 +997,8 @@ namespace Clickett
         private void JitterMouseEnter(object sender, MouseEventArgs? e)
         {
             CHT(2, "JitterInfo", "Adds random timing between clicks so it's harder to detect");
-        }private void JitterMouseLeave(object sender, MouseEventArgs? e)
+        }
+        private void JitterMouseLeave(object sender, MouseEventArgs? e)
         {
             CHT(5, "JitterInfo", "");
         }
@@ -1015,7 +1027,7 @@ namespace Clickett
             try { millis = int.Parse(millisInput.Text); } catch { millisInput.Text = "0"; millis = 0; }
             try { seconds = int.Parse(secondsInput.Text); } catch { secondsInput.Text = "0"; seconds = 0; }
             try { minutes = int.Parse(minutesInput.Text); } catch { minutesInput.Text = "0"; minutes = 0; }
-            if(millis==0 && seconds==0 && minutes == 0)
+            if (millis == 0 && seconds == 0 && minutes == 0)
             {
                 millis = 1;
                 millisInput.Text = "1";
@@ -1130,10 +1142,10 @@ namespace Clickett
             {
                 DoubleAnimation fadeInAnimation = new DoubleAnimation(0.2, 1, TimeSpan.FromMilliseconds(150), FillBehavior.Stop);
                 if (settOpen) SettView.BeginAnimation(OpacityProperty, fadeInAnimation);
-                else confStack.BeginAnimation(OpacityProperty, fadeInAnimation);
+                else homeStack.BeginAnimation(OpacityProperty, fadeInAnimation);
             }
             SettView.Visibility = settOpen ? Visibility.Visible : Visibility.Collapsed;
-            confStack.Visibility = settOpen ? Visibility.Hidden : Visibility.Visible;
+            homeStack.Visibility = settOpen ? Visibility.Hidden : Visibility.Visible;
 
             if (doAnimations)
             {
@@ -1175,14 +1187,14 @@ namespace Clickett
                 locText.Text = "Press Trigger Key";
                 locText.HorizontalAlignment = HorizontalAlignment.Center;
                 locText.Opacity = 0.7;
-                locText.Margin = new Thickness(8,0,78,0);
+                locText.Margin = new Thickness(8, 0, 78, 0);
                 trigSet.IsEnabled = false;
                 RegisterHotkey();
                 locSetButt.Margin = new Thickness(0, 3, 3, 3);
                 locSetButt.Width = 69;
                 locSetButtText.Text = "Cancel";
             }
-            
+
         }
 
         private void TcReset(object sender, RoutedEventArgs? e)
@@ -1326,7 +1338,7 @@ namespace Clickett
             helpBut.Visibility = Visibility.Collapsed;
             tutHelpPage.Visibility = Visibility.Collapsed;
             tutContact.Visibility = Visibility.Collapsed;
-            FocusItem(1); 
+            FocusItem(1);
             TutoArrange(340, 125, 100, 64, 300, false, -98, 44, 48, "You can use this part to choose how fast you want to click");
             tutNextButText.Text = "Next";
             tutOverlay.Visibility = Visibility.Visible;
@@ -1375,12 +1387,15 @@ namespace Clickett
                 case 3:
                     FocusItem(6);
                     TutoArrange(361, 113, 25, 20, 250, false, 67, 274, 0, "Choose between the 3 different clicking modes with this\n\nBurst - Click a set amount of times every time you press the trigger");
+                    modeSel.SelectedIndex = 0;
                     break;
                 case 4:
                     TutoArrange(361, 113, 25, 20, 250, false, 67, 274, 0, "Choose between the 3 different clicking modes with this\n\nToggle - Switch between clicking and not clicking when you press the trigger");
+                    modeSel.SelectedIndex = 1;
                     break;
                 case 5:
                     TutoArrange(361, 113, 25, 20, 250, false, 67, 274, 0, "Choose between the 3 different clicking modes with this\n\nHold - Start clicking when you push the trigger down and stops when you let go");
+                    modeSel.SelectedIndex = 2;
                     break;
                 case 6:
                     FocusItem(11);
@@ -1412,19 +1427,24 @@ namespace Clickett
                     TutoNext(this, null);
                     return;
                 case 12:
-                    FocusItem(13);
-                    TutoArrange(375, 69, 27, 30, 320, false, 100, 250, 82, "When you click this it activates Clickett\n\nAfter that you can press the trigger to start clicking!");
+                    FocusItem(10);
+                    TutoArrange(361, 90, 35, 20, 360, true, -90, 45, 55, "This shows you the keyboard shortcut you need to press to start clicking\n\nClick 'Set' to choose your own!");
                     break;
                 case 13:
-                    TutoArrange(375, 69, 27, 60, 320, false, 100, 250, 82, "Clickett cannot click when it isn't activated");
+                    if (active) Activate();
+                    FocusItem(13);
+                    TutoArrange(375, 69, 27, 60, 320, false, 100, 250, 82, "Clickett is disabled by default\nClick this to enable it");
+                    tutNextBut.Visibility = Visibility.Collapsed;
                     break;
                 case 14:
-                    FocusItem(10);
-                    TutoArrange(361, 90, 35, 20, 360, true, -90, 55, 55, "This shows you the trigger you need to press to start clicking\n\nClick 'Set' to change it");
+                    TutoArrange(375, 69, 27, 40, 320, false, 100, 250, 82, "Clickett is now activated!\nIt will start clicking when you press the shortcut\n\nClickett cannot click when it isn't activated");
+                    tutNextBut.Visibility = Visibility.Visible;
+                    tutArrow.Visibility = Visibility.Collapsed;
                     break;
                 case 15:
                     FocusItem(12);
-                    TutoArrange(213, 145, 50, 28, 400, false, -180, 56, 120, "See settings by clicking here\n\nHere you can choose a theme and customise the experience!");
+                    TutoArrange(213, 145, 50, 40, 400, false, -180, 56, 120, "See settings by clicking here\n\nHere you can choose a theme and customise the experience!");
+                    tutArrow.Visibility = Visibility.Visible;
                     break;
                 case 16:
                     FocusItem(0);
@@ -1465,7 +1485,7 @@ namespace Clickett
             tutText.Width = textWidth;
             tutText.Text = text;
             TransformGroup bruh = new TransformGroup();
-            bruh.Children.Add(new ScaleTransform((arrowFlip? -1 : 1), 1));
+            bruh.Children.Add(new ScaleTransform((arrowFlip ? -1 : 1), 1));
             bruh.Children.Add(new RotateTransform(arrowRot));
             tutArrow.RenderTransform = bruh;
             tutArrow.Margin = new Thickness(arrowX, arrowY, 0, 0);
@@ -1516,11 +1536,12 @@ namespace Clickett
             settButt.IsEnabled = false;
             activateButtGrid.SetResourceReference(OpacityProperty, "OverlayOpacity");
             activateButtGrid.Effect = blur;
-            activateButt.IsEnabled= false;
+            activateButt.IsEnabled = false;
             settGrid.SetResourceReference(OpacityProperty, "OverlayOpacity");
             settGrid.Effect = blur;
 
-            switch (i){
+            switch (i)
+            {
                 case 0:
                     break;
                 case 1:
@@ -1649,6 +1670,11 @@ namespace Clickett
             }
         }
 
+        private void RandomBioText()
+        {
+
+        }
+
         const int WS_EX_TRANSPARENT = 0x00000020;
         const int GWL_EXSTYLE = (-20);
 
@@ -1679,13 +1705,13 @@ namespace Clickett
             }
             catch (Exception ex)
             {
-                if(manual) MakeNotification("Update Error", "Failed to check for updates");
+                if (manual) MakeNotification("Update Error", "Failed to check for updates");
                 return;
             }
 
             if (_update == null)
             {
-                if(manual) MakeNotification("Up to Date!", "You're on the latest version!");
+                if (manual) MakeNotification("Up to Date!", "You're on the latest version!");
                 return;
             }
 
@@ -1703,7 +1729,7 @@ namespace Clickett
                 }
                 catch (Exception exc)
                 {
-                    if(manual) MakeNotification("Download Error", "Failed to download update");
+                    if (manual) MakeNotification("Download Error", "Failed to download update");
                 }
             }
         }
@@ -1711,7 +1737,8 @@ namespace Clickett
         private void Progress(int percent)
         {
             // progress can be sent from other threads
-            this.Dispatcher.InvokeAsync(() => {
+            this.Dispatcher.InvokeAsync(() =>
+            {
 
                 //CHT(2, "UpdatePercentage", percent.ToString());
                 if (percent == 100)
@@ -1720,7 +1747,7 @@ namespace Clickett
                     //CHT(2, "UpdatePercentage", "");
                 }
             });
-            
+
         }
 
         private void InstallUpdateButton_Click(object sender, RoutedEventArgs e)
@@ -1765,5 +1792,26 @@ namespace Clickett
             s.Default.Save();
             _tbi.Dispose();
         }
+
+        private void ScrollViewer_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            // Try catches here just to ensure app does not crash and instead falls back to default WPF scrolling behaviour if an exception occurs here for whatever reason
+            try
+            {
+                // Disables custom scroll handling when scroll by one screen at a time is enabled in mouse settings. Feel free to handle this yourself if you wish.
+                if (System.Windows.Forms.SystemInformation.MouseWheelScrollLines == -1) e.Handled = false;
+                else
+                    try
+                    {
+                        // Scrolls the scroll viewer according to the delta value and the user's scrolling settings
+                        System.Windows.Controls.ScrollViewer SenderScrollViewer = (System.Windows.Controls.ScrollViewer)sender;
+                        SenderScrollViewer.ScrollToVerticalOffset(SenderScrollViewer.VerticalOffset - e.Delta * 10 * System.Windows.Forms.SystemInformation.MouseWheelScrollLines / (double)80);
+                        e.Handled = true;
+                    }
+                    catch { }
+            }
+            catch { }
+        }
+
     }
 }
