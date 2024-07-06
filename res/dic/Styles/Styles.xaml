@@ -13,6 +13,7 @@
         <Setter Property="FontFamily" Value="../../#Outfit Medium" />
         <Setter Property="Foreground" Value="{DynamicResource FgCol2}" />
         <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="IsHitTestVisible" Value="False" />
     </Style>
 
     <!--Box Name Text Style-->
@@ -136,7 +137,7 @@
                         <Popup Name="Popup" Placement="Bottom" VerticalOffset="5"
            Focusable="False" AllowsTransparency="True"
            IsOpen="{TemplateBinding ComboBox.IsDropDownOpen}"
-           PopupAnimation="Fade">
+           PopupAnimation="None">
                             <Grid Name="DropDown" SnapsToDevicePixels="True"
             MinWidth="{TemplateBinding FrameworkElement.ActualWidth}"
             MaxHeight="{TemplateBinding ComboBox.MaxDropDownHeight}">
@@ -206,7 +207,7 @@
                     <RepeatButton Style="{StaticResource SliderRepeatButton}" Command="Slider.IncreaseLarge" />
                 </Track.IncreaseRepeatButton>
                 <Track.Thumb>
-                    <Thumb Style="{StaticResource SliderThumb}"  />
+                    <Thumb Style="{DynamicResource SliderThumb}"  />
                 </Track.Thumb>
             </Track>
         </Grid>

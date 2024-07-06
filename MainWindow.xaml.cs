@@ -1224,7 +1224,7 @@ namespace Clickett
 
             if (rocket)
             {
-                rocketIconDis.ImageSource = (ImageSource)FindResource("rocket2DrawingImage");
+                rocketIconDis.ImageSource = (ImageSource)FindResource("Rocket2Icon");
                 rocketBorder.SetResourceReference(BackgroundProperty, "AcCol2");
                 swapBorder.SetResourceReference(BackgroundProperty, "FgCol2");
                 swapButt.IsEnabled = false;
@@ -1235,7 +1235,7 @@ namespace Clickett
             }
             else
             {
-                rocketIconDis.ImageSource = (ImageSource)FindResource("rocket1DrawingImage");
+                rocketIconDis.ImageSource = (ImageSource)FindResource("Rocket1Icon");
                 rocketBorder.SetResourceReference(BackgroundProperty, "FgCol2");
                 swapBorder.SetResourceReference(BackgroundProperty, "AcCol2");
                 swapButt.IsEnabled = true;
@@ -1304,9 +1304,9 @@ namespace Clickett
         // SETTINGS CHANGE
         private void ToggleAnim(object sender, RoutedEventArgs? e)
         {
+            doAnimations = s.Default.doAnimations = !doAnimations;
             ColourToggle(animButt, doAnimations);
             animBorder.Opacity = doAnimations ? 1 : 0.4;
-            doAnimations = s.Default.doAnimations = !doAnimations;
 
             UpdateMergedDictionaries();
 
@@ -1699,7 +1699,7 @@ namespace Clickett
             }
 
             // Add styles dictionary
-            try { newRes.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("res/dic/Styles/" + "Styles" + (doAnimations ? "Static" : "Animated") + ".xaml", UriKind.Relative) }); }
+            try { newRes.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("res/dic/Styles/" + "Styles" + (doAnimations ? "Animated" : "Static") + ".xaml", UriKind.Relative) }); }
             catch
             {
                 doAnimations = !doAnimations;
