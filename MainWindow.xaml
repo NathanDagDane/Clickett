@@ -84,7 +84,7 @@
 												<Grid>
 													<Grid x:Name="cpsGrid" Visibility="Hidden">
 														<TextBlock Foreground="{DynamicResource FgCol1}" Text="1" FontFamily="./res/#Outfit Medium" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="13,0,0,0"/>
-														<Button x:Name="cpsWarn" Style="{StaticResource TogBut}" MouseEnter="WarnMouseEnter" MouseLeave="WarnMouseLeave" Click="WarnLink"  Height="15" Width="15" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="300,-19,0,0">
+														<Button x:Name="cpsWarn" Style="{DynamicResource TogBut}" MouseEnter="WarnMouseEnter" MouseLeave="WarnMouseLeave" Click="WarnLink"  Height="15" Width="15" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="300,-19,0,0">
 															<Border x:Name="cpsWarnBack" Background="{DynamicResource FgCol1}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="15" Height="15" Opacity="0.69" RenderOptions.BitmapScalingMode="HighQuality">
 																<Border.OpacityMask>
 																	<ImageBrush ImageSource="{DynamicResource Warning1DrawingImage}" Stretch="Uniform">
@@ -103,7 +103,7 @@
 													</Grid>
 													<Grid x:Name="threadsGrid" Visibility="Visible">
 														<TextBlock Foreground="{DynamicResource FgCol1}" Text="1" FontFamily="./res/#Outfit Medium" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="13,0,0,0"/>
-														<Button x:Name="threadsWarn" Style="{StaticResource TogBut}" MouseEnter="RWarnMouseEnter" MouseLeave="RWarnMouseLeave" Click="WarnLink"  Height="15" Width="15" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="300,-19,0,0">
+														<Button x:Name="threadsWarn" Style="{DynamicResource TogBut}" MouseEnter="RWarnMouseEnter" MouseLeave="RWarnMouseLeave" Click="WarnLink"  Height="15" Width="15" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="300,-19,0,0">
 															<Border x:Name="threadsWarnBack" Background="{DynamicResource FgCol1}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="15" Height="15" Opacity="0.69" RenderOptions.BitmapScalingMode="HighQuality">
 																<Border.OpacityMask>
 																	<ImageBrush ImageSource="{DynamicResource Warning2DrawingImage}" Stretch="Uniform">
@@ -152,7 +152,7 @@
 												</Grid>
 											</Border>
 											<Grid x:Name="rocketSwapGrid" Margin="440,0,0,0" HorizontalAlignment="Left" Width="25" Grid.ColumnSpan="2">
-                                                <Button x:Name="rocketSwap" Click="RocketSwap" Style="{StaticResource TogBut}" MouseEnter="RocketMouseEnter" MouseLeave="RocketMouseLeave" HorizontalAlignment="Left" IsTabStop="False" Focusable="False" Grid.Column="1">
+                                                <Button x:Name="rocketSwap" Click="RocketSwap" Style="{DynamicResource TogBut}" MouseEnter="RocketMouseEnter" MouseLeave="RocketMouseLeave" HorizontalAlignment="Left" IsTabStop="False" Focusable="False" Grid.Column="1">
                                                     <Button.Template>
                                                         <ControlTemplate TargetType="Button">
                                                             <Border BorderThickness="0" Style="{StaticResource BackBox}" RenderTransformOrigin="0.5,0.5">
@@ -181,7 +181,7 @@
 												</Button>
 											</Grid>
 											<Grid x:Name="swapButtGrid" HorizontalAlignment="Right" Width="25" Grid.ColumnSpan="2" Margin="0,0,5,0">
-                                                <Button x:Name="swapButt" Click="InterTypeSwap" Style="{StaticResource TogBut}" HorizontalAlignment="Left" IsTabStop="False" Focusable="False" Grid.Column="1">
+                                                <Button x:Name="swapButt" Click="InterTypeSwap" Style="{DynamicResource TogBut}" HorizontalAlignment="Left" IsTabStop="False" Focusable="False" Grid.Column="1">
                                                     <Button.Template>
                                                         <ControlTemplate TargetType="Button">
                                                             <Border BorderThickness="0" Style="{StaticResource BackBox}" RenderTransformOrigin="0.5,0.5">
@@ -212,7 +212,7 @@
 
 										</Grid>
 										<Grid x:Name="optionsTitGrid">
-											<Button x:Name="optionsTit" BorderThickness="0" Click="ToggleExOp" Style="{StaticResource MyButton}" Margin="15,3,20,0" Width="75" HorizontalContentAlignment="Stretch" HorizontalAlignment="Left" Background="Transparent">
+											<Button x:Name="optionsTit" BorderThickness="0" Click="ToggleExOp" Style="{DynamicResource MyButton}" Margin="15,3,20,0" Width="75" HorizontalContentAlignment="Stretch" HorizontalAlignment="Left" Background="Transparent">
 												<Grid>
                                                     <TextBlock Style="{Binding Source={StaticResource HeaderText}}" Text="Options" Margin="4,0,0,0"/>
 													<Border x:Name="OptionsArrow" Background="{DynamicResource FgCol1}" HorizontalAlignment="Left" VerticalAlignment="Center" Width="15" Height="15" Opacity="0.69" RenderOptions.BitmapScalingMode="HighQuality" Margin="58,0,0,0" RenderTransformOrigin="0.5,0.5">
@@ -255,7 +255,7 @@
 																</Style>
 															</TextBox.Resources>
 														</TextBox>
-                                                        <Button x:Name="LocBut" Style="{StaticResource TogBut}" Margin="0,0,5,0" Click="ToggleLoc"/>
+                                                        <Button x:Name="LocBut" Style="{DynamicResource TogBut}" Margin="0,0,5,0" Click="ToggleLoc"/>
                                                     </Grid>
 													<Button x:Name="locSetButt" Click="SetLoc" Background="{DynamicResource AcGradAlt}" HorizontalAlignment="Right" BorderThickness="0" Margin="0,3,153,3" Width="40" FontSize="8" IsTabStop="False" Focusable="False">
 														<Button.Resources>
@@ -299,13 +299,13 @@
                                             <Border x:Name="jitBorder" Style="{StaticResource BackBox}" MouseEnter="JitterMouseEnter" MouseLeave="JitterMouseLeave" Margin="5,5,132.5,0" HorizontalAlignment="Right" Width="72.5">
 												<Grid>
                                                     <TextBlock Style="{Binding Source={StaticResource BoxNameText}}" Text="Jitter" Margin="8,0,8,0"/>
-                                                    <Button x:Name="jitBut" Style="{StaticResource TogBut}" Margin="0,0,5,0" Click="ToggleJit"/>
+                                                    <Button x:Name="jitBut" Style="{DynamicResource TogBut}" Margin="0,0,5,0" Click="ToggleJit"/>
                                                 </Grid>
 											</Border>
                                             <Border x:Name="douBorder" Style="{StaticResource BackBox}" Margin="5,5,5,0" HorizontalAlignment="Right" Width="122.5">
 												<Grid>
                                                     <TextBlock Style="{Binding Source={StaticResource BoxNameText}}" Text="Double Click" Margin="8,0,8,0"/>
-                                                    <Button x:Name="douBut" Style="{StaticResource TogBut}" Margin="0,0,5,0" Click="ToggleDou"/>
+                                                    <Button x:Name="douBut" Style="{DynamicResource TogBut}" Margin="0,0,5,0" Click="ToggleDou"/>
                                                 </Grid>
 											</Border>
 										</Grid>
@@ -365,35 +365,35 @@
 											<Grid>
                                                 <TextBlock Style="{Binding Source={StaticResource BoxNameText}}" Text="Theme" Margin="10,0,0,0"/>
 												<StackPanel Orientation="Horizontal" Margin="5,0,5,0" HorizontalAlignment="Right">
-													<Button Name="DefaultThemeBut" Background="#061010" Style="{StaticResource ColBut}" Click="SetTheme">
-														<Border Background="#FF45B4B4" Style="{StaticResource ColButCenter}"/>
+													<Button Name="DefaultThemeBut" Background="#061010" Style="{DynamicResource ColBut}" Click="SetTheme">
+														<Border Background="#FF45B4B4" Style="{DynamicResource ColButCenter}"/>
 													</Button>
-                                                    <Button Name="DefaultLightThemeBut" Background="#F8FFFF" Style="{StaticResource ColBut}" Click="SetTheme" Margin="5,0,0,0">
-                                                        <Border Background="#FF45B4B4" Style="{StaticResource ColButCenter}"/>
+                                                    <Button Name="DefaultLightThemeBut" Background="#F8FFFF" Style="{DynamicResource ColBut}" Click="SetTheme" Margin="5,0,0,0">
+                                                        <Border Background="#FF45B4B4" Style="{DynamicResource ColButCenter}"/>
 													</Button>
-                                                    <Button Name="ColdThemeBut" Background="#22272c" Style="{StaticResource ColBut}" Click="SetTheme" Margin="5,0,0,0">
-                                                        <Border Background="#fcfbf8" Style="{StaticResource ColButCenter}"/>
+                                                    <Button Name="ColdThemeBut" Background="#22272c" Style="{DynamicResource ColBut}" Click="SetTheme" Margin="5,0,0,0">
+                                                        <Border Background="#fcfbf8" Style="{DynamicResource ColButCenter}"/>
 													</Button>
-                                                    <Button Name="GreenThemeBut" Background="#030303" Style="{StaticResource ColBut}" Click="SetTheme" Margin="5,0,0,0">
-                                                        <Border Background="#FF16D419" Style="{StaticResource ColButCenter}"/>
+                                                    <Button Name="GreenThemeBut" Background="#030303" Style="{DynamicResource ColBut}" Click="SetTheme" Margin="5,0,0,0">
+                                                        <Border Background="#FF16D419" Style="{DynamicResource ColButCenter}"/>
 													</Button>
-                                                    <Button Name="DiscordThemeBut" Background="#2f3136"  Style="{StaticResource ColBut}" Click="SetTheme" Margin="5,0,0,0">
+                                                    <Button Name="DiscordThemeBut" Background="#2f3136"  Style="{DynamicResource ColBut}" Click="SetTheme" Margin="5,0,0,0">
 														<Image Source="res/Discord.png" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center" RenderOptions.BitmapScalingMode="HighQuality"/>
 													</Button>
-                                                    <Button Background="{DynamicResource Back}" Style="{StaticResource ColBut}" Margin="5,0,0,0" Opacity="0.3">
-														<Border Background="{DynamicResource BoxBack}" Style="{StaticResource ColButCenter}"/>
+                                                    <Button Background="{DynamicResource Back}" Style="{DynamicResource ColBut}" Margin="5,0,0,0" Opacity="0.3" Cursor="Arrow">
+														<Border Background="{DynamicResource BoxBack}" Style="{DynamicResource ColButCenter}"/>
 													</Button>
-                                                    <Button Background="{DynamicResource Back}" Style="{StaticResource ColBut}" Margin="5,0,0,0" Opacity="0.25">
-                                                        <Border Background="{DynamicResource BoxBack}" Style="{StaticResource ColButCenter}"/>
+                                                    <Button Background="{DynamicResource Back}" Style="{DynamicResource ColBut}" Margin="5,0,0,0" Opacity="0.25" Cursor="Arrow">
+                                                        <Border Background="{DynamicResource BoxBack}" Style="{DynamicResource ColButCenter}"/>
 													</Button>
-                                                    <Button Background="{DynamicResource Back}" Style="{StaticResource ColBut}" Margin="5,0,0,0" Opacity="0.2">
-                                                        <Border Background="{DynamicResource BoxBack}" Style="{StaticResource ColButCenter}"/>
+                                                    <Button Background="{DynamicResource Back}" Style="{DynamicResource ColBut}" Margin="5,0,0,0" Opacity="0.2" Cursor="Arrow">
+                                                        <Border Background="{DynamicResource BoxBack}" Style="{DynamicResource ColButCenter}"/>
 													</Button>
-                                                    <Button Background="{DynamicResource Back}" Style="{StaticResource ColBut}" Margin="5,0,0,0" Opacity="0.15">
-                                                        <Border Background="{DynamicResource BoxBack}" Style="{StaticResource ColButCenter}"/>
+                                                    <Button Background="{DynamicResource Back}" Style="{DynamicResource ColBut}" Margin="5,0,0,0" Opacity="0.15" Cursor="Arrow">
+                                                        <Border Background="{DynamicResource BoxBack}" Style="{DynamicResource ColButCenter}"/>
 													</Button>
-                                                    <Button Background="{DynamicResource Back}" Style="{StaticResource ColBut}" Margin="5,0,0,0" Opacity="0.1">
-                                                        <Border Background="{DynamicResource BoxBack}" Style="{StaticResource ColButCenter}"/>
+                                                    <Button Background="{DynamicResource Back}" Style="{DynamicResource ColBut}" Margin="5,0,0,0" Opacity="0.1" Cursor="Arrow">
+                                                        <Border Background="{DynamicResource BoxBack}" Style="{DynamicResource ColButCenter}"/>
 													</Button>
 												</StackPanel>
                                                 <TextBlock Style="{Binding Source={StaticResource BoxNameText}}" Text="More coming soon!" HorizontalAlignment="Right" Margin="0,0,33,0" Opacity="0.5"/>
@@ -402,14 +402,14 @@
                                         <Border x:Name="animBorder" Style="{StaticResource BackBox}" Margin="0,5,0,0">
                                             <Grid>
                                                 <TextBlock Style="{Binding Source={StaticResource BoxNameText}}" Text="Animations" Margin="10,0,0,0"/>
-                                                <Button x:Name="animButt" Style="{StaticResource TogBut}" Margin="0,0,5,0" Click="ToggleAnim"/>
+                                                <Button x:Name="animButt" Style="{DynamicResource TogBut}" Margin="0,0,5,0" Click="ToggleAnim"/>
                                             </Grid>
 										</Border>
                                         <TextBlock Style="{Binding Source={StaticResource HeaderText}}" Margin="15,4,0,2" Text="Clicking"/>
                                         <Border x:Name="ctBorder" Style="{StaticResource BackBox}" Margin="0,1,0,0">
 											<Grid>
                                                 <TextBlock Style="{Binding Source={StaticResource BoxNameText}}" Text="Count total clicks" Margin="10,0,0,0"/>
-												<Button x:Name="tcResetButt" Click="TcReset" Background="{DynamicResource AcGradAlt}" Style="{StaticResource MyButton}" HorizontalAlignment="Left" BorderThickness="0" Margin="150,3,0,3" Width="60" FontSize="8" IsTabStop="False" Focusable="False">
+												<Button x:Name="tcResetButt" Click="TcReset" Background="{DynamicResource AcGradAlt}" Style="{DynamicResource MyButton}" HorizontalAlignment="Left" BorderThickness="0" Margin="150,3,0,3" Width="60" FontSize="8" IsTabStop="False" Focusable="False">
 													<Button.Resources>
 														<Style TargetType="{x:Type Border}">
 															<Setter Property="CornerRadius" Value="5"/>
@@ -418,14 +418,14 @@
 													<TextBlock Text="Reset" FontFamily="./res/#Outfit Medium" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="{DynamicResource GradFG}" FontSize="14"/>
 												</Button>
                                                 <TextBlock x:Name="totalText" Style="{Binding Source={StaticResource BoxNameText}}" Text="69420" HorizontalAlignment="Right" Margin="0,0,50,0" Opacity="0.69"/>
-                                                <Button x:Name="ctButt" Style="{StaticResource TogBut}" Margin="0,0,5,0" Click="ToggleCt"/>
+                                                <Button x:Name="ctButt" Style="{DynamicResource TogBut}" Margin="0,0,5,0" Click="ToggleCt"/>
                                             </Grid>
 										</Border>
                                         <TextBlock Style="{Binding Source={StaticResource HeaderText}}" Margin="15,4,0,2" Text="Panel"/>
                                         <Border x:Name="aotBorder" Style="{StaticResource BackBox}" Margin="0,1,0,0">
 											<Grid>
                                                 <TextBlock Style="{Binding Source={StaticResource BoxNameText}}" Text="Always on top" Margin="10,0,0,0"/>
-                                                <Button x:Name="aotButt" Style="{StaticResource TogBut}" Margin="0,0,5,0" Click="ToggleAot"/>
+                                                <Button x:Name="aotButt" Style="{DynamicResource TogBut}" Margin="0,0,5,0" Click="ToggleAot"/>
                                             </Grid>
 										</Border>
                                         <Border Style="{StaticResource BackBox}" Margin="0,5,0,0">
@@ -446,20 +446,20 @@
                                         <Border x:Name="startupBorder" Style="{StaticResource BackBox}" Margin="0,1,0,0">
 											<Grid>
                                                 <TextBlock Style="{Binding Source={StaticResource BoxNameText}}" Text="Open on Startup" Margin="10,0,0,0"/>
-                                                <Button x:Name="startupButt" Style="{StaticResource TogBut}" Margin="0,0,5,0" Click="ToggleStartup"/>
+                                                <Button x:Name="startupButt" Style="{DynamicResource TogBut}" Margin="0,0,5,0" Click="ToggleStartup"/>
                                             </Grid>
 										</Border>
                                         <StackPanel Orientation="Horizontal">
                                             <Border x:Name="trayBorder" Width="237" Style="{StaticResource BackBox}" Margin="0,5,0,0">
                                                 <Grid>
                                                     <TextBlock Style="{Binding Source={StaticResource BoxNameText}}" Text="System Tray Icon" Margin="10,0,0,0"/>
-                                                    <Button x:Name="trayButt" Style="{StaticResource TogBut}" Margin="0,0,5,0" Click="ToggleTray"/>
+                                                    <Button x:Name="trayButt" Style="{DynamicResource TogBut}" Margin="0,0,5,0" Click="ToggleTray"/>
                                                 </Grid>
                                             </Border>
                                             <Border x:Name="minTrayBorder" Width="237" Style="{StaticResource BackBox}" Margin="5,5,0,0">
                                                 <Grid>
                                                     <TextBlock Style="{Binding Source={StaticResource BoxNameText}}" Text="Minimise to System Tray" Margin="10,0,0,0"/>
-                                                    <Button x:Name="minTrayButt" Style="{StaticResource TogBut}" Margin="0,0,5,0" Click="ToggleMinTray"/>
+                                                    <Button x:Name="minTrayButt" Style="{DynamicResource TogBut}" Margin="0,0,5,0" Click="ToggleMinTray"/>
                                                 </Grid>
                                             </Border>
                                         </StackPanel>
@@ -468,7 +468,7 @@
                                             <Grid>
                                                 <TextBlock Foreground="{DynamicResource FgCol1}" Text="Made by Nathan Dane" FontFamily="./res/#Outfit Medium" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="55,7,0,0"/>
                                                 <TextBlock Name="bioText" Foreground="{DynamicResource FgCol1}" Text="Student and Developer" FontFamily="./res/#Outfit Bold" FontSize="10" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="55,28,0,0" Opacity="0.6"/>
-                                                <Button x:Name="supportButt" Click="SupportLink" Background="{DynamicResource AcGradAlt}" Style="{StaticResource MyButton}" HorizontalAlignment="Right" BorderThickness="0" Margin="0,3,3,3" Width="130" FontSize="8" IsTabStop="False" Focusable="False">
+                                                <Button x:Name="supportButt" Click="SupportLink" Background="{DynamicResource AcGradAlt}" Style="{DynamicResource MyButton}" HorizontalAlignment="Right" BorderThickness="0" Margin="0,3,3,3" Width="130" FontSize="8" IsTabStop="False" Focusable="False">
 													<Button.Resources>
 														<Style TargetType="{x:Type Border}">
 															<Setter Property="CornerRadius" Value="5"/>
@@ -497,7 +497,7 @@
 							</Grid>
 						</Grid>
 						<Grid Margin="0,5,0,0">
-							<Button x:Name="settButt" Style="{StaticResource CustBut}" Click="SettingsToggle" Height="{Binding Source={StaticResource MajBoxHeight}}" Width="{Binding Source={StaticResource MajBoxHeight}}" HorizontalAlignment="Left" Margin="5,0,0,0" IsTabStop="False" Focusable="False">
+							<Button x:Name="settButt" Style="{DynamicResource CustBut}" Click="SettingsToggle" Height="{Binding Source={StaticResource MajBoxHeight}}" Width="{Binding Source={StaticResource MajBoxHeight}}" HorizontalAlignment="Left" Margin="5,0,0,0" IsTabStop="False" Focusable="False">
 								<Button.Triggers>
 									<EventTrigger RoutedEvent="Button.MouseEnter">
 										<BeginStoryboard>
@@ -540,7 +540,7 @@
 								</Border>
 							</Button>
 							<Grid x:Name="activateButtGrid">
-								<Button Name="activateButt" Click="Activate" Background="{DynamicResource AcGrad}" Style="{StaticResource MyButton}" Height="{Binding Source={StaticResource MajBoxHeight}}" HorizontalAlignment="Stretch" BorderThickness="0" Margin="50,0,5,0" IsTabStop="False" Focusable="False">
+								<Button Name="activateButt" Click="Activate" Background="{DynamicResource AcGrad}" Style="{DynamicResource MyButton}" Height="{Binding Source={StaticResource MajBoxHeight}}" HorizontalAlignment="Stretch" BorderThickness="0" Margin="50,0,5,0" IsTabStop="False" Focusable="False">
 									<Button.Resources>
 										<Style TargetType="Border">
 											<Setter Property="CornerRadius" Value="{Binding Source={StaticResource MinRad}}"/>
@@ -559,7 +559,7 @@
                     <Border Style="{StaticResource BackBox}" Margin="5,44,5,0" Height="42" Width="375">
 						<Grid>
 							<StackPanel Orientation="Horizontal" Margin="5,0,5,0" HorizontalAlignment="Right">
-								<Button Name="DefaultThemeBuW" Background="#061010" Style="{StaticResource TogBut}" Click="SetTheme" Width="32" Height="32" VerticalAlignment="Center" BorderThickness="0" RenderTransformOrigin="0.5,0.5">
+								<Button Name="DefaultThemeBuW" Background="#061010" Style="{DynamicResource TogBut}" Click="SetTheme" Width="32" Height="32" VerticalAlignment="Center" BorderThickness="0" RenderTransformOrigin="0.5,0.5">
 									<Button.Resources>
 										<Style TargetType="{x:Type Border}">
 											<Setter Property="CornerRadius" Value="16"/>
@@ -567,7 +567,7 @@
 									</Button.Resources>
 									<Border Background="#FF45B4B4" Width="16" Height="16" VerticalAlignment="Center" CornerRadius="17" HorizontalAlignment="Center"/>
 								</Button>
-								<Button Name="DefaultLightThemeBuW" Background="#F8FFFF" Style="{StaticResource TogBut}" Click="SetTheme" Width="32" Height="32" VerticalAlignment="Center" BorderThickness="0" RenderTransformOrigin="0.5,0.5" Margin="5,0,0,0">
+								<Button Name="DefaultLightThemeBuW" Background="#F8FFFF" Style="{DynamicResource TogBut}" Click="SetTheme" Width="32" Height="32" VerticalAlignment="Center" BorderThickness="0" RenderTransformOrigin="0.5,0.5" Margin="5,0,0,0">
 									<Button.Resources>
 										<Style TargetType="{x:Type Border}">
 											<Setter Property="CornerRadius" Value="16"/>
@@ -575,7 +575,7 @@
 									</Button.Resources>
 									<Border Background="#FF45B4B4" Width="16" Height="16" VerticalAlignment="Center" CornerRadius="17" HorizontalAlignment="Center"/>
 								</Button>
-								<Button Name="ColdThemeBuW" Background="#22272c" Style="{StaticResource TogBut}" Click="SetTheme" Width="32" Height="32" VerticalAlignment="Center" BorderThickness="0" RenderTransformOrigin="0.5,0.5" Margin="5,0,0,0">
+								<Button Name="ColdThemeBuW" Background="#22272c" Style="{DynamicResource TogBut}" Click="SetTheme" Width="32" Height="32" VerticalAlignment="Center" BorderThickness="0" RenderTransformOrigin="0.5,0.5" Margin="5,0,0,0">
 									<Button.Resources>
 										<Style TargetType="{x:Type Border}">
 											<Setter Property="CornerRadius" Value="16"/>
@@ -583,7 +583,7 @@
 									</Button.Resources>
 									<Border Background="#fcfbf8" Width="16" Height="16" VerticalAlignment="Center" CornerRadius="17" HorizontalAlignment="Center"/>
 								</Button>
-								<Button Name="GreenThemeBuW" Background="#030303" Style="{StaticResource TogBut}" Click="SetTheme" Width="32" Height="32" VerticalAlignment="Center" BorderThickness="0" RenderTransformOrigin="0.5,0.5" Margin="5,0,0,0">
+								<Button Name="GreenThemeBuW" Background="#030303" Style="{DynamicResource TogBut}" Click="SetTheme" Width="32" Height="32" VerticalAlignment="Center" BorderThickness="0" RenderTransformOrigin="0.5,0.5" Margin="5,0,0,0">
 									<Button.Resources>
 										<Style TargetType="{x:Type Border}">
 											<Setter Property="CornerRadius" Value="16"/>
@@ -591,7 +591,7 @@
 									</Button.Resources>
 									<Border Background="#FF16D419" Width="16" Height="16" VerticalAlignment="Center" CornerRadius="17" HorizontalAlignment="Center"/>
 								</Button>
-								<Button Name="DiscordThemeBuW" Background="#2f3136" Style="{StaticResource TogBut}" Click="SetTheme" Width="32" Height="32" VerticalAlignment="Center" BorderThickness="0" RenderTransformOrigin="0.5,0.5" Margin="5,0,0,0">
+								<Button Name="DiscordThemeBuW" Background="#2f3136" Style="{DynamicResource TogBut}" Click="SetTheme" Width="32" Height="32" VerticalAlignment="Center" BorderThickness="0" RenderTransformOrigin="0.5,0.5" Margin="5,0,0,0">
 									<Button.Resources>
 										<Style TargetType="{x:Type Border}">
 											<Setter Property="CornerRadius" Value="16"/>
@@ -644,7 +644,7 @@
 						</Grid>
 					</Border>
 					<TextBlock Foreground="{DynamicResource FgCol2}" Margin="73,166,0,0" FontFamily="./res/#Outfit Medium" FontSize="13" VerticalAlignment="Top" HorizontalAlignment="Left" Text="Wanna take a tour?"/>
-					<Button Click="AcceptTuto" Background="{DynamicResource BoxBack}" Style="{StaticResource MyButton}" HorizontalAlignment="Center" BorderThickness="0" IsTabStop="False" Focusable="False" Width="155" Height="22" VerticalAlignment="Top" Margin="0,190,160,0">
+					<Button Click="AcceptTuto" Background="{DynamicResource BoxBack}" Style="{DynamicResource MyButton}" HorizontalAlignment="Center" BorderThickness="0" IsTabStop="False" Focusable="False" Width="155" Height="22" VerticalAlignment="Top" Margin="0,190,160,0">
 						<Button.Resources>
 							<Style TargetType="Border">
 								<Setter Property="CornerRadius" Value="{Binding Source={StaticResource MinRad}}"/>
@@ -652,7 +652,7 @@
 						</Button.Resources>
 						<TextBlock FontFamily="./res/#Outfit" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="{DynamicResource FgCol1}"><Run Text="Sure"/><Run Language="en-gb" Text=","/><Run Text=" lets go"/><Run Text="!"/></TextBlock>
 					</Button>
-					<Button Click="DenyTuto" Background="{DynamicResource BoxBack}" Style="{StaticResource MyButton}" HorizontalAlignment="Center" BorderThickness="0" IsTabStop="False" Focusable="False" Width="155" Height="22" VerticalAlignment="Top" Margin="160,190,0,0">
+					<Button Click="DenyTuto" Background="{DynamicResource BoxBack}" Style="{DynamicResource MyButton}" HorizontalAlignment="Center" BorderThickness="0" IsTabStop="False" Focusable="False" Width="155" Height="22" VerticalAlignment="Top" Margin="160,190,0,0">
 						<Button.Resources>
 							<Style TargetType="Border">
 								<Setter Property="CornerRadius" Value="{Binding Source={StaticResource MinRad}}"/>
@@ -696,7 +696,7 @@
 							</ImageBrush>
 						</Border.OpacityMask>
 					</Border>
-					<Button x:Name="tutHelpPage" Click="HelpLink" Background="{DynamicResource BoxBack}" Style="{StaticResource MyButton}" HorizontalAlignment="Center" BorderThickness="0" IsTabStop="False" Focusable="False" Width="155" Height="22" VerticalAlignment="Top" Margin="0,105,160,0">
+					<Button x:Name="tutHelpPage" Click="HelpLink" Background="{DynamicResource BoxBack}" Style="{DynamicResource MyButton}" HorizontalAlignment="Center" BorderThickness="0" IsTabStop="False" Focusable="False" Width="155" Height="22" VerticalAlignment="Top" Margin="0,105,160,0">
 						<Button.Resources>
 							<Style TargetType="Border">
 								<Setter Property="CornerRadius" Value="{Binding Source={StaticResource MinRad}}"/>
@@ -704,7 +704,7 @@
 						</Button.Resources>
 						<TextBlock Text="Help Page" FontFamily="./res/#Outfit" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="{DynamicResource FgCol1}"/>
 					</Button>
-					<Button x:Name="tutContact" Click="HelpContact" Background="{DynamicResource BoxBack}" Style="{StaticResource MyButton}" HorizontalAlignment="Center" BorderThickness="0" IsTabStop="False" Focusable="False" Width="155" Height="22" VerticalAlignment="Top" Margin="160,105,0,0">
+					<Button x:Name="tutContact" Click="HelpContact" Background="{DynamicResource BoxBack}" Style="{DynamicResource MyButton}" HorizontalAlignment="Center" BorderThickness="0" IsTabStop="False" Focusable="False" Width="155" Height="22" VerticalAlignment="Top" Margin="160,105,0,0">
 						<Button.Resources>
 							<Style TargetType="Border">
 								<Setter Property="CornerRadius" Value="{Binding Source={StaticResource MinRad}}"/>
@@ -715,9 +715,9 @@
 					<TextBlock x:Name="tutTextOther" Margin="34,110,0,0" Foreground="{DynamicResource FgCol1}" FontFamily="./res/#Outfit Medium" FontSize="15" VerticalAlignment="Top" TextAlignment="Center" HorizontalAlignment="Left" Width="186" TextWrapping="WrapWithOverflow" LineStackingStrategy="BlockLineHeight" IsHitTestVisible="False"><Run Language="en-gb" Text="Click the circle to turn it on or off"/></TextBlock>
 				</Grid>
 				<Grid x:Name="helpMenu" Margin="0,60,0,0" Visibility="Collapsed" Height="168" VerticalAlignment="Center">
-					<Button BorderBrush="Transparent" Background="Transparent" Click="HelpExit" Style="{StaticResource MyButton}" Cursor="Arrow"/>
+					<Button BorderBrush="Transparent" Background="Transparent" Click="HelpExit" Style="{DynamicResource MyButton}" Cursor="Arrow"/>
 					<TextBlock Foreground="{DynamicResource FgCol2}" Margin="20,15,20,0" Text="Take a guide around Clickett" FontFamily="./res/#Outfit Medium" FontSize="18" VerticalAlignment="Top" TextAlignment="Center" HorizontalAlignment="Center"/>
-					<Button Name="begTutButt" Click="StartTuto" Background="{DynamicResource AcGrad}" Style="{StaticResource TogBut}" HorizontalAlignment="Center" BorderThickness="0" IsTabStop="False" Focusable="False" Width="180" Height="30" VerticalAlignment="Top" Margin="0,50,0,0">
+					<Button Name="begTutButt" Click="StartTuto" Background="{DynamicResource AcGrad}" Style="{DynamicResource TogBut}" HorizontalAlignment="Center" BorderThickness="0" IsTabStop="False" Focusable="False" Width="180" Height="30" VerticalAlignment="Top" Margin="0,50,0,0">
 						<Button.Resources>
 							<Style TargetType="Border">
 								<Setter Property="CornerRadius" Value="{Binding Source={StaticResource MinRad}}"/>
@@ -726,7 +726,7 @@
 						<TextBlock Text="Start Tutorial" FontFamily="./res/#Outfit Bold" FontSize="19" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="{DynamicResource ActivateText}"/>
 					</Button>
 					<TextBlock Foreground="{DynamicResource FgCol2}" Margin="20,97,20,0" Text="More Help" FontFamily="./res/#Outfit Bold" FontSize="13" VerticalAlignment="Top" TextAlignment="Center" HorizontalAlignment="Center"/>
-					<Button Click="HelpLink" Background="{DynamicResource BoxBack}" Style="{StaticResource MyButton}" HorizontalAlignment="Center" BorderThickness="0" IsTabStop="False" Focusable="False" Width="155" Height="22" VerticalAlignment="Top" Margin="0,123,160,0">
+					<Button Click="HelpLink" Background="{DynamicResource BoxBack}" Style="{DynamicResource MyButton}" HorizontalAlignment="Center" BorderThickness="0" IsTabStop="False" Focusable="False" Width="155" Height="22" VerticalAlignment="Top" Margin="0,123,160,0">
 						<Button.Resources>
 							<Style TargetType="Border">
 								<Setter Property="CornerRadius" Value="{Binding Source={StaticResource MinRad}}"/>
@@ -734,7 +734,7 @@
 						</Button.Resources>
 						<TextBlock Text="Help Page" FontFamily="./res/#Outfit" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="{DynamicResource FgCol1}"/>
 					</Button>
-					<Button Click="HelpContact" Background="{DynamicResource BoxBack}" Style="{StaticResource MyButton}" HorizontalAlignment="Center" BorderThickness="0" IsTabStop="False" Focusable="False" Width="155" Height="22" VerticalAlignment="Top" Margin="160,123,0,0">
+					<Button Click="HelpContact" Background="{DynamicResource BoxBack}" Style="{DynamicResource MyButton}" HorizontalAlignment="Center" BorderThickness="0" IsTabStop="False" Focusable="False" Width="155" Height="22" VerticalAlignment="Top" Margin="160,123,0,0">
 						<Button.Resources>
 							<Style TargetType="Border">
 								<Setter Property="CornerRadius" Value="{Binding Source={StaticResource MinRad}}"/>
@@ -742,7 +742,7 @@
 						</Button.Resources>
 						<TextBlock Text="Contact" FontFamily="./res/#Outfit" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="{DynamicResource FgCol1}"/>
 					</Button>
-					<Button Style="{StaticResource TogBut}" Click="HelpExit" HorizontalAlignment="Left" VerticalAlignment="Top" Width="25" Height="25" Margin="62,15,0,0" BorderThickness="0" Background="#00DDDDDD" IsTabStop="False">
+					<Button Style="{DynamicResource TogBut}" Click="HelpExit" HorizontalAlignment="Left" VerticalAlignment="Top" Width="25" Height="25" Margin="62,15,0,0" BorderThickness="0" Background="#00DDDDDD" IsTabStop="False">
 						<Button.Resources>
 							<Style TargetType="Border">
 								<Setter Property="CornerRadius" Value="20"/>
@@ -773,7 +773,7 @@
 					</Button.Style>
 					<TextBlock Text="Exit Tutorial" FontFamily="./res/#Outfit Medium" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="{DynamicResource FgCol1}" FontSize="10"/>
 				</Button>
-				<Button x:Name="UpdateBut" Style="{StaticResource TogBut}" Click="InstallUpdateButton_Click" HorizontalAlignment="Right" VerticalAlignment="Top" Width="25" Height="25" Margin="0,3,90,0" BorderThickness="0" Background="#00DDDDDD" IsTabStop="False">
+				<Button x:Name="UpdateBut" Style="{DynamicResource TogBut}" Click="InstallUpdateButton_Click" HorizontalAlignment="Right" VerticalAlignment="Top" Width="25" Height="25" Margin="0,3,90,0" BorderThickness="0" Background="#00DDDDDD" IsTabStop="False">
 					<Border Background="{DynamicResource FgCol1}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="18" Height="18" Opacity="0.69" RenderOptions.BitmapScalingMode="HighQuality">
 						<Border.OpacityMask>
 							<ImageBrush ImageSource="{DynamicResource swapDrawingImage}" Stretch="Uniform">
@@ -787,7 +787,7 @@
 						</Border.OpacityMask>
 					</Border>
 				</Button>
-				<Button x:Name="helpBut" Style="{StaticResource TogBut}" Click="Help" HorizontalAlignment="Right" VerticalAlignment="Top" Width="25" Height="25" Margin="0,3,61,0" BorderThickness="0" Background="#00DDDDDD" IsTabStop="False">
+				<Button x:Name="helpBut" Style="{DynamicResource IconBut}" Click="Help" HorizontalAlignment="Right" VerticalAlignment="Top" Width="25" Height="25" Margin="0,3,61,0" BorderThickness="0" Background="#00DDDDDD" IsTabStop="False">
 					<Border Background="{DynamicResource FgCol1}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="18" Height="18" Opacity="0.3" RenderOptions.BitmapScalingMode="HighQuality">
 						<Border.OpacityMask>
 							<ImageBrush ImageSource="{DynamicResource helpDrawingImage}" Stretch="Uniform">
@@ -801,7 +801,7 @@
 						</Border.OpacityMask>
 					</Border>
 				</Button>
-				<Button Style="{StaticResource TogBut}" Click="AppMin" HorizontalAlignment="Right" VerticalAlignment="Top" Width="25" Height="25" Margin="0,3,32,0" BorderThickness="0" Background="#00DDDDDD" IsTabStop="False">
+				<Button Style="{DynamicResource TitleBarBut}" Click="AppMin" Margin="0,5,30,0" IsTabStop="False">
 					<Border Background="{DynamicResource FgCol1}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="13" Height="13" Opacity="0.69" RenderOptions.BitmapScalingMode="HighQuality">
 						<Border.OpacityMask>
 							<ImageBrush ImageSource="{DynamicResource MinDrawingImage}" Stretch="Uniform">
@@ -815,7 +815,7 @@
 						</Border.OpacityMask>
 					</Border>
 				</Button>
-				<Button Style="{StaticResource TogBut}" Click="AppClose" HorizontalAlignment="Right" VerticalAlignment="Top" Width="25" Height="25" Margin="0,3,3,0" BorderThickness="0" Background="#00DDDDDD" IsTabStop="False">
+				<Button Style="{DynamicResource TitleBarBut}" Click="AppClose" Margin="0,5,5,0" IsTabStop="False">
 					<Border Background="{DynamicResource FgCol1}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="13" Height="13" Opacity="0.69">
 						<Border.OpacityMask>
 							<ImageBrush ImageSource="{DynamicResource CloseDrawingImage}" Stretch="Uniform">

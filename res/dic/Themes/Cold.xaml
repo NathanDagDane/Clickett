@@ -35,6 +35,7 @@
     <SolidColorBrush x:Key="FgCol3">#fcfbf8</SolidColorBrush>
     <SolidColorBrush x:Key="GradFG">#2e343b</SolidColorBrush>
 
+    <Color x:Key="BoxBackColor">#2e343b</Color>
     <SolidColorBrush x:Key="BoxBack">#2e343b</SolidColorBrush>
 
     <SolidColorBrush x:Key="InBac">#3B4149</SolidColorBrush>

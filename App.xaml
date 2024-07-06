@@ -6,9 +6,11 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="res/dic/Themes/BaseTheme.xaml"/>
+                <!-- Dynamically replaced by index -->
+                <ResourceDictionary Source="res/dic/DynamicDictionaries.xaml"/>
+                <!-- Never referenced by index -->
+                <ResourceDictionary Source="res/dic/Styles/Styles.xaml"/>
                 <ResourceDictionary Source="res/dic/Vectors.xaml"/>
-                <ResourceDictionary Source="res/dic/MainWindowStyles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

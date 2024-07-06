@@ -1,5 +1,4 @@
 ﻿using System.Windows;
-using Velopack;
 
 namespace Clickett
 {

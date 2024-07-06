@@ -1304,36 +1304,11 @@ namespace Clickett
         // SETTINGS CHANGE
         private void ToggleAnim(object sender, RoutedEventArgs? e)
         {
-            doAnimations = s.Default.doAnimations = !doAnimations;
             ColourToggle(animButt, doAnimations);
             animBorder.Opacity = doAnimations ? 1 : 0.4;
+            doAnimations = s.Default.doAnimations = !doAnimations;
 
-            var style = doAnimations ? "TogBut" : "TogButStatic";
-            LocBut.SetResourceReference(StyleProperty, style);
-            jitBut.SetResourceReference(StyleProperty, style);
-            douBut.SetResourceReference(StyleProperty, style);
-            animButt.SetResourceReference(StyleProperty, style);
-            ctButt.SetResourceReference(StyleProperty, style);
-            aotButt.SetResourceReference(StyleProperty, style);
-            startupButt.SetResourceReference(StyleProperty, style);
-            trayButt.SetResourceReference(StyleProperty, style);
-            minTrayButt.SetResourceReference(StyleProperty, style);
-            tutNextBut.SetResourceReference(StyleProperty, style);
-            begTutButt.SetResourceReference(StyleProperty, style);
-            helpBut.SetResourceReference(StyleProperty, style);
-
-
-            cpsWarn.SetResourceReference(StyleProperty, style);
-            threadsWarn.SetResourceReference(StyleProperty, style);
-            rocketSwap.SetResourceReference(StyleProperty, style);
-            swapButt.SetResourceReference(StyleProperty, style);
-
-            style = doAnimations ? "ColBut" : "ColButStatic";
-            DefaultThemeBut.SetResourceReference(StyleProperty, style);
-            DefaultLightThemeBut.SetResourceReference(StyleProperty, style);
-            ColdThemeBut.SetResourceReference(StyleProperty, style);
-            GreenThemeBut.SetResourceReference(StyleProperty, style);
-            DiscordThemeBut.SetResourceReference(StyleProperty, style);
+            UpdateMergedDictionaries();
 
             s.Default.Save();
         }
@@ -1498,27 +1473,10 @@ namespace Clickett
         }
         private void SetTheme(object sender, RoutedEventArgs? e)
         {
-            var themeName = curTheme = ((Button)sender).Name.Substring(0, ((Button)sender).Name.Length - 8);
-            ResourceDictionary newRes = Application.Current.Resources.MergedDictionaries[1];
-            newRes.MergedDictionaries.Clear();
-            try
-            {
-                newRes.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("res/dic/Themes/" + themeName + ".xaml", UriKind.Relative) });
-            }
-            catch
-            {
-                try
-                {
-                    themeName = s.Default.Theme;
-                    newRes.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("res/dic/Themes/" + themeName + ".xaml", UriKind.Relative) });
-                }
-                catch
-                {
-                    s.Default.Theme = themeName = "Default";
-                    newRes.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("res/dic/Themes/" + themeName + ".xaml", UriKind.Relative) });
-                }
-            }
-            s.Default.Theme = themeName;
+            curTheme = ((Button)sender).Name.Substring(0, ((Button)sender).Name.Length - 8);
+            UpdateMergedDictionaries();
+
+            s.Default.Theme = curTheme;
             s.Default.Save();
         }
 
@@ -1718,6 +1676,37 @@ namespace Clickett
                     catch { }
             }
             catch { }
+        }
+        private void UpdateMergedDictionaries()
+        {
+            ResourceDictionary newRes = Application.Current.Resources.MergedDictionaries[1];
+            newRes.MergedDictionaries.Clear();
+
+            // Add theme dictionary
+            try { newRes.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("res/dic/Themes/" + curTheme + ".xaml", UriKind.Relative) }); }
+            catch
+            {
+                try
+                {
+                    curTheme = s.Default.Theme;
+                    newRes.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("res/dic/Themes/" + curTheme + ".xaml", UriKind.Relative) });
+                }
+                catch
+                {
+                    s.Default.Theme = curTheme = "Default";
+                    newRes.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("res/dic/Themes/Default.xaml", UriKind.Relative) });
+                }
+            }
+
+            // Add styles dictionary
+            try { newRes.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("res/dic/Styles/" + "Styles" + (doAnimations ? "Static" : "Animated") + ".xaml", UriKind.Relative) }); }
+            catch
+            {
+                doAnimations = !doAnimations;
+                ColourToggle(animButt, doAnimations);
+                animBorder.Opacity = doAnimations ? 1 : 0.4;
+                return;
+            }
         }
 
 

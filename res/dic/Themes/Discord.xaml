@@ -42,6 +42,7 @@
     <SolidColorBrush x:Key="FgCol2">#FFb5b8bb</SolidColorBrush>
     <SolidColorBrush x:Key="FgCol3">#FFd7d8de</SolidColorBrush>
 
+    <Color x:Key="BoxBackColor">#404249</Color>
     <SolidColorBrush x:Key="BoxBack">#404249</SolidColorBrush>
 
     <SolidColorBrush x:Key="InBac">#51535A</SolidColorBrush>
