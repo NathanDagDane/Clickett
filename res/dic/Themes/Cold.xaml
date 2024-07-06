@@ -8,6 +8,8 @@
 
     <SolidColorBrush x:Key="AcGrad">#fcfbf8</SolidColorBrush>
 
+    <SolidColorBrush x:Key="AcGradAlt">#fcfbf8</SolidColorBrush>
+
     <LinearGradientBrush x:Key="ActivateText">
         <LinearGradientBrush.RelativeTransform>
             <TransformGroup>

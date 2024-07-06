@@ -1308,19 +1308,10 @@ namespace Clickett
             ColourToggle(animButt, doAnimations);
             animBorder.Opacity = doAnimations ? 1 : 0.4;
 
-            var style = doAnimations ? "TogBut" : "MyButton";
-            cpsWarn.SetResourceReference(StyleProperty, style);
-            threadsWarn.SetResourceReference(StyleProperty, style);
-            rocketSwap.SetResourceReference(StyleProperty, style);
-            swapButt.SetResourceReference(StyleProperty, style);
+            var style = doAnimations ? "TogBut" : "TogButStatic";
             LocBut.SetResourceReference(StyleProperty, style);
             jitBut.SetResourceReference(StyleProperty, style);
             douBut.SetResourceReference(StyleProperty, style);
-            DefaultThemeBut.SetResourceReference(StyleProperty, style);
-            DefaultLightThemeBut.SetResourceReference(StyleProperty, style);
-            ColdThemeBut.SetResourceReference(StyleProperty, style);
-            GreenThemeBut.SetResourceReference(StyleProperty, style);
-            DiscordThemeBut.SetResourceReference(StyleProperty, style);
             animButt.SetResourceReference(StyleProperty, style);
             ctButt.SetResourceReference(StyleProperty, style);
             aotButt.SetResourceReference(StyleProperty, style);
@@ -1330,6 +1321,19 @@ namespace Clickett
             tutNextBut.SetResourceReference(StyleProperty, style);
             begTutButt.SetResourceReference(StyleProperty, style);
             helpBut.SetResourceReference(StyleProperty, style);
+
+
+            cpsWarn.SetResourceReference(StyleProperty, style);
+            threadsWarn.SetResourceReference(StyleProperty, style);
+            rocketSwap.SetResourceReference(StyleProperty, style);
+            swapButt.SetResourceReference(StyleProperty, style);
+
+            style = doAnimations ? "ColBut" : "ColButStatic";
+            DefaultThemeBut.SetResourceReference(StyleProperty, style);
+            DefaultLightThemeBut.SetResourceReference(StyleProperty, style);
+            ColdThemeBut.SetResourceReference(StyleProperty, style);
+            GreenThemeBut.SetResourceReference(StyleProperty, style);
+            DiscordThemeBut.SetResourceReference(StyleProperty, style);
 
             s.Default.Save();
         }

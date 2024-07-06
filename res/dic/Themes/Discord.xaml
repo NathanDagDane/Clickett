@@ -17,6 +17,19 @@
         <GradientStop Color="#5865F2" Offset="1"/>
     </LinearGradientBrush>
 
+    <LinearGradientBrush x:Key="AcGradAlt">
+        <LinearGradientBrush.RelativeTransform>
+            <TransformGroup>
+                <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                <SkewTransform CenterX="0.5" CenterY="0.5"/>
+                <RotateTransform Angle="0" CenterX="0.5" CenterY="0.5"/>
+                <TranslateTransform/>
+            </TransformGroup>
+        </LinearGradientBrush.RelativeTransform>
+        <GradientStop Color="#5865F2"/>
+        <GradientStop Color="#5865F2" Offset="1"/>
+    </LinearGradientBrush>
+
     <SolidColorBrush x:Key="ActivateText">#dbdee1</SolidColorBrush>
 
     <SolidColorBrush x:Key="AcCol1">#5865F2</SolidColorBrush>

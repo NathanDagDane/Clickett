@@ -255,17 +255,8 @@
 																</Style>
 															</TextBox.Resources>
 														</TextBox>
-														<Button Background="AntiqueWhite" x:Name="LocBut" HorizontalAlignment="Right" Width="15" Height="15" VerticalAlignment="Center" Margin="0,0,5,0" Click="ToggleLoc" IsTabStop="False">
-															<Button.Resources>
-																<Style TargetType="{x:Type Border}">
-																	<Setter Property="CornerRadius" Value="20"/>
-																</Style>
-															</Button.Resources>
-															<Button.Style>
-																<StaticResource ResourceKey="TogBut"/>
-															</Button.Style>
-														</Button>
-													</Grid>
+                                                        <Button x:Name="LocBut" Style="{StaticResource TogBut}" Margin="0,0,5,0" Click="ToggleLoc"/>
+                                                    </Grid>
 													<Button x:Name="locSetButt" Click="SetLoc" Background="{DynamicResource AcGradAlt}" HorizontalAlignment="Right" BorderThickness="0" Margin="0,3,153,3" Width="40" FontSize="8" IsTabStop="False" Focusable="False">
 														<Button.Resources>
 															<Style TargetType="{x:Type Border}">
@@ -308,32 +299,14 @@
                                             <Border x:Name="jitBorder" Style="{StaticResource BackBox}" MouseEnter="JitterMouseEnter" MouseLeave="JitterMouseLeave" Margin="5,5,132.5,0" HorizontalAlignment="Right" Width="72.5">
 												<Grid>
                                                     <TextBlock Style="{Binding Source={StaticResource BoxNameText}}" Text="Jitter" Margin="8,0,8,0"/>
-													<Button Background="AntiqueWhite" x:Name="jitBut" HorizontalAlignment="Right" Width="15" Height="15" VerticalAlignment="Center" Margin="0,0,5,0" Click="ToggleJit" IsTabStop="False">
-														<Button.Resources>
-															<Style TargetType="{x:Type Border}">
-																<Setter Property="CornerRadius" Value="20"/>
-															</Style>
-														</Button.Resources>
-														<Button.Style>
-															<StaticResource ResourceKey="TogBut"/>
-														</Button.Style>
-													</Button>
-												</Grid>
+                                                    <Button x:Name="jitBut" Style="{StaticResource TogBut}" Margin="0,0,5,0" Click="ToggleJit"/>
+                                                </Grid>
 											</Border>
                                             <Border x:Name="douBorder" Style="{StaticResource BackBox}" Margin="5,5,5,0" HorizontalAlignment="Right" Width="122.5">
 												<Grid>
                                                     <TextBlock Style="{Binding Source={StaticResource BoxNameText}}" Text="Double Click" Margin="8,0,8,0"/>
-													<Button Background="AntiqueWhite" x:Name="douBut" HorizontalAlignment="Right" Width="15" Height="15" VerticalAlignment="Center" Margin="0,0,5,0" Click="ToggleDou" IsTabStop="False">
-														<Button.Resources>
-															<Style TargetType="{x:Type Border}">
-																<Setter Property="CornerRadius" Value="20"/>
-															</Style>
-														</Button.Resources>
-														<Button.Style>
-															<StaticResource ResourceKey="TogBut"/>
-														</Button.Style>
-													</Button>
-												</Grid>
+                                                    <Button x:Name="douBut" Style="{StaticResource TogBut}" Margin="0,0,5,0" Click="ToggleDou"/>
+                                                </Grid>
 											</Border>
 										</Grid>
 										<Grid Margin="0,5,0,0">
@@ -427,19 +400,10 @@
 											</Grid>
 										</Border>
                                         <Border x:Name="animBorder" Style="{StaticResource BackBox}" Margin="0,5,0,0">
-											<Grid>
+                                            <Grid>
                                                 <TextBlock Style="{Binding Source={StaticResource BoxNameText}}" Text="Animations" Margin="10,0,0,0"/>
-												<Button Background="AntiqueWhite" x:Name="animButt" HorizontalAlignment="Right" Width="15" Height="15" VerticalAlignment="Center" Margin="0,0,5,0" Click="ToggleAnim" IsTabStop="False">
-													<Button.Resources>
-														<Style TargetType="{x:Type Border}">
-															<Setter Property="CornerRadius" Value="20"/>
-														</Style>
-													</Button.Resources>
-													<Button.Style>
-														<StaticResource ResourceKey="TogBut"/>
-													</Button.Style>
-												</Button>
-											</Grid>
+                                                <Button x:Name="animButt" Style="{StaticResource TogBut}" Margin="0,0,5,0" Click="ToggleAnim"/>
+                                            </Grid>
 										</Border>
                                         <TextBlock Style="{Binding Source={StaticResource HeaderText}}" Margin="15,4,0,2" Text="Clicking"/>
                                         <Border x:Name="ctBorder" Style="{StaticResource BackBox}" Margin="0,1,0,0">
@@ -454,33 +418,15 @@
 													<TextBlock Text="Reset" FontFamily="./res/#Outfit Medium" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="{DynamicResource GradFG}" FontSize="14"/>
 												</Button>
                                                 <TextBlock x:Name="totalText" Style="{Binding Source={StaticResource BoxNameText}}" Text="69420" HorizontalAlignment="Right" Margin="0,0,50,0" Opacity="0.69"/>
-												<Button Background="AntiqueWhite" x:Name="ctButt" HorizontalAlignment="Right" Width="15" Height="15" VerticalAlignment="Center" Margin="0,0,5,0" Click="ToggleCt" IsTabStop="False">
-													<Button.Resources>
-														<Style TargetType="{x:Type Border}">
-															<Setter Property="CornerRadius" Value="20"/>
-														</Style>
-													</Button.Resources>
-													<Button.Style>
-														<StaticResource ResourceKey="TogBut"/>
-													</Button.Style>
-												</Button>
-											</Grid>
+                                                <Button x:Name="ctButt" Style="{StaticResource TogBut}" Margin="0,0,5,0" Click="ToggleCt"/>
+                                            </Grid>
 										</Border>
                                         <TextBlock Style="{Binding Source={StaticResource HeaderText}}" Margin="15,4,0,2" Text="Panel"/>
                                         <Border x:Name="aotBorder" Style="{StaticResource BackBox}" Margin="0,1,0,0">
 											<Grid>
                                                 <TextBlock Style="{Binding Source={StaticResource BoxNameText}}" Text="Always on top" Margin="10,0,0,0"/>
-												<Button Background="AntiqueWhite" x:Name="aotButt" HorizontalAlignment="Right" Width="15" Height="15" VerticalAlignment="Center" Margin="0,0,5,0" Click="ToggleAot" IsTabStop="False">
-													<Button.Resources>
-														<Style TargetType="{x:Type Border}">
-															<Setter Property="CornerRadius" Value="20"/>
-														</Style>
-													</Button.Resources>
-													<Button.Style>
-														<StaticResource ResourceKey="TogBut"/>
-													</Button.Style>
-												</Button>
-											</Grid>
+                                                <Button x:Name="aotButt" Style="{StaticResource TogBut}" Margin="0,0,5,0" Click="ToggleAot"/>
+                                            </Grid>
 										</Border>
                                         <Border Style="{StaticResource BackBox}" Margin="0,5,0,0">
 											<Grid>
@@ -500,47 +446,20 @@
                                         <Border x:Name="startupBorder" Style="{StaticResource BackBox}" Margin="0,1,0,0">
 											<Grid>
                                                 <TextBlock Style="{Binding Source={StaticResource BoxNameText}}" Text="Open on Startup" Margin="10,0,0,0"/>
-												<Button Background="AntiqueWhite" x:Name="startupButt" HorizontalAlignment="Right" Width="15" Height="15" VerticalAlignment="Center" Margin="0,0,5,0" Click="ToggleStartup" IsTabStop="False">
-													<Button.Resources>
-														<Style TargetType="{x:Type Border}">
-															<Setter Property="CornerRadius" Value="20"/>
-														</Style>
-													</Button.Resources>
-													<Button.Style>
-														<StaticResource ResourceKey="TogBut"/>
-													</Button.Style>
-												</Button>
-											</Grid>
+                                                <Button x:Name="startupButt" Style="{StaticResource TogBut}" Margin="0,0,5,0" Click="ToggleStartup"/>
+                                            </Grid>
 										</Border>
                                         <StackPanel Orientation="Horizontal">
                                             <Border x:Name="trayBorder" Width="237" Style="{StaticResource BackBox}" Margin="0,5,0,0">
                                                 <Grid>
                                                     <TextBlock Style="{Binding Source={StaticResource BoxNameText}}" Text="System Tray Icon" Margin="10,0,0,0"/>
-                                                    <Button Background="AntiqueWhite" x:Name="trayButt" HorizontalAlignment="Right" Width="15" Height="15" VerticalAlignment="Center" Margin="0,0,5,0" Click="ToggleTray" IsTabStop="False">
-                                                        <Button.Resources>
-                                                            <Style TargetType="{x:Type Border}">
-                                                                <Setter Property="CornerRadius" Value="20"/>
-                                                            </Style>
-                                                        </Button.Resources>
-                                                        <Button.Style>
-                                                            <StaticResource ResourceKey="TogBut"/>
-                                                        </Button.Style>
-                                                    </Button>
+                                                    <Button x:Name="trayButt" Style="{StaticResource TogBut}" Margin="0,0,5,0" Click="ToggleTray"/>
                                                 </Grid>
                                             </Border>
                                             <Border x:Name="minTrayBorder" Width="237" Style="{StaticResource BackBox}" Margin="5,5,0,0">
                                                 <Grid>
                                                     <TextBlock Style="{Binding Source={StaticResource BoxNameText}}" Text="Minimise to System Tray" Margin="10,0,0,0"/>
-                                                    <Button Background="AntiqueWhite" x:Name="minTrayButt" HorizontalAlignment="Right" Width="15" Height="15" VerticalAlignment="Center" Margin="0,0,5,0" Click="ToggleMinTray" IsTabStop="False">
-                                                        <Button.Resources>
-                                                            <Style TargetType="{x:Type Border}">
-                                                                <Setter Property="CornerRadius" Value="20"/>
-                                                            </Style>
-                                                        </Button.Resources>
-                                                        <Button.Style>
-                                                            <StaticResource ResourceKey="TogBut"/>
-                                                        </Button.Style>
-                                                    </Button>
+                                                    <Button x:Name="minTrayButt" Style="{StaticResource TogBut}" Margin="0,0,5,0" Click="ToggleMinTray"/>
                                                 </Grid>
                                             </Border>
                                         </StackPanel>

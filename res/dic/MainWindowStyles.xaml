@@ -79,33 +79,34 @@
     <Style x:Key="TogBut" TargetType="Button">
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Width" Value="15" />
+        <Setter Property="Height" Value="15" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Right" />
+        <Setter Property="IsTabStop" Value="False" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <Border BorderThickness="0" RenderTransformOrigin="0.5,0.5">
+                    <Border BorderThickness="0" CornerRadius="20" Background="{TemplateBinding Background}" RenderTransformOrigin="0.5,0.5">
                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         <Border.RenderTransform>
-                            <ScaleTransform x:Name="Tans" ScaleX="1" ScaleY="1"/>
+                            <ScaleTransform x:Name="Scale" ScaleX="1" ScaleY="1"/>
                         </Border.RenderTransform>
                     </Border>
                     <ControlTemplate.Triggers>
                         <EventTrigger RoutedEvent="Button.MouseEnter">
                             <BeginStoryboard>
                                 <Storyboard>
-                                    <DoubleAnimation Storyboard.TargetName="Tans"
-                                 Storyboard.TargetProperty="ScaleX" To="1.1" Duration="0:0:0.05" AccelerationRatio="0.1" DecelerationRatio="0.9"/>
-                                    <DoubleAnimation Storyboard.TargetName="Tans"
-                                 Storyboard.TargetProperty="ScaleY" To="1.1" Duration="0:0:0.05" AccelerationRatio="0.1" DecelerationRatio="0.9"/>
+                                    <DoubleAnimation Storyboard.TargetName="Scale" Storyboard.TargetProperty="ScaleX" To="1.1" Duration="0:0:0.05" AccelerationRatio="0.1" DecelerationRatio="0.9"/>
+                                    <DoubleAnimation Storyboard.TargetName="Scale" Storyboard.TargetProperty="ScaleY" To="1.1" Duration="0:0:0.05" AccelerationRatio="0.1" DecelerationRatio="0.9"/>
                                 </Storyboard>
                             </BeginStoryboard>
                         </EventTrigger>
                         <EventTrigger RoutedEvent="Button.MouseLeave">
                             <BeginStoryboard>
                                 <Storyboard>
-                                    <DoubleAnimation Storyboard.TargetName="Tans"
-                                 Storyboard.TargetProperty="ScaleX" To="1" Duration="0:0:0.2" AccelerationRatio="0.3" DecelerationRatio="0.7"/>
-                                    <DoubleAnimation Storyboard.TargetName="Tans"
-                                 Storyboard.TargetProperty="ScaleY" To="1" Duration="0:0:0.2" AccelerationRatio="0.3" DecelerationRatio="0.7" />
+                                    <DoubleAnimation Storyboard.TargetName="Scale" Storyboard.TargetProperty="ScaleX" To="1" Duration="0:0:0.2" AccelerationRatio="0.3" DecelerationRatio="0.7"/>
+                                    <DoubleAnimation Storyboard.TargetName="Scale" Storyboard.TargetProperty="ScaleY" To="1" Duration="0:0:0.2" AccelerationRatio="0.3" DecelerationRatio="0.7" />
                                 </Storyboard>
                             </BeginStoryboard>
                         </EventTrigger>
@@ -117,6 +118,37 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+    <Style x:Key="TogButStatic" TargetType="Button">
+        <Setter Property="OverridesDefaultStyle" Value="True" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Width" Value="15" />
+        <Setter Property="Height" Value="15" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Right" />
+        <Setter Property="IsTabStop" Value="False" />
+        <Setter Property="RenderTransformOrigin" Value="0.5,0.5" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border BorderThickness="0" CornerRadius="20" Background="{TemplateBinding Background}"/>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="RenderTransform">
+                                <Setter.Value>
+                                    <ScaleTransform ScaleX="1.1" ScaleY="1.1" />
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value="0.4"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
 
     <!--Colour Button Style-->
     <Style x:Key="ColBut" TargetType="Button">
@@ -165,6 +197,38 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+    <Style x:Key="ColButStatic" TargetType="Button">
+        <Setter Property="OverridesDefaultStyle" Value="True" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Width" Value="32" />
+        <Setter Property="Height" Value="32" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="RenderTransformOrigin" Value="0.5,0.5" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border CornerRadius="16" BorderThickness="0" Background="{TemplateBinding Background}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="RenderTransform">
+                                <Setter.Value>
+                                    <ScaleTransform ScaleX="1.1" ScaleY="1.1" />
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value="0.4"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <Style x:Key="ColButCenter" TargetType="Border">
         <Setter Property="CornerRadius" Value="17" />
         <Setter Property="Height" Value="16" />
