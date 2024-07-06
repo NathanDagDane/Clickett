@@ -5,9 +5,21 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:Sys="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
-        MouseLeftButtonDown="WindowDrag" PreviewKeyDown="KeyDown" Closed="OnExit" Topmost="true"
-        Background="Transparent" AllowsTransparency="true" WindowStyle="None" ResizeMode="NoResize"
-        Title="Clickett" SizeToContent="Height" HorizontalAlignment="Stretch" Width="600" Icon="/res/iconround.png" RenderTransformOrigin="0.5,0.5">
+        
+        Title="Clickett"
+        Icon="/res/iconround.png"
+        Closed="OnExit"
+        Topmost="true"
+        WindowStyle="None"
+        AllowsTransparency="true"
+        Background="Transparent"
+        Width="600"
+        SizeToContent="Height"
+        ResizeMode="NoResize"
+        HorizontalAlignment="Stretch"
+        RenderTransformOrigin="0.5,0.5"
+        MouseLeftButtonDown="WindowDrag"
+        PreviewKeyDown="KeyDown">
 
 	<Window.Triggers>
 		<EventTrigger RoutedEvent="Window.Loaded">
@@ -28,453 +40,12 @@
 			</BeginStoryboard>
 		</EventTrigger>
 	</Window.Triggers>
+    
 	<Window.RenderTransform>
 		<ScaleTransform x:Name="WindowScale" 
           ScaleX="1" ScaleY="1"  />
 	</Window.RenderTransform>
-	<Window.Resources>
-		<Sys:String x:Key="BoxBackCol">#CC5A5E5F</Sys:String>
-		<Sys:String x:Key="FGCol1">#EED7DBDB</Sys:String>
-		<Sys:String x:Key="FGCol2">#D5BBBBBB</Sys:String>
-		<Sys:String x:Key="FGCol3">#FFEEF5F5</Sys:String>
-		<Sys:String x:Key="InBacCol">#F1757575</Sys:String>
-		<Sys:String x:Key="InBorCol">#F17F7F7F</Sys:String>
 
-		<Sys:Int16 x:Key="MinRad">8</Sys:Int16>
-		<Sys:Int16 x:Key="MajRad">12</Sys:Int16>
-		<Sys:Int16 x:Key="MinBoxHeight">25</Sys:Int16>
-		<Sys:Int16 x:Key="MajBoxHeight">40</Sys:Int16>
-
-        <!--Header Text Style-->
-        <Style x:Key="HeaderText" TargetType="TextBlock">
-            <Setter Property="FontSize" Value="14" />
-            <Setter Property="FontFamily" Value="./res/#Outfit Medium" />
-            <Setter Property="Foreground" Value="{DynamicResource FgCol2}" />
-            <Setter Property="HorizontalAlignment" Value="Left" />
-        </Style>
-
-        <!--Box Name Text Style-->
-        <Style x:Key="BoxNameText" TargetType="TextBlock">
-            <Setter Property="FontSize" Value="15" />
-            <Setter Property="FontFamily" Value="./res/#Outfit Medium" />
-            <Setter Property="Foreground" Value="{DynamicResource FgCol1}" />
-            <Setter Property="HorizontalAlignment" Value="Left" />
-            <Setter Property="VerticalAlignment" Value="Center" />
-        </Style>
-
-        <!--Switch Button Style-->
-		<Style x:Key="MyButton" TargetType="Button">
-			<Setter Property="OverridesDefaultStyle" Value="True" />
-			<Setter Property="Cursor" Value="Hand" />
-			<Setter Property="Template">
-				<Setter.Value>
-					<ControlTemplate TargetType="Button">
-						<Border BorderThickness="0" Background="{TemplateBinding Background}">
-							<ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-						</Border>
-						<ControlTemplate.Triggers>
-							<Trigger Property="IsMouseOver" Value="True">
-								<Setter Property="Opacity" Value="0.69" />
-							</Trigger>
-							<Trigger Property="IsEnabled" Value="False">
-								<Setter Property="Opacity" Value="0.4"/>
-							</Trigger>
-						</ControlTemplate.Triggers>
-					</ControlTemplate>
-				</Setter.Value>
-			</Setter>
-		</Style>
-
-		<!--Switch Button Style-->
-		<Style x:Key="CustBut" TargetType="Button">
-			<Setter Property="OverridesDefaultStyle" Value="True" />
-			<Setter Property="Cursor" Value="Hand" />
-			<Setter Property="Template">
-				<Setter.Value>
-					<ControlTemplate TargetType="Button">
-						<Border BorderThickness="0" Background="{TemplateBinding Background}">
-							<ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-						</Border>
-						<ControlTemplate.Triggers>
-							<Trigger Property="IsMouseOver" Value="True">
-							</Trigger>
-							<Trigger Property="IsEnabled" Value="False">
-							</Trigger>
-						</ControlTemplate.Triggers>
-					</ControlTemplate>
-				</Setter.Value>
-			</Setter>
-		</Style>
-
-		<!--Toggle Button Style-->
-		<Style x:Key="TogBut" TargetType="Button">
-			<Setter Property="OverridesDefaultStyle" Value="True" />
-			<Setter Property="Cursor" Value="Hand" />
-			<Setter Property="Template">
-				<Setter.Value>
-					<ControlTemplate TargetType="Button">
-						<Border BorderThickness="0" Background="{TemplateBinding Background}" RenderTransformOrigin="0.5,0.5">
-							<ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-							<Border.RenderTransform>
-								<ScaleTransform x:Name="Tans" ScaleX="1" ScaleY="1"/>
-							</Border.RenderTransform>
-						</Border>
-						<ControlTemplate.Triggers>
-							<EventTrigger RoutedEvent="Button.MouseEnter">
-								<BeginStoryboard>
-									<Storyboard>
-										<DoubleAnimation Storyboard.TargetName="Tans"
-                                         Storyboard.TargetProperty="ScaleX" To="1.1" Duration="0:0:0.05" AccelerationRatio="0.1" DecelerationRatio="0.9"/>
-										<DoubleAnimation Storyboard.TargetName="Tans"
-                                         Storyboard.TargetProperty="ScaleY" To="1.1" Duration="0:0:0.05" AccelerationRatio="0.1" DecelerationRatio="0.9"/>
-									</Storyboard>
-								</BeginStoryboard>
-							</EventTrigger>
-							<EventTrigger RoutedEvent="Button.MouseLeave">
-								<BeginStoryboard>
-									<Storyboard>
-										<DoubleAnimation Storyboard.TargetName="Tans"
-                                         Storyboard.TargetProperty="ScaleX" To="1" Duration="0:0:0.2" AccelerationRatio="0.3" DecelerationRatio="0.7"/>
-										<DoubleAnimation Storyboard.TargetName="Tans"
-                                         Storyboard.TargetProperty="ScaleY" To="1" Duration="0:0:0.2" AccelerationRatio="0.3" DecelerationRatio="0.7" />
-									</Storyboard>
-								</BeginStoryboard>
-							</EventTrigger>
-							<Trigger Property="IsEnabled" Value="False">
-								<Setter Property="Opacity" Value="0.4"/>
-							</Trigger>
-						</ControlTemplate.Triggers>
-					</ControlTemplate>
-				</Setter.Value>
-			</Setter>
-		</Style>
-
-		<!--Colour Button Style-->
-		<Style x:Key="ColourButton" TargetType="Button">
-			<Setter Property="OverridesDefaultStyle" Value="True" />
-			<Setter Property="Cursor" Value="Hand" />
-			<Setter Property="Template">
-				<Setter.Value>
-					<ControlTemplate TargetType="Button">
-						<Border BorderThickness="0" Background="{TemplateBinding Background}">
-							<ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-						</Border>
-					</ControlTemplate>
-				</Setter.Value>
-			</Setter>
-		</Style>
-
-		<!--ComboBox Style-->
-		<ControlTemplate TargetType="ToggleButton" x:Key="ComboBoxToggleButtonTemplate">
-			<Grid>
-				<Grid.ColumnDefinitions>
-					<ColumnDefinition />
-					<ColumnDefinition Width="20" />
-				</Grid.ColumnDefinitions>
-				<Border Grid.ColumnSpan="2" Name="Border"
-              BorderBrush="{DynamicResource InBor}" 
-              CornerRadius="5" BorderThickness="0,0,0,0" 
-              Background="{DynamicResource InBac}" />
-				<Border Grid.Column="1" Margin="1, 1, 1, 1" BorderBrush="#444" Name="ButtonBorder"
-              CornerRadius="0, 0, 0, 0" BorderThickness="0, 0, 0, 0" 
-              Background="Transparent" />
-
-				<Path Name="Arrow" Grid.Column="1" 
-            Data="M 0 0 L 4 4 L 8 0 Z"
-            HorizontalAlignment="Center" Fill="{DynamicResource FgCol2}"
-            VerticalAlignment="Center" />
-			</Grid>
-			<ControlTemplate.Triggers>
-				<Trigger Property="UIElement.IsMouseOver" Value="True">
-					<Setter Property="Border.Background" TargetName="Border" Value="{DynamicResource InBor}"/>
-					<Setter Property="Shape.Fill" TargetName="Arrow" Value="{DynamicResource AcCol1}"/>
-					<Setter Property="Cursor" Value="Hand"/>
-				</Trigger>
-				<Trigger Property="ToggleButton.IsChecked" Value="True">
-					<Setter Property="Shape.Fill" TargetName="Arrow" Value="{DynamicResource AcCol1}"/>
-				</Trigger>
-			</ControlTemplate.Triggers>
-		</ControlTemplate>
-
-		<Style x:Key="ComboBoxFlatStyle"  TargetType="{x:Type ComboBox}">
-			<Setter Property="UIElement.SnapsToDevicePixels" Value="True"/>
-			<Setter Property="FrameworkElement.OverridesDefaultStyle" Value="True"/>
-			<Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled"/>
-			<Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Disabled"/>
-			<Setter Property="ScrollViewer.CanContentScroll" Value="False"/>
-			<Setter Property="TextElement.Foreground" Value="Black"/>
-			<Setter Property="FrameworkElement.FocusVisualStyle" Value="{x:Null}"/>
-
-			<Setter Property="ComboBox.ItemContainerStyle">
-				<Setter.Value>
-					<Style TargetType="ComboBoxItem">
-						<Setter Property="Template">
-							<Setter.Value>
-								<ControlTemplate TargetType="ComboBoxItem">
-
-									<Grid>
-										<Border
-                                        BorderThickness="0"
-                                        Background="{TemplateBinding Background}"
-                                        CornerRadius="4" Padding="3,0,0,0">
-											<ContentPresenter/>
-										</Border>
-									</Grid>
-									<ControlTemplate.Triggers>
-										<Trigger Property="IsMouseOver" Value="True">
-											<Setter Property="Background" Value="{DynamicResource BoxBack}" />
-										</Trigger>
-									</ControlTemplate.Triggers>
-								</ControlTemplate>
-							</Setter.Value>
-						</Setter>
-					</Style>
-				</Setter.Value>
-			</Setter>
-
-			<Setter Property="Control.Template">
-				<Setter.Value>
-					<ControlTemplate TargetType="ComboBox">
-						<Grid>
-							<ToggleButton Name="ToggleButton" Grid.Column="2"
-                ClickMode="Press" Focusable="False"
-                IsChecked="{Binding Path=IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
-                Template="{StaticResource ComboBoxToggleButtonTemplate}"/>
-
-							<ContentPresenter Name="ContentSite" Margin="4, 0, 0, 0" IsHitTestVisible="False"
-                              HorizontalAlignment="Left" VerticalAlignment="Center"                              
-                              Content="{TemplateBinding ComboBox.SelectionBoxItem}" 
-                              ContentTemplate="{TemplateBinding ComboBox.SelectionBoxItemTemplate}"
-                              ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"/>
-							<TextBox Name="PART_EditableTextBox" Margin="0, 0, 0, 0"                     
-                     IsReadOnly="{TemplateBinding IsReadOnly}"
-                     Visibility="Hidden" Background="Transparent"
-                     HorizontalAlignment="Left" VerticalAlignment="Center"
-                     Focusable="True" >
-								<TextBox.Template>
-									<ControlTemplate TargetType="TextBox" >
-										<Border Name="PART_ContentHost" Focusable="False" />
-									</ControlTemplate>
-								</TextBox.Template>
-							</TextBox>
-							<!-- Popup showing items -->
-							<Popup Name="Popup" Placement="Bottom" VerticalOffset="5"
-                   Focusable="False" AllowsTransparency="True"
-                   IsOpen="{TemplateBinding ComboBox.IsDropDownOpen}"
-                   PopupAnimation="Fade">
-								<Grid Name="DropDown" SnapsToDevicePixels="True"
-                    MinWidth="{TemplateBinding FrameworkElement.ActualWidth}"
-                    MaxHeight="{TemplateBinding ComboBox.MaxDropDownHeight}">
-									<Border Name="DropDownBorder" Background="{DynamicResource InBac}" Margin="0, 0, 0, 0" Padding="0,0,0,0"
-											CornerRadius="6" BorderThickness="0,0,0,0" BorderBrush="{DynamicResource InBac}"/>
-									<ScrollViewer Margin="2" SnapsToDevicePixels="True">
-										<ItemsPresenter KeyboardNavigation.DirectionalNavigation="Contained"/>
-									</ScrollViewer>
-								</Grid>
-							</Popup>
-						</Grid>
-						<ControlTemplate.Triggers>
-							<Trigger Property="ItemsControl.HasItems" Value="False">
-								<Setter Property="FrameworkElement.MinHeight" TargetName="DropDownBorder" Value="50"/>
-							</Trigger>
-							<Trigger Property="ItemsControl.IsGrouping" Value="True">
-								<Setter Property="ScrollViewer.CanContentScroll" Value="False"/>
-							</Trigger>
-							<Trigger Property="ComboBox.IsEditable" Value="True">
-								<Setter Property="KeyboardNavigation.IsTabStop" Value="False"/>
-								<Setter Property="UIElement.Visibility" TargetName="PART_EditableTextBox" Value="Visible"/>
-								<Setter Property="UIElement.Visibility" TargetName="ContentSite" Value="Hidden"/>
-							</Trigger>
-						</ControlTemplate.Triggers>
-					</ControlTemplate>
-				</Setter.Value>
-			</Setter>
-		</Style>
-
-		<!--Slider Style-->
-		<Style x:Key="SliderRepeatButton" TargetType="RepeatButton">
-			<Setter Property="SnapsToDevicePixels" Value="true" />
-			<Setter Property="OverridesDefaultStyle" Value="true" />
-			<Setter Property="IsTabStop" Value="false" />
-			<Setter Property="Focusable" Value="false" />
-			<Setter Property="Template">
-				<Setter.Value>
-					<ControlTemplate TargetType="RepeatButton">
-						<Border  BorderThickness="0" Background="{DynamicResource InBac}" Height="4" CornerRadius="0,2,2,0"/>
-					</ControlTemplate>
-				</Setter.Value>
-			</Setter>
-		</Style>
-		<Style x:Key="SliderRepeatButton1" TargetType="RepeatButton">
-			<Setter Property="SnapsToDevicePixels" Value="true" />
-            <Setter Property="OverridesDefaultStyle" Value="true" />
-            <Setter Property="Template">
-				<Setter.Value>
-					<ControlTemplate TargetType="RepeatButton">
-						<Border SnapsToDevicePixels="True"  BorderThickness="0" Height="4" CornerRadius="2,0,0,2" Background="{DynamicResource AcGrad}"/>
-					</ControlTemplate>
-				</Setter.Value>
-			</Setter>
-		</Style>
-		<Style x:Key="SliderThumb" TargetType="Thumb">
-			<Setter Property="SnapsToDevicePixels" Value="true" />
-            <Setter Property="OverridesDefaultStyle" Value="true" />
-            <Setter Property="Template">
-				<Setter.Value>
-					<ControlTemplate TargetType="Thumb">
-						<Ellipse x:Name="Ellipse" Height="15" Width="15" Fill="{DynamicResource FgCol3}" RenderTransformOrigin="0.5,0.5">
-							<Ellipse.RenderTransform>
-								<ScaleTransform x:Name="Tans" ScaleX="1" ScaleY="1"/>
-							</Ellipse.RenderTransform>
-						</Ellipse>
-						<ControlTemplate.Triggers>
-							<EventTrigger RoutedEvent="Button.MouseEnter">
-								<BeginStoryboard>
-									<Storyboard>
-										<DoubleAnimation Storyboard.TargetName="Tans"
-                                         Storyboard.TargetProperty="ScaleX" To="1.15" Duration="0:0:0.05" AccelerationRatio="0.1" DecelerationRatio="0.9"/>
-										<DoubleAnimation Storyboard.TargetName="Tans"
-                                         Storyboard.TargetProperty="ScaleY" To="1.15" Duration="0:0:0.05" AccelerationRatio="0.1" DecelerationRatio="0.9"/>
-									</Storyboard>
-								</BeginStoryboard>
-							</EventTrigger>
-							<EventTrigger RoutedEvent="Button.MouseLeave">
-								<BeginStoryboard>
-									<Storyboard>
-										<DoubleAnimation Storyboard.TargetName="Tans"
-                                         Storyboard.TargetProperty="ScaleX" To="1" Duration="0:0:0.2" AccelerationRatio="0.3" DecelerationRatio="0.7"/>
-										<DoubleAnimation Storyboard.TargetName="Tans"
-                                         Storyboard.TargetProperty="ScaleY" To="1" Duration="0:0:0.2" AccelerationRatio="0.3" DecelerationRatio="0.7" />
-									</Storyboard>
-								</BeginStoryboard>
-							</EventTrigger>
-						</ControlTemplate.Triggers>
-					</ControlTemplate>
-				</Setter.Value>
-			</Setter>
-		</Style>
-		<ControlTemplate x:Key="Slider"  TargetType="Slider">
-			<Grid>
-				<Grid.RowDefinitions>
-					<RowDefinition Height="Auto" />
-					<RowDefinition Height="Auto" MinHeight="{TemplateBinding MinHeight}" />
-					<RowDefinition Height="Auto" />
-				</Grid.RowDefinitions>
-				<Track Grid.Row="1" x:Name="PART_Track"   >
-					<Track.DecreaseRepeatButton>
-						<RepeatButton Style="{StaticResource SliderRepeatButton1}"  Command="Slider.DecreaseLarge" />
-					</Track.DecreaseRepeatButton>
-					<Track.IncreaseRepeatButton>
-						<RepeatButton Style="{StaticResource SliderRepeatButton}" Command="Slider.IncreaseLarge" />
-					</Track.IncreaseRepeatButton>
-					<Track.Thumb>
-						<Thumb Style="{StaticResource SliderThumb}"  />
-					</Track.Thumb>
-				</Track>
-			</Grid>
-		</ControlTemplate>
-
-		<Style x:Key="Horizontal_Slider" TargetType="Slider">
-			<Setter Property="Focusable" Value="False"/>
-			<Setter Property="SnapsToDevicePixels" Value="true" />
-			<Setter Property="OverridesDefaultStyle" Value="true" />
-			<Style.Triggers>
-				<Trigger Property="Orientation" Value="Horizontal">
-					<Setter Property="MinHeight" Value="21" />
-					<Setter Property="MinWidth" Value="104" />
-					<Setter Property="Template" Value="{StaticResource Slider}" />
-				</Trigger>
-			</Style.Triggers>
-		</Style>
-
-		<!--ScrollViewer Style-->
-		<Style x:Key="ScrollBarPageButton" TargetType="{x:Type RepeatButton}">
-			<Setter Property="Visibility" Value="Hidden"/>
-			<Setter Property="SnapsToDevicePixels" Value="true"/>
-			<Setter Property="OverridesDefaultStyle" Value="true"/>
-			<Setter Property="IsTabStop" Value="false"/>
-			<Setter Property="Focusable" Value="false"/>
-			<Setter Property="Template">
-				<Setter.Value>
-					<ControlTemplate TargetType="{x:Type RepeatButton}">
-						<Border Background="Transparent" />
-					</ControlTemplate>
-				</Setter.Value>
-			</Setter>
-		</Style>
-
-		<Style x:Key="ScrollBarThumb" TargetType="{x:Type Thumb}">
-			<Setter Property="SnapsToDevicePixels" Value="True"/>
-			<Setter Property="OverridesDefaultStyle" Value="true"/>
-			<Setter Property="IsTabStop" Value="false"/>
-			<Setter Property="Focusable" Value="false"/>
-			<Setter Property="Template">
-				<Setter.Value>
-					<ControlTemplate TargetType="{x:Type Thumb}">
-						<Border CornerRadius="3" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="0"  Width="6"/>
-					</ControlTemplate>
-				</Setter.Value>
-			</Setter>
-		</Style>
-
-		<ControlTemplate x:Key="VerticalScrollBar" TargetType="{x:Type ScrollBar}">
-			<Grid>
-				<Grid.RowDefinitions>
-					<RowDefinition MaxHeight="0"/>
-					<RowDefinition Height="0.0000001*"/>
-					<RowDefinition MaxHeight="0"/>
-				</Grid.RowDefinitions>
-				<Border Grid.RowSpan="3" CornerRadius="3" Background="{DynamicResource BoxBack}" Opacity="0.5" />
-				<RepeatButton/>
-				<Track Name="PART_Track" Grid.Row="1" IsDirectionReversed="true">
-					<Track.DecreaseRepeatButton>
-						<RepeatButton Style="{StaticResource ScrollBarPageButton}" Command="ScrollBar.PageUpCommand" />
-					</Track.DecreaseRepeatButton>
-					<Track.Thumb>
-						<Thumb Style="{StaticResource ScrollBarThumb}" Margin="0,0,0,0" Background="{DynamicResource AcCol2}" BorderBrush="Transparent" />
-					</Track.Thumb>
-					<Track.IncreaseRepeatButton>
-						<RepeatButton Style="{StaticResource ScrollBarPageButton}" Command="ScrollBar.PageDownCommand" />
-					</Track.IncreaseRepeatButton>
-				</Track>
-				<RepeatButton/>
-			</Grid>
-		</ControlTemplate>
-		<Style x:Key="{x:Type ScrollBar}" TargetType="{x:Type ScrollBar}">
-			<Setter Property="SnapsToDevicePixels" Value="True"/>
-			<Setter Property="OverridesDefaultStyle" Value="true"/>
-			<Style.Triggers>
-				<Trigger Property="Orientation" Value="Vertical">
-					<Setter Property="Width" Value="6"/>
-					<Setter Property="Height" Value="Auto" />
-					<Setter Property="Template" Value="{StaticResource VerticalScrollBar}" />
-				</Trigger>
-			</Style.Triggers>
-		</Style>
-
-		<Style x:Key="FavsScrollViewer" TargetType="{x:Type ScrollViewer}">
-			<Setter Property="OverridesDefaultStyle" Value="True"/>
-			<Setter Property="Template">
-				<Setter.Value>
-					<ControlTemplate TargetType="{x:Type ScrollViewer}">
-						<Grid>
-							<Grid.RowDefinitions>
-								<RowDefinition/>
-								<RowDefinition Height="Auto"/>
-							</Grid.RowDefinitions>
-							<Grid.ColumnDefinitions>
-								<ColumnDefinition Width="Auto" MinWidth="479"/>
-								<ColumnDefinition/>
-							</Grid.ColumnDefinitions>
-							<ScrollContentPresenter Grid.Column="0"/>
-							<ScrollBar Grid.Column="1" Name="PART_VerticalScrollBar" Value="{TemplateBinding VerticalOffset}" Maximum="{TemplateBinding ScrollableHeight}" ViewportSize="{TemplateBinding ViewportHeight}" Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}" Margin="5,0,5,0"/>
-						</Grid>
-					</ControlTemplate>
-				</Setter.Value>
-			</Setter>
-		</Style>
-
-	</Window.Resources>
 
 	<!--Structure-->
 	<Viewbox FocusVisualStyle="{x:Null}">
@@ -503,13 +74,13 @@
 								<Grid>
 									<!--Config View-->
 									<StackPanel x:Name="confStack">
-                                        <TextBlock x:Name="interText" Style="{Binding Source={StaticResource HeaderText}}" Margin="20,5,20,0" Text="Clicks Per Second"/>
+                                        <TextBlock x:Name="interText" Style="{StaticResource HeaderText}" Margin="20,5,20,0" Text="Clicks Per Second"/>
 										<Grid Margin="0,1,0,0">
 											<Grid.ColumnDefinitions>
 												<ColumnDefinition Width="69*"/>
 												<ColumnDefinition Width="431*"/>
 											</Grid.ColumnDefinitions>
-											<Border x:Name="interBor" CornerRadius="{Binding Source={StaticResource MinRad}}" Margin="5,0,65,0" Height="{Binding Source={StaticResource MinBoxHeight}}" Background="{DynamicResource BoxBack}" Grid.ColumnSpan="2">
+                                            <Border x:Name="interBor" Style="{StaticResource BackBox}" Margin="5,0,65,0" Grid.ColumnSpan="2">
 												<Grid>
 													<Grid x:Name="cpsGrid" Visibility="Hidden">
 														<TextBlock Foreground="{DynamicResource FgCol1}" Text="1" FontFamily="./res/#Outfit Medium" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="13,0,0,0"/>
@@ -581,19 +152,18 @@
 												</Grid>
 											</Border>
 											<Grid x:Name="rocketSwapGrid" Margin="440,0,0,0" HorizontalAlignment="Left" Width="25" Grid.ColumnSpan="2">
-												<Button x:Name="rocketSwap" Click="RocketSwap" MouseEnter="RocketMouseEnter" MouseLeave="RocketMouseLeave" Background="{DynamicResource BoxBack}" HorizontalAlignment="Left" BorderThickness="0" IsTabStop="False" Focusable="False" Grid.Column="1">
-													<Button.Resources>
-														<Style TargetType="{x:Type Border}">
-															<Setter Property="CornerRadius" Value="{Binding Source={StaticResource MinRad}}"/>
-														</Style>
-													</Button.Resources>
-													<Button.Style>
-														<StaticResource ResourceKey="TogBut"/>
-													</Button.Style>
-													<Button.Height>
-														<Binding Source="{StaticResource MinBoxHeight}"/>
-													</Button.Height>
-													<Button.Width>
+                                                <Button x:Name="rocketSwap" Click="RocketSwap" Style="{StaticResource TogBut}" MouseEnter="RocketMouseEnter" MouseLeave="RocketMouseLeave" HorizontalAlignment="Left" IsTabStop="False" Focusable="False" Grid.Column="1">
+                                                    <Button.Template>
+                                                        <ControlTemplate TargetType="Button">
+                                                            <Border BorderThickness="0" Style="{StaticResource BackBox}" RenderTransformOrigin="0.5,0.5">
+                                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                                <Border.RenderTransform>
+                                                                    <ScaleTransform x:Name="Tans" ScaleX="1" ScaleY="1"/>
+                                                                </Border.RenderTransform>
+                                                            </Border>
+                                                        </ControlTemplate>
+                                                    </Button.Template>
+                                                    <Button.Width>
 														<Binding Source="{StaticResource MinBoxHeight}"/>
 													</Button.Width>
 													<Border x:Name="rocketBorder" Background="{DynamicResource FgCol2}" RenderOptions.BitmapScalingMode="HighQuality" VerticalAlignment="Center" Width="20" Height="20" CornerRadius="0,0,0,0">
@@ -611,19 +181,18 @@
 												</Button>
 											</Grid>
 											<Grid x:Name="swapButtGrid" HorizontalAlignment="Right" Width="25" Grid.ColumnSpan="2" Margin="0,0,5,0">
-												<Button x:Name="swapButt"  Click="InterTypeSwap" Background="{DynamicResource BoxBack}" HorizontalAlignment="Left" BorderThickness="0" IsTabStop="False" Focusable="False" Grid.Column="1">
-													<Button.Resources>
-														<Style TargetType="{x:Type Border}">
-															<Setter Property="CornerRadius" Value="{Binding Source={StaticResource MinRad}}"/>
-														</Style>
-													</Button.Resources>
-													<Button.Style>
-														<StaticResource ResourceKey="TogBut"/>
-													</Button.Style>
-													<Button.Height>
-														<Binding Source="{StaticResource MinBoxHeight}"/>
-													</Button.Height>
-													<Button.Width>
+                                                <Button x:Name="swapButt" Click="InterTypeSwap" Style="{StaticResource TogBut}" HorizontalAlignment="Left" IsTabStop="False" Focusable="False" Grid.Column="1">
+                                                    <Button.Template>
+                                                        <ControlTemplate TargetType="Button">
+                                                            <Border BorderThickness="0" Style="{StaticResource BackBox}" RenderTransformOrigin="0.5,0.5">
+                                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                                <Border.RenderTransform>
+                                                                    <ScaleTransform x:Name="Tans" ScaleX="1" ScaleY="1"/>
+                                                                </Border.RenderTransform>
+                                                            </Border>
+                                                        </ControlTemplate>
+                                                    </Button.Template>
+                                                    <Button.Width>
 														<Binding Source="{StaticResource MinBoxHeight}"/>
 													</Button.Width>
 													<Border x:Name="swapBorder" Background="{DynamicResource AcCol2}" RenderOptions.BitmapScalingMode="HighQuality" VerticalAlignment="Center" Width="20" Height="20" CornerRadius="0,0,0,0">
@@ -666,7 +235,7 @@
 										</Grid>
 										<!--TextBlock Foreground="{DynamicResource FgCol2}" Margin="20,3,20,0" Text="Options" FontFamily="./res/#Outfit Medium" FontSize="13"/-->
 										<Grid Margin="0,1,0,0">
-											<Border x:Name="locBorder" CornerRadius="{Binding Source={StaticResource MinRad}}" Margin="5,0,210,0" Height="{Binding Source={StaticResource MinBoxHeight}}" Background="{DynamicResource BoxBack}" HorizontalAlignment="Stretch">
+                                            <Border x:Name="locBorder" Style="{StaticResource BackBox}" Margin="5,0,210,0" HorizontalAlignment="Stretch">
 												<Grid>
                                                     <TextBlock x:Name="locText" Style="{Binding Source={StaticResource BoxNameText}}" Text="Location" Margin="8,0,8,0"/>
 													<Grid x:Name="locGrid">
@@ -710,7 +279,7 @@
 													</Button>
 												</Grid>
 											</Border>
-											<Border x:Name="modeBor" CornerRadius="{Binding Source={StaticResource MinRad}}" Margin="5,0,5,0" Height="{Binding Source={StaticResource MinBoxHeight}}" Background="{DynamicResource BoxBack}" HorizontalAlignment="Right" Width="200">
+                                            <Border x:Name="modeBor" Style="{StaticResource BackBox}" Margin="5,0,5,0" HorizontalAlignment="Right" Width="200">
 												<Grid>
 													<Grid x:Name="burstGrid">
 														<TextBox x:Name="burstCountInput" Background="{DynamicResource InBac}" BorderBrush="{DynamicResource InBor}" Foreground="{DynamicResource FgCol3}" LostFocus="ChangeBurstCount" TextChanged="HandleInterTextChange" HorizontalAlignment="Right" BorderThickness="1.5" Margin="0,3,85,3" Width="40" FontFamily="./res/#Outfit Medium" Padding="2,0,0,0" PreviewTextInput="NumberValidationTextBox" IsTabStop="False" >
@@ -731,12 +300,12 @@
 											</Border>
 										</Grid>
 										<Grid x:Name="exOptions" Margin="0,0,0,0" Visibility="Collapsed">
-											<Border x:Name="ProfBorder" Opacity="0.5" CornerRadius="{Binding Source={StaticResource MinRad}}" Margin="5,5,210,0" Height="{Binding Source={StaticResource MinBoxHeight}}" Background="{DynamicResource BoxBack}" HorizontalAlignment="Stretch">
+                                            <Border x:Name="ProfBorder" Opacity="0.5" Style="{StaticResource BackBox}" Margin="5,5,210,0" HorizontalAlignment="Stretch">
 												<Grid>
                                                     <TextBlock x:Name="FrofText" Foreground="{DynamicResource FgCol2}" Style="{Binding Source={StaticResource BoxNameText}}" Text="Coming Soon" HorizontalAlignment="Center" Margin="8,0,8,0"/>
 												</Grid>
 											</Border>
-											<Border x:Name="jitBorder" MouseEnter="JitterMouseEnter" MouseLeave="JitterMouseLeave" CornerRadius="{Binding Source={StaticResource MinRad}}" Margin="5,5,132.5,0" Height="{Binding Source={StaticResource MinBoxHeight}}" Background="{DynamicResource BoxBack}" HorizontalAlignment="Right" Width="72.5">
+                                            <Border x:Name="jitBorder" Style="{StaticResource BackBox}" MouseEnter="JitterMouseEnter" MouseLeave="JitterMouseLeave" Margin="5,5,132.5,0" HorizontalAlignment="Right" Width="72.5">
 												<Grid>
                                                     <TextBlock Style="{Binding Source={StaticResource BoxNameText}}" Text="Jitter" Margin="8,0,8,0"/>
 													<Button Background="AntiqueWhite" x:Name="jitBut" HorizontalAlignment="Right" Width="15" Height="15" VerticalAlignment="Center" Margin="0,0,5,0" Click="ToggleJit" IsTabStop="False">
@@ -751,7 +320,7 @@
 													</Button>
 												</Grid>
 											</Border>
-											<Border x:Name="douBorder" CornerRadius="{Binding Source={StaticResource MinRad}}" Margin="5,5,5,0" Height="{Binding Source={StaticResource MinBoxHeight}}" Background="{DynamicResource BoxBack}" HorizontalAlignment="Right" Width="122.5">
+                                            <Border x:Name="douBorder" Style="{StaticResource BackBox}" Margin="5,5,5,0" HorizontalAlignment="Right" Width="122.5">
 												<Grid>
                                                     <TextBlock Style="{Binding Source={StaticResource BoxNameText}}" Text="Double Click" Margin="8,0,8,0"/>
 													<Button Background="AntiqueWhite" x:Name="douBut" HorizontalAlignment="Right" Width="15" Height="15" VerticalAlignment="Center" Margin="0,0,5,0" Click="ToggleDou" IsTabStop="False">
@@ -768,7 +337,7 @@
 											</Border>
 										</Grid>
 										<Grid Margin="0,5,0,0">
-											<Border x:Name="trigBor" CornerRadius="{Binding Source={StaticResource MinRad}}" Margin="5,0,210,0" Height="{Binding Source={StaticResource MinBoxHeight}}" Background="{DynamicResource BoxBack}" HorizontalAlignment="Stretch">
+                                            <Border x:Name="trigBor" Style="{StaticResource BackBox}" Margin="5,0,210,0" HorizontalAlignment="Stretch">
 												<Grid>
                                                     <TextBlock x:Name="trigText" Style="{Binding Source={StaticResource BoxNameText}}" Text="Shortcut" Margin="8,0,8,0"/>
 													<Border x:Name="trigBorder" HorizontalAlignment="Left" BorderThickness="0" Margin="92,3,0,3" Width="147" CornerRadius="5" Background="{DynamicResource InBac}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" MouseEnter="HotMouseEnter" MouseLeave="HotMouseLeave">
@@ -787,7 +356,7 @@
 													</Button>
 												</Grid>
 											</Border>
-											<Border x:Name="clickBor" CornerRadius="{Binding Source={StaticResource MinRad}}" Margin="5,0,5,0" Height="{Binding Source={StaticResource MinBoxHeight}}" Background="{DynamicResource BoxBack}" HorizontalAlignment="Right" Width="200">
+                                            <Border x:Name="clickBor" Style="{StaticResource BackBox}" Margin="5,0,5,0" HorizontalAlignment="Right" Width="200">
 												<Grid>
                                                     <TextBlock Style="{Binding Source={StaticResource BoxNameText}}" Text="Click" Margin="8,0,0,0"/>
 													<Border>
@@ -812,103 +381,52 @@
                                             <TextBlock x:Name="uiScaleText" Style="{Binding Source={StaticResource HeaderText}}" Margin="15,0,0,2" Text="UI Scale - 100%"/>
                                             <TextBlock Style="{Binding Source={StaticResource HeaderText}}" Foreground="{DynamicResource AcCol2}" Margin="15,0,10,0" Text="{Binding AssemblyVersion}"  HorizontalAlignment="Right" Opacity="0.6"/>
 										</Grid>
-										<Border CornerRadius="{Binding Source={StaticResource MinRad}}" Margin="0,1,0,0" Height="{Binding Source={StaticResource MinBoxHeight}}" Background="{DynamicResource BoxBack}">
+                                        <Border Style="{StaticResource BackBox}" Margin="0,1,0,0">
 											<Grid>
 												<TextBlock Foreground="{DynamicResource FgCol1}" Text="50" FontFamily="./res/#Outfit Medium" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0"/>
 												<Slider x:Name="uiScaleSlid" ValueChanged="ScaleSliderChange" Thumb.DragCompleted="ScaleChange" VerticalAlignment="Center" Margin="35,0,40,0" BorderThickness="0" Style="{StaticResource Horizontal_Slider}" Minimum="50" Maximum="200" Value="4" TickFrequency="1" IsSnapToTickEnabled="True" IsTabStop="False"/>
 												<TextBlock Foreground="{DynamicResource FgCol1}" Text="200" FontFamily="./res/#Outfit Medium" FontSize="15" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,6,0"/>
 											</Grid>
 										</Border>
-										<Border CornerRadius="{Binding Source={StaticResource MinRad}}" Margin="0,5,0,0" Height="42" Background="{DynamicResource BoxBack}">
+                                        <Border Style="{StaticResource BackBox}" Margin="0,5,0,0" Height="42">
 											<Grid>
                                                 <TextBlock Style="{Binding Source={StaticResource BoxNameText}}" Text="Theme" Margin="10,0,0,0"/>
 												<StackPanel Orientation="Horizontal" Margin="5,0,5,0" HorizontalAlignment="Right">
-													<Button Name="DefaultThemeBut" Background="#061010" Style="{StaticResource TogBut}" Click="SetTheme" Width="32" Height="32" VerticalAlignment="Center" BorderThickness="0" RenderTransformOrigin="0.5,0.5">
-														<Button.Resources>
-															<Style TargetType="{x:Type Border}">
-																<Setter Property="CornerRadius" Value="16"/>
-															</Style>
-														</Button.Resources>
-
-														<Border Background="#FF45B4B4" Width="16" Height="16" VerticalAlignment="Center" CornerRadius="17" HorizontalAlignment="Center"/>
+													<Button Name="DefaultThemeBut" Background="#061010" Style="{StaticResource ColBut}" Click="SetTheme">
+														<Border Background="#FF45B4B4" Style="{StaticResource ColButCenter}"/>
 													</Button>
-													<Button Name="DefaultLightThemeBut" Background="#F8FFFF" Style="{StaticResource TogBut}" Click="SetTheme" Width="32" Height="32" VerticalAlignment="Center" BorderThickness="0" RenderTransformOrigin="0.5,0.5" Margin="5,0,0,0">
-														<Button.Resources>
-															<Style TargetType="{x:Type Border}">
-																<Setter Property="CornerRadius" Value="16"/>
-															</Style>
-														</Button.Resources>
-														<Border Background="#FF45B4B4" Width="16" Height="16" VerticalAlignment="Center" CornerRadius="17" HorizontalAlignment="Center"/>
+                                                    <Button Name="DefaultLightThemeBut" Background="#F8FFFF" Style="{StaticResource ColBut}" Click="SetTheme" Margin="5,0,0,0">
+                                                        <Border Background="#FF45B4B4" Style="{StaticResource ColButCenter}"/>
 													</Button>
-													<Button Name="ColdThemeBut" Background="#22272c" Style="{StaticResource TogBut}" Click="SetTheme" Width="32" Height="32" VerticalAlignment="Center" BorderThickness="0" RenderTransformOrigin="0.5,0.5" Margin="5,0,0,0">
-														<Button.Resources>
-															<Style TargetType="{x:Type Border}">
-																<Setter Property="CornerRadius" Value="16"/>
-															</Style>
-														</Button.Resources>
-														<Border Background="#fcfbf8" Width="16" Height="16" VerticalAlignment="Center" CornerRadius="17" HorizontalAlignment="Center"/>
+                                                    <Button Name="ColdThemeBut" Background="#22272c" Style="{StaticResource ColBut}" Click="SetTheme" Margin="5,0,0,0">
+                                                        <Border Background="#fcfbf8" Style="{StaticResource ColButCenter}"/>
 													</Button>
-													<Button Name="GreenThemeBut" Background="#030303" Style="{StaticResource TogBut}" Click="SetTheme" Width="32" Height="32" VerticalAlignment="Center" BorderThickness="0" RenderTransformOrigin="0.5,0.5" Margin="5,0,0,0">
-														<Button.Resources>
-															<Style TargetType="{x:Type Border}">
-																<Setter Property="CornerRadius" Value="16"/>
-															</Style>
-														</Button.Resources>
-														<Border Background="#FF16D419" Width="16" Height="16" VerticalAlignment="Center" CornerRadius="17" HorizontalAlignment="Center"/>
+                                                    <Button Name="GreenThemeBut" Background="#030303" Style="{StaticResource ColBut}" Click="SetTheme" Margin="5,0,0,0">
+                                                        <Border Background="#FF16D419" Style="{StaticResource ColButCenter}"/>
 													</Button>
-													<Button Name="DiscordThemeBut" Background="#2f3136" Style="{StaticResource TogBut}" Click="SetTheme" Width="32" Height="32" VerticalAlignment="Center" BorderThickness="0" RenderTransformOrigin="0.5,0.5" Margin="5,0,0,0">
-														<Button.Resources>
-															<Style TargetType="{x:Type Border}">
-																<Setter Property="CornerRadius" Value="16"/>
-															</Style>
-														</Button.Resources>
+                                                    <Button Name="DiscordThemeBut" Background="#2f3136"  Style="{StaticResource ColBut}" Click="SetTheme" Margin="5,0,0,0">
 														<Image Source="res/Discord.png" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center" RenderOptions.BitmapScalingMode="HighQuality"/>
 													</Button>
-													<Button Background="{DynamicResource Back}" Style="{StaticResource ColourButton}" Cursor="Arrow" Width="32" Height="32" VerticalAlignment="Center" BorderThickness="0" RenderTransformOrigin="0.5,0.5" Margin="5,0,0,0" Opacity="0.3">
-														<Button.Resources>
-															<Style TargetType="{x:Type Border}">
-																<Setter Property="CornerRadius" Value="16"/>
-															</Style>
-														</Button.Resources>
-														<Border Background="{DynamicResource BoxBack}" Width="16" Height="16" VerticalAlignment="Center" CornerRadius="17" HorizontalAlignment="Center"/>
+                                                    <Button Background="{DynamicResource Back}" Style="{StaticResource ColBut}" Margin="5,0,0,0" Opacity="0.3">
+														<Border Background="{DynamicResource BoxBack}" Style="{StaticResource ColButCenter}"/>
 													</Button>
-													<Button Background="{DynamicResource Back}" Style="{StaticResource ColourButton}" Cursor="Arrow" Width="32" Height="32" VerticalAlignment="Center" BorderThickness="0" RenderTransformOrigin="0.5,0.5" Margin="5,0,0,0" Opacity="0.25">
-														<Button.Resources>
-															<Style TargetType="{x:Type Border}">
-																<Setter Property="CornerRadius" Value="16"/>
-															</Style>
-														</Button.Resources>
-														<Border Background="{DynamicResource BoxBack}" Width="16" Height="16" VerticalAlignment="Center" CornerRadius="17" HorizontalAlignment="Center"/>
+                                                    <Button Background="{DynamicResource Back}" Style="{StaticResource ColBut}" Margin="5,0,0,0" Opacity="0.25">
+                                                        <Border Background="{DynamicResource BoxBack}" Style="{StaticResource ColButCenter}"/>
 													</Button>
-													<Button Background="{DynamicResource Back}" Style="{StaticResource ColourButton}" Cursor="Arrow" Width="32" Height="32" VerticalAlignment="Center" BorderThickness="0" RenderTransformOrigin="0.5,0.5" Margin="5,0,0,0" Opacity="0.2">
-														<Button.Resources>
-															<Style TargetType="{x:Type Border}">
-																<Setter Property="CornerRadius" Value="16"/>
-															</Style>
-														</Button.Resources>
-														<Border Background="{DynamicResource BoxBack}" Width="16" Height="16" VerticalAlignment="Center" CornerRadius="17" HorizontalAlignment="Center"/>
+                                                    <Button Background="{DynamicResource Back}" Style="{StaticResource ColBut}" Margin="5,0,0,0" Opacity="0.2">
+                                                        <Border Background="{DynamicResource BoxBack}" Style="{StaticResource ColButCenter}"/>
 													</Button>
-													<Button Background="{DynamicResource Back}" Style="{StaticResource ColourButton}" Cursor="Arrow" Width="32" Height="32" VerticalAlignment="Center" BorderThickness="0" RenderTransformOrigin="0.5,0.5" Margin="5,0,0,0" Opacity="0.15">
-														<Button.Resources>
-															<Style TargetType="{x:Type Border}">
-																<Setter Property="CornerRadius" Value="16"/>
-															</Style>
-														</Button.Resources>
-														<Border Background="{DynamicResource BoxBack}" Width="16" Height="16" VerticalAlignment="Center" CornerRadius="17" HorizontalAlignment="Center"/>
+                                                    <Button Background="{DynamicResource Back}" Style="{StaticResource ColBut}" Margin="5,0,0,0" Opacity="0.15">
+                                                        <Border Background="{DynamicResource BoxBack}" Style="{StaticResource ColButCenter}"/>
 													</Button>
-													<Button Background="{DynamicResource Back}" Style="{StaticResource ColourButton}" Cursor="Arrow" Width="32" Height="32" VerticalAlignment="Center" BorderThickness="0" RenderTransformOrigin="0.5,0.5" Margin="5,0,0,0" Opacity="0.1">
-														<Button.Resources>
-															<Style TargetType="{x:Type Border}">
-																<Setter Property="CornerRadius" Value="16"/>
-															</Style>
-														</Button.Resources>
-														<Border Background="{DynamicResource BoxBack}" Width="16" Height="16" VerticalAlignment="Center" CornerRadius="17" HorizontalAlignment="Center"/>
+                                                    <Button Background="{DynamicResource Back}" Style="{StaticResource ColBut}" Margin="5,0,0,0" Opacity="0.1">
+                                                        <Border Background="{DynamicResource BoxBack}" Style="{StaticResource ColButCenter}"/>
 													</Button>
 												</StackPanel>
                                                 <TextBlock Style="{Binding Source={StaticResource BoxNameText}}" Text="More coming soon!" HorizontalAlignment="Right" Margin="0,0,33,0" Opacity="0.5"/>
 											</Grid>
 										</Border>
-										<Border x:Name="animBorder" CornerRadius="{Binding Source={StaticResource MinRad}}" Margin="0,5,0,0" Height="{Binding Source={StaticResource MinBoxHeight}}" Background="{DynamicResource BoxBack}">
+                                        <Border x:Name="animBorder" Style="{StaticResource BackBox}" Margin="0,5,0,0">
 											<Grid>
                                                 <TextBlock Style="{Binding Source={StaticResource BoxNameText}}" Text="Animations" Margin="10,0,0,0"/>
 												<Button Background="AntiqueWhite" x:Name="animButt" HorizontalAlignment="Right" Width="15" Height="15" VerticalAlignment="Center" Margin="0,0,5,0" Click="ToggleAnim" IsTabStop="False">
@@ -924,7 +442,7 @@
 											</Grid>
 										</Border>
                                         <TextBlock Style="{Binding Source={StaticResource HeaderText}}" Margin="15,4,0,2" Text="Clicking"/>
-										<Border x:Name="ctBorder" CornerRadius="{Binding Source={StaticResource MinRad}}" Margin="0,1,0,0" Height="{Binding Source={StaticResource MinBoxHeight}}" Background="{DynamicResource BoxBack}">
+                                        <Border x:Name="ctBorder" Style="{StaticResource BackBox}" Margin="0,1,0,0">
 											<Grid>
                                                 <TextBlock Style="{Binding Source={StaticResource BoxNameText}}" Text="Count total clicks" Margin="10,0,0,0"/>
 												<Button x:Name="tcResetButt" Click="TcReset" Background="{DynamicResource AcGradAlt}" Style="{StaticResource MyButton}" HorizontalAlignment="Left" BorderThickness="0" Margin="150,3,0,3" Width="60" FontSize="8" IsTabStop="False" Focusable="False">
@@ -949,7 +467,7 @@
 											</Grid>
 										</Border>
                                         <TextBlock Style="{Binding Source={StaticResource HeaderText}}" Margin="15,4,0,2" Text="Panel"/>
-										<Border x:Name="aotBorder" CornerRadius="{Binding Source={StaticResource MinRad}}" Margin="0,1,0,0" Height="{Binding Source={StaticResource MinBoxHeight}}" Background="{DynamicResource BoxBack}">
+                                        <Border x:Name="aotBorder" Style="{StaticResource BackBox}" Margin="0,1,0,0">
 											<Grid>
                                                 <TextBlock Style="{Binding Source={StaticResource BoxNameText}}" Text="Always on top" Margin="10,0,0,0"/>
 												<Button Background="AntiqueWhite" x:Name="aotButt" HorizontalAlignment="Right" Width="15" Height="15" VerticalAlignment="Center" Margin="0,0,5,0" Click="ToggleAot" IsTabStop="False">
@@ -964,14 +482,14 @@
 												</Button>
 											</Grid>
 										</Border>
-										<Border CornerRadius="{Binding Source={StaticResource MinRad}}" Margin="0,5,0,0" Height="{Binding Source={StaticResource MinBoxHeight}}" Background="{DynamicResource BoxBack}">
+                                        <Border Style="{StaticResource BackBox}" Margin="0,5,0,0">
 											<Grid>
                                                 <TextBlock Style="{Binding Source={StaticResource BoxNameText}}" Text="Normal Opacity" Margin="10,0,0,0"/>
                                                 <TextBlock Style="{Binding Source={StaticResource BoxNameText}}" x:Name="nOpText" Text="100%" HorizontalAlignment="Right" Margin="0,0,6,0"/>
 												<Slider x:Name="nOpSlid" ValueChanged="NOpSliderChange" Thumb.DragCompleted="NOpChange" VerticalAlignment="Center" Margin="150,0,50,0" BorderThickness="0" Style="{StaticResource Horizontal_Slider}" Minimum="40" Maximum="100" Value="4" TickFrequency="1" IsSnapToTickEnabled="True" IsTabStop="False"/>
 											</Grid>
 										</Border>
-										<Border CornerRadius="{Binding Source={StaticResource MinRad}}" Margin="0,5,0,0" Height="{Binding Source={StaticResource MinBoxHeight}}" Background="{DynamicResource BoxBack}">
+                                        <Border Style="{StaticResource BackBox}" Margin="0,5,0,0">
 											<Grid>
                                                 <TextBlock Style="{Binding Source={StaticResource BoxNameText}}" Text="Clicking Opacity" Margin="10,0,0,0"/>
                                                 <TextBlock Style="{Binding Source={StaticResource BoxNameText}}" x:Name="cOpText" Text="100%" HorizontalAlignment="Right" Margin="0,0,6,0"/>
@@ -979,7 +497,7 @@
 											</Grid>
 										</Border>
                                         <TextBlock Style="{Binding Source={StaticResource HeaderText}}" Margin="15,4,0,2" Text="Windows"/>
-										<Border x:Name="startupBorder" CornerRadius="{Binding Source={StaticResource MinRad}}" Margin="0,1,0,0" Height="{Binding Source={StaticResource MinBoxHeight}}" Background="{DynamicResource BoxBack}">
+                                        <Border x:Name="startupBorder" Style="{StaticResource BackBox}" Margin="0,1,0,0">
 											<Grid>
                                                 <TextBlock Style="{Binding Source={StaticResource BoxNameText}}" Text="Open on Startup" Margin="10,0,0,0"/>
 												<Button Background="AntiqueWhite" x:Name="startupButt" HorizontalAlignment="Right" Width="15" Height="15" VerticalAlignment="Center" Margin="0,0,5,0" Click="ToggleStartup" IsTabStop="False">
@@ -995,7 +513,7 @@
 											</Grid>
 										</Border>
                                         <StackPanel Orientation="Horizontal">
-                                            <Border x:Name="trayBorder" Width="237" CornerRadius="{Binding Source={StaticResource MinRad}}" Margin="0,5,0,0" Height="{Binding Source={StaticResource MinBoxHeight}}" Background="{DynamicResource BoxBack}">
+                                            <Border x:Name="trayBorder" Width="237" Style="{StaticResource BackBox}" Margin="0,5,0,0">
                                                 <Grid>
                                                     <TextBlock Style="{Binding Source={StaticResource BoxNameText}}" Text="System Tray Icon" Margin="10,0,0,0"/>
                                                     <Button Background="AntiqueWhite" x:Name="trayButt" HorizontalAlignment="Right" Width="15" Height="15" VerticalAlignment="Center" Margin="0,0,5,0" Click="ToggleTray" IsTabStop="False">
@@ -1010,7 +528,7 @@
                                                     </Button>
                                                 </Grid>
                                             </Border>
-                                            <Border x:Name="minTrayBorder" Width="237"  CornerRadius="{Binding Source={StaticResource MinRad}}" Margin="5,5,0,0" Height="{Binding Source={StaticResource MinBoxHeight}}" Background="{DynamicResource BoxBack}">
+                                            <Border x:Name="minTrayBorder" Width="237" Style="{StaticResource BackBox}" Margin="5,5,0,0">
                                                 <Grid>
                                                     <TextBlock Style="{Binding Source={StaticResource BoxNameText}}" Text="Minimise to System Tray" Margin="10,0,0,0"/>
                                                     <Button Background="AntiqueWhite" x:Name="minTrayButt" HorizontalAlignment="Right" Width="15" Height="15" VerticalAlignment="Center" Margin="0,0,5,0" Click="ToggleMinTray" IsTabStop="False">
@@ -1027,7 +545,7 @@
                                             </Border>
                                         </StackPanel>
                                         <TextBlock Foreground="{DynamicResource FgCol2}" Margin="0,-4,0,7" Text="..." FontFamily="./res/#Outfit Medium" FontSize="20" TextAlignment="Center"/>
-										<Border x:Name="OtherBorder" CornerRadius="{Binding Source={StaticResource MinRad}}" Margin="0,1,0,0" Height="50" Background="{DynamicResource BoxBack}">
+                                        <Border x:Name="OtherBorder" Style="{StaticResource BackBox}" Margin="0,1,0,0" Height="50">
                                             <Grid>
                                                 <TextBlock Foreground="{DynamicResource FgCol1}" Text="Made by Nathan Dane" FontFamily="./res/#Outfit Medium" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="55,7,0,0"/>
                                                 <TextBlock Name="bioText" Foreground="{DynamicResource FgCol1}" Text="Student and Developer" FontFamily="./res/#Outfit Bold" FontSize="10" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="55,28,0,0" Opacity="0.6"/>
@@ -1060,13 +578,7 @@
 							</Grid>
 						</Grid>
 						<Grid Margin="0,5,0,0">
-							<Button x:Name="settButt" Style="{StaticResource CustBut}" Click="SettingsToggle" Height="{Binding Source={StaticResource MajBoxHeight}}" Width="{Binding Source={StaticResource MajBoxHeight}}" HorizontalAlignment="Left" Background="{DynamicResource BoxBack}" BorderThickness="0" Margin="5,0,0,0" IsTabStop="False" Focusable="False">
-
-								<Button.Resources>
-									<Style TargetType="Border">
-										<Setter Property="CornerRadius" Value="{Binding Source={StaticResource MinRad}}"/>
-									</Style>
-								</Button.Resources>
+							<Button x:Name="settButt" Style="{StaticResource CustBut}" Click="SettingsToggle" Height="{Binding Source={StaticResource MajBoxHeight}}" Width="{Binding Source={StaticResource MajBoxHeight}}" HorizontalAlignment="Left" Margin="5,0,0,0" IsTabStop="False" Focusable="False">
 								<Button.Triggers>
 									<EventTrigger RoutedEvent="Button.MouseEnter">
 										<BeginStoryboard>
@@ -1125,7 +637,7 @@
 				<Grid x:Name="welcomeGrid" Visibility="Collapsed">
 					<TextBlock Margin="0,65,0,0" Foreground="{DynamicResource FgCol1}" Text="Welcome to Clickett!" FontFamily="./res/#Outfit Medium" FontSize="20" VerticalAlignment="Top" TextAlignment="Center" HorizontalAlignment="Center" Width="300" TextWrapping="WrapWithOverflow" LineStackingStrategy="BlockLineHeight" IsHitTestVisible="False"/>
 					<TextBlock Foreground="{DynamicResource FgCol2}" Margin="73,97,20,0" FontFamily="./res/#Outfit Medium" FontSize="13" VerticalAlignment="Top" HorizontalAlignment="Left"><Run Language="en-gb" Text="Choose a theme"/></TextBlock>
-					<Border CornerRadius="{Binding Source={StaticResource MinRad}}" Margin="5,44,5,0" Height="42" Background="{DynamicResource BoxBack}" Width="375">
+                    <Border Style="{StaticResource BackBox}" Margin="5,44,5,0" Height="42" Width="375">
 						<Grid>
 							<StackPanel Orientation="Horizontal" Margin="5,0,5,0" HorizontalAlignment="Right">
 								<Button Name="DefaultThemeBuW" Background="#061010" Style="{StaticResource TogBut}" Click="SetTheme" Width="32" Height="32" VerticalAlignment="Center" BorderThickness="0" RenderTransformOrigin="0.5,0.5">

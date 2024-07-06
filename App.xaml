@@ -8,6 +8,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="res/dic/Themes/BaseTheme.xaml"/>
                 <ResourceDictionary Source="res/dic/Vectors.xaml"/>
+                <ResourceDictionary Source="res/dic/MainWindowStyles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
