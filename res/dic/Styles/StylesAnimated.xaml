@@ -9,63 +9,135 @@
     <Sys:Int16 x:Key="MinBoxHeight">25</Sys:Int16>
     <Sys:Int16 x:Key="MajBoxHeight">40</Sys:Int16>
 
-    <!--Generic Button Style-->
-    <Style x:Key="MyButton" TargetType="Button">
+    <!--Inner Box Button Style-->
+    <Style x:Key="InnerBoxBut" TargetType="Button">
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Background" Value="{DynamicResource AcGradAlt}" />
+        <Setter Property="Foreground" Value="{DynamicResource GradFG}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource AcGradAlt}" />
+        <Setter Property="FontFamily" Value="../../#Outfit Medium" />
+        <Setter Property="TextBlock.HorizontalAlignment" Value="Center" />
+        <Setter Property="TextBlock.VerticalAlignment" Value="Center" />
+        <Setter Property="TextBlock.FontSize" Value="14" />
+        <Setter Property="VerticalAlignment" Value="Stretch" />
+        <Setter Property="HorizontalAlignment" Value="Right" />
+        <Setter Property="Margin" Value="3,3,3,3" />
+        <Setter Property="IsTabStop" Value="False" />
+        <Setter Property="Focusable" Value="False" />
+        <Setter Property="BorderThickness" Value="0" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <Border BorderThickness="0" Background="{TemplateBinding Background}">
-                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    </Border>
+                    <Grid>
+                        <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0.2,5,0.2,0.2" CornerRadius="5" Background="{TemplateBinding BorderBrush}" Opacity="0.5"/>
+                        <Border BorderThickness="0" CornerRadius="5" Background="{TemplateBinding Background}" RenderTransformOrigin="0.5,0.5">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            <Border.RenderTransform>
+                                <TranslateTransform x:Name="Translate" X="0" Y="0"/>
+                            </Border.RenderTransform>
+                        </Border>
+                    </Grid>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Opacity" Value="0.69" />
-                        </Trigger>
-                        <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Opacity" Value="0.4"/>
-                        </Trigger>
+                        <EventTrigger RoutedEvent="Button.MouseEnter">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation Storyboard.TargetName="Translate" Storyboard.TargetProperty="Y" To="-2" Duration="0:0:0.03" AccelerationRatio="0.1" DecelerationRatio="0.9"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                        <EventTrigger RoutedEvent="Button.MouseLeave">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation Storyboard.TargetName="Translate" Storyboard.TargetProperty="Y" To="0" Duration="0:0:0.15" AccelerationRatio="0.3" DecelerationRatio="0.7"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
 
-    <!--Switch Button Style-->
-    <Style x:Key="CustBut" TargetType="Button">
+    <!--Box-Aligned Button Template-->
+    <ControlTemplate x:Key="BoxAlignedButtonTemplate" TargetType="Button">
+        <Border BorderThickness="0" Background="{TemplateBinding Background}" Height="{TemplateBinding Height}" CornerRadius="{Binding Source={StaticResource MinRad}}" RenderTransformOrigin="0.5,0.5">
+            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Border.RenderTransform>
+                <ScaleTransform x:Name="Scale" ScaleX="1" ScaleY="1"/>
+            </Border.RenderTransform>
+        </Border>
+        <ControlTemplate.Triggers>
+            <EventTrigger RoutedEvent="Button.MouseEnter">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <DoubleAnimation Storyboard.TargetName="Scale" Storyboard.TargetProperty="ScaleX" To="1.07" Duration="0:0:0.05" AccelerationRatio="0.1" DecelerationRatio="0.9"/>
+                        <DoubleAnimation Storyboard.TargetName="Scale" Storyboard.TargetProperty="ScaleY" To="1.07" Duration="0:0:0.05" AccelerationRatio="0.1" DecelerationRatio="0.9"/>
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+            <EventTrigger RoutedEvent="Button.MouseLeave">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <DoubleAnimation Storyboard.TargetName="Scale" Storyboard.TargetProperty="ScaleX" To="1" Duration="0:0:0.2" AccelerationRatio="0.3" DecelerationRatio="0.7"/>
+                        <DoubleAnimation Storyboard.TargetName="Scale" Storyboard.TargetProperty="ScaleY" To="1" Duration="0:0:0.2" AccelerationRatio="0.3" DecelerationRatio="0.7" />
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <!--Settings Button Style-->
+    <Style x:Key="SettingsBut" TargetType="Button">
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Cursor" Value="Hand" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
                     <Border BorderThickness="0" CornerRadius="{Binding Source={StaticResource MinRad}}" Background="{DynamicResource BoxBack}" Height="{TemplateBinding Height}">
-                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <ContentPresenter RenderTransformOrigin="0.5,0.5">
+                            <ContentPresenter.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform x:Name="settScale" CenterY="0.5" CenterX="0.5"/>
+                                </TransformGroup>
+                            </ContentPresenter.RenderTransform>
+                        </ContentPresenter>
                     </Border>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                        </Trigger>
-                        <Trigger Property="IsEnabled" Value="False">
-                        </Trigger>
+                        <EventTrigger RoutedEvent="Button.MouseEnter">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation Storyboard.TargetName="settScale" Storyboard.TargetProperty="ScaleX" To="1.06" Duration="0:0:0.05" AccelerationRatio="0.1" DecelerationRatio="0.9"/>
+                                    <DoubleAnimation Storyboard.TargetName="settScale" Storyboard.TargetProperty="ScaleY" To="1.06" Duration="0:0:0.05" AccelerationRatio="0.1" DecelerationRatio="0.9"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                        <EventTrigger RoutedEvent="Button.MouseLeave">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation Storyboard.TargetName="settScale"
+     Storyboard.TargetProperty="ScaleX" To="1" Duration="0:0:0.2" AccelerationRatio="0.3" DecelerationRatio="0.7"/>
+                                    <DoubleAnimation Storyboard.TargetName="settScale"
+     Storyboard.TargetProperty="ScaleY" To="1" Duration="0:0:0.2" AccelerationRatio="0.3" DecelerationRatio="0.7" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
 
-    <!--Toggle Button Style-->
+    <!--Icon Button Style-->
     <Style x:Key="IconBut" TargetType="Button">
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Cursor" Value="Hand" />
-        <Setter Property="Width" Value="15" />
-        <Setter Property="Height" Value="15" />
-        <Setter Property="VerticalAlignment" Value="Center" />
-        <Setter Property="HorizontalAlignment" Value="Right" />
         <Setter Property="IsTabStop" Value="False" />
+        <Setter Property="Background" Value="Transparent" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <Border BorderThickness="0" CornerRadius="20" Background="{TemplateBinding Background}" RenderTransformOrigin="0.5,0.5">
+                    <Border BorderThickness="0" RenderTransformOrigin="0.5,0.5">
                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         <Border.RenderTransform>
                             <ScaleTransform x:Name="Scale" ScaleX="1" ScaleY="1"/>
@@ -88,9 +160,6 @@
                                 </Storyboard>
                             </BeginStoryboard>
                         </EventTrigger>
-                        <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Opacity" Value="0.4"/>
-                        </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
@@ -149,6 +218,7 @@
         <Setter Property="Height" Value="20" />
         <Setter Property="VerticalAlignment" Value="Top" />
         <Setter Property="HorizontalAlignment" Value="Right" />
+        <Setter Property="RenderOptions.BitmapScalingMode" Value="HighQuality" />
         <Setter Property="IsTabStop" Value="False" />
         <Setter Property="Template">
             <Setter.Value>
@@ -190,7 +260,7 @@
         </Setter>
     </Style>
 
-    <!--Colour Button Style-->
+    <!--Colour Selection Button Style-->
     <Style x:Key="ColBut" TargetType="Button">
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Cursor" Value="Hand" />
@@ -238,16 +308,24 @@
         </Setter>
     </Style>
 
-    <!--Colour Button Style-->
-    <Style x:Key="ColourButton" TargetType="Button">
-        <Setter Property="OverridesDefaultStyle" Value="True" />
+    <!--Activate Button Style-->
+    <Style x:Key="ActivateButton" TargetType="Button">
         <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Background" Value="{DynamicResource AcGrad}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <Border BorderThickness="0" Background="{TemplateBinding Background}">
-                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <Border BorderThickness="0" Background="{TemplateBinding Background}" CornerRadius="{Binding Source={StaticResource MinRad}}" >
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Name="InnerStuff"/>
                     </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="InnerStuff" Property="ContentPresenter.Opacity" Value="0.8"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="InnerStuff" Property="ContentPresenter.Opacity" Value="0.5"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -396,9 +474,9 @@
                             <BeginStoryboard>
                                 <Storyboard>
                                     <DoubleAnimation Storyboard.TargetName="Tans"
-                                 Storyboard.TargetProperty="ScaleX" To="1.15" Duration="0:0:0.05" AccelerationRatio="0.1" DecelerationRatio="0.9"/>
+                                 Storyboard.TargetProperty="ScaleX" To="1.15" Duration="0:0:0.04" AccelerationRatio="0.1" DecelerationRatio="0.9"/>
                                     <DoubleAnimation Storyboard.TargetName="Tans"
-                                 Storyboard.TargetProperty="ScaleY" To="1.15" Duration="0:0:0.05" AccelerationRatio="0.1" DecelerationRatio="0.9"/>
+                                 Storyboard.TargetProperty="ScaleY" To="1.15" Duration="0:0:0.04" AccelerationRatio="0.1" DecelerationRatio="0.9"/>
                                 </Storyboard>
                             </BeginStoryboard>
                         </EventTrigger>
@@ -406,9 +484,9 @@
                             <BeginStoryboard>
                                 <Storyboard>
                                     <DoubleAnimation Storyboard.TargetName="Tans"
-                                 Storyboard.TargetProperty="ScaleX" To="1" Duration="0:0:0.2" AccelerationRatio="0.3" DecelerationRatio="0.7"/>
+                                 Storyboard.TargetProperty="ScaleX" To="1" Duration="0:0:0.15" AccelerationRatio="0.3" DecelerationRatio="0.7"/>
                                     <DoubleAnimation Storyboard.TargetName="Tans"
-                                 Storyboard.TargetProperty="ScaleY" To="1" Duration="0:0:0.2" AccelerationRatio="0.3" DecelerationRatio="0.7" />
+                                 Storyboard.TargetProperty="ScaleY" To="1" Duration="0:0:0.15" AccelerationRatio="0.3" DecelerationRatio="0.7" />
                                 </Storyboard>
                             </BeginStoryboard>
                         </EventTrigger>
@@ -418,88 +496,4 @@
         </Setter>
     </Style>
 
-    <!--ScrollViewer Style-->
-    <Style x:Key="ScrollBarPageButton" TargetType="{x:Type RepeatButton}">
-        <Setter Property="Visibility" Value="Hidden"/>
-        <Setter Property="SnapsToDevicePixels" Value="true"/>
-        <Setter Property="OverridesDefaultStyle" Value="true"/>
-        <Setter Property="IsTabStop" Value="false"/>
-        <Setter Property="Focusable" Value="false"/>
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type RepeatButton}">
-                    <Border Background="Transparent" />
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-    <Style x:Key="ScrollBarThumb" TargetType="{x:Type Thumb}">
-        <Setter Property="SnapsToDevicePixels" Value="True"/>
-        <Setter Property="OverridesDefaultStyle" Value="true"/>
-        <Setter Property="IsTabStop" Value="false"/>
-        <Setter Property="Focusable" Value="false"/>
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type Thumb}">
-                    <Border CornerRadius="3" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="0"  Width="6"/>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-    <ControlTemplate x:Key="VerticalScrollBar" TargetType="{x:Type ScrollBar}">
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition MaxHeight="0"/>
-                <RowDefinition Height="0.0000001*"/>
-                <RowDefinition MaxHeight="0"/>
-            </Grid.RowDefinitions>
-            <Border Grid.RowSpan="3" CornerRadius="3" Background="{DynamicResource BoxBack}" Opacity="0.5" />
-            <RepeatButton/>
-            <Track Name="PART_Track" Grid.Row="1" IsDirectionReversed="true">
-                <Track.DecreaseRepeatButton>
-                    <RepeatButton Style="{StaticResource ScrollBarPageButton}" Command="ScrollBar.PageUpCommand" />
-                </Track.DecreaseRepeatButton>
-                <Track.Thumb>
-                    <Thumb Style="{StaticResource ScrollBarThumb}" Margin="0,0,0,0" Background="{DynamicResource AcCol2}" BorderBrush="Transparent" />
-                </Track.Thumb>
-                <Track.IncreaseRepeatButton>
-                    <RepeatButton Style="{StaticResource ScrollBarPageButton}" Command="ScrollBar.PageDownCommand" />
-                </Track.IncreaseRepeatButton>
-            </Track>
-            <RepeatButton/>
-        </Grid>
-    </ControlTemplate>
-    <Style x:Key="{x:Type ScrollBar}" TargetType="{x:Type ScrollBar}">
-        <Setter Property="SnapsToDevicePixels" Value="True"/>
-        <Setter Property="OverridesDefaultStyle" Value="true"/>
-        <Style.Triggers>
-            <Trigger Property="Orientation" Value="Vertical">
-                <Setter Property="Width" Value="6"/>
-                <Setter Property="Height" Value="Auto" />
-                <Setter Property="Template" Value="{StaticResource VerticalScrollBar}" />
-            </Trigger>
-        </Style.Triggers>
-    </Style>
-    <Style x:Key="FavsScrollViewer" TargetType="{x:Type ScrollViewer}">
-        <Setter Property="OverridesDefaultStyle" Value="True"/>
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type ScrollViewer}">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" MinWidth="479"/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
-                        <ScrollContentPresenter Grid.Column="0"/>
-                        <ScrollBar Grid.Column="1" Name="PART_VerticalScrollBar" Value="{TemplateBinding VerticalOffset}" Maximum="{TemplateBinding ScrollableHeight}" ViewportSize="{TemplateBinding ViewportHeight}" Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}" Margin="5,0,5,0"/>
-                    </Grid>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-    
 </ResourceDictionary>

@@ -32,6 +32,20 @@
         <Setter Property="Background" Value="{DynamicResource BoxBack}" />
     </Style>
 
+    <!--Box-Aligned Button Style-->
+    <Style x:Key="BoxAlignedBut" TargetType="Button">
+        <Setter Property="Background" Value="{DynamicResource BoxBack}" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Height" Value="{Binding Source={StaticResource MinBoxHeight}}" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Right" />
+        <Setter Property="IsTabStop" Value="False" />
+        <Setter Property="RenderTransformOrigin" Value="0.5,0.5" />
+        <Setter Property="Foreground" Value="{DynamicResource GradFG}" />
+        <Setter Property="FontFamily" Value="../../#Outfit Medium" />
+        <Setter Property="Template" Value="{DynamicResource BoxAlignedButtonTemplate}"/>
+    </Style>
+
     <!--Colour Button Style-->
     <Style x:Key="ColButCenter" TargetType="Border">
         <Setter Property="CornerRadius" Value="17" />
@@ -39,6 +53,45 @@
         <Setter Property="Width" Value="16" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="HorizontalAlignment" Value="Center" />
+    </Style>
+
+    <!--Text Box Style-->
+    <Style x:Key="TextBoxFlat" TargetType="TextBox">
+        <Setter Property="Background" Value="{DynamicResource BoxBack}" />
+        <Setter Property="Background" Value="{DynamicResource InBac}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource InBor}" />
+        <Setter Property="Foreground" Value="{DynamicResource FgCol3}" />
+        <Setter Property="BorderThickness" Value="1.5" />
+        <Setter Property="FontFamily" Value="../../#Outfit Medium" />
+        <Setter Property="Template" >
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type TextBox}">
+                    <Border
+                        x:Name="TextBorder"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        SnapsToDevicePixels="True"
+                        CornerRadius="5">
+                        <ScrollViewer
+                            x:Name="PART_ContentHost"
+                            Focusable="false"
+                            HorizontalScrollBarVisibility="Hidden"
+                            VerticalScrollBarVisibility="Hidden" 
+                            VerticalAlignment="Center"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter TargetName="TextBorder" Property="BorderBrush" Value="{DynamicResource AcCol1}" />
+                        </Trigger>
+                        <Trigger Property="IsFocused" Value="true">
+                            <Setter TargetName="TextBorder" Property="BorderBrush" Value="{DynamicResource AcCol1}" />
+                            <Setter TargetName="TextBorder" Property="BorderThickness" Value="2" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
 
     <!--ComboBox Style-->
@@ -57,9 +110,9 @@
       Background="Transparent" />
 
             <Path Name="Arrow" Grid.Column="1" 
-    Data="M 0 0 L 4 4 L 8 0 Z"
-    HorizontalAlignment="Center" Fill="{DynamicResource FgCol2}"
-    VerticalAlignment="Center" />
+    Data="M 0 0 L 4 4.1 L 8 0 Z"
+    HorizontalAlignment="Center" Fill="{DynamicResource FgCol1}"
+    VerticalAlignment="Center"  Opacity="0.8"/>
         </Grid>
         <ControlTemplate.Triggers>
             <Trigger Property="UIElement.IsMouseOver" Value="True">
@@ -78,7 +131,8 @@
         <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled"/>
         <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Disabled"/>
         <Setter Property="ScrollViewer.CanContentScroll" Value="False"/>
-        <Setter Property="TextElement.Foreground" Value="Black"/>
+        <Setter Property="TextElement.Foreground" Value="{DynamicResource FgCol1}"/>
+        <Setter Property="FontFamily" Value="../../#Outfit Medium"/>
         <Setter Property="FrameworkElement.FocusVisualStyle" Value="{x:Null}"/>
 
         <Setter Property="ComboBox.ItemContainerStyle">
@@ -87,12 +141,8 @@
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate TargetType="ComboBoxItem">
-
                                 <Grid>
-                                    <Border
-                                BorderThickness="0"
-                                Background="{TemplateBinding Background}"
-                                CornerRadius="4" Padding="3,0,0,0">
+                                    <Border BorderThickness="0" Background="{TemplateBinding Background}" CornerRadius="4" Padding="3,0,0,0">
                                         <ContentPresenter/>
                                     </Border>
                                 </Grid>
@@ -212,7 +262,7 @@
             </Track>
         </Grid>
     </ControlTemplate>
-    <Style x:Key="Horizontal_Slider" TargetType="Slider">
+    <Style x:Key="SliderFlat" TargetType="Slider">
         <Setter Property="Focusable" Value="False"/>
         <Setter Property="SnapsToDevicePixels" Value="true" />
         <Setter Property="OverridesDefaultStyle" Value="true" />

@@ -64,6 +64,7 @@ namespace Clickett
         // STARTUP LOGIC
         public MainWindow()
         {
+            Properties.Settings.Default.Reset();
             InitializeComponent();
             InitializeThingies();
             TextOptions.SetTextRenderingMode(this, TextRenderingMode.Auto);
@@ -77,7 +78,7 @@ namespace Clickett
         private void InitializeThingies()
         {
             try { hotkey = s.Default.hkAction; }
-            catch { hotkey = Key.F; }
+            catch { hotkey = Key.Z; }
             hkCtrl = s.Default.hkCtrl;
             hkShift = s.Default.hkShift;
             hkAlt = s.Default.hkAlt;
@@ -610,6 +611,7 @@ namespace Clickett
             if (settOpen) SettingsToggle(this, null);
             if (exOp) ToggleExOp(this, null);
             if (rocket) RocketSwap(this, null);
+            if (interType) InterTypeSwap(this, null);
             helpBut.IsEnabled = false;
             if (newLocListen)
             {
@@ -646,7 +648,7 @@ namespace Clickett
             tutHelpPage.Visibility = Visibility.Collapsed;
             tutContact.Visibility = Visibility.Collapsed;
             FocusItem(1);
-            TutoArrange(340, 125, 100, 64, 300, false, -98, 44, 48, "You can use this part to choose how fast you want to click");
+            TutoArrange(340, 125, 100, 64, 300, false, -98, 44, 48, "You can use this slider to choose how fast you want to click");
             tutNextButText.Text = "Next";
             tutOverlay.Visibility = Visibility.Visible;
             tutStep = 0;
@@ -837,8 +839,8 @@ namespace Clickett
             settButt.SetResourceReference(OpacityProperty, "OverlayOpacity");
             settButt.Effect = blur;
             settButt.IsEnabled = false;
-            activateButtGrid.SetResourceReference(OpacityProperty, "OverlayOpacity");
-            activateButtGrid.Effect = blur;
+            activateButt.SetResourceReference(OpacityProperty, "OverlayOpacity");
+            activateButt.Effect = blur;
             activateButt.IsEnabled = false;
             settGrid.SetResourceReference(OpacityProperty, "OverlayOpacity");
             settGrid.Effect = blur;
@@ -920,8 +922,8 @@ namespace Clickett
                     settButt.IsEnabled = true;
                     break;
                 case 13:
-                    activateButtGrid.Opacity = 1;
-                    activateButtGrid.Effect = null;
+                    activateButt.Opacity = 1;
+                    activateButt.Effect = null;
                     activateButt.IsEnabled = true;
                     break;
                 default:
@@ -964,8 +966,8 @@ namespace Clickett
                     settButt.Opacity = 1;
                     settButt.Effect = null;
                     settButt.IsEnabled = true;
-                    activateButtGrid.Opacity = 1;
-                    activateButtGrid.Effect = null;
+                    activateButt.Opacity = 1;
+                    activateButt.Effect = null;
                     activateButt.IsEnabled = true;
                     settGrid.Opacity = 1;
                     settGrid.Effect = null;
@@ -987,6 +989,7 @@ namespace Clickett
         // UPDATING LOGIC
         private async void CheckUpdate(bool manual)
         {
+            UpdateBut.Visibility = Visibility.Collapsed;
             try
             {
                 // ConfigureAwait(true) so that UpdateStatus() is called on the UI thread
@@ -1008,13 +1011,13 @@ namespace Clickett
 
             try
             {
-                await _um.DownloadUpdatesAsync(_update, Progress).ConfigureAwait(false);
+                await _um.DownloadUpdatesAsync(_update, UpdateDownloadProgress).ConfigureAwait(false);
             }
             catch (Exception ex)
             {
                 try
                 {
-                    await _um.DownloadUpdatesAsync(_update, Progress, ignoreDeltas: true).ConfigureAwait(false);
+                    await _um.DownloadUpdatesAsync(_update, UpdateDownloadProgress, ignoreDeltas: true).ConfigureAwait(false);
                 }
                 catch (Exception exc)
                 {
@@ -1022,7 +1025,7 @@ namespace Clickett
                 }
             }
         }
-        private void Progress(int percent)
+        private void UpdateDownloadProgress(int percent)
         {
             // progress can be sent from other threads
             this.Dispatcher.InvokeAsync(() =>
@@ -1184,13 +1187,13 @@ namespace Clickett
             var cps = cpsSlid.Value;
             clickInterval = (int)Math.Round(1000 / cps);
             interText.Text = "Clicks Per Second - " + cps;
-            if (cps > 55)
+            if (cps > 50)
             {
                 cpsWarn.Visibility = Visibility.Visible;
                 var mar = cpsWarn.Margin;
                 mar.Left = 30 + (355 * ((cps - 1) / 68));
                 cpsWarn.Margin = mar;
-                cpsWarnBack.Opacity = 0.2 + (0.6 * ((cps - 55) / 14));
+                cpsWarnBack.Opacity = 0.2 + (0.6 * ((cps - 50) / 19));
             }
             else cpsWarn.Visibility = Visibility.Hidden;
         }
@@ -1400,7 +1403,7 @@ namespace Clickett
         }
         private void ScaleChange(object sender, System.Windows.Controls.Primitives.DragCompletedEventArgs? e)
         {
-            uiScale = s.Default.uiScale = (int)uiScaleSlid.Value;
+            uiScale = s.Default.uiScale = (int)((Slider)sender).Value;
             s.Default.Save();
             if (doAnimations)
             {
@@ -1473,7 +1476,7 @@ namespace Clickett
         }
         private void SetTheme(object sender, RoutedEventArgs? e)
         {
-            curTheme = ((Button)sender).Name.Substring(0, ((Button)sender).Name.Length - 8);
+            curTheme = ((Button)sender).Tag.ToString();
             UpdateMergedDictionaries();
 
             s.Default.Theme = curTheme;

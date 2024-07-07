@@ -63,7 +63,7 @@
 
     <SolidColorBrush x:Key="FgCol1">#EED7DBDB</SolidColorBrush>
     <SolidColorBrush x:Key="FgCol2">#D5BBBBBB</SolidColorBrush>
-    <SolidColorBrush x:Key="FgCol3">#FFEEF5F5</SolidColorBrush>
+    <SolidColorBrush x:Key="FgCol3">#FF12D138</SolidColorBrush>
     <SolidColorBrush x:Key="GradFG">#E9030303</SolidColorBrush>
 
     <Color x:Key="BoxBackColor">#AC1D1E1D</Color>

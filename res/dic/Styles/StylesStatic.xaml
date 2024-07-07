@@ -9,20 +9,49 @@
     <Sys:Int16 x:Key="MinBoxHeight">25</Sys:Int16>
     <Sys:Int16 x:Key="MajBoxHeight">40</Sys:Int16>
 
-    <!--Generic Button Style-->
-    <Style x:Key="MyButton" TargetType="Button">
+    <!--Inner Box Button Style-->
+    <Style x:Key="InnerBoxBut" TargetType="Button">
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Background" Value="{DynamicResource AcGradAlt}" />
+        <Setter Property="Foreground" Value="{DynamicResource GradFG}" />
+        <Setter Property="FontFamily" Value="../../#Outfit Medium" />
+        <Setter Property="TextBlock.HorizontalAlignment" Value="Center" />
+        <Setter Property="TextBlock.VerticalAlignment" Value="Center" />
+        <Setter Property="TextBlock.FontSize" Value="14" />
+        <Setter Property="VerticalAlignment" Value="Stretch" />
+        <Setter Property="HorizontalAlignment" Value="Right" />
+        <Setter Property="Margin" Value="3,3,3,3" />
+        <Setter Property="IsTabStop" Value="False" />
+        <Setter Property="Focusable" Value="False" />
+        <Setter Property="BorderThickness" Value="0" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <Border BorderThickness="0" Background="{TemplateBinding Background}">
-                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    </Border>
+                    <Grid>
+                        <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0.05,5,0.05,0.05" CornerRadius="5" Background="{TemplateBinding Background}" Opacity="0.5"/>
+                        <Border BorderThickness="0" CornerRadius="5" Background="{TemplateBinding Background}" RenderTransformOrigin="0.5,0.5">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            <Border.RenderTransform>
+                                <TranslateTransform x:Name="Translate" X="0" Y="0"/>
+                            </Border.RenderTransform>
+                        </Border>
+                    </Grid>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Opacity" Value="0.69" />
-                        </Trigger>
+                        <EventTrigger RoutedEvent="Button.MouseEnter">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation Storyboard.TargetName="Translate" Storyboard.TargetProperty="Y" To="-1.7" Duration="0:0:0"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                        <EventTrigger RoutedEvent="Button.MouseLeave">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation Storyboard.TargetName="Translate" Storyboard.TargetProperty="Y" To="0" Duration="0:0:0"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Opacity" Value="0.4"/>
                         </Trigger>
@@ -32,20 +61,88 @@
         </Setter>
     </Style>
 
-    <!--Switch Button Style-->
-    <Style x:Key="CustBut" TargetType="Button">
+    <!--Box-Aligned Button Template-->
+    <ControlTemplate x:Key="BoxAlignedButtonTemplate" TargetType="Button">
+        <Border BorderThickness="0" Background="{DynamicResource BoxBack}" Height="{Binding Source={StaticResource MinBoxHeight}}" CornerRadius="{Binding Source={StaticResource MinRad}}">
+            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Border.RenderTransform>
+                <ScaleTransform ScaleX="1" ScaleY="1"/>
+            </Border.RenderTransform>
+        </Border>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="RenderTransform">
+                    <Setter.Value>
+                        <ScaleTransform ScaleX="1.07" ScaleY="1.07" />
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <!--Settings Button Style-->
+    <Style x:Key="SettingsBut" TargetType="Button">
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Cursor" Value="Hand" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
                     <Border BorderThickness="0" CornerRadius="{Binding Source={StaticResource MinRad}}" Background="{DynamicResource BoxBack}" Height="{TemplateBinding Height}">
-                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <Border Name="settIcon" Background="{DynamicResource FgCol1}" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Center" VerticalAlignment="Center" Width="29" Height="29">
+                            <Border.RenderTransform>
+                                <TransformGroup>
+                                    <RotateTransform Angle="0" />
+                                    <ScaleTransform x:Name="settScale" CenterY="0.5" CenterX="0.5"/>
+                                </TransformGroup>
+                            </Border.RenderTransform>
+                            <Border.OpacityMask>
+                                <ImageBrush ImageSource="{DynamicResource SettingIcon}" Stretch="Uniform">
+                                    <ImageBrush.RelativeTransform>
+                                        <TransformGroup>
+                                            <TranslateTransform X="0" Y="0"/>
+                                        </TransformGroup>
+                                    </ImageBrush.RelativeTransform>
+                                </ImageBrush>
+                            </Border.OpacityMask>
+                        </Border>
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="settIcon" Property="Border.RenderTransform">
+                                <Setter.Value>
+                                    <ScaleTransform ScaleX="1.05" ScaleY="1.05" />
+                                </Setter.Value>
+                            </Setter>
                         </Trigger>
-                        <Trigger Property="IsEnabled" Value="False">
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--Icon Button Style-->
+    <Style x:Key="IconBut" TargetType="Button">
+        <Setter Property="OverridesDefaultStyle" Value="True" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="IsTabStop" Value="False" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="RenderTransformOrigin" Value="0.5,0.5" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border BorderThickness="0">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <Border.RenderTransform>
+                            <ScaleTransform ScaleX="1" ScaleY="1"/>
+                        </Border.RenderTransform>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="RenderTransform">
+                                <Setter.Value>
+                                    <ScaleTransform ScaleX="1.1" ScaleY="1.1" />
+                                </Setter.Value>
+                            </Setter>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -116,7 +213,7 @@
         </Setter>
     </Style>
 
-    <!--Colour Button Style-->
+    <!--Colour Selection Button Style-->
     <Style x:Key="ColBut" TargetType="Button">
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Cursor" Value="Hand" />
@@ -148,16 +245,24 @@
         </Setter>
     </Style>
 
-    <!--Colour Button Style-->
-    <Style x:Key="ColourButton" TargetType="Button">
-        <Setter Property="OverridesDefaultStyle" Value="True" />
+    <!--Activate Button Style-->
+    <Style x:Key="ActivateButton" TargetType="Button">
         <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Background" Value="{DynamicResource AcGrad}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <Border BorderThickness="0" Background="{TemplateBinding Background}">
-                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <Border BorderThickness="0" Background="{TemplateBinding Background}" CornerRadius="{Binding Source={StaticResource MinRad}}" >
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Name="InnerStuff"/>
                     </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="InnerStuff" Property="ContentPresenter.Opacity" Value="0.8"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="InnerStuff" Property="ContentPresenter.Opacity" Value="0.5"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
