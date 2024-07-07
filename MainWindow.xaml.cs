@@ -64,7 +64,6 @@ namespace Clickett
         // STARTUP LOGIC
         public MainWindow()
         {
-            Properties.Settings.Default.Reset();
             InitializeComponent();
             InitializeThingies();
             TextOptions.SetTextRenderingMode(this, TextRenderingMode.Auto);
@@ -247,8 +246,10 @@ namespace Clickett
             hwnd = new WindowInteropHelper(this).Handle;
             SetWindowExTransparent(hwnd);
             fullCanvas.Opacity = cOpacity;
+
+            fullGrid.RenderTransform = new ScaleTransform(0.94,0.94);
             var blur = new BlurEffect();
-            blur.Radius = 5;
+            blur.Radius = 10;
             fullGrid.Effect = blur;
 
             mouse_event(clickDo | clickUp, xPos, yPos, 0, 0);
@@ -279,6 +280,8 @@ namespace Clickett
             Focusable = true;
             SetWindowExDefault(hwnd);
             fullCanvas.Opacity = nOpacity;
+
+            fullGrid.RenderTransform = new ScaleTransform(1, 1);
             fullGrid.Effect = null;
             if (countTotal)
             {
