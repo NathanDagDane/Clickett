@@ -1407,6 +1407,7 @@ namespace Clickett
         private void ScaleChange(object sender, System.Windows.Controls.Primitives.DragCompletedEventArgs? e)
         {
             uiScale = s.Default.uiScale = (int)((Slider)sender).Value;
+            uiScaleSlid.Value = uiScale;
             s.Default.Save();
             if (doAnimations)
             {
