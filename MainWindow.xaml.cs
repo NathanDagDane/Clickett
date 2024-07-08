@@ -98,7 +98,7 @@ namespace Clickett
             ToggleLoc(this, null);
             jitter = !s.Default.jitter;
             ToggleJit(this, null);
-            doubleClick = false;
+            doubleClick = !s.Default.doubleClick;
             ToggleDou(this, null);
             interType = true;
             millisInput.Text = "0";
@@ -252,6 +252,7 @@ namespace Clickett
             blur.Radius = 10;
             fullGrid.Effect = blur;
 
+            if(doLocation) SetCursorPos((int)xPos, (int)yPos);
             mouse_event(clickDo | clickUp, xPos, yPos, 0, 0);
             totalClickCounter++;
 
@@ -512,6 +513,32 @@ namespace Clickett
         {
             Close();
         }
+        private void OnExit(object sender, EventArgs e)
+        {
+            clicking = false;
+            _source.RemoveHook(Hooks);
+            UnregisterHotkey();
+
+            s.Default.hkAction = hotkey;
+            s.Default.hkAlt = hkAlt;
+            s.Default.hkCtrl = hkCtrl;
+            s.Default.hkShift = hkShift;
+            s.Default.doubleClick = doubleClick;
+            s.Default.jitter = jitter;
+            s.Default.doAnimations = doAnimations;
+            s.Default.countTotal = countTotal;
+            s.Default.aot = aot;
+            s.Default.startup = startup;
+            s.Default.trayIcon = trayIcon;
+            s.Default.minToTray = minToTray;
+            s.Default.modeInt = modeInt;
+            s.Default.burstCount = burstCount;
+            s.Default.clickInterval = clickInterval;
+            s.Default.uiScale = uiScale;
+            s.Default.Theme = curTheme;
+            s.Default.Save();
+            _tbi.Dispose();
+        }
         private void NewTrigger(object sender, RoutedEventArgs? e)
         {
             if (newTrigListen)
@@ -593,6 +620,9 @@ namespace Clickett
                 settStoryboard.Begin(this);
             }
             else OptionsArrow.RenderTransform = new RotateTransform(exOp ? 180.0 : 0.0, 0.5, 0.5);
+
+            s.Default.openedExOp = true;
+            s.Default.Save();
 
             if (inTuto && tutStep == 9)
             {
@@ -1051,31 +1081,6 @@ namespace Clickett
 
             _um.ApplyUpdatesAndRestart(_update);
         }
-        private void OnExit(object sender, EventArgs e)
-        {
-            clicking = false;
-            _source.RemoveHook(Hooks);
-            UnregisterHotkey();
-
-            s.Default.hkAction = hotkey;
-            s.Default.hkAlt = hkAlt;
-            s.Default.hkCtrl = hkCtrl;
-            s.Default.hkShift = hkShift;
-            s.Default.jitter = jitter;
-            s.Default.doAnimations = doAnimations;
-            s.Default.countTotal = countTotal;
-            s.Default.aot = aot;
-            s.Default.startup = startup;
-            s.Default.trayIcon = trayIcon;
-            s.Default.minToTray = minToTray;
-            s.Default.modeInt = modeInt;
-            s.Default.burstCount = burstCount;
-            s.Default.clickInterval = clickInterval;
-            s.Default.uiScale = uiScale;
-            s.Default.Theme = curTheme;
-            s.Default.Save();
-            _tbi.Dispose();
-        }
 
 
         // CLICKING CONFIG CHANGE
@@ -1098,7 +1103,7 @@ namespace Clickett
         }
         private void ToggleDou(object sender, RoutedEventArgs? e)
         {
-            doubleClick = !doubleClick;
+            doubleClick = s.Default.doubleClick = !doubleClick;
             ColourToggle(douBut, doubleClick);
             douBorder.Opacity = doubleClick ? 1 : 0.4;
             s.Default.Save();
@@ -1456,15 +1461,16 @@ namespace Clickett
         {
             if (!awaitReset)
             {
-                CHT(1, "TcReset", "Sure? Click again to reset\n3");
+                tcResetText.Text = "Click again to confirm         3";
+                tcResetText.Opacity = 0.7;
                 awaitReset = true;
                 tcResetTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
                 var timerCount = 3;
                 tcResetTimer.Tick += (sender, args) =>
                 {
-                    CHT(0, "TcReset", "Sure? Click again to reset\n" + (timerCount - 1));
+                    tcResetText.Text = "Click again to confirm         " + (timerCount - 1);
                     timerCount--;
-                    if (timerCount == 0) { tcResetTimer.Stop(); awaitReset = false; CHT(5, "TcReset", ""); }
+                    if (timerCount == 0) { tcResetTimer.Stop(); awaitReset = false; tcResetText.Text = "Count total clicks"; tcResetText.Opacity = 1; }
                 };
                 tcResetTimer.Start();
             }
@@ -1474,7 +1480,8 @@ namespace Clickett
                 s.Default.totalClicks = 0;
                 s.Default.Save();
                 totalText.Text = s.Default.totalClicks.ToString();
-                CHT(5, "TcReset", "");
+                tcResetText.Text = "Count total clicks";
+                tcResetText.Opacity = 1;
                 awaitReset = false;
             }
         }
@@ -1537,7 +1544,15 @@ namespace Clickett
         {
             CHT(5, "JitterInfo", "");
         }
-        
+        private void UpdateNotifyMouseEnter(object sender, MouseEventArgs? e)
+        {
+            CHT(2, "UpdateNotify", "New update downloaded!\nClick to relaunch");
+        }
+        private void UpdateNotifyMouseLeave(object sender, MouseEventArgs? e)
+        {
+            CHT(5, "UpdateNotify", "");
+        }
+
         private void RandomBioText()
         {
 

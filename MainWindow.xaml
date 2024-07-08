@@ -373,10 +373,13 @@
                                         <TextBlock Style="{Binding Source={StaticResource HeaderText}}" Margin="15,4,0,2" Text="Clicking"/>
                                         <Border x:Name="ctBorder" Style="{StaticResource BackBox}" Margin="0,1,0,0">
                                             <Grid>
-                                                <TextBlock Style="{Binding Source={StaticResource BoxNameText}}" Text="Count total clicks" Margin="10,0,0,0"/>
-                                                <Button x:Name="tcResetButt" Click="TcReset" Style="{DynamicResource InnerBoxBut}" HorizontalAlignment="Center" Margin="150,3,0,3" Width="60">Reset</Button>
-                                                <TextBlock x:Name="totalText" Style="{Binding Source={StaticResource BoxNameText}}" Text="69420" HorizontalAlignment="Right" Margin="0,0,50,0" Opacity="0.69"/>
-                                                <Button x:Name="ctButt" Style="{DynamicResource TogBut}" Margin="0,0,5,0" Click="ToggleCt"/>
+                                                <TextBlock Name="tcResetText" Style="{Binding Source={StaticResource BoxNameText}}" Text="Count total clicks" Margin="10,0,0,0"/>
+                                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                                    <Button x:Name="tcResetButt" Click="TcReset" Style="{DynamicResource InnerBoxBut}" Margin="0,3,35,3" Width="60">Reset</Button>
+                                                    <TextBlock x:Name="totalText" Style="{Binding Source={StaticResource BoxNameText}}" Text="69420" Margin="0,0,50,0" Opacity="0.69"/>
+                                                </StackPanel>
+                                                    <Button x:Name="ctButt" Style="{DynamicResource TogBut}" Margin="0,0,5,0" Click="ToggleCt"/>
+                                                
                                             </Grid>
                                         </Border>
                                         <TextBlock Style="{Binding Source={StaticResource HeaderText}}" Margin="15,4,0,2" Text="Panel"/>
@@ -621,15 +624,12 @@
                     <Button x:Name="tutExitBut" Visibility="Collapsed" Style="{StaticResource BoxAlignedBut}" Click="TutoExit" VerticalAlignment="Center" Margin="0,0,12,0" Width="80" FontSize="8" Height="16">
                         <TextBlock Text="Exit Tutorial" FontFamily="./res/#Outfit Medium" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="{DynamicResource FgCol1}" FontSize="10"/>
                     </Button>
-                    <Button x:Name="UpdateBut" Visibility="Collapsed" Style="{DynamicResource IconBut}" Click="InstallUpdateButton_Click" HorizontalAlignment="Right" VerticalAlignment="Top" Width="24" Height="24" Margin="0,0,5,0">
-                    <Border Background="{DynamicResource FgCol1}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="16" Height="16" Opacity="0.35" RenderOptions.BitmapScalingMode="HighQuality" RenderTransformOrigin="0.5,0.5">
+                    <Button x:Name="UpdateBut" Visibility="Collapsed" Style="{DynamicResource IconBut}" Click="InstallUpdateButton_Click" HorizontalAlignment="Right" VerticalAlignment="Top" Width="24" Height="24" Margin="0,0,5,0" MouseEnter="UpdateNotifyMouseEnter" MouseLeave="UpdateNotifyMouseLeave">
+                        <Border Background="{DynamicResource FgCol1}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="16" Height="16" Opacity="0.35" RenderOptions.BitmapScalingMode="HighQuality" RenderTransformOrigin="0.5,0.5">
                         <Border.RenderTransform>
-                            <TransformGroup>
-                                <ScaleTransform/>
-                                <SkewTransform/>
-                                <RotateTransform Angle="36"/>
-                                <TranslateTransform/>
-                            </TransformGroup>
+                                <TransformGroup>
+                                    <RotateTransform Angle="36"/>
+                                </TransformGroup>
                         </Border.RenderTransform>
                         <Border.OpacityMask>
                             <ImageBrush ImageSource="{StaticResource UpdateIcon}" Stretch="Uniform"/>

@@ -273,5 +273,29 @@ namespace Clickett.Properties {
                 this["FirstRun"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool doubleClick {
+            get {
+                return ((bool)(this["doubleClick"]));
+            }
+            set {
+                this["doubleClick"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool openedExOp {
+            get {
+                return ((bool)(this["openedExOp"]));
+            }
+            set {
+                this["openedExOp"] = value;
+            }
+        }
     }
 }
