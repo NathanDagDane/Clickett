@@ -8,6 +8,8 @@
 
     <SolidColorBrush x:Key="AcGrad">#fcfbf8</SolidColorBrush>
 
+    <SolidColorBrush x:Key="AcGradAlt">#fcfbf8</SolidColorBrush>
+
     <LinearGradientBrush x:Key="ActivateText">
         <LinearGradientBrush.RelativeTransform>
             <TransformGroup>
@@ -33,6 +35,7 @@
     <SolidColorBrush x:Key="FgCol3">#fcfbf8</SolidColorBrush>
     <SolidColorBrush x:Key="GradFG">#2e343b</SolidColorBrush>
 
+    <Color x:Key="BoxBackColor">#2e343b</Color>
     <SolidColorBrush x:Key="BoxBack">#2e343b</SolidColorBrush>
 
     <SolidColorBrush x:Key="InBac">#3B4149</SolidColorBrush>
