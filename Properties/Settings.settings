@@ -30,7 +30,7 @@
       <Value Profile="(Default)">100</Value>
     </Setting>
     <Setting Name="hkAction" Type="System.Windows.Input.Key" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">Z</Value>
     </Setting>
     <Setting Name="hkCtrl" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>

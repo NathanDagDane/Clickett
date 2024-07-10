@@ -133,6 +133,7 @@ namespace Clickett.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Z")]
         public global::System.Windows.Input.Key hkAction {
             get {
                 return ((global::System.Windows.Input.Key)(this["hkAction"]));

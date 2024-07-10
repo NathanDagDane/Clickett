@@ -77,23 +77,14 @@ namespace Clickett
         private void InitializeThingies()
         {
             try { hotkey = s.Default.hkAction; }
-            catch { hotkey = Key.Z; }
+            catch { hotkey = s.Default.hkAction = Key.Z; }
             hkCtrl = s.Default.hkCtrl;
             hkShift = s.Default.hkShift;
             hkAlt = s.Default.hkAlt;
             triggerDis.Text = (hkCtrl ? "Ctrl + " : "") + (hkShift ? "Shift + " : "") + (hkAlt ? "Alt + " : "") + KeyChar(hotkey);
             curTheme = s.Default.Theme;
-            ResourceDictionary newRes = Application.Current.Resources.MergedDictionaries[1];
-            newRes.MergedDictionaries.Clear();
-            try
-            {
-                newRes.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("res/dic/Themes/" + s.Default.Theme + ".xaml", UriKind.Relative) });
-            }
-            catch
-            {
-                newRes.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("res/dic/Themes/Default.xaml", UriKind.Relative) });
-                s.Default.Theme = curTheme = "Default";
-            }
+            doAnimations = !s.Default.doAnimations;
+            ToggleAnim(this, null);
             doLocation = true;
             ToggleLoc(this, null);
             jitter = !s.Default.jitter;
@@ -112,8 +103,6 @@ namespace Clickett
             ModeChange(this, null);
             settOpen = true;
             SettingsToggle(this, null);
-            doAnimations = !s.Default.doAnimations;
-            ToggleAnim(this, null);
             countTotal = !s.Default.countTotal;
             ToggleCt(this, null);
             aot = !s.Default.aot;
@@ -489,6 +478,10 @@ namespace Clickett
         private void HelpLink(object sender, RoutedEventArgs? e)
         {
             Process.Start(new ProcessStartInfo("https://github.com/NathanDagDane/Clickett/wiki/Getting-Started,-Help-and-FAQ") { UseShellExecute = true });
+        }
+        private void OpenGithubLink(object sender, RoutedEventArgs? e)
+        {
+            Process.Start(new ProcessStartInfo("https://github.com/NathanDagDane") { UseShellExecute = true });
         }
         private void HelpContact(object sender, RoutedEventArgs? e)
         {
@@ -1253,7 +1246,6 @@ namespace Clickett
                 threadsGrid.Visibility = Visibility.Hidden;
                 interType = !interType;
                 InterTypeSwap(this, null);
-
             }
         }
         private void InterTypeSwap(object sender, RoutedEventArgs? e)
@@ -1496,6 +1488,14 @@ namespace Clickett
 
 
         // MOUSE-OVER EFFECTS
+        private void HoverHudDisplayTagEnter(object sender, MouseEventArgs? e)
+        {
+             CHT(2, ((FrameworkElement)sender).Name + "Hover", ((FrameworkElement)sender).Tag.ToString());
+        }
+        private void HoverHudDisplayTagLeave(object sender, MouseEventArgs? e)
+        {
+            CHT(5, ((FrameworkElement)sender).Name + "Hover", "");
+        }
         private void LogoMouseEnter(object sender, MouseEventArgs? e)
         {
             if (countTotal) CHT(2, "ShowScore", "Total Clicks\n" + s.Default.totalClicks.ToString());
@@ -1511,46 +1511,6 @@ namespace Clickett
         private void HotMouseLeave(object sender, MouseEventArgs? e)
         {
             CHT(5, "ShowHotkey", "");
-        }
-        private void WarnMouseEnter(object sender, MouseEventArgs? e)
-        {
-            CHT(2, "ShowWarning", "Some games may struggle to process this many clicks!");
-        }
-        private void WarnMouseLeave(object sender, MouseEventArgs? e)
-        {
-            CHT(5, "ShowWarning", "");
-        }
-        private void RWarnMouseEnter(object sender, MouseEventArgs? e)
-        {
-            CHT(2, "ShowRWarning", (threads > 14) ? "Clicks may slow down as applications get overloaded!" : "Some games may struggle to process this many clicks!");
-        }
-        private void RWarnMouseLeave(object sender, MouseEventArgs? e)
-        {
-            CHT(5, "ShowRWarning", "");
-        }
-        private void RocketMouseEnter(object sender, MouseEventArgs? e)
-        {
-            CHT(2, "RocketSwitch", "Rocket Mode");
-        }
-        private void RocketMouseLeave(object sender, MouseEventArgs? e)
-        {
-            CHT(5, "RocketSwitch", "");
-        }
-        private void JitterMouseEnter(object sender, MouseEventArgs? e)
-        {
-            CHT(2, "JitterInfo", "Adds random timing between clicks so it's harder to detect");
-        }
-        private void JitterMouseLeave(object sender, MouseEventArgs? e)
-        {
-            CHT(5, "JitterInfo", "");
-        }
-        private void UpdateNotifyMouseEnter(object sender, MouseEventArgs? e)
-        {
-            CHT(2, "UpdateNotify", "New update downloaded!\nClick to relaunch");
-        }
-        private void UpdateNotifyMouseLeave(object sender, MouseEventArgs? e)
-        {
-            CHT(5, "UpdateNotify", "");
         }
 
         private void RandomBioText()
