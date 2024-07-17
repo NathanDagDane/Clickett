@@ -108,7 +108,7 @@
                                                     </Grid>
                                                     <Grid x:Name="threadsGrid" Visibility="Visible">
                                                         <TextBlock Foreground="{DynamicResource FgCol1}" Text="1" FontFamily="./res/#Outfit Medium" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="13,0,0,0"/>
-                                                        <Button x:Name="threadsWarn" Style="{DynamicResource IconBut}" Click="WarnLink"  Height="15" Width="15" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="300,-19,0,0" MouseEnter="HoverHudDisplayTagEnter" MouseLeave="HoverHudDisplayTagLeave" Tag="Higher values can cause crashing and slowing down!">
+                                                        <Button x:Name="threadsWarn" Style="{DynamicResource IconBut}" Click="WarnLink"  Height="15" Width="15" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="300,-19,0,0" MouseEnter="HoverHudDisplayTagEnter" MouseLeave="HoverHudDisplayTagLeave" Tag="Higher values can cause lag and crashing without a very powerful computer!">
                                                             <Border x:Name="threadsWarnBack" Background="{DynamicResource FgCol1}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="15" Height="15" Opacity="0.69" RenderOptions.BitmapScalingMode="HighQuality">
                                                                 <Border.OpacityMask>
                                                                     <ImageBrush ImageSource="{StaticResource Warning2DrawingImage}" Stretch="Uniform">
@@ -122,8 +122,8 @@
                                                                 </Border.OpacityMask>
                                                             </Border>
                                                         </Button>
-                                                        <Slider x:Name="threadsSlid" ValueChanged="ThreadsChange" VerticalAlignment="Center" Margin="30,0,30,0" Style="{StaticResource SliderFlat}" Minimum="1" Maximum="20" Value="5" TickFrequency="1" IsSnapToTickEnabled="True"/>
-                                                        <TextBlock Foreground="{DynamicResource FgCol1}" Text="20" FontFamily="./res/#Outfit Medium" FontSize="15" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,6,0"/>
+                                                        <Slider x:Name="threadsSlid" ValueChanged="ThreadsChange" VerticalAlignment="Center" Margin="30,0,30,0" Style="{StaticResource SliderFlat}" Minimum="1" Maximum="10" Value="3" TickFrequency="1" IsSnapToTickEnabled="True"/>
+                                                        <TextBlock Foreground="{DynamicResource FgCol1}" Text="10" FontFamily="./res/#Outfit Medium" FontSize="15" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,7.5,0"/>
                                                     </Grid>
                                                     <Grid x:Name="interGrid" Visibility="Hidden">
                                                         <!--Minutes Input-->

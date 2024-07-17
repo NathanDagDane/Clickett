@@ -1,6 +1,7 @@
 ﻿using Microsoft.Toolkit.Uwp.Notifications;
 using Microsoft.Win32;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
@@ -222,7 +223,7 @@ namespace Clickett
                 }
                 else
                 {
-                    clickCounter = 1;
+                    clickCounter = 0;
                     EnterClickState();
                 }
             }
@@ -241,9 +242,10 @@ namespace Clickett
             blur.Radius = 10;
             fullGrid.Effect = blur;
 
-            if(doLocation) SetCursorPos((int)xPos, (int)yPos);
-            mouse_event(clickDo | clickUp, xPos, yPos, 0, 0);
-            totalClickCounter++;
+            if (doLocation) SetCursorPos((int)xPos, (int)yPos);
+            mouse_event(clickDo | clickUp, xPos, yPos, 0, 0); totalClickCounter++;
+            if (doubleClick) { mouse_event(clickDo | clickUp, xPos, yPos, 0, 0); totalClickCounter++; }
+            if (modeInt == 0) IterateClick();
 
             Thread.Sleep(1);
 
@@ -273,9 +275,10 @@ namespace Clickett
 
             fullGrid.RenderTransform = new ScaleTransform(1, 1);
             fullGrid.Effect = null;
+            Thread.Sleep(1);
             if (countTotal)
             {
-                s.Default.totalClicks += totalClickCounter - 1;
+                s.Default.totalClicks += totalClickCounter;
                 s.Default.Save();
                 totalText.Text = s.Default.totalClicks.ToString();
                 totalClickCounter = 0;
@@ -286,26 +289,32 @@ namespace Clickett
             var cap = (modeInt == 0); // Whether limited to number of clicks before stopping
             pTimer = new(TimeSpan.FromMilliseconds(clickInterval));
 
-            if (cap) IterateClick();
             if (doubleClick)
             {
-                mouse_event(clickDo | clickUp, xPos, yPos, 0, 0);
-                totalClickCounter++;
-            }
-
-            while (await pTimer.WaitForNextTickAsync()) // Clicking loop
-            {
-                if (jitter)
+                while (await pTimer.WaitForNextTickAsync()) // Double-clicking loop
                 {
-                    Thread.Sleep((int)Math.Floor((float)clickInterval * (float)(new Random().Next(0, 6)) / 10f));
-                }
-                if (cap) IterateClick();
-                mouse_event(clickDo | clickUp, xPos, yPos, 0, 0);
-                totalClickCounter++;
-                if (doubleClick)
-                {
+                    if (jitter)
+                    {
+                        Thread.Sleep((int)Math.Floor((float)clickInterval * (float)(new Random().Next(0, 6)) / 10f));
+                    }
+                    mouse_event(clickDo | clickUp, xPos, yPos, 0, 0);
                     mouse_event(clickDo | clickUp, xPos, yPos, 0, 0);
                     totalClickCounter++;
+                    totalClickCounter++;
+                    if (cap) IterateClick();
+                }
+            }
+            else
+            {
+                while (await pTimer.WaitForNextTickAsync()) // Clicking loop
+                {
+                    if (jitter)
+                    {
+                        Thread.Sleep((int)Math.Floor((float)clickInterval * (float)(new Random().Next(0, 6)) / 10f));
+                    }
+                    mouse_event(clickDo | clickUp, xPos, yPos, 0, 0);
+                    totalClickCounter++;
+                    if (cap) IterateClick();
                 }
             }
         }
@@ -353,14 +362,23 @@ namespace Clickett
                             }));
                             break;
                         }
-                        count += 1;
                     }
+                    count += 1;
                     mouse_event(CclickDo | CclickUp, CxPos, CyPos, 0, 0);
                     if (doub) mouse_event(CclickDo | CclickUp, CxPos, CyPos, 0, 0);
 
                     Thread.Sleep(1);
                 }
-                else break;
+                else
+                {
+                    Dispatcher.Invoke((Action)(() =>
+                    {
+                        s.Default.totalClicks += count;
+                        s.Default.Save();
+                        totalText.Text = s.Default.totalClicks.ToString();
+                    }));
+                    break;
+                }
             }
         }
         // ADDITIONAL HOOKS
@@ -378,13 +396,13 @@ namespace Clickett
         }
         private void IterateClick()
         {
+            clickCounter++;
             if (clickCounter >= burstCount)
             {
                 ExitClickState();
                 clickCounter = 0;
                 return;
             }
-            clickCounter++;
         }
         private void CountTotal(object sender, EventArgs? e)
         {
@@ -1202,22 +1220,22 @@ namespace Clickett
         {
             threads = (int)threadsSlid.Value;
             var speed = "";
-            if (threads < 5) speed = "Fast";
-            else if (threads < 10) speed = "Very fast";
-            else if (threads < 15) speed = "Stupidly fast";
-            else if (threads < 20) speed = "Insanely fast";
+            if (threads < 3) speed = "Fast";
+            else if (threads < 5) speed = "Very fast";
+            else if (threads < 7) speed = "Stupidly fast";
+            else if (threads < 9) speed = "Insanely fast";
             else speed = "Broken";
             interText.Text = "Threads - " + threads + "  " + speed;
 
-            if (threads > 9)
+            if (threads > 4)
             {
                 threadsWarn.Visibility = Visibility.Visible;
                 var mar = threadsWarn.Margin;
-                mar.Left = 30 + (355 * (((float)threads - 1) / 19));
+                mar.Left = 30 + (355 * (((float)threads - 1) / 9));
                 threadsWarn.Margin = mar;
-                threadsWarnBack.Opacity = 0.2 + (0.6 * (((float)threads - 10) / 10));
+                threadsWarnBack.Opacity = 0.2 + (0.6 * (((float)threads - 4) / 6));
 
-                if (threads > 14) threadsWarnBack.SetResourceReference(BackgroundProperty, "AcCol2");
+                if (threads > 7) threadsWarnBack.SetResourceReference(BackgroundProperty, "AcCol2");
                 else threadsWarnBack.SetResourceReference(BackgroundProperty, "FgCol1");
             }
             else threadsWarn.Visibility = Visibility.Hidden;
