@@ -61,7 +61,7 @@
         <Setter Property="Background" Value="{DynamicResource InBac}" />
         <Setter Property="BorderBrush" Value="{DynamicResource InBor}" />
         <Setter Property="Foreground" Value="{DynamicResource FgCol3}" />
-        <Setter Property="BorderThickness" Value="1.5" />
+        <Setter Property="BorderThickness" Value="2" />
         <Setter Property="FontFamily" Value="../../#Outfit Medium" />
         <Setter Property="Template" >
             <Setter.Value>

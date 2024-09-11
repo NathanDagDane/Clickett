@@ -200,39 +200,38 @@ namespace Clickett
                 }
             }
         }
-        private void AutoClick() // Called when hotkey pressed
+        private void HotkeyPressed() // Enters click state when hotkey pressed
         {
-            if (modeInt == 2)            //Hold
+            switch (modeInt)
             {
-                if (clicking) return;
+                case 0:                                 // Burst
+                    if (clicking) {
+                        ExitClickState();
+                        clickCounter = 0;
+                    } else {
+                        clickCounter = 0;
+                        EnterClickState();
+                    }
+                    break;
+                case 1:                                 // Toggle
+                    if (clicking) ExitClickState();
+                    else EnterClickState();
+                    break;
+                case 2:                                 // Hold
+                    if (clicking) return;
 
-                dispatcherTimer.Tick += new EventHandler(HoldCheck);
-                EnterClickState();
-            }
-            else if (modeInt == 1)       //Toggle
-            {
-                if (clicking) ExitClickState();
-                else EnterClickState();
-            }
-            else if (modeInt == 0)       //Burst
-            {
-                if (clicking)
-                {
-                    ExitClickState();
-                    clickCounter = 0;
-                }
-                else
-                {
-                    clickCounter = 0;
+                    dispatcherTimer.Tick += new EventHandler(HoldCheck);
                     EnterClickState();
-                }
+                    break;
+                default:
+                    break;
             }
         }
         private void EnterClickState()
         {
             clicking = true;
             Focusable = false;
-            dispatcherTimer.Interval = TimeSpan.FromMilliseconds(clickInterval * 0.8);
+            dispatcherTimer.Interval = TimeSpan.FromMilliseconds(rocket ? 1 : (clickInterval * 0.8));
             hwnd = new WindowInteropHelper(this).Handle;
             SetWindowExTransparent(hwnd);
             fullCanvas.Opacity = cOpacity;
@@ -417,7 +416,7 @@ namespace Clickett
             if (hotkeyID != _hotkeyID) { return IntPtr.Zero; }
             if (active)
             {
-                AutoClick();
+                HotkeyPressed();
                 handled = true;
             }
             else
