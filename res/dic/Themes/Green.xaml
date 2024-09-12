@@ -41,11 +41,11 @@
         <GradientStop Color="#FF12D138" Offset="1"/>
     </LinearGradientBrush>
 
-    <SolidColorBrush x:Key="AcCol1">#FF16D419</SolidColorBrush>
-    <SolidColorBrush x:Key="AcCol2">#FF12D138</SolidColorBrush>
+    <SolidColorBrush x:Key="AcCol1">#16D419</SolidColorBrush>
+    <SolidColorBrush x:Key="AcCol2">#12D138</SolidColorBrush>
 
-    <Color x:Key="AcCol1c">#FF16D419</Color>
-    <Color x:Key="AcCol2c">#FF12D138</Color>
+    <Color x:Key="AcCol1c">#16D419</Color>
+    <Color x:Key="AcCol2c">#12D138</Color>
 
     <SolidColorBrush x:Key="FgCol1">#EED7DBDB</SolidColorBrush>
     <SolidColorBrush x:Key="FgCol2">#D5BBBBBB</SolidColorBrush>
@@ -61,9 +61,9 @@
     <SolidColorBrush x:Key="InacBut">#CC5A5A5A</SolidColorBrush>
 
     <SolidColorBrush x:Key="SliderBack">#551D1E1D</SolidColorBrush>
-    <SolidColorBrush x:Key="thumbBackDisabled">#D5BBBBBB</SolidColorBrush>
+    <SolidColorBrush x:Key="thumbBackDisabled">#16D419</SolidColorBrush>
     <SolidColorBrush x:Key="thumbBackEnabled">#030303</SolidColorBrush>
-    <SolidColorBrush x:Key="ThumbLineDisabled">#8851535a</SolidColorBrush>
+    <SolidColorBrush x:Key="ThumbLineDisabled">#030303</SolidColorBrush>
     <SolidColorBrush x:Key="ThumbLineEnabled">#AA12d138</SolidColorBrush>
     <Color x:Key="ThumbShadowCol">#AAA</Color>
     <Color x:Key="ThumbBackDropCol">#222</Color>

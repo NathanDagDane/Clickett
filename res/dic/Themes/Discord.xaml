@@ -37,8 +37,9 @@
     <Color x:Key="AcCol2c">#5865F2</Color>
 
     <SolidColorBrush x:Key="FgCol1">#dbdee1</SolidColorBrush>
-    <SolidColorBrush x:Key="FgCol2">#FFb5b8bb</SolidColorBrush>
-    <SolidColorBrush x:Key="FgCol3">#FFd7d8de</SolidColorBrush>
+    <SolidColorBrush x:Key="FgCol2">#b5b8bb</SolidColorBrush>
+    <SolidColorBrush x:Key="FgCol3">#d7d8de</SolidColorBrush>
+    <SolidColorBrush x:Key="GradFG">#dbdee1</SolidColorBrush>
 
     <Color x:Key="BoxBackColor">#404249</Color>
     <SolidColorBrush x:Key="BoxBack">#404249</SolidColorBrush>

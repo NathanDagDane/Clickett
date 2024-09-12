@@ -2,18 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:Sys="clr-namespace:System;assembly=mscorlib">
 
-    <LinearGradientBrush x:Key="Back">
-        <LinearGradientBrush.RelativeTransform>
-            <TransformGroup>
-                <ScaleTransform CenterY="0.5" CenterX="0.5"/>
-                <SkewTransform CenterX="0.5" CenterY="0.5"/>
-                <RotateTransform Angle="-89" CenterX="0.5" CenterY="0.5"/>
-                <TranslateTransform/>
-            </TransformGroup>
-        </LinearGradientBrush.RelativeTransform>
-        <GradientStop Color="#FFF" Offset="1"/>
-        <GradientStop Color="#FFF" Offset="0"/>
-    </LinearGradientBrush>
+    <SolidColorBrush x:Key="Back">#FFF</SolidColorBrush>
 
     <LinearGradientBrush x:Key="AcGrad">
         <LinearGradientBrush.RelativeTransform>
@@ -37,38 +26,38 @@
                 <TranslateTransform/>
             </TransformGroup>
         </LinearGradientBrush.RelativeTransform>
-        <GradientStop Color="#FFC8E8E8"/>
-        <GradientStop Color="#FFCFEFEE" Offset="1.5"/>
+        <GradientStop Color="#00BABA"/>
+        <GradientStop Color="#00C4BA" Offset="1.5"/>
     </LinearGradientBrush>
 
-    <SolidColorBrush x:Key="AcCol1">#FF00BABA</SolidColorBrush>
-    <SolidColorBrush x:Key="AcCol2">#FF00C4BA</SolidColorBrush>
+    <SolidColorBrush x:Key="AcCol1">#00BABA</SolidColorBrush>
+    <SolidColorBrush x:Key="AcCol2">#00C4BA</SolidColorBrush>
 
-    <Color x:Key="AcCol1c">#FF00BABA</Color>
-    <Color x:Key="AcCol2c">#FF00C4BA</Color>
+    <Color x:Key="AcCol1c">#00BABA</Color>
+    <Color x:Key="AcCol2c">#00C4BA</Color>
 
-    <SolidColorBrush x:Key="FgCol1">#CC000000</SolidColorBrush>
-    <SolidColorBrush x:Key="FgCol2">#C2444444</SolidColorBrush>
-    <SolidColorBrush x:Key="FgCol3">#FF666666</SolidColorBrush>
-    <SolidColorBrush x:Key="GradFG">#FF00BABA</SolidColorBrush>
+    <SolidColorBrush x:Key="FgCol1">#EF25373B</SolidColorBrush>
+    <SolidColorBrush x:Key="FgCol2">#CF39494D</SolidColorBrush>
+    <SolidColorBrush x:Key="FgCol3">#C3C5C6</SolidColorBrush>
+    <SolidColorBrush x:Key="GradFG">#FFF</SolidColorBrush>
 
-    <Color x:Key="BoxBackColor">#EEE</Color>
-    <SolidColorBrush x:Key="BoxBack">#EEE</SolidColorBrush>
+    <Color x:Key="BoxBackColor">#F0F0F0</Color>
+    <SolidColorBrush x:Key="BoxBack">#F0F0F0</SolidColorBrush>
 
-    <SolidColorBrush x:Key="InBac">#E0e0e0</SolidColorBrush>
-    <SolidColorBrush x:Key="InBor">#F9F9F9</SolidColorBrush>
+    <SolidColorBrush x:Key="InBac">#E5E5E7</SolidColorBrush>
+    <SolidColorBrush x:Key="InBor">#E0E0E2</SolidColorBrush>
 
-    <SolidColorBrush x:Key="InacBut">#CCDDDDDD</SolidColorBrush>
+    <SolidColorBrush x:Key="InacBut">#8C39494D</SolidColorBrush>
 
-    <SolidColorBrush x:Key="SliderBack">#99EEEEEE</SolidColorBrush>
-    <SolidColorBrush x:Key="thumbBackDisabled">#88404249</SolidColorBrush>
-    <SolidColorBrush x:Key="thumbBackEnabled">#88404249</SolidColorBrush>
-    <SolidColorBrush x:Key="ThumbLineDisabled">#51535a</SolidColorBrush>
-    <SolidColorBrush x:Key="ThumbLineEnabled">#51535a</SolidColorBrush>
-    <Color x:Key="ThumbShadowCol">#AAA</Color>
-    <Color x:Key="ThumbBackDropCol">#7B7B7B</Color>
-    <DropShadowEffect x:Key="thumbShadowDisabled" ShadowDepth="0" BlurRadius="15" Color="#AAA" ></DropShadowEffect>
-    <DropShadowEffect x:Key="thumbShadowEnabled" ShadowDepth="0" BlurRadius="13" Color="{StaticResource AcCol2c}" Opacity="0.3"></DropShadowEffect>
+    <SolidColorBrush x:Key="SliderBack">#F6F6F6</SolidColorBrush>
+    <SolidColorBrush x:Key="thumbBackDisabled">#FF00BABA</SolidColorBrush>
+    <SolidColorBrush x:Key="thumbBackEnabled">#F6F6F6</SolidColorBrush>
+    <SolidColorBrush x:Key="ThumbLineDisabled">#F6F6F6</SolidColorBrush>
+    <SolidColorBrush x:Key="ThumbLineEnabled">#FF00C4BA</SolidColorBrush>
+    <Color x:Key="ThumbShadowCol">#CFF5F5</Color>
+    <Color x:Key="ThumbBackDropCol">#DDEEEE</Color>
+    <DropShadowEffect x:Key="thumbShadowDisabled" ShadowDepth="0" BlurRadius="15" Color="#CFF5F5" ></DropShadowEffect>
+    <DropShadowEffect x:Key="thumbShadowEnabled" ShadowDepth="0" BlurRadius="13" Color="{StaticResource AcCol2c}" Opacity="0.1"></DropShadowEffect>
 
     <Sys:Double x:Key="OverlayOpacity">0.25</Sys:Double>
 
