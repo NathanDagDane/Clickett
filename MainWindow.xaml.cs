@@ -187,6 +187,7 @@ namespace Clickett
                 thumbBackDrop.Opacity = 1;
                 thumbRect.SetResourceReference(EffectProperty, "thumbShadowDisabled");
                 enableButtThumb.SetResourceReference(BackgroundProperty, "thumbBackDisabled");
+                thumbLinesBorder.SetResourceReference(BackgroundProperty, "ThumbLineDisabled");
 
 
 
@@ -227,6 +228,7 @@ namespace Clickett
                 thumbBackDrop.Opacity = 0;
                 thumbRect.SetResourceReference(EffectProperty, "thumbShadowEnabled");
                 enableButtThumb.SetResourceReference(BackgroundProperty, "thumbBackEnabled");
+                thumbLinesBorder.SetResourceReference(BackgroundProperty, "ThumbLineEnabled");
 
 
 
@@ -819,7 +821,7 @@ namespace Clickett
                     tutNextBut.Visibility = Visibility.Collapsed;
                     break;
                 case 14:
-                    TutoArrange(375, 69, 27, 40, 320, false, 100, 250, 82, "Clickett is now activated!\nIt will start clicking when you press the shortcut\n\nClickett cannot click when it isn't activated");
+                    TutoArrange(375, 69, 27, 40, 320, false, 100, 250, 82, "Clickett is now enabled!\nIt will start clicking when you press the shortcut\n\nClickett cannot click when it isn't enabled");
                     tutNextBut.Visibility = Visibility.Visible;
                     tutArrow.Visibility = Visibility.Collapsed;
                     break;

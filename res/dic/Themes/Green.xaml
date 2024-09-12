@@ -63,10 +63,12 @@
     <SolidColorBrush x:Key="SliderBack">#551D1E1D</SolidColorBrush>
     <SolidColorBrush x:Key="thumbBackDisabled">#D5BBBBBB</SolidColorBrush>
     <SolidColorBrush x:Key="thumbBackEnabled">#030303</SolidColorBrush>
+    <SolidColorBrush x:Key="ThumbLineDisabled">#8851535a</SolidColorBrush>
+    <SolidColorBrush x:Key="ThumbLineEnabled">#AA12d138</SolidColorBrush>
     <Color x:Key="ThumbShadowCol">#AAA</Color>
     <Color x:Key="ThumbBackDropCol">#222</Color>
     <DropShadowEffect x:Key="thumbShadowDisabled" ShadowDepth="0" BlurRadius="15" Color="#AAA" ></DropShadowEffect>
-    <DropShadowEffect x:Key="thumbShadowEnabled" ShadowDepth="0" BlurRadius="13" Color="{StaticResource AcCol2c}" Opacity="0.3"></DropShadowEffect>
+    <DropShadowEffect x:Key="thumbShadowEnabled" ShadowDepth="0" BlurRadius="18" Color="{StaticResource AcCol2c}" Opacity="0.3"></DropShadowEffect>
 
     <Sys:Double x:Key="OverlayOpacity">0.23</Sys:Double>
 

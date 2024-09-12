@@ -63,6 +63,8 @@
     <SolidColorBrush x:Key="SliderBack">#99EEEEEE</SolidColorBrush>
     <SolidColorBrush x:Key="thumbBackDisabled">#88404249</SolidColorBrush>
     <SolidColorBrush x:Key="thumbBackEnabled">#88404249</SolidColorBrush>
+    <SolidColorBrush x:Key="ThumbLineDisabled">#51535a</SolidColorBrush>
+    <SolidColorBrush x:Key="ThumbLineEnabled">#51535a</SolidColorBrush>
     <Color x:Key="ThumbShadowCol">#AAA</Color>
     <Color x:Key="ThumbBackDropCol">#7B7B7B</Color>
     <DropShadowEffect x:Key="thumbShadowDisabled" ShadowDepth="0" BlurRadius="15" Color="#AAA" ></DropShadowEffect>
