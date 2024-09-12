@@ -184,6 +184,9 @@ namespace Clickett
                     enableButtThumbTransform.BeginAnimation(TranslateTransform.XProperty, new DoubleAnimation() { To = 0, Duration = TimeSpan.Zero });
                     enableButtColBorder.BeginAnimation(OpacityProperty, new DoubleAnimation() { To = 0, Duration = TimeSpan.Zero, FillBehavior = FillBehavior.HoldEnd });
                 }
+                thumbBackDrop.Opacity = 1;
+                thumbRect.SetResourceReference(EffectProperty, "thumbShadowDisabled");
+                enableButtThumb.SetResourceReference(BackgroundProperty, "FgCol2");
 
 
 
@@ -221,6 +224,10 @@ namespace Clickett
                     enableButtThumbTransform.BeginAnimation(TranslateTransform.XProperty, new DoubleAnimation() { To = 382, Duration = TimeSpan.Zero });
                     enableButtColBorder.BeginAnimation(OpacityProperty, new DoubleAnimation() { To = 1, Duration = TimeSpan.Zero, FillBehavior = FillBehavior.HoldEnd });
                 }
+                thumbBackDrop.Opacity = 0;
+                //thumbShadow.Opacity = 0.2;
+                thumbRect.SetResourceReference(EffectProperty, "thumbShadowEnabled");
+                enableButtThumb.SetResourceReference(BackgroundProperty, "FgCol1");
 
 
 
@@ -1572,7 +1579,7 @@ namespace Clickett
             var margin = active ? 382 : 0;
             if (doAnimations)
             {
-                enableButtThumbTransform.BeginAnimation(TranslateTransform.XProperty, new DoubleAnimation() { To = margin, Duration = TimeSpan.FromSeconds(0.3), DecelerationRatio = 0.8, AccelerationRatio = 0.1 });
+                enableButtThumbTransform.BeginAnimation(TranslateTransform.XProperty, new DoubleAnimation() { To = margin, Duration = TimeSpan.FromSeconds(0.2), DecelerationRatio = 0.8, AccelerationRatio = 0 });
             }
             else
             {

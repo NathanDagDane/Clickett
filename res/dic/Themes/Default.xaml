@@ -61,6 +61,8 @@
     <SolidColorBrush x:Key="InacBut">#77353838</SolidColorBrush>
     <Color x:Key="ThumbShadowCol">#888</Color>
     <Color x:Key="ThumbBackDropCol">#666</Color>
+    <DropShadowEffect x:Key="thumbShadowDisabled" ShadowDepth="0" BlurRadius="15" Color="#888" ></DropShadowEffect>
+    <DropShadowEffect x:Key="thumbShadowEnabled" ShadowDepth="0" BlurRadius="13" Color="{StaticResource AcCol2c}" Opacity="0.3"></DropShadowEffect>
 
     <Sys:Double x:Key="OverlayOpacity">0.15</Sys:Double>
 

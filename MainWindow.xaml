@@ -499,7 +499,7 @@
                                         <Border.Effect>
                                             <DropShadowEffect x:Name="thumbBackDrop" BlurRadius="10" ShadowDepth="0" Color="{DynamicResource ThumbBackDropCol}"/>
                                         </Border.Effect>
-                                        <Rectangle Fill="Transparent" Stroke="Black" Margin="-4,-4,-4,-4" StrokeThickness="3" RadiusX="5" RadiusY="5">
+                                        <Rectangle Name="thumbRect" Fill="Transparent" Stroke="Black" Margin="-4,-4,-4,-4" StrokeThickness="3" RadiusX="5" RadiusY="5">
                                             <Rectangle.Effect>
                                                 <DropShadowEffect x:Name="thumbShadow" ShadowDepth="0" BlurRadius="15" Color="{DynamicResource ThumbShadowCol}"/>
                                             </Rectangle.Effect>
