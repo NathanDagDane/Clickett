@@ -41,18 +41,6 @@
         <GradientStop Color="#FFCFEFEE" Offset="1.5"/>
     </LinearGradientBrush>
 
-    <LinearGradientBrush x:Key="ActivateText">
-        <LinearGradientBrush.RelativeTransform>
-            <TransformGroup>
-                <ScaleTransform CenterY="0.5" CenterX="0.5"/>
-                <SkewTransform CenterX="0.5" CenterY="0.5"/>
-                <RotateTransform Angle="180" CenterX="0.5" CenterY="0.5"/>
-                <TranslateTransform/>
-            </TransformGroup>
-        </LinearGradientBrush.RelativeTransform>
-        <GradientStop Color="#FFF"/>
-    </LinearGradientBrush>
-
     <SolidColorBrush x:Key="AcCol1">#FF00BABA</SolidColorBrush>
     <SolidColorBrush x:Key="AcCol2">#FF00C4BA</SolidColorBrush>
 
@@ -70,7 +58,9 @@
     <SolidColorBrush x:Key="InBac">#E0e0e0</SolidColorBrush>
     <SolidColorBrush x:Key="InBor">#F9F9F9</SolidColorBrush>
 
-    <SolidColorBrush x:Key="InacBut">#CCDDDDDD</SolidColorBrush>
+    <SolidColorBrush x:Key="InacBut">#99EEEEEE</SolidColorBrush>
+    <Color x:Key="ThumbShadowCol">#AAA</Color>
+    <Color x:Key="ThumbBackDropCol">#7B7B7B</Color>
 
     <Sys:Double x:Key="OverlayOpacity">0.25</Sys:Double>
 
