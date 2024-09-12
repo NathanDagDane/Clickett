@@ -213,4 +213,47 @@
             </DrawingGroup>
         </DrawingImage.Drawing>
     </DrawingImage>
+
+    <DrawingImage x:Key="ThumbLines">
+        <DrawingImage.Drawing>
+            <DrawingGroup ClipGeometry="M0,0 V19 H17 V0 H0 Z">
+                <GeometryDrawing Geometry="F1 M17,19z M0,0z M1,1L1,18">
+                    <GeometryDrawing.Pen>
+                        <Pen Thickness="2" StartLineCap="Round" EndLineCap="Round" LineJoin="Miter" MiterLimit="1">
+                            <Pen.Brush>
+                                <SolidColorBrush Color="#FF000000"/>
+                            </Pen.Brush>
+                        </Pen>
+                    </GeometryDrawing.Pen>
+                </GeometryDrawing>
+                <GeometryDrawing Geometry="F1 M17,19z M0,0z M6,1L6,18">
+                    <GeometryDrawing.Pen>
+                        <Pen Thickness="2" StartLineCap="Round" EndLineCap="Round" LineJoin="Miter" MiterLimit="1">
+                            <Pen.Brush>
+                                <SolidColorBrush Color="#FF000000"/>
+                            </Pen.Brush>
+                        </Pen>
+                    </GeometryDrawing.Pen>
+                </GeometryDrawing>
+                <GeometryDrawing Geometry="F1 M17,19z M0,0z M11,1L11,18">
+                    <GeometryDrawing.Pen>
+                        <Pen Thickness="2" StartLineCap="Round" EndLineCap="Round" LineJoin="Miter" MiterLimit="1">
+                            <Pen.Brush>
+                                <SolidColorBrush Color="#FF000000"/>
+                            </Pen.Brush>
+                        </Pen>
+                    </GeometryDrawing.Pen>
+                </GeometryDrawing>
+                <GeometryDrawing Geometry="F1 M17,19z M0,0z M16,1L16,18">
+                    <GeometryDrawing.Pen>
+                        <Pen Thickness="2" StartLineCap="Round" EndLineCap="Round" LineJoin="Miter" MiterLimit="1">
+                            <Pen.Brush>
+                                <SolidColorBrush Color="#FF000000"/>
+                            </Pen.Brush>
+                        </Pen>
+                    </GeometryDrawing.Pen>
+                </GeometryDrawing>
+            </DrawingGroup>
+        </DrawingImage.Drawing>
+    </DrawingImage>
 </ResourceDictionary>

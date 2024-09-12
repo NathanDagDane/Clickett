@@ -259,14 +259,6 @@
                     <Border BorderThickness="0" Background="{TemplateBinding Background}" CornerRadius="{Binding Source={StaticResource MinRad}}" >
                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Name="InnerStuff"/>
                     </Border>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="InnerStuff" Property="ContentPresenter.Opacity" Value="0.8"/>
-                        </Trigger>
-                        <Trigger Property="IsEnabled" Value="False">
-                            <Setter TargetName="InnerStuff" Property="ContentPresenter.Opacity" Value="0.5"/>
-                        </Trigger>
-                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

@@ -41,18 +41,6 @@
         <GradientStop Color="#FFCFEFEE" Offset="1.5"/>
     </LinearGradientBrush>
 
-    <LinearGradientBrush x:Key="ActivateText">
-        <LinearGradientBrush.RelativeTransform>
-            <TransformGroup>
-                <ScaleTransform CenterY="0.5" CenterX="0.5"/>
-                <SkewTransform CenterX="0.5" CenterY="0.5"/>
-                <RotateTransform Angle="180" CenterX="0.5" CenterY="0.5"/>
-                <TranslateTransform/>
-            </TransformGroup>
-        </LinearGradientBrush.RelativeTransform>
-        <GradientStop Color="#FFF"/>
-    </LinearGradientBrush>
-
     <SolidColorBrush x:Key="AcCol1">#FF00BABA</SolidColorBrush>
     <SolidColorBrush x:Key="AcCol2">#FF00C4BA</SolidColorBrush>
 
@@ -71,6 +59,16 @@
     <SolidColorBrush x:Key="InBor">#F9F9F9</SolidColorBrush>
 
     <SolidColorBrush x:Key="InacBut">#CCDDDDDD</SolidColorBrush>
+
+    <SolidColorBrush x:Key="SliderBack">#99EEEEEE</SolidColorBrush>
+    <SolidColorBrush x:Key="thumbBackDisabled">#88404249</SolidColorBrush>
+    <SolidColorBrush x:Key="thumbBackEnabled">#88404249</SolidColorBrush>
+    <SolidColorBrush x:Key="ThumbLineDisabled">#51535a</SolidColorBrush>
+    <SolidColorBrush x:Key="ThumbLineEnabled">#51535a</SolidColorBrush>
+    <Color x:Key="ThumbShadowCol">#AAA</Color>
+    <Color x:Key="ThumbBackDropCol">#7B7B7B</Color>
+    <DropShadowEffect x:Key="thumbShadowDisabled" ShadowDepth="0" BlurRadius="15" Color="#AAA" ></DropShadowEffect>
+    <DropShadowEffect x:Key="thumbShadowEnabled" ShadowDepth="0" BlurRadius="13" Color="{StaticResource AcCol2c}" Opacity="0.3"></DropShadowEffect>
 
     <Sys:Double x:Key="OverlayOpacity">0.25</Sys:Double>
 

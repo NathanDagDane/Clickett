@@ -3,9 +3,11 @@ using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing.Printing;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using System.Security.Cryptography.Xml;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -157,8 +159,6 @@ namespace Clickett
             if (active)
             {
                 UnregisterHotkey();
-                activateButtText.Text = "Activate";
-                activateButt.SetResourceReference(BackgroundProperty, "AcGrad");
                 active = false;
                 trigSet.IsEnabled = true;
                 locSetButt.IsEnabled = doLocation;
@@ -171,6 +171,26 @@ namespace Clickett
                     }
                     catch { }
                 }
+
+
+
+                if (doAnimations)
+                {
+                    enableButtColBorder.BeginAnimation(OpacityProperty, new DoubleAnimation() { To = 0, Duration = TimeSpan.FromSeconds(0.3), DecelerationRatio = 0.6, AccelerationRatio = 0.2, FillBehavior = FillBehavior.HoldEnd });
+                    enableButtThumbTransform.BeginAnimation(TranslateTransform.XProperty, new DoubleAnimation() { To = 0, Duration = TimeSpan.FromSeconds(0.3), DecelerationRatio = 0.6, AccelerationRatio = 0.2, FillBehavior = FillBehavior.HoldEnd });
+                }
+                else
+                {
+                    enableButtThumbTransform.BeginAnimation(TranslateTransform.XProperty, new DoubleAnimation() { To = 0, Duration = TimeSpan.Zero });
+                    enableButtColBorder.BeginAnimation(OpacityProperty, new DoubleAnimation() { To = 0, Duration = TimeSpan.Zero, FillBehavior = FillBehavior.HoldEnd });
+                }
+                thumbBackDrop.Opacity = 1;
+                thumbRect.SetResourceReference(EffectProperty, "thumbShadowDisabled");
+                enableButtThumb.SetResourceReference(BackgroundProperty, "thumbBackDisabled");
+                thumbLinesBorder.SetResourceReference(BackgroundProperty, "ThumbLineDisabled");
+
+
+
             }
             else
             {
@@ -184,8 +204,6 @@ namespace Clickett
                     trigBorder.ToolTip = "Try something else";
                     return;
                 }
-                activateButtText.Text = "Stop";
-                activateButt.SetResourceReference(BackgroundProperty, "InacBut");
                 active = true;
                 clicking = false;
                 trigSet.IsEnabled = locSetButt.IsEnabled = false;
@@ -198,6 +216,22 @@ namespace Clickett
                     }
                     catch { }
                 }
+
+
+                if (doAnimations){
+                    enableButtColBorder.BeginAnimation(OpacityProperty, new DoubleAnimation() { To = 1, Duration = TimeSpan.FromSeconds(0.3), DecelerationRatio = 0.6, AccelerationRatio = 0.2, FillBehavior = FillBehavior.HoldEnd });
+                    enableButtThumbTransform.BeginAnimation(TranslateTransform.XProperty, new DoubleAnimation() { To = 382, Duration = TimeSpan.FromSeconds(0.3), DecelerationRatio = 0.6, AccelerationRatio = 0.2, FillBehavior = FillBehavior.HoldEnd });
+                }else {
+                    enableButtThumbTransform.BeginAnimation(TranslateTransform.XProperty, new DoubleAnimation() { To = 382, Duration = TimeSpan.Zero });
+                    enableButtColBorder.BeginAnimation(OpacityProperty, new DoubleAnimation() { To = 1, Duration = TimeSpan.Zero, FillBehavior = FillBehavior.HoldEnd });
+                }
+                thumbBackDrop.Opacity = 0;
+                thumbRect.SetResourceReference(EffectProperty, "thumbShadowEnabled");
+                enableButtThumb.SetResourceReference(BackgroundProperty, "thumbBackEnabled");
+                thumbLinesBorder.SetResourceReference(BackgroundProperty, "ThumbLineEnabled");
+
+
+
             }
         }
         private void HotkeyPressed() // Enters click state when hotkey pressed
@@ -787,7 +821,7 @@ namespace Clickett
                     tutNextBut.Visibility = Visibility.Collapsed;
                     break;
                 case 14:
-                    TutoArrange(375, 69, 27, 40, 320, false, 100, 250, 82, "Clickett is now activated!\nIt will start clicking when you press the shortcut\n\nClickett cannot click when it isn't activated");
+                    TutoArrange(375, 69, 27, 40, 320, false, 100, 250, 82, "Clickett is now enabled!\nIt will start clicking when you press the shortcut\n\nClickett cannot click when it isn't enabled");
                     tutNextBut.Visibility = Visibility.Visible;
                     tutArrow.Visibility = Visibility.Collapsed;
                     break;
@@ -1528,6 +1562,30 @@ namespace Clickett
         private void HotMouseLeave(object sender, MouseEventArgs? e)
         {
             CHT(5, "ShowHotkey", "");
+        }
+        private void EnableMouseEnter(object sender, MouseEventArgs? e)
+        {
+            var margin = active ? 352 : 30;
+            if (doAnimations)
+            {
+                enableButtThumbTransform.BeginAnimation(TranslateTransform.XProperty, new DoubleAnimation() { To = margin, Duration = TimeSpan.FromSeconds(0.2), DecelerationRatio = 0.8, AccelerationRatio = 0.1 });
+            }
+            else
+            {
+                enableButtThumbTransform.BeginAnimation(TranslateTransform.XProperty, new DoubleAnimation() { To = margin, Duration = TimeSpan.Zero });
+            }
+        }
+        private void EnableMouseLeave(object sender, MouseEventArgs? e)
+        {
+            var margin = active ? 382 : 0;
+            if (doAnimations)
+            {
+                enableButtThumbTransform.BeginAnimation(TranslateTransform.XProperty, new DoubleAnimation() { To = margin, Duration = TimeSpan.FromSeconds(0.2), DecelerationRatio = 0.8, AccelerationRatio = 0 });
+            }
+            else
+            {
+                enableButtThumbTransform.BeginAnimation(TranslateTransform.XProperty, new DoubleAnimation() { To = margin, Duration = TimeSpan.Zero });
+            }
         }
 
         private void RandomBioText()
