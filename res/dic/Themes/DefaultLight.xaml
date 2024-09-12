@@ -58,9 +58,15 @@
     <SolidColorBrush x:Key="InBac">#E0e0e0</SolidColorBrush>
     <SolidColorBrush x:Key="InBor">#F9F9F9</SolidColorBrush>
 
-    <SolidColorBrush x:Key="InacBut">#99EEEEEE</SolidColorBrush>
+    <SolidColorBrush x:Key="InacBut">#CCDDDDDD</SolidColorBrush>
+
+    <SolidColorBrush x:Key="SliderBack">#99EEEEEE</SolidColorBrush>
+    <SolidColorBrush x:Key="thumbBackDisabled">#88404249</SolidColorBrush>
+    <SolidColorBrush x:Key="thumbBackEnabled">#88404249</SolidColorBrush>
     <Color x:Key="ThumbShadowCol">#AAA</Color>
     <Color x:Key="ThumbBackDropCol">#7B7B7B</Color>
+    <DropShadowEffect x:Key="thumbShadowDisabled" ShadowDepth="0" BlurRadius="15" Color="#AAA" ></DropShadowEffect>
+    <DropShadowEffect x:Key="thumbShadowEnabled" ShadowDepth="0" BlurRadius="13" Color="{StaticResource AcCol2c}" Opacity="0.3"></DropShadowEffect>
 
     <Sys:Double x:Key="OverlayOpacity">0.25</Sys:Double>
 

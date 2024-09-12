@@ -484,13 +484,13 @@
                                     </Border.OpacityMask>
                                 </Border>
                             </Button>
-                            <Button Name="activateButt" Click="Activate" Style="{DynamicResource ActivateButton}" Height="{Binding Source={StaticResource MajBoxHeight}}" HorizontalAlignment="Stretch" Margin="50,0,5,0" Background="{DynamicResource InacBut}" MouseEnter="EnableMouseEnter" MouseLeave="EnableMouseLeave">
+                            <Button Name="activateButt" Click="Activate" Style="{DynamicResource ActivateButton}" Height="{Binding Source={StaticResource MajBoxHeight}}" HorizontalAlignment="Stretch" Margin="50,0,5,0" Background="{DynamicResource SliderBack}" MouseEnter="EnableMouseEnter" MouseLeave="EnableMouseLeave">
                                 <Grid Name="activateGrid" Height="{Binding Source={StaticResource MajBoxHeight}}" Width="445">
                                     <TextBlock Text="Disabled" FontFamily="./res/#Outfit Bold" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="15,0,0,0" Foreground="{DynamicResource FgCol2}" Opacity="0.5"/>
                                     <Border Name="enableButtColBorder" Background="{DynamicResource AcGrad}" CornerRadius="{Binding Source={StaticResource MinRad}}" Opacity="0">
                                         <TextBlock Text="Enabled" FontFamily="./res/#Outfit Bold" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,15,0" Foreground="{DynamicResource GradFG}"/>
                                     </Border>
-                                    <Border Name="enableButtThumb" Background="{DynamicResource FgCol2}" Width="57" CornerRadius="5" HorizontalAlignment="Left" Margin="3,3,3,3">
+                                    <Border Name="enableButtThumb" Background="{DynamicResource thumbBackDisabled}" Width="57" CornerRadius="5" HorizontalAlignment="Left" Margin="3,3,3,3">
                                         <Border.RenderTransform>
                                             <TransformGroup>
                                                 <TranslateTransform x:Name="enableButtThumbTransform"/>
