@@ -1,0 +1,39 @@
+name: Bug Report
+description: File a bug report.
+title: ""
+labels: ["bug", "user"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this bug report!
+  - type: input
+    id: contact
+    attributes:
+      label: Contact Details
+      description: How can we get in touch with you if we need more info?
+      placeholder: ex. email@example.com
+    validations:
+      required: false
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: Also tell us, what did you expect to happen?
+      placeholder: A bug happened!
+      value: ""
+    validations:
+      required: true
+  - type: dropdown
+    id: version
+    attributes:
+      label: Version
+      description: What version of Clickett are you running? You can check your version at the top of settings
+      options:
+        - 0.8.0
+        - 0.7.4
+        - Older
+        - "Can't check"
+      default: 0
+    validations:
+      required: true
