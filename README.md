@@ -37,16 +37,16 @@
   <h3 align="center">Clickett</h3>
 
   <p align="center">
-    An awesome README template to jumpstart your projects!
+    The Next-Gen Auto Clicker
     <br />
-    <a href="https://github.com/othneildrew/Best-README-Template"><strong>Explore the docs »</strong></a>
+    <a href="clickett.app"><strong>Go to Website »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/othneildrew/Best-README-Template">View Demo</a>
+    <a href="https://www.notion.so/clickett/10d6a3a1c22b80f6ad0ff5e1f4d90313?v=10d6a3a1c22b80e6a075000cd90e017c&pvs=4">Help Page</a>
     ·
-    <a href="https://github.com/othneildrew/Best-README-Template/issues/new?labels=bug&template=bug-report---.md">Report Bug</a>
+    <a href="https://github.com/NathanDagDane/Clickett/issues/new?assignees=&labels=bug%2Cuser&projects=&template=bug_report.yml&title=%5BBug%5D%3A">Report Bug</a>
     ·
-    <a href="https://github.com/othneildrew/Best-README-Template/issues/new?labels=enhancement&template=feature-request---.md">Request Feature</a>
+    <a href="https://github.com/othneildrew/Best-README-Template/issues/new?labels=enhancement&template=feature-request---.md">Suggest Feature</a>
   </p>
 </div>
 
@@ -222,7 +222,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Your Name - [@your_twitter](https://twitter.com/your_username) - email@example.com
+Your Name - [@your_twitter](https://twitter.com/your_username) - nathandane.dev@gmail.com
 
 Project Link: [github.com/NathanDagDane/Clickett](https://github.com/NathanDagDane/Clickett)
 
