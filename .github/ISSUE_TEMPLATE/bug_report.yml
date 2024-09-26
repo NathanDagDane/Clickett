@@ -21,7 +21,6 @@ body:
       label: What happened?
       description: Also tell us, what did you expect to happen?
       placeholder: A bug happened!
-      value: ""
     validations:
       required: true
   - type: dropdown
