@@ -137,7 +137,7 @@ Simple steps to get up and running with the Clickett auto clicker.
 
 ### Prerequisites
 
-Clickett is a **Windows only** app. Ensure you have Windows 10/11 (or later). There are currently no MacOS, Linus, or mobile versions.
+Clickett is a **Windows only** app. Ensure you have Windows 10/11 (or later). There are currently no MacOS, Linux, or mobile versions.
 
 ### Installation
 
