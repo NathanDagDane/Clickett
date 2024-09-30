@@ -528,7 +528,7 @@ namespace Clickett
         }
         private void HelpLink(object sender, RoutedEventArgs? e)
         {
-            Process.Start(new ProcessStartInfo("https://github.com/NathanDagDane/Clickett/wiki/Getting-Started,-Help-and-FAQ") { UseShellExecute = true });
+            Process.Start(new ProcessStartInfo("https://clickett.app/help") { UseShellExecute = true });
         }
         private void OpenGithubLink(object sender, RoutedEventArgs? e)
         {
@@ -536,7 +536,7 @@ namespace Clickett
         }
         private void HelpContact(object sender, RoutedEventArgs? e)
         {
-            Process.Start(new ProcessStartInfo("mailto:nathandane.dev@gmail.com?subject=Clickett%20Support") { UseShellExecute = true });
+            Process.Start(new ProcessStartInfo("mailto:clickett.help@gmail.com?subject=Clickett%20Support") { UseShellExecute = true });
         }
         private void HelpExit(object sender, RoutedEventArgs? e)
         {
