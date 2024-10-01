@@ -39,7 +39,7 @@
   <p align="center">
     The Next-Gen Auto Clicker
     <br />
-    <a href="clickett.app"><strong>Go to Website »</strong></a>
+    <a href="[clickett.app](https://clickett.app)"><strong>Go to Website »</strong></a>
     <br />
     <br />
     <a href="https://ko-fi.com/L4L0K0358">
@@ -50,7 +50,7 @@
     </a>
     <br />
     <br />
-    <a href="https://clickett.notion.site/10d6a3a1c22b80f6ad0ff5e1f4d90313?v=10d6a3a1c22b80e6a075000cd90e017c&pvs=4">Help Page</a>
+    <a href="https://clickett.app/help">Help Page</a>
     ·
     <a href="https://github.com/NathanDagDane/Clickett/issues/new?assignees=&labels=bug%2Cuser&projects=&template=bug_report.yml&title=%5BBug%5D%3A">Report Bug</a>
   </p>
