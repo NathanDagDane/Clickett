@@ -39,7 +39,7 @@
   <p align="center">
     The Next-Gen Auto Clicker
     <br />
-    <a href="[clickett.app](https://clickett.app)"><strong>Go to Website »</strong></a>
+    <a href="https://clickett.app"><strong>Go to Website »</strong></a>
     <br />
     <br />
     <a href="https://ko-fi.com/L4L0K0358">
