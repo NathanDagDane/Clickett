@@ -1,23 +1,5 @@
 <!-- Improved compatibility of back to top link: See: https://github.com/othneildrew/Best-README-Template/pull/73 -->
 <a id="readme-top"></a>
-<!--
-*** Thanks for checking out the Best-README-Template. If you have a suggestion
-*** that would make this better, please fork the repo and create a pull request
-*** or simply open an issue with the tag "enhancement".
-*** Don't forget to give the project a star!
-*** Thanks again! Now go create something AMAZING! :D
--->
-
-
-
-<!-- PROJECT SHIELDS -->
-<!--
-*** I'm using markdown "reference style" links for readability.
-*** Reference links are enclosed in brackets [ ] instead of parentheses ( ).
-*** See the bottom of this document for the declaration of the reference variables
-*** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
-*** https://www.markdownguide.org/basic-syntax/#reference-style-links
--->
 [![Contributors][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
@@ -46,7 +28,7 @@
       <img src="https://cdn.prod.website-files.com/5c14e387dab576fe667689cf/64f1a9ddd0246590df69ea1a_kofi_short_button_dark%25402x-p-500.png" alt="Support on Ko-fi" height="50">
     </a>
     <a href="https://www.microsoft.com/store/productId/9NW55MH6VMHG">
-      <img src="https://raw.githubusercontent.com/microsoft/app-store-badge/refs/heads/main/src/images/en-US%20dark.svg" alt="Download from Microsoft Store" height="50">
+      <img src="https://get.microsoft.com/images/en-us%20dark.svg" alt="Download from Microsoft Store" height="50">
     </a>
     <br />
     <br />
@@ -77,6 +59,13 @@
       </ul>
     </li>
     <li><a href="#roadmap">Roadmap</a></li>
+    <li>
+      <a href="#core-ideas">Core Ideas</a>
+      <ul>
+        <li><a href="#tech-stack">Tech Stack</a></li>
+        <li><a href="#identity">Identity</a></li>
+      </ul>
+    </li>
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
@@ -184,6 +173,36 @@ See the [open issues](https://github.com/NathanDagDane/Clickett/issues) for a fu
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+
+
+<!-- CORE IDEAS -->
+## Core Ideas
+
+Auto clickers are a widespread and popular tool.  
+Despite this, I noticed a significant gap in this market.
+
+_All existing clickers seemed to have a strong windows 7 or 'my first website' aesthetic!_
+
+And so the idea for **Clickett** was born.  
+I drew up Clickett to be everything missing from current clickers.
+
+### Tech stack
+An auto clicker's main function is to **click**, and so its main measure of worth is how **fast** it can do so.  
+To meet the speed and heavy usage of WIN32 APIs demands of the program, a **native** `.NET` and `C#` stack was chosen. This would allow me to take advantage of native windows features (eg. tray icons) and UI libraries.
+
+The limitation faced by many clickers is that they are based on _WinForms_. A robust but dated and inflexible framework.  
+_UWP_ and _WinUI3_ are very modern frameworks, but are similarly inflexible and face an uncertain future.  
+This left **_WPF_** as the perfect framework for Clickett, being mature, flexible, powerful, and native! (Requiring only some more manual work)
+
+### Identity
+Alongside technical and UX initiatives, the most significant was to give it a **strong identity.**  
+This would give it the professional and reliable feel missing from all other clickers.  
+So I cracked open my designer tool of coice at the time (PowerPoint 😉) to create a design that's **iconic on first sight!**
+
+And so here we are now.  
+Demand certainly showed, with Clickett reaching 20,000 unique users in the first month and 100,000 unique users in the first year!
+
+**_Huge thanks to all testers, donators, and every user of Clickett!_**
 
 
 <!-- CONTRIBUTING -->
