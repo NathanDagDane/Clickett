@@ -1,5 +1,5 @@
-<!-- Improved compatibility of back to top link: See: https://github.com/othneildrew/Best-README-Template/pull/73 -->
 <a id="readme-top"></a>
+
 <div align="center">
   <a href="https://github.com/NathanDagDane/Clickett/graphs/contributors">
     <img src="https://img.shields.io/github/contributors/NathanDagDane/Clickett.svg?style=for-the-badge">
