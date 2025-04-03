@@ -2,22 +2,34 @@
 
 <div align="center">
   <a href="https://github.com/NathanDagDane/Clickett/graphs/contributors">
-    <img src="https://img.shields.io/github/contributors/NathanDagDane/Clickett.svg?style=for-the-badge">
+    <picture>
+      <img src="https://img.shields.io/github/contributors/NathanDagDane/Clickett.svg?style=for-the-badge">
+    </picture>
   </a>
   <a href="https://github.com/NathanDagDane/Clickett/network/members">
-    <img src="https://img.shields.io/github/forks/NathanDagDane/Clickett.svg?style=for-the-badge">
+    <picture>
+      <img src="https://img.shields.io/github/forks/NathanDagDane/Clickett.svg?style=for-the-badge">
+    </picture>
   </a>
   <a href="https://github.com/NathanDagDane/Clickett/stargazers">
-    <img src="https://img.shields.io/github/stars/NathanDagDane/Clickett.svg?style=for-the-badge">
+    <picture>
+      <img src="https://img.shields.io/github/stars/NathanDagDane/Clickett.svg?style=for-the-badge">
+    </picture>
   </a>
   <a href="https://github.com/NathanDagDane/Clickett/issues">
-    <img src="https://img.shields.io/github/issues/NathanDagDane/Clickett.svg?style=for-the-badge">
+    <picture>
+      <img src="https://img.shields.io/github/issues/NathanDagDane/Clickett.svg?style=for-the-badge">
+    </picture>
   </a>
   <a href="https://github.com/NathanDagDane/Clickett/blob/master/LICENSE.txt">
-    <img src="https://img.shields.io/github/license/NathanDagDane/Clickett.svg?style=for-the-badge">
+    <picture>
+      <img src="https://img.shields.io/github/license/NathanDagDane/Clickett.svg?style=for-the-badge">
+    </picture>
   </a>
   <a href="https://www.linkedin.com/in/nathan-dane/">
-    <img src="https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555">
+    <picture>
+      <img src="https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555">
+    </picture>
   </a>
 </div>
 
