@@ -7,6 +7,10 @@
 [![MIT License][license-shield]][license-url]
 [![LinkedIn][linkedin-shield]][linkedin-url]
 
+![ms-but](https://github.com/user-attachments/assets/4d1809cc-c888-4f8e-b6e8-f065c24fb941)
+![ms-but-dark](https://github.com/user-attachments/assets/2d229fe0-9aa7-4296-a87f-efeebc4b502a)
+![kofi-but](https://github.com/user-attachments/assets/e314b6af-a210-4795-b649-bdfe071ae008)
+![kofi-but-dark](https://github.com/user-attachments/assets/c2e19e16-a53a-4b71-91ee-6c6744889cca)
 
 
 <!-- PROJECT LOGO -->
