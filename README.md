@@ -1,36 +1,52 @@
 <!-- Improved compatibility of back to top link: See: https://github.com/othneildrew/Best-README-Template/pull/73 -->
 <a id="readme-top"></a>
-[![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
-[![MIT License][license-shield]][license-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
-
+<div align="center">
+  <a href="https://github.com/NathanDagDane/Clickett/graphs/contributors">
+    <img src="https://img.shields.io/github/contributors/NathanDagDane/Clickett.svg?style=for-the-badge">
+  </a>
+  <a href="https://github.com/NathanDagDane/Clickett/network/members">
+    <img src="https://img.shields.io/github/forks/NathanDagDane/Clickett.svg?style=for-the-badge">
+  </a>
+  <a href="https://github.com/NathanDagDane/Clickett/stargazers">
+    <img src="https://img.shields.io/github/stars/NathanDagDane/Clickett.svg?style=for-the-badge">
+  </a>
+  <a href="https://github.com/NathanDagDane/Clickett/issues">
+    <img src="https://img.shields.io/github/issues/NathanDagDane/Clickett.svg?style=for-the-badge">
+  </a>
+  <a href="https://github.com/NathanDagDane/Clickett/blob/master/LICENSE.txt">
+    <img src="https://img.shields.io/github/license/NathanDagDane/Clickett.svg?style=for-the-badge">
+  </a>
+  <a href="https://www.linkedin.com/in/nathan-dane/">
+    <img src="https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555">
+  </a>
+</div>
 
 
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
   <a href="https://clickett.app">
-    <img src="https://raw.githubusercontent.com/NathanDagDane/Clickett/refs/heads/master/res/iconround.png" alt="Logo" width="120" height="120">
+    <img src="https://raw.githubusercontent.com/NathanDagDane/Clickett/refs/heads/master/res/iconround.png" alt="Logo" width="100" height="100">
   </a>
 
-  <h3 align="center">Clickett</h3>
+  <h1>Clickett</h1>
+  <h3>The Next-Gen Auto Clicker</h3>
 
-  <p align="center">
-    The Next-Gen Auto Clicker
-    <br />
-    <a href="https://clickett.app"><strong>Go to Website »</strong></a>
-    <br />
-    <br />
+  <p>
     <a href="https://ko-fi.com/L4L0K0358">
-      <img src="https://cdn.prod.website-files.com/5c14e387dab576fe667689cf/64f1a9ddd0246590df69ea1a_kofi_short_button_dark%25402x-p-500.png" alt="Support on Ko-fi" height="50">
+      <picture>
+        <source media="(prefers-color-scheme: light)" srcset="https://github.com/user-attachments/assets/e314b6af-a210-4795-b649-bdfe071ae008">
+        <img class="image" src="https://github.com/user-attachments/assets/c2e19e16-a53a-4b71-91ee-6c6744889cca" height="50px">
+    </picture>
     </a>
     <a href="https://www.microsoft.com/store/productId/9NW55MH6VMHG">
-      <img src="https://get.microsoft.com/images/en-us%20dark.svg" alt="Download from Microsoft Store" height="50">
+      <picture>
+        <source media="(prefers-color-scheme: light)" srcset="https://github.com/user-attachments/assets/4d1809cc-c888-4f8e-b6e8-f065c24fb941">
+        <img class="image" src="https://github.com/user-attachments/assets/2d229fe0-9aa7-4296-a87f-efeebc4b502a" height="50px">
+    </picture>
     </a>
     <br />
+    <a href="https://clickett.app"><strong>Go to Website »</strong></a>
     <br />
     <a href="https://clickett.app/help">Help Page</a>
     ·
@@ -42,7 +58,7 @@
 
 <!-- TABLE OF CONTENTS -->
 <details>
-  <summary>Table of Contents</summary>
+  <summary><h2>Table of Contents</h2></summary>
   <ol>
     <li>
       <a href="#about-the-project">About The Project</a>
@@ -72,19 +88,15 @@
   </ol>
 </details>
 
-<br />
-
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
 <br />
-<br />
 
 <div align="center">
-  <img src="https://raw.githubusercontent.com/NathanDagDane/Clickett/refs/heads/resources/screenshots/Clickett%20Enabled.png" alt="Clickett Screenshot" width="700">
+  <img src="https://raw.githubusercontent.com/NathanDagDane/Clickett/refs/heads/resources/screenshots/Clickett%20Enabled.png" alt="Clickett Screenshot" width="80%">
 </div>
 
-<br />
 <br />
 
 **Clickett** is the **next-generation** auto clicker designed to automate repetitive clicking tasks with ease.
@@ -145,7 +157,7 @@ Clickett is a **Windows only** app. Ensure you have Windows 10/11 (or later). Th
 
 ### Usage
 
-Clickett is **disabled** each time it is launched. Before you can click, you need to **enable** Clickett using the large button at the bottom. 
+Clickett is **disabled** each time it is launched. Before you can click, you need to **enable** Clickett using the large button at the bottom.
 
 Once Clickett is enabled, you can press the *hotkey* and it will start clicking.
 
@@ -178,28 +190,28 @@ See the [open issues](https://github.com/NathanDagDane/Clickett/issues) for a fu
 <!-- CORE IDEAS -->
 ## Core Ideas
 
-Auto clickers are a widespread and popular tool.  
+Auto clickers are a widespread and popular tool.
 Despite this, I noticed a significant gap in this market.
 
 _All existing clickers seemed to have a strong windows 7 or 'my first website' aesthetic!_
 
-And so the idea for **Clickett** was born.  
+And so the idea for **Clickett** was born.
 I drew up Clickett to be everything missing from current clickers.
 
 ### Tech stack
-An auto clicker's main function is to **click**, and so its main measure of worth is how **fast** it can do so.  
+An auto clicker's main function is to **click**, and so its main measure of worth is how **fast** it can do so.
 To meet the speed and heavy usage of WIN32 APIs demands of the program, a **native** `.NET` and `C#` stack was chosen. This would allow me to take advantage of native windows features (eg. tray icons) and UI libraries.
 
-The limitation faced by many clickers is that they are based on _WinForms_. A robust but dated and inflexible framework.  
-_UWP_ and _WinUI3_ are very modern frameworks, but are similarly inflexible and face an uncertain future.  
+The limitation faced by many clickers is that they are based on _WinForms_. A robust but dated and inflexible framework.
+_UWP_ and _WinUI3_ are very modern frameworks, but are similarly inflexible and face an uncertain future.
 This left **_WPF_** as the perfect framework for Clickett, being mature, flexible, powerful, and native! (Requiring only some more manual work)
 
 ### Identity
-Alongside technical and UX initiatives, the most significant was to give it a **strong identity.**  
-This would give it the professional and reliable feel missing from all other clickers.  
+Alongside technical and UX initiatives, the most significant was to give it a **strong identity.**
+This would give it the professional and reliable feel missing from all other clickers.
 So I cracked open my designer tool of coice at the time (PowerPoint 😉) to create a design that's **iconic on first sight!**
 
-And so here we are now.  
+And so here we are now.
 Demand certainly showed, with Clickett reaching 20,000 unique users in the first month and 100,000 unique users in the first year!
 
 **_Huge thanks to all testers, donators, and every user of Clickett!_**
@@ -250,18 +262,5 @@ Project Link: [github.com/NathanDagDane/Clickett](https://github.com/NathanDagDa
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
-<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/NathanDagDane/Clickett.svg?style=for-the-badge
-[contributors-url]: https://github.com/NathanDagDane/Clickett/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/NathanDagDane/Clickett.svg?style=for-the-badge
-[forks-url]: https://github.com/NathanDagDane/Clickett/network/members
-[stars-shield]: https://img.shields.io/github/stars/NathanDagDane/Clickett.svg?style=for-the-badge
-[stars-url]: https://github.com/NathanDagDane/Clickett/stargazers
-[issues-shield]: https://img.shields.io/github/issues/NathanDagDane/Clickett.svg?style=for-the-badge
-[issues-url]: https://github.com/NathanDagDane/Clickett/issues
-[license-shield]: https://img.shields.io/github/license/NathanDagDane/Clickett.svg?style=for-the-badge
-[license-url]: https://github.com/NathanDagDane/Clickett/blob/master/LICENSE.txt
-[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: https://www.linkedin.com/in/nathan-dane/
 [React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
 [React-url]: https://reactjs.org/
